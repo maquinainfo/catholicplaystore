@@ -1,0 +1,420 @@
+import React, { useState, useEffect } from 'react';
+import { Shield, Crown, BookOpen, ChevronRight, Menu, X, Star, Heart, Church, ExternalLink, Mail, Send, User } from 'lucide-react';
+
+// =================================================================================
+// Definição da Paleta de Cores e Estilos (Premium & Moderno)
+// =================================================================================
+const COLORS = {
+  LIGHT_BG: '#F9F7F2', // Um creme ainda mais leve e limpo
+  DARK_TEXT: '#2C1810', // Marrom café muito escuro para alto contraste
+  MAROON: '#800020', // Borgonha clássico (Burgundy)
+  GOLD_ACCENT: '#D4AF37', // Dourado metálico
+  GOLD_LIGHT: '#F3E5AB', // Dourado muito pálido para fundos sutis
+  CARD_BG: '#FFFFFF',
+};
+
+/**
+ * Componente AppCard Melhorado
+ * Adiciona uma moldura interna elegante (Double Border) para um toque clássico.
+ */
+const AppCard = ({ title, description, Icon, id, link }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    } else {
+      console.log(`Acessando App: ${title}`);
+    }
+  };
+
+  return (
+    <div
+      id={id}
+      className="relative group rounded-xl shadow-md cursor-pointer transition-all duration-500 overflow-hidden bg-white"
+      style={{ 
+        transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
+        boxShadow: isHovered 
+          ? `0 20px 40px -15px rgba(128, 0, 32, 0.15)` // Sombra colorida sutil no hover
+          : `0 4px 6px -1px rgba(0, 0, 0, 0.05)`,
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
+    >
+      {/* Borda Superior Colorida (Accent) */}
+      <div className="h-1 w-full" style={{ backgroundColor: isHovered ? COLORS.MAROON : COLORS.GOLD_ACCENT, transition: 'background-color 0.5s' }}></div>
+
+      <div className="p-6 h-full flex flex-col">
+        
+        {/* Detalhe: Moldura Interna Sutil (Referência à imagem original) */}
+        <div 
+          className="absolute inset-4 border rounded-lg pointer-events-none opacity-20 transition-all duration-500"
+          style={{ 
+            borderColor: COLORS.GOLD_ACCENT,
+            borderWidth: '1px',
+            transform: isHovered ? 'scale(0.98)' : 'scale(1)',
+          }}
+        ></div>
+
+        {/* Cabeçalho do Card */}
+        <div className="flex items-start justify-between mb-4 z-10 relative">
+          <div 
+            className="p-3 rounded-full shadow-sm transition-colors duration-500"
+            style={{ 
+              backgroundColor: isHovered ? COLORS.MAROON : '#FFF', 
+              border: `1px solid ${isHovered ? COLORS.MAROON : COLORS.GOLD_LIGHT}` 
+            }}
+          >
+            <Icon 
+              className="w-6 h-6 transition-colors duration-500" 
+              style={{ color: isHovered ? '#FFF' : COLORS.MAROON }} 
+            />
+          </div>
+          {link && <ExternalLink className="w-4 h-4 opacity-30" />}
+        </div>
+
+        {/* Conteúdo */}
+        <div className="z-10 relative flex-grow">
+          <h2 
+            className="text-xl font-serif font-bold mb-2 leading-tight"
+            style={{ color: COLORS.DARK_TEXT }}
+          >
+            {title}
+          </h2>
+
+          {/* Avaliação de 5 Estrelas */}
+          <div className="flex items-center space-x-1 mb-3">
+            {[...Array(5)].map((_, i) => (
+              <Star 
+                key={i} 
+                className="w-3 h-3 md:w-4 md:h-4 fill-current" 
+                style={{ color: '#F59E0B' }} 
+              />
+            ))}
+            <span className="text-xs font-medium text-gray-400 ml-1">(5.0)</span>
+          </div>
+
+          <p 
+            className="text-sm font-sans leading-relaxed opacity-80 mb-6" 
+            style={{ color: COLORS.DARK_TEXT }}
+          >
+            {description}
+          </p>
+        </div>
+
+        {/* Botão de Ação - Atualizado para cor sólida */}
+        <div className="mt-auto z-10 relative">
+          <button 
+            className="w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-widest flex items-center justify-center transition-all duration-300 group-hover:shadow-lg"
+            style={{ 
+              backgroundColor: isHovered ? COLORS.GOLD_ACCENT : COLORS.MAROON, // Agora é MAROON (Vinho) por padrão
+              color: '#FFFFFF' // Texto branco para contraste
+            }}
+          >
+            <span>Abrir App</span>
+            <ChevronRight className={`w-4 h-4 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =================================================================================
+// Componente App Principal
+// =================================================================================
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+
+  // =================================================================================
+  // INTEGRAÇÃO META PIXEL (FACEBOOK)
+  // =================================================================================
+  useEffect(() => {
+    // Configurações fornecidas
+    const PIXEL_ID = '1154498153566073';
+    // Token para uso futuro/API de Conversões (guardado aqui conforme solicitado)
+    const ACCESS_TOKEN = 'EAAb7ExQhdZCsBQOBPuVJP0YoZB6HfM6N19SDeMs897j5PSugHuu7ZB51WikreEAWO1uuVJ1ZCFbTuihKYwSHJVA1knpwZAApDZCNBUVH3itGe0ZChxyED13DOTY8DZCvqdbSILYq4CAfG8NZB8w3ZCKZA59XWZCA12KaJfvURG2VODLVEc41of3X4h2LbqCAPbhWKddvzwZDZD';
+
+    // Injeção Padrão do Script do Meta Pixel
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    // Inicialização do Pixel
+    if (window.fbq) {
+      window.fbq('init', PIXEL_ID);
+      window.fbq('track', 'PageView');
+    }
+  }, []);
+
+  // Links de navegação atualizados com URLs externas e flag isExternal
+  const navLinks = [
+    { name: 'Inicio', href: '#', isExternal: false },
+    { name: 'Santo Rosario', href: 'https://appsantorosarioes.netlify.app/', isExternal: true },
+    { name: 'Novenas', href: 'https://novena12marias.netlify.app/', isExternal: true },
+    { name: 'Devocional', href: 'https://devocionaldelosantos.netlify.app/', isExternal: true }, // Shortened name for menu
+    { name: 'Recursos', href: '#recursos', isExternal: false },
+    { name: 'Contacto', href: '#contacto', isExternal: false }, // Novo link
+  ];
+
+  return (
+    <div 
+      className="min-h-screen font-sans selection:bg-red-100 selection:text-red-900" 
+      style={{ backgroundColor: COLORS.LIGHT_BG, color: COLORS.DARK_TEXT }}
+    >
+      {/* Navbar com efeito Glassmorphism */}
+      <header 
+        className="sticky top-0 z-50 transition-all duration-300 border-b backdrop-blur-md bg-opacity-90" 
+        style={{ borderColor: 'rgba(212, 175, 55, 0.3)', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+      >
+        <div className="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <div className="bg-red-900 p-1.5 rounded text-white">
+               {/* Ícone de Igreja atualizado */}
+               <Church className="w-4 h-4" />
+            </div>
+            <h1 className="text-xl font-serif font-bold tracking-wide uppercase text-gray-900">
+              Catholic Play Store
+            </h1>
+          </div>
+          
+          <button 
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+
+          <nav className="hidden md:flex space-x-6 text-sm font-medium tracking-wide">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href}
+                target={link.isExternal ? "_blank" : undefined}
+                rel={link.isExternal ? "noopener noreferrer" : undefined}
+                className="hover:text-red-800 transition-colors duration-200 relative group py-2 flex items-center" 
+                style={{ color: COLORS.DARK_TEXT }}
+              >
+                {link.name}
+                {link.isExternal && <ExternalLink className="w-3 h-3 ml-1 opacity-50" />}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-800 transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Menu Mobile */}
+      {isMenuOpen && (
+        <nav className="md:hidden fixed w-full bg-white z-40 border-b shadow-lg animate-in slide-in-from-top-5">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              target={link.isExternal ? "_blank" : undefined}
+              rel={link.isExternal ? "noopener noreferrer" : undefined}
+              className="block py-4 px-6 border-b border-gray-100 hover:bg-red-50 text-sm font-semibold uppercase flex items-center justify-between" 
+              style={{ color: COLORS.DARK_TEXT }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {link.name}
+              {link.isExternal && <ExternalLink className="w-4 h-4 opacity-50" />}
+            </a>
+          ))}
+        </nav>
+      )}
+
+      <main className="max-w-6xl mx-auto px-4 py-12 md:py-16">
+        
+        {/* Hero Section com "Luz" */}
+        <div className="text-center mb-20 relative">
+          {/* Efeito de Luz de Fundo */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-200 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+          
+          <span className="inline-block py-1 px-3 rounded-full bg-red-50 text-red-900 text-xs font-bold tracking-widest uppercase mb-4 border border-red-100">
+            Hub Espiritual
+          </span>
+          <h1 
+            className="text-5xl md:text-6xl font-serif font-black mb-6 relative z-10" 
+            style={{ color: COLORS.DARK_TEXT }}
+          >
+            Catholic Play Store
+          </h1>
+          <p 
+            className="text-xl md:text-2xl font-serif italic max-w-2xl mx-auto leading-relaxed opacity-80 relative z-10" 
+            style={{ color: COLORS.DARK_TEXT }}
+          >
+            “Tu Centro Digital de Oración, Devoción y Espiritualidad Católica”
+          </p>
+        </div>
+
+        {/* Grid de Apps */}
+        <section className="grid gap-8 sm:grid-cols-1 lg:grid-cols-3 mb-24">
+          
+          <AppCard
+            title="Santo Rosario de Batalla Espiritual"
+            description="Reza el Rosario con poder, con meditaciones centradas en el combate espiritual y la intercesión de la Virgen María."
+            Icon={Shield}
+            id="rosario"
+            link="https://appsantorosarioes.netlify.app/"
+          />
+
+          <AppCard
+            title="Colección de Novenas 12 Marías"
+            description="El poder de las doce vírgenes más milagrosas del mundo en un solo lugar. Historia, oraciones y novenas especiales."
+            Icon={Crown}
+            id="doze-marias"
+            link="https://novena12marias.netlify.app/"
+          />
+
+          <AppCard
+            title="Devocional de los Santos – 365 Días"
+            description="Sigue la vida y las virtudes de los santos cada día del año. Inspiración diaria para la santidad."
+            Icon={BookOpen}
+            id="devocional"
+            link="https://devocionaldelosantos.netlify.app/"
+          />
+        </section>
+
+        {/* Seção Mais Recursos */}
+        <section id="recursos" className="mb-24 relative overflow-hidden rounded-2xl bg-white shadow-sm border border-orange-100 p-8 md:p-16 text-center">
+          <div className="relative z-10">
+            <div className="inline-flex items-center justify-center p-3 rounded-full bg-orange-50 mb-6">
+              <Star className="w-6 h-6 text-orange-400" />
+            </div>
+            <h2 className="text-3xl font-serif font-bold mb-4" style={{ color: COLORS.DARK_TEXT }}>
+              Más Recursos Católicos
+            </h2>
+            <p className="text-gray-600 max-w-lg mx-auto mb-8">
+              Estamos preparando nuevas herramientas para enriquecer tu vida espiritual. Novenas, lecturas bíblicas y mucho más, próximamente.
+            </p>
+            <div className="inline-flex items-center text-sm font-bold text-orange-800 bg-orange-50 px-4 py-2 rounded-full">
+              <Heart className="w-4 h-4 mr-2 fill-current" />
+              Próximamente
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* SEÇÃO DE FORMULÁRIO DE CONTATO (NOVA) */}
+        {/* ======================================================== */}
+        <section id="contacto" className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden md:flex">
+            
+            {/* Lado Esquerdo - Info/Visual */}
+            <div className="bg-red-900 p-8 md:p-12 text-white md:w-2/5 flex flex-col justify-between relative overflow-hidden">
+               {/* Pattern de fundo decorativo */}
+               <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" 
+                    style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '20px 20px' }}>
+               </div>
+               
+               <div>
+                  <h3 className="text-2xl font-serif font-bold mb-2">Contáctanos</h3>
+                  <p className="text-red-100 text-sm leading-relaxed mb-6">
+                    ¿Tienes alguna sugerencia, duda o testimonio? Nos encantaría escucharte.
+                  </p>
+               </div>
+               
+               <div className="space-y-4">
+                 <div className="flex items-center space-x-3 text-red-100 text-sm">
+                   <div className="p-2 bg-red-800 rounded-lg"><Mail className="w-4 h-4" /></div>
+                   <span>Envíanos un mensaje directo</span>
+                 </div>
+               </div>
+
+               <div className="mt-8 pt-8 border-t border-red-800">
+                  <p className="text-xs text-red-300">
+                    Respondemos a la mayor brevedad posible.
+                  </p>
+               </div>
+            </div>
+
+            {/* Lado Direito - Formulário */}
+            <div className="p-8 md:p-12 md:w-3/5">
+              <form 
+                action="https://formsubmit.co/maquinadoinfoprodutor@gmail.com" 
+                method="POST"
+                className="space-y-6"
+              >
+                {/* Configurações FormSubmit */}
+                <input type="hidden" name="_subject" value="Nuevo Mensaje - Catholic Play Store" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+
+                <div>
+                  <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">Nombre</label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      required
+                      placeholder="Tu nombre completo"
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-red-900 focus:ring-1 focus:ring-red-900 outline-none transition-all bg-gray-50 focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">Correo Electrónico</label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      required
+                      placeholder="ejemplo@correo.com"
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-red-900 focus:ring-1 focus:ring-red-900 outline-none transition-all bg-gray-50 focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">Mensaje</label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    required
+                    rows="4"
+                    placeholder="Escribe tu mensaje aquí..."
+                    className="w-full p-4 rounded-lg border border-gray-200 focus:border-red-900 focus:ring-1 focus:ring-red-900 outline-none transition-all bg-gray-50 focus:bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit"
+                  className="w-full py-4 px-6 rounded-lg bg-red-900 hover:bg-red-800 text-white font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
+                >
+                  <span>Enviar Mensaje</span>
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <footer className="bg-white border-t border-gray-100 py-12 mt-12">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col justify-center items-center text-center">
+          <div className="mb-0">
+            <h3 className="text-lg font-serif font-bold text-gray-900">Catholic Play Store</h3>
+            <p className="text-sm text-gray-500 mt-2">© 2024 Ad Maiorem Dei Gloriam</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
