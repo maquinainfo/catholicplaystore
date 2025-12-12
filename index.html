@@ -247,6 +247,42 @@
             }
         ];
 
+        // Dados de Música Gregoriana
+        const MUSIC_DATA = [
+            {
+                id: 'music-1',
+                title: "Música Gregoriana en Latín",
+                subtitle: "Adveniat Regnum Tuum",
+                image: "https://img.youtube.com/vi/akPTHn8PkcE/hqdefault.jpg",
+                match: "98% Match",
+                link: "https://www.youtube.com/watch?v=akPTHn8PkcE&list=RDakPTHn8PkcE&start_radio=1"
+            },
+            {
+                id: 'music-2',
+                title: "Salmo 117 - En Español",
+                subtitle: "Cantos Gregorianos",
+                image: "https://img.youtube.com/vi/I3v8mfk6ZF4/hqdefault.jpg", 
+                match: "95% Match",
+                link: "https://www.youtube.com/watch?v=I3v8mfk6ZF4&list=PLdUCerNPOxpk9U2jrCSrdrwDyX9b0Ivbc"
+            },
+            {
+                id: 'music-3',
+                title: "Da Pacem Domine",
+                subtitle: "Canto de los Templarios",
+                image: "https://img.youtube.com/vi/h0YRkuziwEg/maxresdefault.jpg",
+                match: "99% Match",
+                link: "https://www.youtube.com/watch?v=h0YRkuziwEg&list=RDh0YRkuziwEg&start_radio=1"
+            },
+            {
+                id: 'music-4',
+                title: "Miserere Mei Deus",
+                subtitle: "Monjes Benedictinos",
+                image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg",
+                match: "97% Match",
+                link: "https://www.youtube.com/watch?v=nLpcVQghKDg&list=RDnLpcVQghKDg&start_radio=1"
+            }
+        ];
+
         // =================================================================================
         // Componentes
         // =================================================================================
@@ -391,14 +427,21 @@
             );
         };
 
-        const Card = ({ item, isApp, customStyle }) => {
+        const Card = ({ item, isApp, customStyle, isHorizontal }) => {
+            // Define largura e proporção com base se é horizontal (vídeo) ou vertical (poster)
+            const widthClass = customStyle 
+                ? customStyle 
+                : (isHorizontal ? 'w-[220px] md:w-[300px] mx-1' : 'w-[140px] md:w-[200px] mx-1');
+            
+            const aspectClass = isHorizontal ? 'aspect-video' : 'aspect-[2/3]';
+
             return (
                 <div 
-                    className={`group relative flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 hover:z-50 ${customStyle ? customStyle : 'w-[140px] md:w-[200px] mx-1'}`}
+                    className={`group relative flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out hover:scale-105 hover:z-50 ${widthClass}`}
                     onClick={() => item.link !== '#' && window.open(item.link, '_blank')}
                 >
                     {/* Poster Image / Placeholder - Lógica ajustada para priorizar imagem */}
-                    <div className={`aspect-[2/3] w-full rounded-md overflow-hidden relative shadow-lg ${!item.image && isApp ? item.color : 'bg-gray-800'}`}>
+                    <div className={`${aspectClass} w-full rounded-md overflow-hidden relative shadow-lg ${!item.image && isApp ? item.color : 'bg-gray-800'}`}>
                         {!item.image && isApp ? (
                             <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center border border-white/10 bg-gradient-to-br from-white/10 to-transparent">
                                 <item.icon className="w-10 h-10 md:w-12 md:h-12 mb-3 text-white drop-shadow-lg" />
@@ -412,6 +455,15 @@
                         {/* Gradient Overlay on Hover */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
                         
+                        {/* Ícone de Play no centro se for vídeo (horizontal) */}
+                        {isHorizontal && (
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="bg-red-600 rounded-full p-2 shadow-lg">
+                                    <Play className="w-6 h-6 text-white fill-current" />
+                                </div>
+                            </div>
+                        )}
+
                         {/* Netflix-style Badge */}
                         {item.badge && (
                             <div className="absolute top-2 right-0 bg-red-600 text-white text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md z-10">
@@ -432,7 +484,7 @@
             );
         };
 
-        const Row = ({ title, subtitle, items, isAppRow, id }) => {
+        const Row = ({ title, subtitle, items, isAppRow, id, isHorizontal }) => {
             const rowRef = useRef(null);
 
             return (
@@ -457,7 +509,12 @@
                             className="flex space-x-2 md:space-x-4 overflow-x-scroll scrollbar-hide pb-4 pr-12 items-center"
                         >
                             {items.map((item, index) => (
-                                <Card key={index} item={item} isApp={isAppRow} />
+                                <Card 
+                                    key={index} 
+                                    item={item} 
+                                    isApp={isAppRow} 
+                                    isHorizontal={isHorizontal}
+                                />
                             ))}
                         </div>
                         
@@ -545,7 +602,7 @@
             const [searchQuery, setSearchQuery] = useState('');
             
             // Combine all data for searching
-            const allData = [...APPS_DATA, ...BOOKS_DATA, ...GUADALUPE_DATA];
+            const allData = [...APPS_DATA, ...BOOKS_DATA, ...GUADALUPE_DATA, ...MUSIC_DATA];
             
             const filteredData = searchQuery 
                 ? allData.filter(item => 
@@ -590,6 +647,15 @@
                                     subtitle="Colección Completa con os Bonos:" 
                                     items={BOOKS_DATA} 
                                     isAppRow={false} 
+                                />
+
+                                {/* Nova Seção de Música - Agora com isHorizontal={true} */}
+                                <Row 
+                                    title="Playlist de música gregoriana especialmente seleccionada para Meditación y contemplación" 
+                                    subtitle="Paz y Contemplación" 
+                                    items={MUSIC_DATA} 
+                                    isAppRow={false}
+                                    isHorizontal={true} 
                                 />
 
                                 <Row 
