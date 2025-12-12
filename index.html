@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catholic Play Store</title>
+    <title>Catholic Play Store - Member Area</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,17 +12,27 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel para traduzir o código React no navegador -->
+    <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Fonte: Montserrat & Playfair Display -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- Configuração de Fontes do Tailwind -->
+    <!-- Configuração Tailwind e Estilos Personalizados -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        netflix: {
+                            bg: '#141414',
+                            red: '#E50914',
+                            darkRed: '#B9090B',
+                            card: '#1f1f1f',
+                            text: '#e5e5e5',
+                            dim: '#b3b3b3'
+                        }
+                    },
                     fontFamily: {
                         sans: ['Montserrat', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
@@ -31,164 +41,349 @@
             }
         }
     </script>
+    <style>
+        /* Esconder barra de rolagem mas manter funcionalidade */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Efeito de gradiente no Hero mais suave */
+        .hero-gradient {
+            background: linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 15%, transparent 60%);
+        }
+
+        .hero-vignette {
+            background: radial-gradient(circle, transparent 50%, #141414 150%);
+        }
+        
+        body {
+            background-color: #141414;
+            color: #fff;
+        }
+    </style>
 </head>
-<body class="bg-[#F9F7F2]">
+<body>
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         // =================================================================================
-        // Ícones SVG Manuais (Lucide)
+        // Ícones (Lucide)
         // =================================================================================
-        const IconBase = ({ children, className, style }) => (
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="24" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className={className}
-                style={style}
-            >
+        const IconBase = ({ children, className, style, onClick }) => (
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}>
                 {children}
             </svg>
         );
 
+        const Play = (props) => <IconBase {...props}><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></IconBase>;
+        const Info = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></IconBase>;
+        const Bell = (props) => <IconBase {...props}><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></IconBase>;
+        const Search = (props) => <IconBase {...props}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></IconBase>;
+        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>;
         const Shield = (props) => <IconBase {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></IconBase>;
         const Crown = (props) => <IconBase {...props}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></IconBase>;
         const BookOpen = (props) => <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>;
-        const ChevronRight = (props) => <IconBase {...props}><path d="m9 18 6-6-6-6"/></IconBase>;
-        const Menu = (props) => <IconBase {...props}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></IconBase>;
-        const X = (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 18 18"/></IconBase>;
-        const Star = (props) => <IconBase {...props}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></IconBase>;
-        const Heart = (props) => <IconBase {...props}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></IconBase>;
-        const Church = (props) => <IconBase {...props}><path d="m18 7 4 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="m18 2 4 9"/><path d="m2 11 4-9"/><path d="M12 2v8"/><circle cx="12" cy="5" r="2"/></IconBase>;
-        const ExternalLink = (props) => <IconBase {...props}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></IconBase>;
-        const Mail = (props) => <IconBase {...props}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></IconBase>;
-        const Send = (props) => <IconBase {...props}><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></IconBase>;
         const User = (props) => <IconBase {...props}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></IconBase>;
-        const Library = (props) => <IconBase {...props}><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></IconBase>;
-        const Flame = (props) => <IconBase {...props}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.1.2-2.2.6-3.2 1.8 1.9 3 3.2 2.9 5.7Z"/></IconBase>;
-        const Book = (props) => <IconBase {...props}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></IconBase>;
+        const X = (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 18 18"/></IconBase>;
 
         // =================================================================================
-        // Definição da Paleta de Cores e Estilos
+        // Dados
         // =================================================================================
-        const COLORS = {
-            LIGHT_BG: '#F9F7F2',
-            DARK_TEXT: '#2C1810',
-            MAROON: '#800020',
-            GOLD_ACCENT: '#D4AF37',
-            GOLD_LIGHT: '#F3E5AB',
-            CARD_BG: '#FFFFFF',
-            BLUE_ACCENT: '#1E3A8A', 
-            BLUE_LIGHT: '#DBEAFE',
-        };
+        
+        const APPS_DATA = [
+            {
+                id: 'rosario',
+                title: "Santo Rosario de Batalla Espiritual",
+                subtitle: "Oración y Combate",
+                description: "Reza el Rosario con poder, meditaciones centradas en el combate espiritual.",
+                icon: Shield,
+                color: "bg-blue-900",
+                link: "https://appsantorosarioes.netlify.app/",
+                match: "98% Match",
+                badge: "Top 10",
+                image: "https://i.postimg.cc/G2tN6VCf/Gemini-Generated-Image-txrat1txrat1txra.png" 
+            },
+            {
+                id: 'novenas',
+                title: "Novena 12 Marías",
+                subtitle: "Colección de Novenas",
+                description: "El poder de las doce vírgenes más milagrosas del mundo en un solo lugar.",
+                icon: Crown,
+                color: "bg-purple-900",
+                link: "https://novena12marias.netlify.app/",
+                match: "95% Match",
+                badge: "Nuevo",
+                image: "https://i.postimg.cc/gJpyZ6M8/Gemini-Generated-Image-6fg18u6fg18u6fg1.png" 
+            },
+            {
+                id: 'devocional',
+                title: "Devocional de los Santos",
+                subtitle: "Vidas de Santos",
+                description: "Sigue la vida y las virtudes de los santos cada día del año.",
+                icon: BookOpen,
+                color: "bg-emerald-900",
+                link: "https://devocionaldelosantos.netlify.app/",
+                match: "92% Match",
+                image: "https://i.postimg.cc/15LQwpFK/Gemini-Generated-Image-gcg4jfgcg4jfgcg4.png" 
+            }
+        ];
+
+        const BOOKS_DATA = [
+             { 
+                id: 'adviento',
+                title: "Libro de Adviento", 
+                author: "Colección Exclusiva", 
+                desc: "Preparación y celebración del nacimiento de Jesús.", 
+                link: "https://libroadvientoenavidad.netlify.app/",
+                image: "https://i.postimg.cc/d0yHyvxb/Gemini-Generated-Image-r1hrk0r1hrk0r1hr.webp",
+                match: "99% Match"
+            },
+            { 
+                id: 'oraciones',
+                title: "Oraciones Católicas", 
+                author: "Tradición Eclesial", 
+                desc: "Las plegarias fundamentales para la vida diaria.", 
+                link: "#",
+                image: "https://i.postimg.cc/zBTCJGcP/Gemini-Generated-Image-whfdhkwhfdhkwhfd-1.webp", 
+                match: "85% Match"
+            },
+            { 
+                id: 'apariciones',
+                title: "Apariciones Marianas", 
+                author: "Historia Sagrada", 
+                desc: "Relatos y mensajes de las visitas de la Virgen.", 
+                link: "#",
+                image: "https://i.postimg.cc/Fzmj1Qts/Gemini-Generated-Image-xyoyl9xyoyl9xyoy.webp", 
+                match: "90% Match"
+            },
+            { 
+                id: 'conversos',
+                title: "Guía para Conversos", 
+                author: "Guía de Fe", 
+                desc: "Acompañamiento paso a paso en el camino católico.", 
+                link: "#",
+                image: "https://i.postimg.cc/QN2MQqVZ/Gemini-Generated-Image-ayk0l5ayk0l5ayk0.webp",
+                match: "88% Match"
+            }
+        ];
+
+        // Dados da Nova Coleção Guadalupe
+        const GUADALUPE_DATA = [
+            {
+                id: 'guadalupe-1',
+                title: "La Imagen que Habla",
+                subtitle: "Los Mensajes Ocultos",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            },
+            {
+                id: 'guadalupe-2',
+                title: "El Milagro de las Estrellas",
+                subtitle: "Constelaciones en el Manto",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            },
+            {
+                id: 'guadalupe-3',
+                title: "Guadalupe y Juan Diego",
+                subtitle: "Conversaciones Espirituales",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            },
+            {
+                id: 'guadalupe-4',
+                title: "Guadalupe en Náhuatl",
+                subtitle: "Significado Original",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            },
+            {
+                id: 'guadalupe-5',
+                title: "Milagros Guadalupanos",
+                subtitle: "500 Años de Testimonios",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            },
+            {
+                id: 'guadalupe-6',
+                title: "Profecías y Mensajes",
+                subtitle: "A Través de los Siglos",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            },
+            {
+                id: 'guadalupe-7',
+                title: "El Mensaje de Guadalupe",
+                subtitle: "Para el Mundo Moderno",
+                author: "Colección Guadalupe",
+                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
+                badge: "Lanzamiento 2026",
+                match: "Próximamente",
+                link: "#"
+            }
+        ];
 
         // =================================================================================
-        // Componente Card de Aplicativo
+        // Componentes
         // =================================================================================
-        const AppCard = ({ title, description, Icon, id, link, customColor, square, onClick }) => {
-            const [isHovered, setIsHovered] = useState(false);
-            
-            const activeColor = customColor || COLORS.MAROON;
-            const activeAccent = customColor || COLORS.GOLD_ACCENT;
-            const borderRadius = square ? 'rounded-none' : 'rounded-xl';
 
-            const handleClick = (e) => {
-                if (onClick) {
-                    onClick(e);
-                } else if (link) {
-                    window.open(link, '_blank', 'noopener,noreferrer');
-                } else {
-                    console.log(`Acessando App: ${title}`);
+        const Navbar = ({ searchQuery, setSearchQuery }) => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [showInput, setShowInput] = useState(false);
+            const inputRef = useRef(null);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 0);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const scrollToSection = (e, id) => {
+                e.preventDefault();
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
                 }
             };
 
+            const handleSearchClick = () => {
+                setShowInput(true);
+                setTimeout(() => {
+                    if (inputRef.current) inputRef.current.focus();
+                }, 100);
+            };
+
+            const handleBlur = () => {
+                if (!searchQuery) setShowInput(false);
+            };
+
+            const clearSearch = () => {
+                setSearchQuery('');
+                setShowInput(false);
+            };
+
             return (
-                <div
-                    id={id}
-                    className={`relative group ${borderRadius} shadow-md cursor-pointer transition-all duration-500 overflow-hidden bg-white`}
-                    style={{ 
-                        transform: isHovered ? 'translateY(-5px)' : 'translateY(0)',
-                        boxShadow: isHovered 
-                        ? `0 20px 40px -15px rgba(0, 0, 0, 0.2)`
-                        : `0 4px 6px -1px rgba(0, 0, 0, 0.05)`,
-                    }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onClick={handleClick}
-                >
-                    <div className="h-1 w-full" style={{ backgroundColor: isHovered ? activeColor : activeAccent, transition: 'background-color 0.5s' }}></div>
-
-                    <div className="p-6 h-full flex flex-col">
-                        <div 
-                        className={`absolute inset-4 border ${square ? 'rounded-none' : 'rounded-lg'} pointer-events-none opacity-20 transition-all duration-500`}
-                        style={{ 
-                            borderColor: activeAccent,
-                            borderWidth: '1px',
-                            transform: isHovered ? 'scale(0.98)' : 'scale(1)',
-                        }}
-                        ></div>
-
-                        <div className="flex items-start justify-between mb-4 z-10 relative">
-                            <div 
-                                className="p-3 rounded-full shadow-sm transition-colors duration-500"
-                                style={{ 
-                                backgroundColor: isHovered ? activeColor : '#FFF', 
-                                border: `1px solid ${isHovered ? activeColor : (customColor ? '#E5E7EB' : COLORS.GOLD_LIGHT)}` 
-                                }}
-                            >
-                                <Icon 
-                                className="w-6 h-6 transition-colors duration-500" 
-                                style={{ color: isHovered ? '#FFF' : activeColor }} 
-                                />
-                            </div>
-                            {link && <ExternalLink className="w-4 h-4 opacity-30 text-gray-400" />}
+                <nav className={`fixed w-full z-50 transition-colors duration-500 ease-in-out px-4 md:px-12 py-4 flex items-center justify-between ${isScrolled || showInput ? 'bg-[#141414] shadow-md' : 'bg-gradient-to-b from-black/90 to-transparent'}`}>
+                    <div className="flex items-center space-x-8">
+                        <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="text-red-600 text-2xl md:text-3xl font-bold uppercase tracking-tighter cursor-pointer drop-shadow-md decoration-0">CATHOLIC PLAY</a>
+                        <ul className={`hidden md:flex space-x-6 text-sm font-medium text-gray-200 ${showInput ? 'opacity-0 pointer-events-none' : 'opacity-100'} transition-opacity duration-300`}>
+                            <li>
+                                <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="hover:text-gray-400 cursor-pointer transition">Inicio</a>
+                            </li>
+                            <li>
+                                <a href="#apps" onClick={(e) => scrollToSection(e, 'apps')} className="hover:text-white font-bold cursor-pointer transition">Apps</a>
+                            </li>
+                            <li>
+                                <a href="#libros" onClick={(e) => scrollToSection(e, 'libros')} className="hover:text-gray-400 cursor-pointer transition">Libros</a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:text-gray-400 cursor-pointer transition">Mi Lista</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="flex items-center space-x-6 text-white">
+                        
+                        {/* Search Box Expandable */}
+                        <div className={`flex items-center transition-all duration-300 border ${showInput ? 'border-white bg-black/60 px-2 py-1' : 'border-transparent'}`}>
+                            <Search 
+                                className="w-5 h-5 cursor-pointer hover:text-gray-300 transition" 
+                                onClick={handleSearchClick}
+                            />
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                className={`bg-transparent text-white text-sm outline-none transition-all duration-300 ${showInput ? 'w-32 md:w-60 ml-2 opacity-100' : 'w-0 ml-0 opacity-0'}`}
+                                placeholder="Títulos, gente, géneros"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onBlur={handleBlur}
+                            />
+                            {searchQuery && showInput && (
+                                <X className="w-4 h-4 cursor-pointer ml-1 hover:text-gray-300" onClick={clearSearch} />
+                            )}
                         </div>
 
-                        <div className="z-10 relative flex-grow">
-                            <h2 
-                                className="text-xl font-serif font-bold mb-2 leading-tight"
-                                style={{ color: COLORS.DARK_TEXT }}
-                            >
-                                {title}
-                            </h2>
-
-                            <div className="flex items-center space-x-1 mb-3">
-                                {[...Array(5)].map((_, i) => (
-                                <Star 
-                                    key={i} 
-                                    className="w-3 h-3 md:w-4 md:h-4 fill-current" 
-                                    style={{ color: '#F59E0B' }} 
-                                />
-                                ))}
-                                <span className="text-xs font-medium text-gray-400 ml-1">(5.0)</span>
+                        <Bell className={`w-5 h-5 cursor-pointer hover:text-gray-300 transition ${showInput ? 'hidden md:block' : 'block'}`} />
+                        <div className={`flex items-center cursor-pointer group ${showInput ? 'hidden md:flex' : 'flex'}`}>
+                            <div className="w-8 h-8 rounded bg-[#B9090B] flex items-center justify-center group-hover:ring-1 ring-white transition overflow-hidden">
+                                <User className="w-5 h-5 text-white" />
                             </div>
-
-                            <p 
-                                className="text-sm font-sans leading-relaxed opacity-80 mb-6" 
-                                style={{ color: COLORS.DARK_TEXT }}
-                            >
-                                {description}
-                            </p>
+                            <ChevronDown className="w-4 h-4 ml-1 group-hover:rotate-180 transition-transform" />
                         </div>
+                    </div>
+                </nav>
+            );
+        };
 
-                        <div className="mt-auto z-10 relative">
-                            <button 
-                                className={`w-full py-3 px-4 ${square ? 'rounded-none' : 'rounded-lg'} text-xs font-bold uppercase tracking-widest flex items-center justify-center transition-all duration-300 group-hover:shadow-lg`}
-                                style={{ 
-                                    backgroundColor: isHovered ? activeAccent : activeColor,
-                                    color: '#FFFFFF'
-                                }}
+        const Hero = () => {
+            return (
+                <div id="inicio" className="relative h-[65vh] md:h-[95vh] w-full text-white bg-[#141414]">
+                    {/* Background Image Layer */}
+                    <div className="absolute top-0 left-0 w-full h-full select-none">
+                        <img 
+                            src="https://i.postimg.cc/K4Snrkfk/Gemini-Generated-Image-koc27wkoc27wkoc2.png" 
+                            alt="Hero Background" 
+                            className="w-full h-full object-cover object-center"
+                        />
+                        {/* Correção: Gradiente ajustado para ser transparente no topo e escuro na base (mobile) */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#141414] md:to-[#141414]"></div>
+                        {/* Gradiente extra apenas para mobile na parte inferior para leitura do texto */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/60 to-transparent md:hidden"></div>
+                        <div className="hidden md:block absolute inset-0 hero-gradient"></div>
+                        <div className="hidden md:block absolute inset-0 hero-vignette"></div>
+                    </div>
+
+                    {/* Content Layer - Ajustado: Bottom no mobile, Top/Center no Desktop */}
+                    <div className="absolute bottom-4 left-0 w-full px-4 pb-8 md:p-0 md:left-12 md:top-[30%] md:bottom-auto md:w-auto max-w-2xl z-30 flex flex-col justify-end md:justify-center">
+                        <div className="flex items-center space-x-2 mb-2 md:mb-4 animate-fade-in-up">
+                            <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Original de Catholic Play</span>
+                        </div>
+                        
+                        <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 md:mb-4 leading-tight drop-shadow-2xl">
+                           El Santo Rosario
+                        </h1>
+                        <p className="text-sm md:text-xl text-shadow-md mb-4 md:mb-8 line-clamp-3 text-gray-100 font-medium max-w-lg drop-shadow-md">
+                            Únete a la batalla espiritual. Una experiencia inmersiva de oración y meditación que transformará tu vida diaria y fortalecerá tu fe.
+                        </p>
+                        
+                        <div className="flex space-x-3">
+                            <a 
+                                href="https://appsantorosarioes.netlify.app/" 
+                                target="_blank" 
+                                className="flex items-center bg-white text-black px-4 py-2 md:px-8 md:py-3 rounded hover:bg-opacity-80 transition text-sm md:text-lg font-bold shadow-lg transform active:scale-95"
                             >
-                                <span>{onClick ? 'Acceder' : 'Abrir App'}</span>
-                                <ChevronRight className={`w-4 h-4 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
+                                <Play className="w-4 h-4 md:w-6 md:h-6 mr-2 fill-current" />
+                                Abrir App
+                            </a>
+                            <button className="flex items-center bg-gray-500/60 text-white px-4 py-2 md:px-8 md:py-3 rounded font-bold hover:bg-gray-500/40 transition text-sm md:text-lg backdrop-blur-md shadow-lg transform active:scale-95">
+                                <Info className="w-4 h-4 md:w-6 md:h-6 mr-2" />
+                                Más Info
                             </button>
                         </div>
                     </div>
@@ -196,389 +391,223 @@
             );
         };
 
-        // =================================================================================
-        // Componente Principal
-        // =================================================================================
-        const App = () => {
-            const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-            useEffect(() => {
-                // Configuração Pixel
-                const PIXEL_ID = '1154498153566073';
-                const ACCESS_TOKEN = 'EAAb7ExQhdZCsBQOBPuVJP0YoZB6HfM6N19SDeMs897j5PSugHuu7ZB51WikreEAWO1uuVJ1ZCFbTuihKYwSHJVA1knpwZAApDZCNBUVH3itGe0ZChxyED13DOTY8DZCvqdbSILYq4CAfG8NZB8w3ZCKZA59XWZCA12KaJfvURG2VODLVEc41of3X4h2LbqCAPbhWKddvzwZDZD';
-
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-
-                if (window.fbq) {
-                    window.fbq('init', PIXEL_ID);
-                    window.fbq('track', 'PageView');
-                }
-            }, []);
-
-            const navLinks = [
-                { name: 'Inicio', href: '#', isExternal: false },
-                { name: 'Santo Rosario', href: 'https://appsantorosarioes.netlify.app/', isExternal: true },
-                { name: 'Novenas', href: 'https://novena12marias.netlify.app/', isExternal: true },
-                { name: 'Devocional', href: 'https://devocionaldelosantos.netlify.app/', isExternal: true },
-                { name: 'Biblioteca', href: '#biblioteca', isExternal: false }, 
-                { name: 'Recursos', href: '#recursos', isExternal: false },
-                { name: 'Contacto', href: '#contacto', isExternal: false },
-            ];
-
-            const books = [
-                { 
-                    title: "El Libro de Adviento y Navidad", 
-                    author: "Colección Exclusiva", 
-                    desc: "Preparación y celebración del nacimiento de Jesús.", 
-                    link: "https://libroadvientoenavidad.netlify.app/",
-                    image: "https://i.postimg.cc/d0yHyvxb/Gemini-Generated-Image-r1hrk0r1hrk0r1hr.webp" 
-                },
-                { 
-                    title: "Oraciones Católicas", 
-                    author: "Tradición Eclesial", 
-                    desc: "Las plegarias fundamentales para la vida diaria.", 
-                    link: "#",
-                    image: "https://i.postimg.cc/zBTCJGcP/Gemini-Generated-Image-whfdhkwhfdhkwhfd-1.webp",
-                    badge: "Disponible 15/12"
-                },
-                { 
-                    title: "Apariciones Marianas", 
-                    author: "Historia Sagrada", 
-                    desc: "Relatos y mensajes de las visitas de la Virgen.", 
-                    link: "#",
-                    image: "https://i.postimg.cc/Fzmj1Qts/Gemini-Generated-Image-xyoyl9xyoyl9xyoy.webp",
-                    badge: "Disponible 15/12"
-                },
-                { 
-                    title: "Devocionario para Conversos", 
-                    author: "Guía de Fe", 
-                    desc: "Acompañamiento paso a paso en el camino católico.", 
-                    link: "#",
-                    image: "https://i.postimg.cc/QN2MQqVZ/Gemini-Generated-Image-ayk0l5ayk0l5ayk0.webp",
-                    badge: "Disponible 15/12"
-                },
-                { 
-                    title: "Los 15 Tesoros Espirituales", 
-                    author: "Sabiduría Eterna", 
-                    desc: "Claves esenciales para fortalecer tu espíritu.", 
-                    link: "#",
-                    badge: "Disponible 15/12"
-                }
-            ];
-
+        const Card = ({ item, isApp, customStyle }) => {
             return (
                 <div 
-                    className="min-h-screen font-sans selection:bg-red-100 selection:text-red-900" 
-                    style={{ backgroundColor: COLORS.LIGHT_BG, color: COLORS.DARK_TEXT }}
+                    className={`group relative flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 hover:z-50 ${customStyle ? customStyle : 'w-[140px] md:w-[200px] mx-1'}`}
+                    onClick={() => item.link !== '#' && window.open(item.link, '_blank')}
                 >
-                    {/* Navbar */}
-                    <header 
-                        className="sticky top-0 z-50 transition-all duration-300 border-b backdrop-blur-md bg-opacity-90" 
-                        style={{ borderColor: 'rgba(212, 175, 55, 0.3)', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
-                    >
-                        <div className="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center">
-                            <div className="flex items-center space-x-2">
-                                <div className="bg-red-900 p-1.5 rounded text-white">
-                                    <Church className="w-4 h-4" />
+                    {/* Poster Image / Placeholder - Lógica ajustada para priorizar imagem */}
+                    <div className={`aspect-[2/3] w-full rounded-md overflow-hidden relative shadow-lg ${!item.image && isApp ? item.color : 'bg-gray-800'}`}>
+                        {!item.image && isApp ? (
+                            <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center border border-white/10 bg-gradient-to-br from-white/10 to-transparent">
+                                <item.icon className="w-10 h-10 md:w-12 md:h-12 mb-3 text-white drop-shadow-lg" />
+                                <h3 className="font-serif font-bold text-lg md:text-xl leading-tight mb-1 text-white drop-shadow-md">{item.title}</h3>
+                                <p className="text-[10px] md:text-xs uppercase tracking-widest opacity-80 text-gray-200">{item.subtitle}</p>
+                            </div>
+                        ) : (
+                            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                        )}
+                        
+                        {/* Gradient Overlay on Hover */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
+                        
+                        {/* Netflix-style Badge */}
+                        {item.badge && (
+                            <div className="absolute top-2 right-0 bg-red-600 text-white text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md z-10">
+                                {item.badge}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Meta Info (Apears below on standard view) */}
+                    <div className="mt-2 px-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="text-green-500 font-bold text-[10px] md:text-xs">{item.match}</span>
+                            <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
+                        </div>
+                        <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>
+                    </div>
+                </div>
+            );
+        };
+
+        const Row = ({ title, subtitle, items, isAppRow, id }) => {
+            const rowRef = useRef(null);
+
+            return (
+                <div id={id} className="mb-8 md:mb-12 relative pl-4 md:pl-12 group z-20 scroll-mt-24">
+                    <div>
+                        <h2 className="text-base md:text-xl font-bold text-gray-200 mb-1 hover:text-white cursor-pointer transition inline-flex items-center">
+                            {title}
+                            <span className="text-xs text-blue-400 ml-4 font-normal opacity-0 group-hover:opacity-100 transition-opacity flex items-center duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
+                                Explorar todos <ChevronDown className="w-3 h-3 ml-1 -rotate-90" />
+                            </span>
+                        </h2>
+                        {subtitle && (
+                            <p className="text-xs md:text-sm text-gray-400 font-medium italic mb-3 opacity-80">
+                                {subtitle}
+                            </p>
+                        )}
+                    </div>
+                    
+                    <div className="relative group">
+                        <div 
+                            ref={rowRef}
+                            className="flex space-x-2 md:space-x-4 overflow-x-scroll scrollbar-hide pb-4 pr-12 items-center"
+                        >
+                            {items.map((item, index) => (
+                                <Card key={index} item={item} isApp={isAppRow} />
+                            ))}
+                        </div>
+                        
+                        {/* Fade Effect at the end of the row */}
+                        <div className="absolute top-0 right-0 h-full w-8 md:w-16 bg-gradient-to-l from-[#141414] to-transparent pointer-events-none z-20"></div>
+                    </div>
+                </div>
+            );
+        };
+
+        const ContactSection = () => {
+            return (
+                <div id="contacto" className="max-w-4xl mx-auto px-4 pt-12 pb-4 scroll-mt-24">
+                    <div className="bg-[#1f1f1f] rounded-lg p-6 md:p-12 shadow-2xl border border-gray-800">
+                        <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-white text-center">Contáctanos</h2>
+                        <p className="text-gray-400 text-center mb-8 text-sm md:text-base">
+                            ¿Tienes alguna duda, sugerencia o testimonio? Envíanos un mensaje directo.
+                        </p>
+                        
+                        <form 
+                            action="https://formsubmit.co/maquinadoinfoprodutor@gmail.com" 
+                            method="POST"
+                            className="space-y-6"
+                        >
+                            {/* Configurações ocultas do FormSubmit */}
+                            <input type="hidden" name="_subject" value="Nuevo Mensaje - Catholic Play Store" />
+                            <input type="hidden" name="_template" value="table" />
+                            <input type="hidden" name="_captcha" value="false" />
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label htmlFor="name" className="block text-xs font-bold text-gray-500 uppercase mb-2">Nombre</label>
+                                    <input 
+                                        type="text" 
+                                        name="name" 
+                                        required 
+                                        className="w-full bg-[#333] border border-transparent focus:border-[#E50914] rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#E50914] transition-all"
+                                        placeholder="Tu nombre completo"
+                                    />
                                 </div>
-                                <h1 className="text-xl font-serif font-bold tracking-wide uppercase text-gray-900">
-                                    Catholic Play Store
-                                </h1>
+                                <div>
+                                    <label htmlFor="email" className="block text-xs font-bold text-gray-500 uppercase mb-2">Email</label>
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        required 
+                                        className="w-full bg-[#333] border border-transparent focus:border-[#E50914] rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#E50914] transition-all"
+                                        placeholder="tu@email.com"
+                                    />
+                                </div>
                             </div>
                             
-                            <button 
-                                className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition" 
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            >
-                                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                            </button>
+                            <div>
+                                <label htmlFor="message" className="block text-xs font-bold text-gray-500 uppercase mb-2">Mensaje</label>
+                                <textarea 
+                                    name="message" 
+                                    rows="4" 
+                                    required
+                                    className="w-full bg-[#333] border border-transparent focus:border-[#E50914] rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#E50914] transition-all resize-none"
+                                    placeholder="Escribe tu mensaje aquí..."
+                                ></textarea>
+                            </div>
 
-                            <nav className="hidden md:flex space-x-6 text-sm font-medium tracking-wide">
-                                {navLinks.map((link) => (
-                                <a 
-                                    key={link.name} 
-                                    href={link.href}
-                                    target={link.isExternal ? "_blank" : undefined}
-                                    rel={link.isExternal ? "noopener noreferrer" : undefined}
-                                    className="hover:text-red-800 transition-colors duration-200 relative group py-2 flex items-center" 
-                                    style={{ color: COLORS.DARK_TEXT }}
+                            <div className="text-center pt-2">
+                                <button 
+                                    type="submit" 
+                                    className="bg-[#E50914] hover:bg-[#B9090B] text-white font-bold py-3 px-12 rounded transition-colors duration-300 shadow-lg transform active:scale-95 uppercase tracking-wider text-sm"
                                 >
-                                    {link.name}
-                                    {link.isExternal && <ExternalLink className="w-3 h-3 ml-1 opacity-50" />}
-                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-800 transition-all duration-300 group-hover:w-full"></span>
-                                </a>
-                                ))}
-                            </nav>
-                        </div>
-                    </header>
+                                    Enviar Mensaje
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            );
+        };
 
-                    {/* Menu Mobile */}
-                    {isMenuOpen && (
-                        <nav className="md:hidden fixed w-full bg-white z-40 border-b shadow-lg animate-in slide-in-from-top-5">
-                        {navLinks.map((link) => (
-                            <a 
-                            key={link.name} 
-                            href={link.href}
-                            target={link.isExternal ? "_blank" : undefined}
-                            rel={link.isExternal ? "noopener noreferrer" : undefined}
-                            className="block py-4 px-6 border-b border-gray-100 hover:bg-red-50 text-sm font-semibold uppercase flex items-center justify-between" 
-                            style={{ color: COLORS.DARK_TEXT }}
-                            onClick={() => setIsMenuOpen(false)}
-                            >
-                            {link.name}
-                            {link.isExternal && <ExternalLink className="w-4 h-4 opacity-50" />}
-                            </a>
-                        ))}
-                        </nav>
+        const Footer = () => (
+            <footer className="max-w-4xl mx-auto px-4 py-12 text-gray-500 text-sm mt-4 border-t border-gray-800/30 flex justify-center">
+                <p className="text-[10px] text-gray-600">© 2024 Catholic Play Store - Ad Maiorem Dei Gloriam</p>
+            </footer>
+        );
+
+        const App = () => {
+            const [searchQuery, setSearchQuery] = useState('');
+            
+            // Combine all data for searching
+            const allData = [...APPS_DATA, ...BOOKS_DATA, ...GUADALUPE_DATA];
+            
+            const filteredData = searchQuery 
+                ? allData.filter(item => 
+                    item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                    (item.subtitle && item.subtitle.toLowerCase().includes(searchQuery.toLowerCase()))
+                  )
+                : [];
+
+            return (
+                <div className="min-h-screen bg-[#141414] overflow-x-hidden selection:bg-red-600 selection:text-white font-sans">
+                    <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+                    
+                    {searchQuery ? (
+                         <div className="pt-24 px-4 md:px-12 min-h-screen">
+                            <h2 className="text-lg md:text-2xl text-gray-400 mb-6">Resultados para: <span className="text-white">"{searchQuery}"</span></h2>
+                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                                {filteredData.map((item, idx) => (
+                                    <Card 
+                                        key={idx} 
+                                        item={item} 
+                                        isApp={!!item.icon} // Check if it has an icon (Apps do)
+                                        customStyle="w-full"
+                                    />
+                                ))}
+                            </div>
+                            {filteredData.length === 0 && (
+                                <div className="flex flex-col items-center justify-center mt-20 text-gray-500">
+                                    <p className="text-xl">No se encontraron resultados.</p>
+                                    <p className="text-sm mt-2">Prueba con otro término.</p>
+                                </div>
+                            )}
+                         </div>
+                    ) : (
+                        <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
+                            <Hero />
+                            <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
+                                <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} isAppRow={true} />
+                                
+                                <Row 
+                                    id="libros" 
+                                    title="Biblioteca Católica" 
+                                    subtitle="Colección Completa con os Bonos:" 
+                                    items={BOOKS_DATA} 
+                                    isAppRow={false} 
+                                />
+
+                                <Row 
+                                    title="✨ COLECCIÓN “Guadalupe Revelada”" 
+                                    subtitle="Próximamente disponible para compra" 
+                                    items={GUADALUPE_DATA} 
+                                    isAppRow={false} 
+                                />
+                                
+                                <Row title="Nuevos Lanzamientos en Devoción" items={[...APPS_DATA].reverse()} isAppRow={true} />
+                                <Row title="Recomendados para ti" items={[...BOOKS_DATA].reverse()} isAppRow={false} />
+
+                                <ContactSection />
+                            </div>
+                        </div>
                     )}
 
-                    <main className="max-w-6xl mx-auto px-4 py-12 md:py-16">
-                        
-                        {/* Hero Section */}
-                        <div className="text-center mb-20 relative">
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-200 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
-                            
-                            <span className="inline-block py-1 px-3 rounded-full bg-red-50 text-red-900 text-xs font-bold tracking-widest uppercase mb-4 border border-red-100">
-                                Hub Espiritual
-                            </span>
-                            <h1 
-                                className="text-5xl md:text-6xl font-serif font-black mb-6 relative z-10" 
-                                style={{ color: COLORS.DARK_TEXT }}
-                            >
-                                Catholic Play Store
-                            </h1>
-                            <p 
-                                className="text-xl md:text-2xl font-serif italic max-w-2xl mx-auto leading-relaxed opacity-80 relative z-10" 
-                                style={{ color: COLORS.DARK_TEXT }}
-                            >
-                                “Tu Centro Digital de Oración, Devoción y Espiritualidad Católica”
-                            </p>
-                        </div>
-
-                        {/* SEÇÃO PRINCIPAL: DEVOCIONES Y ORACIÓN */}
-                        <div className="flex items-center mb-8">
-                            <div className="p-2 bg-red-900 rounded-lg text-white mr-3 shadow-md">
-                                <Flame className="w-5 h-5" />
-                            </div>
-                            <h2 className="text-2xl font-serif font-bold text-[#2C1810]">
-                                Devociones y Oración
-                            </h2>
-                        </div>
-                        <section className="grid gap-8 sm:grid-cols-1 lg:grid-cols-3 mb-24">
-                            <AppCard
-                                title="Santo Rosario de Batalla Espiritual"
-                                description="Reza el Rosario con poder, con meditaciones centradas en el combate espiritual y la intercesión de la Virgen María."
-                                Icon={Shield}
-                                id="rosario"
-                                link="https://appsantorosarioes.netlify.app/"
-                            />
-
-                            <AppCard
-                                title="Colección de Novenas 12 Marías"
-                                description="El poder de las doce vírgenes más milagrosas del mundo en un solo lugar. Historia, oraciones y novenas especiales."
-                                Icon={Crown}
-                                id="doze-marias"
-                                link="https://novena12marias.netlify.app/"
-                            />
-
-                            <AppCard
-                                title="Devocional de los Santos – 365 Días"
-                                description="Sigue la vida y las virtudes de los santos cada día del año. Inspiración diaria para la santidad."
-                                Icon={BookOpen}
-                                id="devocional"
-                                link="https://devocionaldelosantos.netlify.app/"
-                            />
-                        </section>
-
-                        {/* SEÇÃO: BIBLIOTECA CATÓLICA (AGORA NA PÁGINA PRINCIPAL) */}
-                        <div id="biblioteca" className="pt-8 mb-8 border-t border-gray-200">
-                            <div className="flex items-center mb-4">
-                                <div className="p-2 bg-blue-900 rounded-lg text-white mr-3 shadow-md">
-                                    <Library className="w-5 h-5" />
-                                </div>
-                                <h2 className="text-3xl font-serif font-bold text-[#1E3A8A]">
-                                    Biblioteca Católica
-                                </h2>
-                            </div>
-                            
-                            {/* Mensagem Promocional */}
-                            <div className="bg-blue-50 border-l-4 border-blue-900 p-4 mb-8 rounded-r-lg shadow-sm">
-                                <div className="flex items-start">
-                                    <Star className="w-5 h-5 text-blue-900 mr-2 mt-0.5 flex-shrink-0 fill-current" />
-                                    <p className="text-blue-900 font-medium italic text-lg leading-relaxed">
-                                        Colección Completa con os Bonos:
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                                {books.map((book, idx) => (
-                                    <div key={idx} className="bg-white p-6 border border-blue-100 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col items-center text-center relative overflow-hidden">
-                                        
-                                        {/* Badge de Data de Lançamento */}
-                                        {book.badge && (
-                                            <div className="absolute top-0 right-0 bg-red-800 text-white text-[10px] font-bold px-3 py-1 shadow-md z-10 rounded-bl-lg uppercase tracking-wide">
-                                                {book.badge}
-                                            </div>
-                                        )}
-
-                                        {book.image ? (
-                                            /* Renderiza a imagem se existir */
-                                            <img 
-                                                src={book.image} 
-                                                alt={book.title}
-                                                className="w-24 h-32 object-cover shadow-lg mb-4 rounded-r-md border-l-4 border-white outline outline-1 outline-gray-200 group-hover:-translate-y-1 transition-transform"
-                                            />
-                                        ) : (
-                                            /* Renderiza o ícone padrão se não houver imagem */
-                                            <div className="w-16 h-20 bg-blue-900 shadow-lg mb-4 flex items-center justify-center rounded-r-md border-l-4 border-white outline outline-1 outline-gray-200 group-hover:-translate-y-1 transition-transform">
-                                                <Book className="text-white w-8 h-8 opacity-80" />
-                                            </div>
-                                        )}
-                                        <h3 className="font-serif font-bold text-lg text-gray-900 leading-tight mb-1">{book.title}</h3>
-                                        <p className="text-xs font-bold text-blue-800 uppercase tracking-wide mb-2">{book.author}</p>
-                                        <p className="text-sm text-gray-500 mb-4 line-clamp-2">{book.desc}</p>
-                                        
-                                        {/* Botão Condicional */}
-                                        {!book.badge && (
-                                            <a href={book.link} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center text-xs font-bold text-blue-900 border-b border-blue-900 hover:border-transparent transition">
-                                                LEER EL LIBRO
-                                                <ChevronRight className="w-3 h-3 ml-1" />
-                                            </a>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Mais Recursos */}
-                        <section id="recursos" className="mb-24 relative overflow-hidden rounded-2xl bg-white shadow-sm border border-orange-100 p-8 md:p-16 text-center">
-                            <div className="relative z-10">
-                                <div className="inline-flex items-center justify-center p-3 rounded-full bg-orange-50 mb-6">
-                                <Star className="w-6 h-6 text-orange-400" />
-                                </div>
-                                <h2 className="text-3xl font-serif font-bold mb-4" style={{ color: COLORS.DARK_TEXT }}>
-                                Más Recursos Católicos
-                                </h2>
-                                <p className="text-gray-600 max-w-lg mx-auto mb-8">
-                                Estamos preparando nuevas herramientas para enriquecer tu vida espiritual. Novenas, lecturas bíblicas y mucho más, próximamente.
-                                </p>
-                                <div className="inline-flex items-center text-sm font-bold text-orange-800 bg-orange-50 px-4 py-2 rounded-full">
-                                <Heart className="w-4 h-4 mr-2 fill-current" />
-                                Próximamente
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Contato */}
-                        <section id="contacto" className="max-w-4xl mx-auto">
-                            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden md:flex">
-                                <div className="bg-red-900 p-8 md:p-12 text-white md:w-2/5 flex flex-col justify-between relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" 
-                                            style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '20px 20px' }}>
-                                    </div>
-                                    
-                                    <div>
-                                        <h3 className="text-2xl font-serif font-bold mb-2">Contáctanos</h3>
-                                        <p className="text-red-100 text-sm leading-relaxed mb-6">
-                                            ¿Tienes alguna sugerencia, duda o testimonio? Nos encantaría escucharte.
-                                        </p>
-                                    </div>
-                                    
-                                    <div className="space-y-4">
-                                        <div className="flex items-center space-x-3 text-red-100 text-sm">
-                                            <div className="p-2 bg-red-800 rounded-lg"><Mail className="w-4 h-4" /></div>
-                                            <span>Envíanos un mensaje directo</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-8 pt-8 border-t border-red-800">
-                                        <p className="text-xs text-red-300">
-                                            Respondemos a la mayor brevedad posible.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="p-8 md:p-12 md:w-3/5">
-                                    <form 
-                                        action="https://formsubmit.co/maquinadoinfoprodutor@gmail.com" 
-                                        method="POST"
-                                        className="space-y-6"
-                                    >
-                                        <input type="hidden" name="_subject" value="Nuevo Mensaje - Catholic Play Store" />
-                                        <input type="hidden" name="_template" value="table" />
-                                        <input type="hidden" name="_captcha" value="false" />
-
-                                        <div>
-                                            <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">Nombre</label>
-                                            <div className="relative">
-                                                <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                                                <input 
-                                                type="text" 
-                                                id="name" 
-                                                name="name" 
-                                                required
-                                                placeholder="Tu nombre completo"
-                                                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-red-900 focus:ring-1 focus:ring-red-900 outline-none transition-all bg-gray-50 focus:bg-white"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">Correo Electrónico</label>
-                                            <div className="relative">
-                                                <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                                                <input 
-                                                type="email" 
-                                                id="email" 
-                                                name="email" 
-                                                required
-                                                placeholder="ejemplo@correo.com"
-                                                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-red-900 focus:ring-1 focus:ring-red-900 outline-none transition-all bg-gray-50 focus:bg-white"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">Mensaje</label>
-                                            <textarea 
-                                                id="message" 
-                                                name="message" 
-                                                required
-                                                rows="4"
-                                                placeholder="Escribe tu mensaje aquí..."
-                                                className="w-full p-4 rounded-lg border border-gray-200 focus:border-red-900 focus:ring-1 focus:ring-red-900 outline-none transition-all bg-gray-50 focus:bg-white resize-none"
-                                            ></textarea>
-                                        </div>
-
-                                        <button 
-                                            type="submit"
-                                            className="w-full py-4 px-6 rounded-lg bg-red-900 hover:bg-red-800 text-white font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
-                                        >
-                                            <span>Enviar Mensaje</span>
-                                            <Send className="w-4 h-4" />
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                    </main>
-
-                    <footer className="bg-white border-t border-gray-100 py-12 mt-12">
-                        <div className="max-w-6xl mx-auto px-4 flex flex-col justify-center items-center text-center">
-                            <div className="mb-0">
-                                <h3 className="text-lg font-serif font-bold text-gray-900">Catholic Play Store</h3>
-                                <p className="text-sm text-gray-500 mt-2">© 2024 Ad Maiorem Dei Gloriam</p>
-                            </div>
-                        </div>
-                    </footer>
+                    <Footer />
                 </div>
             );
         };
