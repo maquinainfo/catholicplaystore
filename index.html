@@ -76,6 +76,17 @@
             background-color: #141414;
             color: #fff;
         }
+
+        /* Estilos para o conteúdo do livro dentro do modal */
+        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; }
+        .book-content h3 { color: #e5e5e5; margin-top: 1em; font-weight: bold; font-size: 1.2rem; }
+        .book-content p { color: #d1d5db; margin-bottom: 1em; line-height: 1.6; }
+        .book-content ul.toc { list-style: none; padding: 0; border: 1px solid #333; padding: 15px; background: #222; border-radius: 8px; margin-bottom: 20px; }
+        .book-content ul.toc li { border-bottom: 1px dotted #444; padding: 5px 0; }
+        .book-content ul.toc a { color: #9ca3af; text-decoration: none; transition: color 0.2s; display: block; }
+        .book-content ul.toc a:hover { color: #E50914; padding-left: 5px; }
+        .book-content .response { font-style: italic; color: #9ca3af; }
+        .book-content strong { color: #fff; }
     </style>
 </head>
 <body>
@@ -357,6 +368,7 @@
             }
         ];
 
+        // LIVROS DA BIBLIOTECA
         const BOOKS_DATA = [
              { 
                 id: 'adviento',
@@ -374,7 +386,321 @@
                 desc: "Las plegarias fundamentales para la vida diaria.", 
                 link: "#",
                 image: "https://i.postimg.cc/zBTCJGcP/Gemini-Generated-Image-whfdhkwhfdhkwhfd-1.webp", 
-                match: "85% Match"
+                match: "85% Match",
+                isModal: true,
+                content: `
+                    <div class="book-content">
+                        <div id="intro">
+                            <h2>Introducción</h2>
+                            <p>Bienvenido a este compendio de luz y esperanza. La oración es el aliento del alma, el puente invisible pero indestructible que une nuestro corazón con el Creador. En las páginas de este libro digital, encontrará un refugio para cada momento de su vida: desde el amanecer hasta el ocaso, en la alegría y en la tribulación.</p>
+                            <p>Estas oraciones no son meras palabras repetidas, sino el eco de siglos de fe de la Iglesia Católica. Han sido recopiladas para acompañarle en su camino espiritual, para ayudarle a dar gracias, pedir perdón, solicitar guía o simplemente descansar en la presencia de Dios, la Virgen María y los Santos.</p>
+                            <p>Que este libro sea una lámpara en su camino y que, a través de estas plegarias, su fe se fortalezca y su corazón encuentre la paz que solo Dios puede dar.</p>
+                        </div>
+
+                        <div id="toc">
+                            <h2>Índice</h2>
+                            <ul class="toc">
+                                <li><a href="#padre-nuestro">Padre Nuestro</a></li>
+                                <li><a href="#ave-maria">Ave María</a></li>
+                                <li><a href="#credo">Credo</a></li>
+                                <li><a href="#gloria">Gloria al Padre</a></li>
+                                <li><a href="#salve">Salve Regina</a></li>
+                                <li><a href="#acto-contricion">Acto de Contrición</a></li>
+                                <li><a href="#acordaos">Acordaos</a></li>
+                                <li><a href="#alma-cristo">Alma de Cristo</a></li>
+                                <li><a href="#angel-dios">Ángel de Dios</a></li>
+                                <li><a href="#senal-cruz">Señal de la Cruz</a></li>
+                                <li><a href="#oraciones-jesus">Oraciones a Jesús</a></li>
+                                <li><a href="#oraciones-maria">Oraciones a la Virgen María</a></li>
+                                <li><a href="#oraciones-jose">Oraciones a San José</a></li>
+                                <li><a href="#santos-angeles">Oraciones a los Santos y Ángeles</a></li>
+                                <li><a href="#difuntos">Oraciones por los Difuntos</a></li>
+                                <li><a href="#momentos">Oraciones para Momentos Específicos</a></li>
+                                <li><a href="#manana">Oración de la Mañana</a></li>
+                                <li><a href="#noche">Oración de la Noche</a></li>
+                                <li><a href="#jesus-crucificado">Oración a Jesús Crucificado</a></li>
+                                <li><a href="#san-miguel">Oración a San Miguel Arcángel</a></li>
+                                <li><a href="#magnificat">Magnificat</a></li>
+                                <li><a href="#regina-coeli">Regina Coeli</a></li>
+                                <li><a href="#ven-espiritu">Ven Santo Espíritu</a></li>
+                                <li><a href="#jose-leon">Oración a San José (Papa León XIII)</a></li>
+                                <li><a href="#santo-rosario">El Santo Rosario</a></li>
+                                <li><a href="#letania-lauretana">Letanía Lauretana</a></li>
+                                <li><a href="#via-crucis">Vía Crucis</a></li>
+                                <li><a href="#veni-creator">Veni Creator Spiritus</a></li>
+                                <li><a href="#oracion-guadalupe">Oración a la Virgen de Guadalupe</a></li>
+                                <li><a href="#divina-misericordia">Coronilla de la Divina Misericordia</a></li>
+                                <li><a href="#via-lucis">Vía Lucis</a></li>
+                                <li><a href="#novena-inmaculada">Novena a la Inmaculada Concepción</a></li>
+                                <li><a href="#letanias-corazon">Letanías al Sagrado Corazón de Jesús</a></li>
+                                <li><a href="#novena-jose">Novena a San José</a></li>
+                                <li><a href="#letania-santos">Letanía de los Santos</a></li>
+                                <li><a href="#novena-misericordia">Novena a la Divina Misericordia</a></li>
+                                <li><a href="#novena-guadalupe">Novena a la Virgen de Guadalupe</a></li>
+                            </ul>
+                        </div>
+
+                        <h2 id="padre-nuestro">Padre Nuestro</h2>
+                        <p>Padre nuestro que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu Reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.</p>
+
+                        <h2 id="ave-maria">Ave María</h2>
+                        <p>Dios te salve, María, llena eres de gracia; el Señor es contigo. Bendita Tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén.</p>
+
+                        <h2 id="credo">Credo</h2>
+                        <h3>Símbolo de los Apóstoles</h3>
+                        <p>Creo en Dios, Padre Todopoderoso, Creador del cielo y de la tierra. Creo en Jesucristo, su único Hijo, Nuestro Señor, Que fue concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos y está sentado a la derecha de Dios, Padre todopoderoso. Desde allí ha de venir a juzgar a vivos y muertos.</p>
+                        <p>Creo en el Espíritu Santo, la santa Iglesia católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén.</p>
+                        
+                        <h3>Símbolo Niceno-Constantinopolitano</h3>
+                        <p>Creo en un solo Dios, Padre todopoderoso, Creador del cielo y de la tierra, de todo lo visible y lo invisible.</p>
+                        <p>Creo en un solo Señor, Jesucristo, Hijo único de Dios, nacido del Padre antes de todos los siglos: Dios de Dios, Luz de Luz, Dios verdadero de Dios verdadero, engendrado, no creado, de la misma naturaleza del Padre, por quien todo fue hecho; que por nosotros, los hombres, y por nuestra salvación bajó del cielo, y por obra del Espíritu Santo se encarnó de María, la Virgen, y se hizo hombre; y por nuestra causa fue crucificado en tiempos de Poncio Pilato; padeció y fue sepultado, y resucitó al tercer día, según las Escrituras, y subió al cielo, y está sentado a la derecha del Padre; y de nuevo vendrá con gloria para juzgar a vivos y muertos, y su reino no tendrá fin.</p>
+                        <p>Creo en el Espíritu Santo, Señor y dador de vida, que procede del Padre y del Hijo, con el Padre y el Hijo recibe una misma adoración y gloria, y que habló por los profetas. Creo en la Iglesia, que es una, santa, católica y apostólica. Confieso que hay un solo bautismo para el perdón de los pecados. Espero la resurrección de los muertos y la vida del mundo futuro. Amén.</p>
+
+                        <h2 id="gloria">Gloria al Padre</h2>
+                        <p>Gloria al Padre y al Hijo y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.</p>
+
+                        <h2 id="salve">Salve Regina</h2>
+                        <p>Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro, muéstranos a Jesús, fruto bendito de tu vientre.</p>
+                        <p>¡Oh, clementísima, oh piadosa, oh dulce Virgen María!</p>
+
+                        <h2 id="acto-contricion">Acto de Contrición</h2>
+                        <p>Dios mío, me arrepiento de todo corazón de todos mis pecados y los aborrezco, porque al pecar, no sólo merezco las penas establecidas por ti justamente, sino principalmente porque te ofendí, a ti sumo Bien y digno de amor por encima de todas las cosas. Por eso propongo firmemente, con ayuda de tu gracia, no pecar más en adelante y huir de toda ocasión de pecado. Amén.</p>
+
+                        <h2 id="acordaos">Acordaos</h2>
+                        <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti también acudo, oh Madre, Virgen de las vírgenes, y aunque gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
+
+                        <h2 id="alma-cristo">Alma de Cristo</h2>
+                        <p>Alma de Cristo, santifícame.<br>Cuerpo de Cristo, sálvame.<br>Sangre de Cristo, embriágame.<br>Agua del costado de Cristo, lávame.<br>Pasión de Cristo, confórtame.<br>¡Oh, buen Jesús!, óyeme.<br>Dentro de tus llagas, escóndeme.<br>No permitas que me aparte de Ti.<br>Del maligno enemigo, defiéndeme.<br>En la hora de mi muerte, llámame.<br>Y mándame ir a Ti.<br>Para que con tus santos te alabe.<br>Por los siglos de los siglos. Amén.</p>
+
+                        <h2 id="angel-dios">Ángel de Dios</h2>
+                        <p>Ángel de Dios, que eres mi custodio, pues la bondad divina me ha encomendado a ti, ilumíname, guárdame, defiéndeme y gobiérname. Amén.</p>
+
+                        <h2 id="senal-cruz">Señal de la Cruz</h2>
+                        <p>Por la señal de la Santa Cruz, de nuestros enemigos, líbranos, Señor, Dios nuestro. En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p>
+
+                        <h2 id="oraciones-jesus">Oraciones a Jesús</h2>
+                        <p><strong>Acto de Fe:</strong> Dios mío, creo firmemente todo lo que has revelado y que la Santa Iglesia me propone para creer, porque Tú eres la Verdad misma.</p>
+                        <p><strong>Acto de Esperanza:</strong> Señor, espero alcanzar por tu gracia la vida eterna y los medios para obtenerla, porque Tú eres fiel a tus promesas.</p>
+                        <p><strong>Acto de Caridad:</strong> Dios mío, te amo sobre todas las cosas y a mi prójimo como a mí mismo por amor a Ti.</p>
+
+                        <h2 id="oraciones-maria">Oraciones a la Virgen María</h2>
+                        <h3>Bendita sea tu pureza</h3>
+                        <p>Bendita sea tu pureza y eternamente lo sea, pues todo un Dios se recrea en tan graciosa belleza. A ti, celestial Princesa, Virgen sagrada María, te ofrezco en este día alma, vida y corazón. Mírame con compasión, no me dejes, Madre mía.</p>
+
+                        <h2 id="oraciones-jose">Oraciones a San José</h2>
+                        <p>San José, custodio de la Sagrada Familia, alcánzanos la gracia de vivir con humildad y de proteger con amor la presencia de Dios en nuestras vidas, tal como tú cuidaste del Niño Jesús y de su Madre Santísima. Amén.</p>
+
+                        <h2 id="santos-angeles">Oraciones a los Santos y Ángeles</h2>
+                        <p><strong>A los Santos Ángeles Custodios:</strong> Santos Ángeles de Dios, a quienes la divina Providencia nos ha confiado para nuestra guarda y protección, iluminadnos, protegednos, guiadnos y gobernadnos en este camino hacia la patria celestial. Amén.</p>
+
+                        <h2 id="difuntos">Oraciones por los Difuntos</h2>
+                        <h3>Requiem Aeternam</h3>
+                        <p>V. Dales, Señor, el descanso eterno.<br>R. <span class="response">Y brille para ellos la luz perpetua.</span><br>V. Que las almas de los fieles difuntos, por la misericordia de Dios, descansen en paz.<br>R. <span class="response">Amén.</span></p>
+
+                        <h2 id="momentos">Oraciones para Momentos Específicos</h2>
+                        <h3>Bendición de los Alimentos</h3>
+                        <p>Bendícenos, Señor, y bendice estos alimentos que vamos a tomar, y que recibimos de tu generosidad. Por Cristo Nuestro Señor. Amén.</p>
+                        <h3>Antes de un Viaje</h3>
+                        <p>Señor, que llenas todo lugar con tu presencia, acompáñame en este viaje. Que mis pasos sean guiados por tu mano y que llegue a mi destino con bien. Amén.</p>
+
+                        <h2 id="manana">Oración de la Mañana</h2>
+                        <h3>Oración de Ofrecimiento del Día</h3>
+                        <p>Señor Dios Omnipotente, que nos has permitido llegar al principio de este día, guárdanos hoy con tu poder, para que no caigamos en pecado, antes bien, todos nuestros pensamientos, palabras y obras se dirijan a cumplir tu Santa Ley. Padre Nuestro, Ave María, Credo.</p>
+                        <p>Señor Dios del Cielo y de la tierra dígnate dirigir, santificar, guiar y gobernar en este día nuestros corazones y nuestros cuerpos, nuestros sentidos, palabras y acciones según tu Ley y por el camino de tus mandamientos, para que aquí y en la eternidad merezcamos, por tu favor, ser salvados y libres. ¡Oh, Salvador del mundo!, que vives y reinas por los siglos de los siglos. Amén.</p>
+                        
+                        <h3>Encomienda a la Santísima Virgen</h3>
+                        <p>¡Oh Virgen y Madre de Dios! Yo me entrego por hijo tuyo, y en honor y gloria de tu pureza, te ofrezco mi alma y cuerpo, mis potencias y sentidos y te suplico me alcances la gracia de no cometer jamás pecado alguno. Amén.</p>
+                        <p>Madre aquí tienes a tu hijo. – Madre aquí tienes a tu hijo. – Madre aquí tienes a tu hijo. En ti Madre mía dulcísima he puesto toda mi confianza, jamás quedaré confundido. Amén.</p>
+                        
+                        <h3>Oración al Ángel de la Guarda</h3>
+                        <p>Ángel de Dios que eres custodio mío; ya que la soberana Piedad a Ti me encomendó, ilumíname, guíame, rígeme y gobiérname en este día. Amén.</p>
+
+                        <h2 id="noche">Oración de la Noche</h2>
+                        <h3>Acción de Gracias y Ofrecimiento</h3>
+                        <p>Dios mío, Jesucristo: Te doy gracias por todos los beneficios que has dispensado en este día. Te ofrezco mi sueño y todos los momentos de esta noche y te pido me conserves en ella sin pecado. Por esto me pongo dentro de tu santísimo Costado y bajo el manto de mi Madre, la Virgen María. Asístanme y guárdenme en paz los santos Ángeles y venga sobre mí tu Bendición.</p>
+                        
+                        <h3>Acto de Contrición</h3>
+                        <p>Señor mío, Jesucristo, Dios y Hombre verdadero, Creador, Padre y Redentor mío; por ser Tú quien eres, Bondad infinita, y porque te amo sobre todas las cosas, me pesa de todo corazón de haberte ofendido; también me pesa porque puedes castigarme con las penas del infierno. Ayudado de tu Divina Gracia, propongo firmemente nunca más pecar, confesarme y cumplir la penitencia que me fuere impuesta. Padre Nuestro, Ave María, Credo.</p>
+                        
+                        <h3>Oración al Ángel de la Guarda</h3>
+                        <p>Ángel de Dios, ángel de Dios: ya que la soberana Piedad a Ti me encomendó, ilumíname, rígeme, guárdame y gobiérname en esta noche. Amén.</p>
+                        
+                        <h3>Oración Final</h3>
+                        <p>Visita, Señor, esta habitación y ahuyenta de ella todas las asechanzas del enemigo. Estén aquí tus santos Ángeles, que nos guarden en paz, y Tú danos tu Santa Bendición, por los méritos de Cristo Nuestro Señor. Amén.</p>
+
+                        <h2 id="jesus-crucificado">Oración a Jesús Crucificado</h2>
+                        <p>Miradme, ¡oh mi amado y buen Jesús!, postrado ante vuestra Santísima presencia; os ruego con el mayor fervor y compasión de que soy capaz imprimáis en mi corazón vivos sentimientos de fe, esperanza y caridad. Verdadero dolor de mis pecados, propósito firmísimo de jamás ofenderos. Mientras que yo, con todo el amor de que soy capaz voy considerando vuestra cinco llagas, comenzando por aquello que dijo de Vos, oh buen Jesús, el santo profeta David: «Han taladrado mis manos y mis pies y se pueden contar todos mis huesos.»</p>
+
+                        <h2 id="san-miguel">Oración a San Miguel Arcángel</h2>
+                        <p>San Miguel Arcángel, defiéndenos en la lucha. Sé nuestro amparo contra la perversidad y asechanzas del demonio. Que Dios manifieste sobre él su poder, es nuestra humilde súplica. Y tú, oh Príncipe de la Milicia Celestial, con el poder que Dios te ha conferido, arroja al infierno a Satanás, y a los demás espíritus malignos que vagan por el mundo para la perdición de las almas. Amén.</p>
+
+                        <h2 id="magnificat">Magnificat (Cántico de María)</h2>
+                        <p>Proclama mi alma la grandeza del Señor, se alegra mi espíritu en Dios mi Salvador, porque ha mirado la humillación de su esclava.</p>
+                        <p>Desde ahora me felicitarán todas las generaciones porque el Poderoso ha hecho obras grandes por mí. Su nombre es Santo y su misericordia llega a sus fieles de generación en generación.</p>
+                        <p>Él hace proezas con su brazo, dispersa a los soberbios de corazón. Derriba del trono a los poderosos y enaltece a los humildes. A los hambrientos los colma de bienes y a los ricos despide vacíos.</p>
+                        <p>Auxilia a Israel su siervo, acordándose de su santa alianza según lo había prometido a nuestros padres en favor de Abrahán y su descendencia por siempre.</p>
+                        <p>Gloria al Padre y al Hijo y al Espíritu Santo como era en principio ahora y siempre por los siglos de los siglos. Amén.</p>
+
+                        <h2 id="regina-coeli">Regina Coeli (Reina del Cielo)</h2>
+                        <p class="center-text"><em>(Se reza en lugar del Ángelus en el Tiempo Pascual)</em></p>
+                        <p>V. Alégrate, Reina del cielo. Aleluya.<br>R. <span class="response">Porque el que mereciste llevar en tu seno. Aleluya.</span><br>V. Ha resucitado, según predijo. Aleluya.<br>R. <span class="response">Ruega por nosotros a Dios. Aleluya.</span><br>V. Gózate y alégrate, Virgen María. Aleluya.<br>R. <span class="response">Porque ha resucitado Dios verdaderamente. Aleluya.</span></p>
+                        <p><strong>Oremos:</strong> Oh Dios que por la Resurrección de tu Hijo, nuestro Señor Jesucristo, te has dignado dar la alegría al mundo, concédenos por su Madre, la Virgen María, alcanzar el gozo de la vida eterna. Por el mismo Jesucristo Nuestro Señor. Amén.</p>
+
+                        <h2 id="ven-espiritu">Ven Santo Espíritu (Sequência de Pentecostes)</h2>
+                        <p>Ven, Espíritu divino, manda tu luz desde el cielo. Padre amoroso del pobre; don, en tus dones espléndido; luz que penetra las almas; fuente del mayor consuelo.</p>
+                        <p>Ven, dulce huésped del alma, descanso de nuestro esfuerzo, tregua en el duro trabajo, brisa en las horas de fuego, gozo que enjuga las lágrimas y reconforta en los duelos.</p>
+                        <p>Entra hasta el fondo del alma, divina luz, y enriquécenos. Mira el vacío del hombre, si tú le faltas por dentro; mira el poder del pecado, cuando no envías tu aliento.</p>
+                        <p>Riega la tierra en sequía, sana el corazón enfermo, lava las manchas, infunde calor de vida en el hielo, doma el espíritu indómito, guía al que tuerce el sendero.</p>
+                        <p>Reparte tus siete dones, según la fe de tus siervos; por tu bondad y tu gracia, dale al esfuerzo su mérito; salva al que busca salvarse y danos tu gozo eterno. Amén.</p>
+
+                        <h2 id="jose-leon">Oración a San José del Papa León XIII</h2>
+                        <p>A ti, bienaventurado San José, acudimos en nuestra tribulación; y después de invocar el auxilio de tu Santísima Esposa solicitamos también confiados tu patrocinio. Por aquella caridad que con la Inmaculada Virgen María, Madre de Dios, te tuvo unido, y por el paterno amor con que abrazaste al Niño Jesús, humildemente te suplicamos vuelvas benigno los ojos a la herencia que con su Sangre adquirió Jesucristo, y con tu poder y auxilio socorras nuestras necesidades.</p>
+                        <p>Protege, Providentísimo Custodio de la Sagrada Familia la escogida descendencia de Jesucristo; aparta de nosotros toda mancha de error y corrupción; asístenos propicio, desde el cielo, fortísimo libertador nuestro, en esta lucha con el poder de las tinieblas: y, como en otro tiempo librasteis al Niño Jesús del inminente peligro de la vida, así ahora, defiende a la Iglesia Santa de Dios de las asechanzas de sus enemigos y de toda adversidad, ya cada uno de nosotros protégenos con el perpetuo patrocinio, para que, a tu ejemplo y sostenidos por tu auxilio, podamos santamente vivir y piadosamente morir y alcanzar en el cielo la eterna felicidad. Amén.</p>
+
+                        <h2 id="santo-rosario">El Santo Rosario</h2>
+                        <p>El Rosario está compuesto por veinte “misterios” (acontecimientos, momentos significativos) de la vida de Jesús y de María, divididos en cuatro “rosarios”: Gozosos, Luminosos, Dolorosos y Gloriosos.</p>
+                        <h3>Cómo se reza el Rosario</h3>
+                        <ol>
+                            <li>Señal de la Cruz y Oración Inicial.</li>
+                            <li>El Credo de los Apóstoles.</li>
+                            <li>Padre Nuestro.</li>
+                            <li>Tres Avemarías y un Gloria.</li>
+                            <li>Anuncio del Misterio.</li>
+                            <li>Rezar la Decena: Un Padre Nuestro, diez Avemarías y un Gloria.</li>
+                            <li>Jaculatoria: "Oh Jesús mío, perdona nuestros pecados..."</li>
+                            <li>Al final del Rosario: Rezar la Salve y las Letanías.</li>
+                        </ol>
+
+                        <h3>Misterios Gozosos (Lunes y Sábado)</h3>
+                        <p><strong>Primer Misterio Gozoso: La Encarnación del Hijo de Dios.</strong> (Lc 1,26-27).</p>
+                        <p><strong>Segundo Misterio Gozoso: La Visitación de Nuestra Señora a su prima Santa Isabel.</strong> (Lc 1, 39-42).</p>
+                        <p><strong>Tercer Misterio Gozoso: El Nacimiento del Hijo de Dios en el portal de Belén.</strong> (Lc 2,1-7).</p>
+                        <p><strong>Cuarto Misterio Gozoso: La presentación de Jesús en el Templo.</strong> (Lc 2, 21-24).</p>
+                        <p><strong>Quinto Misterio Gozoso: El Niño Jesús perdido y hallado en el Templo.</strong> (Lc 2, 41-47).</p>
+
+                        <h3>Misterios Luminosos (Jueves)</h3>
+                        <p><strong>Primer Misterio Luminoso: El Bautismo en el Jordán.</strong> (Mt 3,16-17).</p>
+                        <p><strong>Segundo Misterio Luminoso: Las bodas de Caná.</strong> (Jn 2, 1-5).</p>
+                        <p><strong>Tercer Misterio Luminoso: El anuncio del Reino de Dios.</strong> (Mc 1, 15).</p>
+                        <p><strong>Cuarto Misterio Luminoso: La Transfiguración.</strong> (Mt 17, 1-2).</p>
+                        <p><strong>Quinto Misterio Luminoso: La institución de la Eucaristía.</strong> (Mt 26, 26).</p>
+
+                        <h3>Misterios Dolorosos (Martes y Viernes)</h3>
+                        <p><strong>Primer Misterio Doloroso: La oración en el Huerto.</strong> (Mt 26, 36-39).</p>
+                        <p><strong>Segundo Misterio Doloroso: La flagelación de Jesús atado a la columna.</strong> (Mt 27, 26).</p>
+                        <p><strong>Tercer Misterio Doloroso: La coronación de espinas.</strong> (Mt 27, 27- 29).</p>
+                        <p><strong>Cuarto Misterio Doloroso: Jesús con la Cruz a cuestas camino del Calvario.</strong> (Mc 15, 21-22).</p>
+                        <p><strong>Quinto Misterio Doloroso: La crucifixión y muerte de Jesús.</strong> (Lc 23, 33-46).</p>
+
+                        <h3>Misterios Gloriosos (Miércoles y Domingo)</h3>
+                        <p><strong>Primer Misterio Glorioso: La resurrección del Hijo de Dios.</strong> (Lc 24, 1-6).</p>
+                        <p><strong>Segundo Misterio Glorioso: La Ascensión del Señor al cielo.</strong> (Mc 16, 19).</p>
+                        <p><strong>Tercer Misterio Glorioso: La venida del Espíritu Santo.</strong> (Hch 2, 1-4).</p>
+                        <p><strong>Cuarto Misterio Glorioso: La Asunción de María al cielo.</strong> (Lc 1, 48-49).</p>
+                        <p><strong>Quinto Misterio Glorioso: La coronación de María como Reina y Señora de todo lo creado.</strong> (Ap 12, 1).</p>
+
+                        <h2 id="letania-lauretana">Letanía Lauretana</h2>
+                        <p class="litany-row">Señor, ten piedad. <span class="response">Cristo, ten piedad.</span></p>
+                        <p class="litany-row">Señor, ten piedad. <span class="response">Cristo, óyenos. Cristo, escúchanos.</span></p>
+                        <p class="litany-row">Dios, Padre celestial, <span class="response">ten piedad de nosotros.</span></p>
+                        <p class="litany-row">Dios, Hijo, Redentor del mundo, <span class="response">ten piedad de nosotros.</span></p>
+                        <p class="litany-row">Dios, Espíritu Santo, <span class="response">ten piedad de nosotros.</span></p>
+                        <p class="litany-row">Santísima Trinidad, un solo Dios, <span class="response">ten piedad de nosotros.</span></p>
+                        
+                        <p>Santa María, <span class="response">ruega por nosotros.</span> (Repetir "ruega por nosotros" después de cada invocación:)</p>
+                        <p>Santa Madre de Dios... Santa Virgen de las Vírgenes... Madre de Cristo... Madre de la Iglesia... Madre de la misericordia... Madre de la divina gracia... Madre de la esperanza... Madre purísima... Madre castísima... Madre siempre virgen... Madre inmaculada... Madre amable... Madre admirable... Madre del buen consejo... Madre del Creador... Madre del Salvador... Virgen prudentísima... Virgen digna de veneración... Virgen digna de alabanza... Virgen poderosa... Virgen clemente... Virgen fiel... Espejo de justicia... Trono de la sabiduría... Causa de nuestra alegría... Vaso espiritual... Vaso digno de honor... Vaso de insigne devoción... Rosa mística... Torre de David... Torre de marfil... Casa de oro... Arca de la Alianza... Puerta del cielo... Estrella de la mañana... Salud de los enfermos... Refugio de los pecadores... Consuelo de los migrantes... Consoladora de los afligidos... Auxilio de los cristianos... Reina de los Ángeles... Reina de los Patriarcas... Reina de los Profetas... Reina de los Apóstoles... Reina de los Mártires... Reina de los Confesores... Reina de las Vírgenes... Reina de todos los Santos... Reina concebida sin pecado original... Reina asunta a los Cielos... Reina del Santísimo Rosario... Reina de la familia... Reina de la paz...</p>
+
+                        <p>Cordero de Dios, que quitas el pecado del mundo, <span class="response">perdónanos, Señor.</span><br>Cordero de Dios, que quitas el pecado del mundo, <span class="response">escúchanos, Señor.</span><br>Cordero de Dios, que quitas el pecado del mundo, <span class="response">ten misericordia de nosotros.</span></p>
+                        
+                        <p>V. Ruega por nosotros, Santa Madre de Dios.<br>R. <span class="response">Para que seamos dignos de las promesas de Cristo.</span></p>
+
+                        <h2 id="via-crucis">Vía Crucis (Via Sacra)</h2>
+                        <p><strong>Oración Inicial:</strong> Jesús, mi Señor y Redentor: Yo me arrepiento de todos os pecados que he cometido hasta hoy...</p>
+                        <p><em>(En cada estación: Te adoramos, Señor, y te bendecimos, porque por tu santa cruz redimiste al mundo.)</em></p>
+                        <p><strong>1ª Estación:</strong> Jesús sentenciado a muerte.<br><strong>2ª Estación:</strong> Jesús cargado con la cruz.<br><strong>3ª Estación:</strong> Jesús cae, por primera vez, bajo el paso de la cruz.<br><strong>4ª Estación:</strong> Encuentro con la Virgen.<br><strong>5ª Estación:</strong> el Cirineo ayuda al Señor a llevar la Cruz.<br><strong>6ª Estación:</strong> la Verónica enjuga el rostro de Jesús.<br><strong>7ª Estación:</strong> Segunda caída en el camino de la Cruz.<br><strong>8ª Estación:</strong> Jesús consuela a las hijas de Jerusalén.<br><strong>9ª Estación:</strong> Jesús cae por tercera vez.<br><strong>10ª Estación:</strong> Jesús despojado de sus vestiduras.<br><strong>11ª Estación:</strong> Jesús es clavado en la Cruz.<br><strong>12ª Estación:</strong> Jesús muere en la Cruz.<br><strong>13ª Estación:</strong> Jesús en brazos de su madre.<br><strong>14ª Estación:</strong> Jesús puesto en el sepulcro.</p>
+
+                        <h2 id="veni-creator">Veni Creator Spiritus</h2>
+                        <p>Ven, Espíritu Creador, visita las almas de tus fieles llena con tu divina gracia, los corazones que creaste. Tú, a quien llamamos Paráclito, don de Dios Altísimo, fuente viva, fuego, caridad y espiritual unción...</p>
+                        <p>Gloria a Dios Padre, y al Hijo que resucitó, y al Espíritu Consolador, por los siglos de los siglos. Amén.</p>
+
+                        <h2 id="oracion-guadalupe">Oración a la Virgen de Guadalupe</h2>
+                        <p>Padre de Misericordia, que has puesto a este pueblo tuyo bajo la especial protección de la siempre Virgen María de Guadalupe, Madre de tu Hijo, concédenos, por su intercesión, profundizar en nuestra fe y buscar el progreso de nuestra patria por caminos de justicia y de paz. Por nuestro Señor Jesucristo. Amén.</p>
+                        <h3>Plegaria del Papa Juan Pablo II</h3>
+                        <p>¡Oh Virgen Inmaculada, Madre del verdadero Dios y Madre de la Iglesia! Tú, que desde este lugar manifiestas tu clemencia y tu compasión a todos los que solicitan tu amparo: escucha la oración que con filial confianza te dirigimos, y represéntala ante tu Hijo Jesús, único Redentor nuestro...</p>
+
+                        <h2 id="divina-misericordia">Coronilla de la Divina Misericordia</h2>
+                        <ol>
+                            <li>La señal de la Cruz, Padre Nuestro, Ave María y Credo.</li>
+                            <li>En las cuentas grandes: "Padre Eterno, Te ofrezco el Cuerpo, la Sangre, el Alma y la Divinidad de Tu amadísimo Hijo, Nuestro Señor Jesucristo, como propiciación de nuestros pecados y los del mundo entero."</li>
+                            <li>En las cuentas pequeñas: "Por Su dolorosa Pasión, ten misericordia de nosotros y del mundo entero."</li>
+                            <li>Al final (3 veces): "Santo Dios, Santo Fuerte, Santo Inmortal, ten misericordia de nosotros y del mundo entero."</li>
+                        </ol>
+
+                        <h2 id="via-lucis">Vía Lucis (Camino de la Luz)</h2>
+                        <p>El Vía Lucis es una devoción que recorre catorce estaciones con Cristo triunfante desde la Resurrección a Pentecostés.</p>
+                        <p><strong>1ª Estación:</strong> ¡CRISTO VIVE!: ¡HA RESUCITADO!<br><strong>2ª Estación:</strong> EL ENCUENTRO CON MARÍA MAGDALENA.<br><strong>3ª Estación:</strong> JESÚS SE APARECE A LAS MUJERES.<br><strong>4ª Estación:</strong> LOS SOLDADOS CUSTODIAN EL SEPULCRO DE CRISTO.<br><strong>5ª Estación:</strong> PEDRO Y JUAN CONTEMPLAN EL SEPULCRO VACÍO.<br><strong>6ª Estación:</strong> JESÚS EN EL CENÁCULO MUESTRA SUS LLAGAS.<br><strong>7ª Estación:</strong> EN EL CAMINO DE EMAÚS.<br><strong>8ª Estación:</strong> JESÚS DA A LOS APÓSTOLES EL PODER DE PERDONAR.<br><strong>9ª Estación:</strong> JESÚS FORTALECE LA FE DE TOMÁS.<br><strong>10ª Estación:</strong> JESÚS RESUCITADO EN EL LAGO DE GALILEA.<br><strong>11ª Estación:</strong> JESÚS CONFIRMA A PEDRO EN EL AMOR.<br><strong>12ª Estación:</strong> LA DESPEDIDA: JESÚS ENCARGA SU MISIÓN.<br><strong>13ª Estación:</strong> JESÚS ASCIENDE AL CIELO.<br><strong>14ª Estación:</strong> LA VENIDA DEL ESPÍRITU SANTO EN PENTECOSTÉS.</p>
+
+                        <h2 id="novena-inmaculada">Novena a la Inmaculada Concepción</h2>
+                        <p><strong>Oración para todos los días:</strong> Dios te salve, María, llena de gracia y bendita más que todas las mujeres...</p>
+                        <h3>Oraciones para cada día</h3>
+                        <p><strong>Día Primero:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Segundo:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Tercero:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Cuarto:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Quinto:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Sexto:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Séptimo:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Octavo:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+                        <p><strong>Día Noveno:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
+
+                        <h2 id="letanias-corazon">Letanías al Sagrado Corazón de Jesús</h2>
+                        <p>Señor, ten piedad de nosotros... Cristo, óyenos... Dios, Padre celestial, ten piedad de nosotros...</p>
+                        <p>Corazón de Jesús, Hijo del Eterno Padre, <span class="response">ten piedad de nosotros.</span></p>
+                        <p>(Repetir "ten piedad de nosotros" a cada invocación: Corazón de Jesús, formado por el Espíritu Santo... unido substancialmente al Verbo... de majestad infinita... templo santo de Dios...)</p>
+                        <p>Jesús, manso y humilde de corazón, <span class="response">haz nuestro corazón semejante al Tuyo.</span></p>
+
+                        <h2 id="novena-jose">Novena a San José</h2>
+                        <p><strong>Oración para empezar:</strong> Oh gloriosísimo Padre de Jesús, Esposo de María...</p>
+                        <p><strong>Día Primero:</strong> Prudencia y acierto en todos los casos dudosos.</p>
+                        <p><strong>Día Segundo:</strong> Llevar con paciencia nuestra pobreza.</p>
+                        <p><strong>Día Tercero:</strong> Amor y respeto al Santísimo Nombre de Jesús.</p>
+                        <p><strong>Día Cuarto:</strong> Ser de aquellos para quienes tu sirves.</p>
+                        <p><strong>Día Quinto:</strong> Libres de los que quieren dañar nuestras almas.</p>
+                        <p><strong>Día Sexto:</strong> Sustento espiritual de tu gracia.</p>
+                        <p><strong>Día Séptimo:</strong> Nunca dejar de hacer tu voluntad.</p>
+                        <p><strong>Día Octavo:</strong> Muerte semejante a la suya.</p>
+                        <p><strong>Día Noveno:</strong> Ser verdaderos y sinceros católicos.</p>
+                        <p><strong>Oración final:</strong> Oh custodio y padre de Vírgenes San José...</p>
+
+                        <h2 id="letania-santos">Letanía de los Santos</h2>
+                        <p>Señor, ten piedad de nosotros... Santa María, <span class="response">ruega por nosotros.</span></p>
+                        <p>San Miguel... San Gabriel... San Juan Bautista... San José... San Pedro... San Pablo...</p>
+                        <p>(Esta letanía incluye invocaciones a Dios, a la Virgen, Ángeles, Patriarcas, Apóstoles, Mártires, Confesores y Vírgenes).</p>
+
+                        <h2 id="novena-misericordia">Novena a la Divina Misericordia</h2>
+                        <p><strong>Primer Día:</strong> Toda la humanidad y especialmente a todos los pecadores.</p>
+                        <p><strong>Segundo Día:</strong> Las almas de los sacerdotes y los religiosos.</p>
+                        <p><strong>Tercer Día:</strong> Todas las almas devotas y fieles.</p>
+                        <p><strong>Cuarto Día:</strong> Aquellos que no creen en Dios.</p>
+                        <p><strong>Quinto Día:</strong> Las almas de los hermanos separados.</p>
+                        <p><strong>Sexto Día:</strong> Las almas mansas y humildes.</p>
+                        <p><strong>Séptimo Día:</strong> Las almas que veneran y glorifican mi misericordia.</p>
+                        <p><strong>Octavo Día:</strong> Las almas del Purgatorio.</p>
+                        <p><strong>Noveno Día:</strong> Las almas tibias.</p>
+
+                        <h2 id="novena-guadalupe">Novena a la Virgen de Guadalupe</h2>
+                        <p><strong>Acto de Contrición:</strong> Señor mío, Jesucristo...</p>
+                        <p><strong>Primer Día:</strong> ¡Oh Santísima Señora de Guadalupe!...</p>
+                        <p><strong>Segundo Día:</strong> ¡Oh Santísima Virgen de Guadalupe!...</p>
+                        <p><strong>Tercer Día:</strong> ¡Oh Santísima Virgen María de Guadalupe!...</p>
+                        <p><strong>Cuarto Día:</strong> ¡Oh Santísima María de Guadalupe!...</p>
+                        <p><strong>Quinto Día:</strong> ¿Qué correspondía a quien es un cielo por su hermosura?...</p>
+                        <p><strong>Sexto Día:</strong> ¡Oh Santísima Virgen María de Guadalupe!...</p>
+                        <p><strong>Séptimo Día:</strong> ¡Oh Santísima Virgen María de Guadalupe! Nada veo en este tu retrato...</p>
+                        <p><strong>Octavo Día:</strong> ¡Oh Santísima Virgen de Guadalupe! ¡Qué misterios tan agradables...</p>
+                        <p><strong>Noveno Día:</strong> ¡Oh Santísima Virgen de Guadalupe! ¡Qué consuelo para los pecadores...</p>
+                    </div>
+                `
             },
             { 
                 id: 'apariciones',
@@ -382,8 +708,12 @@
                 author: "Historia Sagrada", 
                 desc: "Relatos y mensajes de las visitas de la Virgen.", 
                 link: "#",
+                // CAPA ORIGINAL MANTIDA
                 image: "https://i.postimg.cc/Fzmj1Qts/Gemini-Generated-Image-xyoyl9xyoyl9xyoy.webp", 
-                match: "90% Match"
+                match: "90% Match",
+                isModal: true, 
+                // Link do Drive convertido para preview
+                pdfUrl: "https://drive.google.com/file/d/1I-bPT1UjmFHWaW8d_BVbpseRTqoJziCx/preview"
             },
             { 
                 id: 'conversos',
@@ -503,6 +833,42 @@
                 image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg",
                 match: "97% Match",
                 link: "https://www.youtube.com/watch?v=nLpcVQghKDg&list=RDnLpcVQghKDg&start_radio=1"
+            }
+        ];
+
+        // DADOS DOS BÔNUS (PDFs) - Atualizado: Sem imagem, apenas nome
+        const BONUS_DATA = [
+            {
+                id: 'bonus-1',
+                title: "Rosario Gregoriano",
+                match: "Regalo",
+                isModal: true,
+                color: "bg-stone-800", // Cor de fundo elegante
+                pdfUrl: "https://drive.google.com/file/d/1ND-7zNs9tDWPZzjAuesxPoiMnQUP8Fn1/preview"
+            },
+            {
+                id: 'bonus-4',
+                title: "Historia Sagrada",
+                match: "Regalo",
+                isModal: true,
+                color: "bg-zinc-800",
+                pdfUrl: "https://drive.google.com/file/d/1_QNbQuEjYbqGXOu0d0T203c0Vy9BYiiZ/preview"
+            },
+            {
+                id: 'bonus-11',
+                title: "Preparación Eucarística",
+                match: "Regalo",
+                isModal: true,
+                color: "bg-slate-800",
+                pdfUrl: "https://drive.google.com/file/d/1LZ2enqNSRP9L07jUxKQ7H_qFT1txZhxj/preview"
+            },
+            {
+                id: 'bonus-more',
+                title: "Accede a los demás bonos",
+                match: "Colección",
+                isModal: false, // Abre em nova aba por ser uma pasta
+                color: "bg-red-900", // Cor de destaque
+                link: "https://drive.google.com/drive/folders/1WtvXPYpTOPAiNUR1WRh2_OJb_7eDxCR3?usp=sharing"
             }
         ];
 
@@ -651,12 +1017,13 @@
         };
 
         const Card = ({ item, isApp, customStyle, isHorizontal, onOpenModal }) => {
-            // Define largura e proporção com base se é horizontal (vídeo) ou vertical (poster)
+            // CORREÇÃO: O formato agora depende EXCLUSIVAMENTE de 'isHorizontal'.
+            // Isso garante que livros com PDF (isModal=true) continuem verticais (formato livro).
             const widthClass = customStyle 
                 ? customStyle 
-                : (isHorizontal || item.isModal ? 'w-[220px] md:w-[300px] mx-1' : 'w-[140px] md:w-[200px] mx-1');
+                : (isHorizontal ? 'w-[220px] md:w-[300px] mx-1' : 'w-[140px] md:w-[200px] mx-1');
             
-            const aspectClass = isHorizontal || item.isModal ? 'aspect-video' : 'aspect-[2/3]';
+            const aspectClass = isHorizontal ? 'aspect-video' : 'aspect-[2/3]';
 
             const handleClick = () => {
                 if (item.isModal && onOpenModal) {
@@ -666,18 +1033,25 @@
                 }
             };
 
+            // Determina a cor de fundo: usa a do item se não houver imagem, ou padrão
+            const bgClass = !item.image ? (item.color || 'bg-gray-800') : 'bg-gray-800';
+
             return (
                 <div 
                     className={`group relative flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out hover:scale-105 hover:z-50 ${widthClass}`}
                     onClick={handleClick}
                 >
                     {/* Poster Image / Placeholder */}
-                    <div className={`${aspectClass} w-full rounded-md overflow-hidden relative shadow-lg ${!item.image && isApp ? item.color : 'bg-gray-800'}`}>
-                        {!item.image && isApp ? (
-                            <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center border border-white/10 bg-gradient-to-br from-white/10 to-transparent">
-                                <item.icon className="w-10 h-10 md:w-12 md:h-12 mb-3 text-white drop-shadow-lg" />
-                                <h3 className="font-serif font-bold text-lg md:text-xl leading-tight mb-1 text-white drop-shadow-md">{item.title}</h3>
-                                <p className="text-[10px] md:text-xs uppercase tracking-widest opacity-80 text-gray-200">{item.subtitle}</p>
+                    <div className={`${aspectClass} w-full rounded-md overflow-hidden relative shadow-lg ${bgClass}`}>
+                        {!item.image ? (
+                            <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center border border-white/5 bg-gradient-to-br from-white/5 to-transparent">
+                                {/* Renderiza ícone apenas se existir */}
+                                {item.icon && <item.icon className="w-10 h-10 md:w-12 md:h-12 mb-3 text-white drop-shadow-lg opacity-80" />}
+                                
+                                <h3 className="font-serif font-bold text-lg md:text-xl leading-tight text-white drop-shadow-md">{item.title}</h3>
+                                
+                                {/* Renderiza subtítulo apenas se existir */}
+                                {item.subtitle && <p className="text-[10px] md:text-xs uppercase tracking-widest opacity-60 text-gray-300 mt-2">{item.subtitle}</p>}
                             </div>
                         ) : (
                             <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
@@ -686,8 +1060,8 @@
                         {/* Gradient Overlay on Hover */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
                         
-                        {/* Ícone de Play (Vídeo) ou Info (Modal) */}
-                        {(isHorizontal || item.isModal) && (
+                        {/* Ícone de Play (Vídeo) ou Info (Modal) - Mantido para indicar interatividade */}
+                        {(isHorizontal || item.isModal) && item.image && (
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <div className="bg-red-600 rounded-full p-2 shadow-lg">
                                     {item.isModal ? (
@@ -713,7 +1087,8 @@
                             <span className="text-green-500 font-bold text-[10px] md:text-xs">{item.match}</span>
                             <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
                         </div>
-                        <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>
+                        {/* Mostra título aqui embaixo apenas se tiver imagem, senão já está no centro */}
+                        {item.image && <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>}
                     </div>
                 </div>
             );
@@ -837,10 +1212,12 @@
         const ContentModal = ({ item, onClose }) => {
             if (!item) return null;
 
+            const isPdf = !!item.pdfUrl;
+
             return (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
                     <div 
-                        className="bg-[#181818] w-full max-w-2xl max-h-[90vh] rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col"
+                        className={`bg-[#181818] w-full ${isPdf ? 'max-w-6xl h-[90vh]' : 'max-w-2xl max-h-[90vh]'} rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col`}
                         onClick={e => e.stopPropagation()} // Evita fechar ao clicar dentro
                     >
                         {/* Botão Fechar */}
@@ -851,27 +1228,40 @@
                             <X className="w-5 h-5" />
                         </button>
 
-                        {/* Imagem de Topo */}
-                        <div className="relative h-48 md:h-64 flex-shrink-0">
-                            <img 
-                                src={item.image} 
-                                alt={item.title} 
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
-                            <div className="absolute bottom-4 left-6">
-                                <h2 className="text-3xl md:text-4xl font-serif font-bold text-white drop-shadow-md">{item.title}</h2>
-                                <p className="text-gray-300 text-sm font-medium mt-1">{item.subtitle}</p>
-                            </div>
-                        </div>
+                        {isPdf ? (
+                            <iframe 
+                                src={item.pdfUrl} 
+                                className="w-full h-full bg-[#2a2a2a]" 
+                                title="PDF Viewer"
+                                allow="autoplay"
+                            ></iframe>
+                        ) : (
+                            <>
+                                {/* Imagem de Topo */}
+                                {item.image && (
+                                    <div className="relative h-48 md:h-64 flex-shrink-0">
+                                        <img 
+                                            src={item.image} 
+                                            alt={item.title} 
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
+                                        <div className="absolute bottom-4 left-6">
+                                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white drop-shadow-md">{item.title}</h2>
+                                            <p className="text-gray-300 text-sm font-medium mt-1">{item.subtitle || item.author}</p>
+                                        </div>
+                                    </div>
+                                )}
 
-                        {/* Conteúdo com Scroll */}
-                        <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
-                            <div 
-                                className="prose prose-invert max-w-none"
-                                dangerouslySetInnerHTML={{ __html: item.content }} 
-                            />
-                        </div>
+                                {/* Conteúdo com Scroll */}
+                                <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
+                                    <div 
+                                        className="book-content prose prose-invert max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: item.content }} 
+                                    />
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             );
@@ -882,7 +1272,7 @@
             const [selectedItem, setSelectedItem] = useState(null); // Estado para o modal
             
             // Combine all data for searching
-            const allData = [...APPS_DATA, ...PRAYERS_DATA, ...BOOKS_DATA, ...GUADALUPE_DATA, ...MUSIC_DATA];
+            const allData = [...APPS_DATA, ...PRAYERS_DATA, ...BOOKS_DATA, ...GUADALUPE_DATA, ...MUSIC_DATA, ...BONUS_DATA];
             
             const filteredData = searchQuery 
                 ? allData.filter(item => 
@@ -927,12 +1317,13 @@
                             <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
                                 <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} isAppRow={true} />
                                 
-                                {/* Seção de Orações Diárias - Agora abre Modal */}
+                                {/* Seção de Orações Diárias - Agora definida explicitamente como horizontal */}
                                 <Row 
                                     title="Oraciones Diarias" 
                                     subtitle="Para fortalecer el espíritu" 
                                     items={PRAYERS_DATA} 
                                     isAppRow={false}
+                                    isHorizontal={true}
                                     onOpenModal={setSelectedItem}
                                 />
 
@@ -942,6 +1333,7 @@
                                     subtitle="Colección Completa con os Bonos:" 
                                     items={BOOKS_DATA} 
                                     isAppRow={false} 
+                                    onOpenModal={setSelectedItem} // Adicionado para permitir abrir PDFs
                                 />
 
                                 {/* Nova Seção de Música */}
@@ -961,7 +1353,16 @@
                                 />
                                 
                                 <Row title="Nuevos Lanzamientos en Devoción" items={[...APPS_DATA].reverse()} isAppRow={true} />
-                                <Row title="Recomendados para ti" items={[...BOOKS_DATA].reverse()} isAppRow={false} />
+                                <Row title="Recomendados para ti" items={[...BOOKS_DATA].reverse()} isAppRow={false} onOpenModal={setSelectedItem} />
+
+                                {/* Nova Seção de Bonos */}
+                                <Row 
+                                    title="Bonos Exclusivos" 
+                                    subtitle="Regalos para tu fe" 
+                                    items={BONUS_DATA} 
+                                    isAppRow={false} 
+                                    onOpenModal={setSelectedItem}
+                                />
 
                                 <ContactSection />
                             </div>
