@@ -78,14 +78,15 @@
         }
 
         /* Estilos para o conteúdo do livro dentro do modal */
-        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; }
-        .book-content h3 { color: #e5e5e5; margin-top: 1em; font-weight: bold; }
+        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; }
+        .book-content h3 { color: #e5e5e5; margin-top: 1em; font-weight: bold; font-size: 1.2rem; }
         .book-content p { color: #d1d5db; margin-bottom: 1em; line-height: 1.6; }
-        .book-content ul.toc { list-style: none; padding: 0; border: 1px solid #333; padding: 15px; background: #222; border-radius: 8px; }
+        .book-content ul.toc { list-style: none; padding: 0; border: 1px solid #333; padding: 15px; background: #222; border-radius: 8px; margin-bottom: 20px; }
         .book-content ul.toc li { border-bottom: 1px dotted #444; padding: 5px 0; }
-        .book-content ul.toc a { color: #9ca3af; text-decoration: none; transition: color 0.2s; }
-        .book-content ul.toc a:hover { color: #E50914; }
+        .book-content ul.toc a { color: #9ca3af; text-decoration: none; transition: color 0.2s; display: block; }
+        .book-content ul.toc a:hover { color: #E50914; padding-left: 5px; }
         .book-content .response { font-style: italic; color: #9ca3af; }
+        .book-content strong { color: #fff; }
     </style>
 </head>
 <body>
@@ -367,6 +368,7 @@
             }
         ];
 
+        // LIVROS DA BIBLIOTECA
         const BOOKS_DATA = [
              { 
                 id: 'adviento',
@@ -388,7 +390,6 @@
                 isModal: true,
                 content: `
                     <div class="book-content">
-                        <!-- INTRODUCCIÓN -->
                         <div id="intro">
                             <h2>Introducción</h2>
                             <p>Bienvenido a este compendio de luz y esperanza. La oración es el aliento del alma, el puente invisible pero indestructible que une nuestro corazón con el Creador. En las páginas de este libro digital, encontrará un refugio para cada momento de su vida: desde el amanecer hasta el ocaso, en la alegría y en la tribulación.</p>
@@ -396,7 +397,6 @@
                             <p>Que este libro sea una lámpara en su camino y que, a través de estas plegarias, su fe se fortalezca y su corazón encuentre la paz que solo Dios puede dar.</p>
                         </div>
 
-                        <!-- ÍNDICE -->
                         <div id="toc">
                             <h2>Índice</h2>
                             <ul class="toc">
@@ -440,8 +440,6 @@
                             </ul>
                         </div>
 
-                        <!-- CONTENIDO -->
-
                         <h2 id="padre-nuestro">Padre Nuestro</h2>
                         <p>Padre nuestro que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu Reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.</p>
 
@@ -472,19 +470,7 @@
                         <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti también acudo, oh Madre, Virgen de las vírgenes, y aunque gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
 
                         <h2 id="alma-cristo">Alma de Cristo</h2>
-                        <p>Alma de Cristo, santifícame.<br>
-                        Cuerpo de Cristo, sálvame.<br>
-                        Sangre de Cristo, embriágame.<br>
-                        Agua del costado de Cristo, lávame.<br>
-                        Pasión de Cristo, confórtame.<br>
-                        ¡Oh, buen Jesús!, óyeme.<br>
-                        Dentro de tus llagas, escóndeme.<br>
-                        No permitas que me aparte de Ti.<br>
-                        Del maligno enemigo, defiéndeme.<br>
-                        En la hora de mi muerte, llámame.<br>
-                        Y mándame ir a Ti.<br>
-                        Para que con tus santos te alabe.<br>
-                        Por los siglos de los siglos. Amén.</p>
+                        <p>Alma de Cristo, santifícame.<br>Cuerpo de Cristo, sálvame.<br>Sangre de Cristo, embriágame.<br>Agua del costado de Cristo, lávame.<br>Pasión de Cristo, confórtame.<br>¡Oh, buen Jesús!, óyeme.<br>Dentro de tus llagas, escóndeme.<br>No permitas que me aparte de Ti.<br>Del maligno enemigo, defiéndeme.<br>En la hora de mi muerte, llámame.<br>Y mándame ir a Ti.<br>Para que con tus santos te alabe.<br>Por los siglos de los siglos. Amén.</p>
 
                         <h2 id="angel-dios">Ángel de Dios</h2>
                         <p>Ángel de Dios, que eres mi custodio, pues la bondad divina me ha encomendado a ti, ilumíname, guárdame, defiéndeme y gobiérname. Amén.</p>
@@ -509,10 +495,7 @@
 
                         <h2 id="difuntos">Oraciones por los Difuntos</h2>
                         <h3>Requiem Aeternam</h3>
-                        <p>V. Dales, Señor, el descanso eterno.<br>
-                        R. <span class="response">Y brille para ellos la luz perpetua.</span><br>
-                        V. Que las almas de los fieles difuntos, por la misericordia de Dios, descansen en paz.<br>
-                        R. <span class="response">Amén.</span></p>
+                        <p>V. Dales, Señor, el descanso eterno.<br>R. <span class="response">Y brille para ellos la luz perpetua.</span><br>V. Que las almas de los fieles difuntos, por la misericordia de Dios, descansen en paz.<br>R. <span class="response">Amén.</span></p>
 
                         <h2 id="momentos">Oraciones para Momentos Específicos</h2>
                         <h3>Bendición de los Alimentos</h3>
@@ -560,12 +543,7 @@
 
                         <h2 id="regina-coeli">Regina Coeli (Reina del Cielo)</h2>
                         <p class="center-text"><em>(Se reza en lugar del Ángelus en el Tiempo Pascual)</em></p>
-                        <p>V. Alégrate, Reina del cielo. Aleluya.<br>
-                        R. <span class="response">Porque el que mereciste llevar en tu seno. Aleluya.</span><br>
-                        V. Ha resucitado, según predijo. Aleluya.<br>
-                        R. <span class="response">Ruega por nosotros a Dios. Aleluya.</span><br>
-                        V. Gózate y alégrate, Virgen María. Aleluya.<br>
-                        R. <span class="response">Porque ha resucitado Dios verdaderamente. Aleluya.</span></p>
+                        <p>V. Alégrate, Reina del cielo. Aleluya.<br>R. <span class="response">Porque el que mereciste llevar en tu seno. Aleluya.</span><br>V. Ha resucitado, según predijo. Aleluya.<br>R. <span class="response">Ruega por nosotros a Dios. Aleluya.</span><br>V. Gózate y alégrate, Virgen María. Aleluya.<br>R. <span class="response">Porque ha resucitado Dios verdaderamente. Aleluya.</span></p>
                         <p><strong>Oremos:</strong> Oh Dios que por la Resurrección de tu Hijo, nuestro Señor Jesucristo, te has dignado dar la alegría al mundo, concédenos por su Madre, la Virgen María, alcanzar el gozo de la vida eterna. Por el mismo Jesucristo Nuestro Señor. Amén.</p>
 
                         <h2 id="ven-espiritu">Ven Santo Espíritu (Sequência de Pentecostes)</h2>
@@ -632,30 +610,14 @@
                         <p>Santa María, <span class="response">ruega por nosotros.</span> (Repetir "ruega por nosotros" después de cada invocación:)</p>
                         <p>Santa Madre de Dios... Santa Virgen de las Vírgenes... Madre de Cristo... Madre de la Iglesia... Madre de la misericordia... Madre de la divina gracia... Madre de la esperanza... Madre purísima... Madre castísima... Madre siempre virgen... Madre inmaculada... Madre amable... Madre admirable... Madre del buen consejo... Madre del Creador... Madre del Salvador... Virgen prudentísima... Virgen digna de veneración... Virgen digna de alabanza... Virgen poderosa... Virgen clemente... Virgen fiel... Espejo de justicia... Trono de la sabiduría... Causa de nuestra alegría... Vaso espiritual... Vaso digno de honor... Vaso de insigne devoción... Rosa mística... Torre de David... Torre de marfil... Casa de oro... Arca de la Alianza... Puerta del cielo... Estrella de la mañana... Salud de los enfermos... Refugio de los pecadores... Consuelo de los migrantes... Consoladora de los afligidos... Auxilio de los cristianos... Reina de los Ángeles... Reina de los Patriarcas... Reina de los Profetas... Reina de los Apóstoles... Reina de los Mártires... Reina de los Confesores... Reina de las Vírgenes... Reina de todos los Santos... Reina concebida sin pecado original... Reina asunta a los Cielos... Reina del Santísimo Rosario... Reina de la familia... Reina de la paz...</p>
 
-                        <p>Cordero de Dios, que quitas el pecado del mundo, <span class="response">perdónanos, Señor.</span><br>
-                        Cordero de Dios, que quitas el pecado del mundo, <span class="response">escúchanos, Señor.</span><br>
-                        Cordero de Dios, que quitas el pecado del mundo, <span class="response">ten misericordia de nosotros.</span></p>
+                        <p>Cordero de Dios, que quitas el pecado del mundo, <span class="response">perdónanos, Señor.</span><br>Cordero de Dios, que quitas el pecado del mundo, <span class="response">escúchanos, Señor.</span><br>Cordero de Dios, que quitas el pecado del mundo, <span class="response">ten misericordia de nosotros.</span></p>
                         
-                        <p>V. Ruega por nosotros, Santa Madre de Dios.<br>
-                        R. <span class="response">Para que seamos dignos de las promesas de Cristo.</span></p>
+                        <p>V. Ruega por nosotros, Santa Madre de Dios.<br>R. <span class="response">Para que seamos dignos de las promesas de Cristo.</span></p>
 
                         <h2 id="via-crucis">Vía Crucis (Via Sacra)</h2>
                         <p><strong>Oración Inicial:</strong> Jesús, mi Señor y Redentor: Yo me arrepiento de todos os pecados que he cometido hasta hoy...</p>
                         <p><em>(En cada estación: Te adoramos, Señor, y te bendecimos, porque por tu santa cruz redimiste al mundo.)</em></p>
-                        <p><strong>1ª Estación:</strong> Jesús sentenciado a muerte.<br>
-                        <strong>2ª Estación:</strong> Jesús cargado con la cruz.<br>
-                        <strong>3ª Estación:</strong> Jesús cae, por primera vez, bajo el paso de la cruz.<br>
-                        <strong>4ª Estación:</strong> Encuentro con la Virgen.<br>
-                        <strong>5ª Estación:</strong> el Cirineo ayuda al Señor a llevar la Cruz.<br>
-                        <strong>6ª Estación:</strong> la Verónica enjuga el rostro de Jesús.<br>
-                        <strong>7ª Estación:</strong> Segunda caída en el camino de la Cruz.<br>
-                        <strong>8ª Estación:</strong> Jesús consuela a las hijas de Jerusalén.<br>
-                        <strong>9ª Estación:</strong> Jesús cae por tercera vez.<br>
-                        <strong>10ª Estación:</strong> Jesús despojado de sus vestiduras.<br>
-                        <strong>11ª Estación:</strong> Jesús es clavado en la Cruz.<br>
-                        <strong>12ª Estación:</strong> Jesús muere en la Cruz.<br>
-                        <strong>13ª Estación:</strong> Jesús en brazos de su madre.<br>
-                        <strong>14ª Estación:</strong> Jesús puesto en el sepulcro.</p>
+                        <p><strong>1ª Estación:</strong> Jesús sentenciado a muerte.<br><strong>2ª Estación:</strong> Jesús cargado con la cruz.<br><strong>3ª Estación:</strong> Jesús cae, por primera vez, bajo el paso de la cruz.<br><strong>4ª Estación:</strong> Encuentro con la Virgen.<br><strong>5ª Estación:</strong> el Cirineo ayuda al Señor a llevar la Cruz.<br><strong>6ª Estación:</strong> la Verónica enjuga el rostro de Jesús.<br><strong>7ª Estación:</strong> Segunda caída en el camino de la Cruz.<br><strong>8ª Estación:</strong> Jesús consuela a las hijas de Jerusalén.<br><strong>9ª Estación:</strong> Jesús cae por tercera vez.<br><strong>10ª Estación:</strong> Jesús despojado de sus vestiduras.<br><strong>11ª Estación:</strong> Jesús es clavado en la Cruz.<br><strong>12ª Estación:</strong> Jesús muere en la Cruz.<br><strong>13ª Estación:</strong> Jesús en brazos de su madre.<br><strong>14ª Estación:</strong> Jesús puesto en el sepulcro.</p>
 
                         <h2 id="veni-creator">Veni Creator Spiritus</h2>
                         <p>Ven, Espíritu Creador, visita las almas de tus fieles llena con tu divina gracia, los corazones que creaste. Tú, a quien llamamos Paráclito, don de Dios Altísimo, fuente viva, fuego, caridad y espiritual unción...</p>
@@ -676,20 +638,7 @@
 
                         <h2 id="via-lucis">Vía Lucis (Camino de la Luz)</h2>
                         <p>El Vía Lucis es una devoción que recorre catorce estaciones con Cristo triunfante desde la Resurrección a Pentecostés.</p>
-                        <p><strong>1ª Estación:</strong> ¡CRISTO VIVE!: ¡HA RESUCITADO!<br>
-                        <strong>2ª Estación:</strong> EL ENCUENTRO CON MARÍA MAGDALENA.<br>
-                        <strong>3ª Estación:</strong> JESÚS SE APARECE A LAS MUJERES.<br>
-                        <strong>4ª Estación:</strong> LOS SOLDADOS CUSTODIAN EL SEPULCRO DE CRISTO.<br>
-                        <strong>5ª Estación:</strong> PEDRO Y JUAN CONTEMPLAN EL SEPULCRO VACÍO.<br>
-                        <strong>6ª Estación:</strong> JESÚS EN EL CENÁCULO MUESTRA SUS LLAGAS.<br>
-                        <strong>7ª Estación:</strong> EN EL CAMINO DE EMAÚS.<br>
-                        <strong>8ª Estación:</strong> JESÚS DA A LOS APÓSTOLES EL PODER DE PERDONAR.<br>
-                        <strong>9ª Estación:</strong> JESÚS FORTALECE LA FE DE TOMÁS.<br>
-                        <strong>10ª Estación:</strong> JESÚS RESUCITADO EN EL LAGO DE GALILEA.<br>
-                        <strong>11ª Estación:</strong> JESÚS CONFIRMA A PEDRO EN EL AMOR.<br>
-                        <strong>12ª Estación:</strong> LA DESPEDIDA: JESÚS ENCARGA SU MISIÓN.<br>
-                        <strong>13ª Estación:</strong> JESÚS ASCIENDE AL CIELO.<br>
-                        <strong>14ª Estación:</strong> LA VENIDA DEL ESPÍRITU SANTO EN PENTECOSTÉS.</p>
+                        <p><strong>1ª Estación:</strong> ¡CRISTO VIVE!: ¡HA RESUCITADO!<br><strong>2ª Estación:</strong> EL ENCUENTRO CON MARÍA MAGDALENA.<br><strong>3ª Estación:</strong> JESÚS SE APARECE A LAS MUJERES.<br><strong>4ª Estación:</strong> LOS SOLDADOS CUSTODIAN EL SEPULCRO DE CRISTO.<br><strong>5ª Estación:</strong> PEDRO Y JUAN CONTEMPLAN EL SEPULCRO VACÍO.<br><strong>6ª Estación:</strong> JESÚS EN EL CENÁCULO MUESTRA SUS LLAGAS.<br><strong>7ª Estación:</strong> EN EL CAMINO DE EMAÚS.<br><strong>8ª Estación:</strong> JESÚS DA A LOS APÓSTOLES EL PODER DE PERDONAR.<br><strong>9ª Estación:</strong> JESÚS FORTALECE LA FE DE TOMÁS.<br><strong>10ª Estación:</strong> JESÚS RESUCITADO EN EL LAGO DE GALILEA.<br><strong>11ª Estación:</strong> JESÚS CONFIRMA A PEDRO EN EL AMOR.<br><strong>12ª Estación:</strong> LA DESPEDIDA: JESÚS ENCARGA SU MISIÓN.<br><strong>13ª Estación:</strong> JESÚS ASCIENDE AL CIELO.<br><strong>14ª Estación:</strong> LA VENIDA DEL ESPÍRITU SANTO EN PENTECOSTÉS.</p>
 
                         <h2 id="novena-inmaculada">Novena a la Inmaculada Concepción</h2>
                         <p><strong>Oración para todos los días:</strong> Dios te salve, María, llena de gracia y bendita más que todas las mujeres...</p>
