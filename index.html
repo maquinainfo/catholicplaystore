@@ -78,12 +78,22 @@
         }
 
         /* Estilos para o conteúdo do livro dentro do modal */
-        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; }
+        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; scroll-margin-top: 20px; }
         .book-content h3 { color: #e5e5e5; margin-top: 1em; font-weight: bold; font-size: 1.2rem; }
         .book-content p { color: #d1d5db; margin-bottom: 1em; line-height: 1.6; }
         .book-content ul.toc { list-style: none; padding: 0; border: 1px solid #333; padding: 15px; background: #222; border-radius: 8px; margin-bottom: 20px; }
         .book-content ul.toc li { border-bottom: 1px dotted #444; padding: 5px 0; }
-        .book-content ul.toc a { color: #9ca3af; text-decoration: none; transition: color 0.2s; display: block; }
+        
+        /* Estilos reforçados para links */
+        .book-content ul.toc a { 
+            color: #9ca3af; 
+            text-decoration: none; 
+            transition: color 0.2s; 
+            display: block; 
+            cursor: pointer !important; /* Força o cursor */
+            position: relative; 
+            z-index: 10; /* Garante que está acima de outros elementos */
+        }
         .book-content ul.toc a:hover { color: #E50914; padding-left: 5px; }
         .book-content .response { font-style: italic; color: #9ca3af; }
         .book-content strong { color: #fff; }
@@ -172,7 +182,7 @@
                         <div>
                             <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">☀️</span> Al despertar</h3>
                             <p class="text-gray-300 leading-relaxed">
-                                Al despertar, dirige tus pensamientos inmediatamente a Dios y, haciendo la Señal de la Cruz, di:<br/>
+                                Al despertar, dirige tus pensamientos inmediatamente a Dios y, fazendo o Sinal da Cruz, diga:<br/>
                                 <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">"En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén."</em>
                             </p>
                         </div>
@@ -467,7 +477,7 @@
                         <p>Dios mío, me arrepiento de todo corazón de todos mis pecados y los aborrezco, porque al pecar, no sólo merezco las penas establecidas por ti justamente, sino principalmente porque te ofendí, a ti sumo Bien y digno de amor por encima de todas las cosas. Por eso propongo firmemente, con ayuda de tu gracia, no pecar más en adelante y huir de toda ocasión de pecado. Amén.</p>
 
                         <h2 id="acordaos">Acordaos</h2>
-                        <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti también acudo, oh Madre, Virgen de las vírgenes, y aunque gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
+                        <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti também acudo, oh Madre, Virgen de las vírgenes, y aunque gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
 
                         <h2 id="alma-cristo">Alma de Cristo</h2>
                         <p>Alma de Cristo, santifícame.<br>Cuerpo de Cristo, sálvame.<br>Sangre de Cristo, embriágame.<br>Agua del costado de Cristo, lávame.<br>Pasión de Cristo, confórtame.<br>¡Oh, buen Jesús!, óyeme.<br>Dentro de tus llagas, escóndeme.<br>No permitas que me aparte de Ti.<br>Del maligno enemigo, defiéndeme.<br>En la hora de mi muerte, llámame.<br>Y mándame ir a Ti.<br>Para que con tus santos te alabe.<br>Por los siglos de los siglos. Amén.</p>
@@ -667,7 +677,7 @@
                         <p><strong>Día Cuarto:</strong> Ser de aquellos para quienes tu sirves.</p>
                         <p><strong>Día Quinto:</strong> Libres de los que quieren dañar nuestras almas.</p>
                         <p><strong>Día Sexto:</strong> Sustento espiritual de tu gracia.</p>
-                        <p><strong>Día Séptimo:</strong> Nunca dejar de hacer tu voluntad.</p>
+                        <p><strong>Día Séptimo:</strong> Nunca deixar de fazer a tua vontade.</p>
                         <p><strong>Día Octavo:</strong> Muerte semejante a la suya.</p>
                         <p><strong>Día Noveno:</strong> Ser verdaderos y sinceros católicos.</p>
                         <p><strong>Oración final:</strong> Oh custodio y padre de Vírgenes San José...</p>
@@ -720,9 +730,11 @@
                 title: "Guía para Conversos", 
                 author: "Guía de Fe", 
                 desc: "Acompañamiento paso a paso en el camino católico.", 
-                link: "#",
+                // Link DIRETO fornecido, sem modal, para abrir em nova aba
+                link: "https://drive.google.com/file/d/1cg7bqPhOOGGSAEe0p9zctx9BAYrV_FAG/view?usp=drive_link",
                 image: "https://i.postimg.cc/QN2MQqVZ/Gemini-Generated-Image-ayk0l5ayk0l5ayk0.webp",
-                match: "88% Match"
+                match: "88% Match",
+                isModal: false // IMPORTANTE: Desativado o modal para abrir diretamente
             }
         ];
 
@@ -1017,8 +1029,6 @@
         };
 
         const Card = ({ item, isApp, customStyle, isHorizontal, onOpenModal }) => {
-            // CORREÇÃO: O formato agora depende EXCLUSIVAMENTE de 'isHorizontal'.
-            // Isso garante que livros com PDF (isModal=true) continuem verticais (formato livro).
             const widthClass = customStyle 
                 ? customStyle 
                 : (isHorizontal ? 'w-[220px] md:w-[300px] mx-1' : 'w-[140px] md:w-[200px] mx-1');
@@ -1033,7 +1043,6 @@
                 }
             };
 
-            // Determina a cor de fundo: usa a do item se não houver imagem, ou padrão
             const bgClass = !item.image ? (item.color || 'bg-gray-800') : 'bg-gray-800';
 
             return (
@@ -1045,22 +1054,16 @@
                     <div className={`${aspectClass} w-full rounded-md overflow-hidden relative shadow-lg ${bgClass}`}>
                         {!item.image ? (
                             <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center border border-white/5 bg-gradient-to-br from-white/5 to-transparent">
-                                {/* Renderiza ícone apenas se existir */}
                                 {item.icon && <item.icon className="w-10 h-10 md:w-12 md:h-12 mb-3 text-white drop-shadow-lg opacity-80" />}
-                                
                                 <h3 className="font-serif font-bold text-lg md:text-xl leading-tight text-white drop-shadow-md">{item.title}</h3>
-                                
-                                {/* Renderiza subtítulo apenas se existir */}
                                 {item.subtitle && <p className="text-[10px] md:text-xs uppercase tracking-widest opacity-60 text-gray-300 mt-2">{item.subtitle}</p>}
                             </div>
                         ) : (
                             <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                         )}
                         
-                        {/* Gradient Overlay on Hover */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
                         
-                        {/* Ícone de Play (Vídeo) ou Info (Modal) - Mantido para indicar interatividade */}
                         {(isHorizontal || item.isModal) && item.image && (
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <div className="bg-red-600 rounded-full p-2 shadow-lg">
@@ -1073,7 +1076,6 @@
                             </div>
                         )}
 
-                        {/* Netflix-style Badge */}
                         {item.badge && (
                             <div className="absolute top-2 right-0 bg-red-600 text-white text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md z-10">
                                 {item.badge}
@@ -1081,13 +1083,11 @@
                         )}
                     </div>
 
-                    {/* Meta Info */}
                     <div className="mt-2 px-1 opacity-80 group-hover:opacity-100 transition-opacity">
                         <div className="flex items-center justify-between mb-1">
                             <span className="text-green-500 font-bold text-[10px] md:text-xs">{item.match}</span>
                             <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
                         </div>
-                        {/* Mostra título aqui embaixo apenas se tiver imagem, senão já está no centro */}
                         {item.image && <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>}
                     </div>
                 </div>
@@ -1129,7 +1129,6 @@
                             ))}
                         </div>
                         
-                        {/* Fade Effect at the end of the row */}
                         <div className="absolute top-0 right-0 h-full w-8 md:w-16 bg-gradient-to-l from-[#141414] to-transparent pointer-events-none z-20"></div>
                     </div>
                 </div>
@@ -1210,9 +1209,57 @@
 
         // --- COMPONENTE MODAL NOVO ---
         const ContentModal = ({ item, onClose }) => {
+            const scrollContainerRef = useRef(null);
+            const contentRef = useRef(null); // Ref para o container do texto
+
             if (!item) return null;
 
             const isPdf = !!item.pdfUrl;
+
+            // UseEffect para gerenciar o clique de forma robusta
+            useEffect(() => {
+                const handleLinkClick = (e) => {
+                    const link = e.target.closest('a');
+                    if (!link) return;
+
+                    const href = link.getAttribute('href');
+                    if (!href || !href.startsWith('#')) return;
+
+                    e.preventDefault(); // Impede o comportamento padrão que falha
+
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    const container = scrollContainerRef.current;
+
+                    if (targetElement && container) {
+                        // Estratégia de Rolagem Matemática (Infalível)
+                        // Calcula a posição do alvo relativa ao topo do container de rolagem
+                        const containerRect = container.getBoundingClientRect();
+                        const targetRect = targetElement.getBoundingClientRect();
+                        
+                        // A nova posição de rolagem é: Posição Atual + (Topo do Alvo - Topo do Container)
+                        const scrollTop = container.scrollTop + (targetRect.top - containerRect.top);
+                        
+                        // Aplica o scroll para a posição exata com um pequeno ajuste (-20px) para não colar no topo
+                        container.scrollTo({
+                            top: scrollTop - 20, 
+                            behavior: 'auto' // Instantâneo para garantir que funcione sem conflito de animação
+                        });
+                    }
+                };
+
+                const contentDiv = contentRef.current;
+                if (contentDiv) {
+                    contentDiv.addEventListener('click', handleLinkClick);
+                }
+
+                // Limpeza do evento ao fechar/desmontar
+                return () => {
+                    if (contentDiv) {
+                        contentDiv.removeEventListener('click', handleLinkClick);
+                    }
+                };
+            }, [item.content]); // Re-executa se o conteúdo mudar
 
             return (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
@@ -1253,9 +1300,13 @@
                                     </div>
                                 )}
 
-                                {/* Conteúdo com Scroll */}
-                                <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
+                                {/* Conteúdo com Scroll - ADICIONADO 'relative' e REF */}
+                                <div 
+                                    className="p-6 md:p-8 overflow-y-auto custom-scrollbar relative" 
+                                    ref={scrollContainerRef}
+                                >
                                     <div 
+                                        ref={contentRef} // REF para o listener de clique
                                         className="book-content prose prose-invert max-w-none"
                                         dangerouslySetInnerHTML={{ __html: item.content }} 
                                     />
