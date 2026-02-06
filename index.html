@@ -165,6 +165,167 @@
                 link: "https://devocionaldelosantos.netlify.app/",
                 match: "92% Match",
                 image: "https://i.postimg.cc/15LQwpFK/Gemini-Generated-Image-gcg4jfgcg4jfgcg4.png" 
+            },
+            {
+                id: 'quaresma',
+                title: "Itinerario Quaresmal",
+                subtitle: "Cuaresma 2026",
+                description: "Una guía espiritual profunda para vivir la Santa Cuaresma.",
+                icon: Info,
+                color: "bg-purple-900", // Cor litúrgica da quaresma
+                link: "#",
+                match: "Próximamente",
+                badge: "15 Feb",
+                image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png"
+            },
+            {
+                id: 'literatura-catolica',
+                title: "Literatura Católica",
+                subtitle: "+500 Libros y Clásicos",
+                description: "Accede a obras maestras de Santos, Teólogos, Mística y Demonología en un ambiente exclusivo.",
+                icon: BookOpen, 
+                color: "bg-amber-900",
+                link: "#", // Link é tratado pelo modal
+                match: "Premium",
+                badge: "Acervo",
+                image: "https://i.postimg.cc/tJL36r3V/Gemini-Generated-Image-fdv54wfdv54wfdv5-(1).png",
+                isModal: true,
+                content: `
+                    <div class="space-y-8 p-4 bg-[#121010] text-[#e5e5e5] font-sans">
+                        <!-- Header com Atmosfera de Biblioteca -->
+                        <div class="relative rounded-xl overflow-hidden border border-[#C5A059]/30 shadow-2xl group">
+                            <div class="absolute inset-0 bg-black/70 z-10"></div>
+                            <!-- Imagem de fundo de biblioteca antiga -->
+                            <img src="https://images.unsplash.com/photo-1507842217121-e0493caf8276?q=80&w=2070&auto=format&fit=crop" alt="Biblioteca Vaticana" class="w-full h-64 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            
+                            <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-6">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                                </div>
+                                <h2 class="text-3xl md:text-5xl font-serif font-bold text-[#C5A059] mb-3 drop-shadow-lg tracking-wide">Literatura Católica</h2>
+                                <p class="text-gray-200 text-lg italic max-w-2xl font-serif opacity-90">"Tolle et lege" — Toma y lee</p>
+                                
+                                <a href="https://drive.google.com/drive/folders/1wUV-Rz-yc2Xob965U3Z4XiSY5BQUM_J9?usp=drive_link" target="_blank" class="mt-8 inline-flex items-center bg-[#721121] hover:bg-[#8C1C2E] text-white px-8 py-4 rounded border border-[#C5A059] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(197,160,89,0.3)] uppercase tracking-widest text-sm font-bold gap-3 no-underline">
+                                    <span>Acceder al Acervo Completo</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Grid de Conteúdo -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                            
+                            <!-- Coluna 1: Santos e Clássicos -->
+                            <div class="space-y-6">
+                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#C5A059] shadow-lg">
+                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+                                        <span>📜</span> Santos y Teólogos Clásicos
+                                    </h3>
+                                    <ul class="space-y-3 text-sm text-gray-300">
+                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
+                                            <strong class="text-white block text-base">Santo Tomás de Aquino</strong>
+                                            <span class="text-xs">Suma Teológica (I, I-II, II-II), Compendio, Catecismo.</span>
+                                        </li>
+                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
+                                            <strong class="text-white block text-base">San Agustín</strong>
+                                            <span class="text-xs">Confesiones, La Ciudad de Dios.</span>
+                                        </li>
+                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
+                                            <strong class="text-white block text-base">Santa Teresa de Jesús</strong>
+                                            <span class="text-xs">Libro de la Vida, Camino de Perfección, Cartas.</span>
+                                        </li>
+                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
+                                            <strong class="text-white block text-base">San Ignacio de Loyola</strong>
+                                            <span class="text-xs">Obras Completas, Ejercicios Espirituales.</span>
+                                        </li>
+                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
+                                            <strong class="text-white block text-base">San Buenaventura & Hildegarda</strong>
+                                            <span class="text-xs">Teología Mística, Obras Divinas.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#C5A059] shadow-lg">
+                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+                                        <span>📚</span> Obras Clásicas Esenciales
+                                    </h3>
+                                    <ul class="grid grid-cols-1 gap-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">Imitación de Cristo</span> <span class="text-xs text-gray-500">- Tomás de Kempis</span></li>
+                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">El Combate Espiritual</span> <span class="text-xs text-gray-500">- Lorenzo Scúpoli</span></li>
+                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">Tratado de la Verdadera Devoción</span> <span class="text-xs text-gray-500">- San Luis María</span></li>
+                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">La Regla de San Benito</span></li>
+                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">1000 Máximas</span> <span class="text-xs text-gray-500">- Don Bosco</span></li>
+                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">Tratado del Amor de Dios</span> <span class="text-xs text-gray-500">- San Francisco de Sales</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Coluna 2: Mística e Demonologia -->
+                            <div class="space-y-6">
+                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#721121] shadow-lg">
+                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+                                        <span>✨</span> Mística y Revelaciones
+                                    </h3>
+                                    <ul class="space-y-3 text-sm text-gray-300">
+                                        <li class="flex items-center gap-2">
+                                            <span class="text-[#721121]">✝</span>
+                                            <span><strong class="text-white">Ana Catalina Emmerich:</strong> La Amarga Pasión.</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <span class="text-[#721121]">✝</span>
+                                            <span><strong class="text-white">Santa Brígida:</strong> Revelaciones Celestiales.</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <span class="text-[#721121]">✝</span>
+                                            <span><strong class="text-white">Santa Gema Galgani:</strong> Escritos y Biografía.</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <span class="text-[#721121]">✝</span>
+                                            <span><strong class="text-white">María Simma:</strong> ¡Sáquennos de aquí! (Purgatorio).</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <span class="text-[#721121]">✝</span>
+                                            <span><strong class="text-white">Relatos de un Peregrino Ruso</strong></span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#721121] shadow-lg">
+                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+                                        <span>🛡️</span> Exorcismo y Apologética
+                                    </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <strong class="text-[#C5A059] block mb-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">Padre Gabriele Amorth</strong>
+                                            <ul class="list-disc list-inside text-sm text-gray-400 pl-2">
+                                                <li>Habla un Exorcista</li>
+                                                <li>El Último Exorcista</li>
+                                                <li>Narraciones de un Exorcista</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="text-[#C5A059] block mb-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">Padre José Antonio Fortea</strong>
+                                            <ul class="list-disc list-inside text-sm text-gray-400 pl-2">
+                                                <li>Summa Daemoniaca</li>
+                                                <li>Exorcística</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="text-[#C5A059] block mb-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">Teología General</strong>
+                                            <p class="text-sm text-gray-400 pl-2">
+                                                Manual de Teología Dogmática (Ludwig Ott), Cartas del Diablo a su Sobrino (C.S. Lewis), En Defensa del Catolicismo.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 text-center pt-6 border-t border-white/10">
+                             <p class="text-[#C5A059] text-sm font-serif italic">"La ignorancia de las Escrituras es ignorancia de Cristo." — San Jerónimo</p>
+                        </div>
+                    </div>
+                `
             }
         ];
 
@@ -197,7 +358,7 @@
                             <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🙏</span> Al arrodillarse</h3>
                             <p class="text-gray-300 leading-relaxed">
                                 Al arrodillarte, procura ponerte en la presencia de Dios, concienciándote de que Él está delante de ti, que conoce todos tus pensamientos y que desea escucharte y socorrerte. Entonces di:<br/>
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">"Libra mi mente, oh Dios mío, de todos los pensamientos que distraen, y permíteme orar siempre con atención y devoción, para que así merezca ser escuchado por Ti. Te ofrezco mis oraciones en unión con aquella intención divina con la cual Tú mismo, mientras estuviste en la Tierra, rendías alabanzas a Dios."</em>
+                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">"Libra mi mente, oh Dios mío, de todos los pensamientos que distraen, y permíteme orar sempre con atenção e devoção, para que assim mereça ser ouvido por Ti. Te ofrezco mis oraciones en unión con aquella intención divina con la cual Tú mismo, mientras estuviste en la Tierra, rendías alabanzas a Dios."</em>
                             </p>
                         </div>
                     </div>
@@ -216,7 +377,7 @@
                             <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🙌</span> Actos de Adoración y Acción de Gracias</h3>
                             <p class="text-gray-300 leading-relaxed">
                                 <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Bendita sea la santa y una Trinidad, ahora y siempre. Amén.<br/><br/>
+                                    "Bendita sea la santa y una Trinidad, agora e sempre. Amén.<br/><br/>
                                     Al Rey de los siglos, al inmortal, invisible y único Dios, sean dados honor y gloria por los siglos de los siglos.<br/><br/>
                                     Te doy gracias, oh Padre mío, por los innumerables beneficios que he recibido de tu amorosa generosidad y misericordia, sobre todo por haberme preservado esta noche.<br/><br/>
                                     Gloria al Padre que me creó, gloria al Hijo que me redimió, gloria al Espíritu Santo que me santificó."
@@ -485,7 +646,7 @@
                         
                         <h3>Símbolo Niceno-Constantinopolitano</h3>
                         <p>Creo en un solo Dios, Padre todopoderoso, Creador del cielo y de la tierra, de todo lo visible y lo invisible.</p>
-                        <p>Creo en un solo Señor, Jesucristo, Hijo único de Dios, nacido del Padre antes de todos los siglos: Dios de Dios, Luz de Luz, Dios verdadero de Dios verdadero, engendrado, no creado, de la misma naturaleza del Padre, por quien todo fue hecho; que por nosotros, los hombres, y por nuestra salvación bajó del cielo, y por obra del Espíritu Santo se encarnó de María, la Virgen, y se hizo hombre; y por nuestra causa fue crucificado en tiempos de Poncio Pilato; padeció y fue sepultado, y resucitó al tercer día, según las Escrituras, y subió al cielo, y está sentado a la derecha del Padre; y de nuevo vendrá con gloria para juzgar a vivos y muertos, y su reino no tendrá fin.</p>
+                        <p>Creo en un solo Señor, Jesucristo, Hijo único de Dios, nacido del Padre antes de todos los siglos: Dios de Dios, Luz de Luz, Dios verdadeiro de Dios verdadeiro, engendrado, não criado, de la misma naturaleza del Padre, por quien todo fue hecho; que por nosotros, los hombres, y por nuestra salvación bajó del cielo, y por obra del Espíritu Santo se encarnó de María, la Virgen, y se hizo hombre; y por nuestra causa fue crucificado en tiempos de Poncio Pilato; padeció y fue sepultado, y resucitó al tercer día, según las Escrituras, y subió al cielo, y está sentado a la derecha del Padre; y de nuevo vendrá con gloria para juzgar a vivos y muertos, y su reino no tendrá fin.</p>
                         <p>Creo en el Espíritu Santo, Señor y dador de vida, que procede del Padre y del Hijo, con el Padre y el Hijo recibe una misma adoración y gloria, y que habló por los profetas. Creo en la Iglesia, que es una, santa, católica y apostólica. Confieso que hay un solo bautismo para el perdón de los pecados. Espero la resurrección de los muertos y la vida del mundo futuro. Amén.</p>
 
                         <h2 id="gloria">Gloria al Padre</h2>
@@ -499,7 +660,7 @@
                         <p>Dios mío, me arrepiento de todo corazón de todos mis pecados y los aborrezco, porque al pecar, no sólo merezco las penas establecidas por ti justamente, sino principalmente porque te ofendí, a ti sumo Bien y digno de amor por encima de todas las cosas. Por eso propongo firmemente, con ayuda de tu gracia, no pecar más en adelante y huir de toda ocasión de pecado. Amén.</p>
 
                         <h2 id="acordaos">Acordaos</h2>
-                        <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti também acudo, oh Madre, Virgen de las vírgenes, y aunque gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
+                        <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti también acudo, oh Madre, Virgen de las vírgenes, y aunque gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
 
                         <h2 id="alma-cristo">Alma de Cristo</h2>
                         <p>Alma de Cristo, santifícame.<br>Cuerpo de Cristo, sálvame.<br>Sangre de Cristo, embriágame.<br>Agua del costado de Cristo, lávame.<br>Pasión de Cristo, confórtame.<br>¡Oh, buen Jesús!, óyeme.<br>Dentro de tus llagas, escóndeme.<br>No permitas que me aparte de Ti.<br>Del maligno enemigo, defiéndeme.<br>En la hora de mi muerte, llámame.<br>Y mándame ir a Ti.<br>Para que con tus santos te alabe.<br>Por los siglos de los siglos. Amén.</p>
@@ -552,7 +713,7 @@
                         <p>Dios mío, Jesucristo: Te doy gracias por todos los beneficios que has dispensado en este día. Te ofrezco mi sueño y todos los momentos de esta noche y te pido me conserves en ella sin pecado. Por esto me pongo dentro de tu santísimo Costado y bajo el manto de mi Madre, la Virgen María. Asístanme y guárdenme en paz los santos Ángeles y venga sobre mí tu Bendición.</p>
                         
                         <h3>Acto de Contrición</h3>
-                        <p>Señor mío, Jesucristo, Dios y Hombre verdadero, Creador, Padre y Redentor mío; por ser Tú quien eres, Bondad infinita, y porque te amo sobre todas las cosas, me pesa de todo corazón de haberte ofendido; también me pesa porque puedes castigarme con las penas del infierno. Ayudado de tu Divina Gracia, propongo firmemente nunca más pecar, confesarme y cumplir la penitencia que me fuere impuesta. Padre Nuestro, Ave María, Credo.</p>
+                        <p>Señor mío, Jesucristo, Dios y Hombre verdadero, Creador, Padre y Redentor mío; por ser Tú quien eres, Bondad infinita, y porque te amo sobre todas las cosas, me pesa de todo corazón de haberte ofendido; também me pesa porque podes castigar-me com as penas do inferno. Ayudado de tu Divina Gracia, propongo firmemente nunca mais pecar, confesarme y cumplir la penitencia que me fuere impuesta. Padre Nuestro, Ave María, Credo.</p>
                         
                         <h3>Oración al Ángel de la Guarda</h3>
                         <p>Ángel de Dios, ángel de Dios: ya que la soberana Piedad a Ti me encomendó, ilumíname, rígeme, guárdame y gobiérname en esta noche. Amén.</p>
@@ -581,13 +742,13 @@
                         <h2 id="ven-espiritu">Ven Santo Espíritu (Sequência de Pentecostes)</h2>
                         <p>Ven, Espíritu divino, manda tu luz desde el cielo. Padre amoroso del pobre; don, en tus dones espléndido; luz que penetra las almas; fuente del mayor consuelo.</p>
                         <p>Ven, dulce huésped del alma, descanso de nuestro esfuerzo, tregua en el duro trabajo, brisa en las horas de fuego, gozo que enjuga las lágrimas y reconforta en los duelos.</p>
-                        <p>Entra hasta el fondo del alma, divina luz, y enriquécenos. Mira el vacío del hombre, si tú le faltas por dentro; mira el poder del pecado, cuando no envías tu aliento.</p>
+                        <p>Entra hasta el fondo del alma, divina luz, y enriquécenos. Mira el vacío del hombre, si tú le faltas por dentro; mira el poder del pecado, quando não envias o teu sopro.</p>
                         <p>Riega la tierra en sequía, sana el corazón enfermo, lava las manchas, infunde calor de vida en el hielo, doma el espíritu indómito, guía al que tuerce el sendero.</p>
                         <p>Reparte tus siete dones, según la fe de tus siervos; por tu bondad y tu gracia, dale al esfuerzo su mérito; salva al que busca salvarse y danos tu gozo eterno. Amén.</p>
 
                         <h2 id="jose-leon">Oración a San José del Papa León XIII</h2>
                         <p>A ti, bienaventurado San José, acudimos en nuestra tribulación; y después de invocar el auxilio de tu Santísima Esposa solicitamos también confiados tu patrocinio. Por aquella caridad que con la Inmaculada Virgen María, Madre de Dios, te tuvo unido, y por el paterno amor con que abrazaste al Niño Jesús, humildemente te suplicamos vuelvas benigno los ojos a la herencia que con su Sangre adquirió Jesucristo, y con tu poder y auxilio socorras nuestras necesidades.</p>
-                        <p>Protege, Providentísimo Custodio de la Sagrada Familia la escogida descendencia de Jesucristo; aparta de nosotros toda mancha de error y corrupción; asístenos propicio, desde el cielo, fortísimo libertador nuestro, en esta lucha con el poder de las tinieblas: y, como en otro tiempo librasteis al Niño Jesús del inminente peligro de la vida, así ahora, defiende a la Iglesia Santa de Dios de las asechanzas de sus enemigos y de toda adversidad, ya cada uno de nosotros protégenos con el perpetuo patrocinio, para que, a tu ejemplo y sostenidos por tu auxilio, podamos santamente vivir y piadosamente morir y alcanzar en el cielo la eterna felicidad. Amén.</p>
+                        <p>Protege, Providentísimo Custodio de la Sagrada Familia la escogida descendencia de Jesucristo; aparta de nosotros toda mancha de error y corrupción; asístenos propicio, desde el cielo, fortísimo libertador nuestro, en esta lucha con el poder de las tinieblas: y, como en otro tiempo librasteis al Niño Jesús del inminente peligro de la vida, así ahora, defiende a la Iglesia Santa de Dios de las asechanzas de sus enemigos y de toda adversidad, ya cada uno de nosotros protégenos con el perpetuo patrocinio, para que, a tu exemplo e sustentados por teu auxílio, possamos santamente viver e piedosamente morrer e alcançar no céu a eterna felicidade. Amém.</p>
 
                         <h2 id="santo-rosario">El Santo Rosario</h2>
                         <p>El Rosario está compuesto por veinte “misterios” (acontecimientos, momentos significativos) de la vida de Jesús y de María, divididos en cuatro “rosarios”: Gozosos, Luminosos, Dolorosos y Gloriosos.</p>
@@ -906,6 +1067,50 @@
             }
         ];
 
+        // NOVA BIBLIOTECA CATÓLICA (LIVROS EXTRAS) - RESTAURADA
+        const EXTRA_LIBRARY_DATA = [
+            {
+                id: 'extra-1',
+                title: "1000 Máximas de Don Bosco",
+                author: "San Juan Bosco",
+                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
+                match: "Nuevo",
+                isModal: true,
+                pdfUrl: "https://drive.google.com/file/d/19JXxLa1e4bwVutfgRJ6d55Qe0FYNQoWw/preview",
+                titleOnCover: true
+            },
+            {
+                id: 'extra-2',
+                title: "Documentos de Fe II",
+                author: "Biblioteca Adicional",
+                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
+                match: "Nuevo",
+                isModal: true,
+                pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMVFdUV3VYb0hzWWc/preview?resourcekey=0-ZBqjmoFFV8k6G6Z-dKw3xw",
+                titleOnCover: true
+            },
+            {
+                id: 'extra-3',
+                title: "Lectura Espiritual III",
+                author: "Biblioteca Adicional",
+                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
+                match: "Nuevo",
+                isModal: true,
+                pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMOEVzTTdIMkpQbjg/preview?resourcekey=0-RdM44nn7xn60vZXmTPMKrQ",
+                titleOnCover: true
+            },
+            {
+                id: 'extra-4',
+                title: "Tradición Católica IV",
+                author: "Biblioteca Adicional",
+                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
+                match: "Nuevo",
+                isModal: true,
+                pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMSGxxZGgwZ2hiQ3c/preview?resourcekey=0-tPsWp9Nig8X_8DhzbGkQww",
+                titleOnCover: true
+            }
+        ];
+
         // =================================================================================
         // Componentes
         // =================================================================================
@@ -1084,6 +1289,24 @@
                             <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                         )}
                         
+                        {/* Título sobre a capa (Overlay) se ativado - ATUALIZADO PARA LETRA PRETA COM DESTAQUE */}
+                        {item.titleOnCover && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-white/5">
+                                <h3 className="font-serif font-extrabold text-black text-sm md:text-xl leading-tight" 
+                                    style={{ 
+                                        textShadow: '0 0 10px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 215, 0, 0.6), 1px 1px 0px rgba(255,255,255,1)' 
+                                    }}>
+                                    {item.title}
+                                </h3>
+                                {item.author && (
+                                    <p className="text-gray-900 text-[10px] md:text-xs uppercase tracking-widest mt-2 font-bold"
+                                       style={{ textShadow: '0 0 4px rgba(255, 255, 255, 0.9)' }}>
+                                        {item.author}
+                                    </p>
+                                )}
+                            </div>
+                        )}
+
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
                         
                         {(isHorizontal || item.isModal) && item.image && (
@@ -1110,6 +1333,7 @@
                             <span className="text-green-500 font-bold text-[10px] md:text-xs">{item.match}</span>
                             <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
                         </div>
+                        {/* Se o título já está na capa, podemos optar por esconder aqui ou manter. Mantendo para consistência no layout da grade */}
                         {item.image && <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>}
                     </div>
                 </div>
@@ -1286,7 +1510,8 @@
             return (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
                     <div 
-                        className={`bg-[#181818] w-full ${isPdf ? 'max-w-6xl h-[90vh]' : 'max-w-2xl max-h-[90vh]'} rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col`}
+                        // ALTERAÇÃO AQUI: Mudado de max-w-2xl para max-w-6xl na condição else (quando não é PDF)
+                        className={`bg-[#181818] w-full ${isPdf ? 'max-w-6xl h-[90vh]' : 'max-w-6xl max-h-[90vh]'} rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col`}
                         onClick={e => e.stopPropagation()} // Evita fechar ao clicar dentro
                     >
                         {/* Botão Fechar */}
@@ -1344,7 +1569,7 @@
             const [searchQuery, setSearchQuery] = useState('');
             const [selectedItem, setSelectedItem] = useState(null); // Estado para o modal
             
-            // Combine all data for searching
+            // Combine all data for searching (REMOVIDO EXTRA_LIBRARY_DATA)
             const allData = [...APPS_DATA, ...PRAYERS_DATA, ...BOOKS_DATA, ...GUADALUPE_DATA, ...MUSIC_DATA, ...BONUS_DATA];
             
             const filteredData = searchQuery 
@@ -1388,7 +1613,8 @@
                         <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
                             <Hero />
                             <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
-                                <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} isAppRow={true} />
+                                {/* CORREÇÃO: Adicionado onOpenModal={setSelectedItem} para permitir abrir o modal da Biblioteca */}
+                                <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} isAppRow={true} onOpenModal={setSelectedItem} />
                                 
                                 {/* Seção de Orações Diárias - Agora definida explicitamente como horizontal */}
                                 <Row 
@@ -1425,7 +1651,7 @@
                                     isAppRow={false} 
                                 />
                                 
-                                <Row title="Nuevos Lanzamientos en Devoción" items={[...APPS_DATA].reverse()} isAppRow={true} />
+                                <Row title="Nuevos Lanzamientos en Devoción" items={[...APPS_DATA].reverse()} isAppRow={true} onOpenModal={setSelectedItem} />
                                 <Row title="Recomendados para ti" items={[...BOOKS_DATA].reverse()} isAppRow={false} onOpenModal={setSelectedItem} />
 
                                 {/* Nova Seção de Bonos */}
