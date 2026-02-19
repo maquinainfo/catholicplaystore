@@ -18,7 +18,6 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- Configuração Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -69,7 +68,7 @@
         const { useState, useEffect, useRef } = React;
 
         // =================================================================================
-        // 1. ÍCONES (CORREÇÃO DE SINTAXE REALIZADA)
+        // 1. ÍCONES (DEFINIDOS PRIMEIRO PARA EVITAR ReferenceError)
         // =================================================================================
         const IconBase = ({ children, className, style, onClick }) => (
             <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}>
@@ -81,7 +80,7 @@
         const Info = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></IconBase>;
         const Bell = (props) => <IconBase {...props}><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></IconBase>;
         const Search = (props) => <IconBase {...props}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></IconBase>;
-        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>; // CORRIGIDO: </IconDown> para </IconBase>
+        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>;
         const Shield = (props) => <IconBase {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></IconBase>;
         const Crown = (props) => <IconBase {...props}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></IconBase>;
         const BookOpen = (props) => <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>;
@@ -89,7 +88,7 @@
         const X = (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></IconBase>;
 
         // =================================================================================
-        // 2. CONSTANTES DE CONTEÚDO (INTEGRAIS)
+        // 2. CONSTANTES DE CONTEÚDO HTML (INTEGRAIS)
         // =================================================================================
 
         const ITINERARIO_MODAL_HTML = `
@@ -105,14 +104,13 @@
                             AÚN NO HE COMPRADO EL ITINERARIO
                         </a>
                         <details class="w-full group">
-                            <summary class="block w-full cursor-pointer bg-[#2a2a2a] hover:bg-[#333] text-gray-200 font-bold py-4 px-6 rounded-lg transition-all shadow-lg text-center list-none text-sm md:text-base border border-gray-700 hover:border-gray-500 select-none">
-                                YA COMPRÉ EL ITINERARIO CUARESMAL
+                            <summary class="block w-full cursor-pointer bg-purple-900 hover:bg-purple-800 text-white font-bold py-4 px-6 rounded-lg transition-all shadow-lg text-center list-none text-sm md:text-base border border-purple-700 hover:border-purple-500 select-none">
+                                YA ADQUIRÍ EL ITINERARIO CUARESMAL
                             </summary>
                             <div class="mt-4 p-6 bg-[#121010] border border-[#C5A059] rounded-lg shadow-[0_0_15px_rgba(197,160,89,0.15)] animate-slideUp">
                                 <p class="text-[#C5A059] font-serif text-lg font-bold text-center leading-relaxed">
                                     <span class="text-2xl block mb-2">🔔</span>
-                                    ATENTO A LAS PUBLICACIONES DE LA APP.<br>
-                                    <span class="text-white mt-3 block text-sm font-sans font-normal opacity-90 border-t border-[#C5A059]/30 pt-3">EL ITINERARIO SE LIBERARÁ EL DÍA 18.</span>
+                                    ATENTO A LAS PUBLICACIONES DE LA APP.
                                 </p>
                                 <div class="mt-4">
                                     <a href="https://elitinerariocuaresmal2026.netlify.app/" target="_blank" class="inline-block bg-[#C5A059] text-black font-bold py-2 px-6 rounded hover:bg-yellow-600 transition-colors no-underline uppercase tracking-wider text-sm shadow-lg">
@@ -122,6 +120,7 @@
                             </div>
                         </details>
                     </div>
+                    <p class="mt-8 text-xs text-gray-500">¿Dudas? Contáctanos a través del soporte.</p>
                 </div>
             </div>
         `;
@@ -142,15 +141,22 @@
         <body>
             <h1>Miércoles de Ceniza 2026</h1>
             <img src="https://i.postimg.cc/kGnSSGrv/image.png" alt="Miércoles de Ceniza">
+            
             <p class="drop-cap">"Tu Padre, que ve en lo secreto, te recompensará" (Mt 6, 4. 6. 18). Estas palabras de Jesús se dirigen a cada uno de nosotros al inicio del itinerario cuaresmal. Lo comenzamos con la imposición de la ceniza, austero gesto penitencial, muy arraigado en la tradición cristiana. Este gesto subraya la conciencia del hombre pecador ante la majestad y la santidad de Dios. Al mismo tiempo, manifiesta su disposición a acoger y traducir en decisiones concretas la adhesión al Evangelio.</p>
+            
             <p>Son muy elocuentes las fórmulas que lo acompañan. La primera, tomada del libro del Génesis: "Acuérdate de que eres polvo y al polvo volverás" (cf. Gn 3, 19), evoca la actual condición humana marcada por la caducidad y el límite. La segunda recoge las palabras evangélicas: "Convertíos y creed el Evangelio" (Mc 1, 15), que constituyen una apremiante exhortación a cambiar de vida. Ambas fórmulas nos invitan a entrar en la Cuaresma con una actitud de escucha y de sincera conversión.</p>
+
             <div class="ornament">†</div>
-            <h2>2. El Evangelio subraya que el Señor "ve en lo secreto"</h2>
-            <p>Es decir, escruta el corazón. Los gestos externos de penitencia tienen valor si son expresión de una actitud interior, si manifiestan la firme voluntad de apartarse del mal e iniciar o caminho do bem. Aqui radica o sentido profundo da ascese cristã.</p>
-            <p>"Ascesis": a palavra mesma evoca a imagem de uma ascensão a metas elevadas. Isso implica necessariamente sacrifícios e renúncias. Com efeito, é preciso reduzir a bagagem ao essencial para que a viagem não seja pesada; estar disposto a enfrentar todas as dificuldades e superar todos os obstáculos para alcançar o objetivo fixado. Para chegar a ser autênticos discípulos de Cristo, é necessário renunciar a si mesmos, tomar a própria cruz e segui-lo (cf. Lc 9, 23). É o árduo caminho da santidade, que todo batizado é chamado a percorrer.</p>
+
+            <h2>2. En lo secreto</h2>
+            <p>El Evangelio subraya que el Señor "ve en lo secreto", es decir, escruta el corazón. Los gestos externos de penitencia tienen valor si son expresión de una actitud interior, si manifiestan la firme voluntad de apartarse del mal e iniciar el camino del bien. Aquí radica el sentido profundo de la ascesis cristiana.</p>
+            
+            <p><strong>"Ascesis"</strong>: la palabra misma evoca la imagen de una ascensión a metas elevadas. Eso implica necesariamente sacrificios y renuncias. En efecto, hace falta reducir el equipaje a lo esencial para que el viaje no sea pesado; estar dispuestos a afrontar todas las dificultades y superar todos los obstáculos para alcanzar el objetivo fijado. Para llegar a ser auténticos discípulos de Cristo, es necesario renunciar a sí mismos, tomar la propia cruz y seguirlo (cf. Lc 9, 23). Es el arduo sendero de la santidad, que todo bautizado está llamado a recorrer.</p>
+
             <div class="ornament">†</div>
-            <h2>3. Meios adequados para caminhar</h2>
-            <p>Desde sempre, a Igreja aponta alguns meios adequados para caminhar por esta senda. Antes de mais nada, a humilde e dócil <strong>adesão à vontade de Deus</strong>, acompanhada por uma <strong>oração</strong> incessante; as <strong>formas penitenciais típicas</strong> da tradição cristã, como a abstinência, o jejum, a mortificação e a renúncia mesmo a bens legítimos; e os <strong>gestos concretos de acolhida</strong> com relação ao próximo, que a passagem evangélica de hoje evoca com a palavra "esmola". Tudo isto se volta a propor com maior intensidade durante o período da Quaresma, que representa, a esse respeito, um "tempo forte" de treinamento espiritual e de serviço generoso aos irmãos.</p>
+
+            <h2>3. Medios para el camino</h2>
+            <p>Desde siempre, la Iglesia señala algunos medios adecuados para caminar por esta senda. Ante todo, la humilde e dócil <strong>adhesión a la voluntad de Dios</strong>, acompañada por una <strong>oración</strong> incesante; las <strong>formas penitenciales típicas</strong> de la tradición cristiana, como la abstinencia, el ayuno, la mortificación y la renuncia incluso a bienes de por sí legítimos; y los <strong>gestos concretos de acogida</strong> con respecto al prójimo, que el pasaje evangélico de hoy evoca con la palabra "limosna". Todo esto se vuelve a proponer con mayor intensidad durante el período de la Cuaresma, que representa, al respecto, un "tiempo fuerte" de entrenamiento espiritual y de servicio generoso a los hermanos.</p>
         </body>
         </html>`;
 
@@ -170,17 +176,16 @@
             <h1>Vía Crucis Meditado</h1>
             <img src="https://i.postimg.cc/9XK143JX/image-(1).png" alt="Via Crucis">
             <p><strong>Viernes de Cuaresma</strong></p>
-            <p>Al abrir los ojos en este viernes de Cuaresma, oferece inmediatamente tu coração a Dios. Antes de qualquer pensamento ou preocupação, haz la Señal de la Cruz e inicia o caminho ao Calvário com o Senhor.</p>
+            <p>Al abrir los ojos en este viernes de Cuaresma, oferece inmediatamente tu coração a Dios. Antes de qualquer pensamento ou preocupação, haz la Señal de la Cruz e inicia el camino al Calvario con el Señor.</p>
             <div class="station">
                 <h2>I Estación: Jesús es condenado a muerte</h2>
-                <p>Contempla a Jesús ante Pilatos. El Justo es condenado por los injustos. Él calla y acepta la sentencia por amor a ti. Señor, ayúdame a aceptar las incomprensiones de este día sin quejarme, ofreciéndolas en unión a tu silencio.</p>
+                <p>Contempla a Jesús ante Pilato. El Justo es condenado por los injustos. Él calla y acepta la sentencia por amor a ti. Señor, ayúdame a aceptar las incomprensiones de este día sin quejarme, ofreciéndolas en unión a tu silencio.</p>
             </div>
             <div class="station">
                 <h2>II Estación: Jesús carga con la Cruz</h2>
-                <p>Jesús abraza o madeiro da nossa salvação. A Cruz não é um peso, mas a ponte para o céu. Senhor, ensina-me a não fugir das minhas responsabilidades e a carregar com alegria a cruz dos meus deveres diários.</p>
+                <p>Jesús abraza el madero de nuestra salvación. La Cruz no es un peso, sino el puente hacia el cielo. Señor, enséñame a no huir de mis responsabilidades e a cargar con alegría la cruz de mis deberes diarios.</p>
             </div>
             <p style="text-align:center; margin-top:50px; color:#D4AF37;">† † †</p>
-            <p style="text-align:center; font-style:italic;">(Catequesis completa de las 14 estaciones)</p>
         </body>
         </html>`;
 
@@ -207,31 +212,39 @@
             </header>
             <p class="drop-cap">Queridos hermanos y hermanas:</p>
             <p>La Cuaresma es el tiempo en el que la Iglesia, con solicitud maternal, nos invita a poner de nuevo el misterio de Dios en el centro de nuestra vida, para que nuestra fe recobre su impulso y el corazón no se disperse entre las inquietudes y distracciones cotidianas.</p>
-            <p>Todo caminho de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu. Existe, por tanto, un vínculo entre el don de la Palabra de Dios, el espacio de hospitalidad que le ofrecemos y la transformación que ella realiza. Por eso, el itinerario cuaresmal se convierte en una ocasión propicia para escuchar la voz del Señor y renovar la decisión de seguir a Cristo, recorriendo con Él el caminho que sube a Jerusalén, donde se cumple el misterio de su pasión, muerte y resurrección.</p>
+            <p>Todo caminho de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu. Existe, por tanto, un vínculo entre el don de la Palabra de Dios, el espacio de hospitalidad que le ofrecemos y la transformación que ella realiza. Por eso, el itinerario cuaresmal se convierte en una ocasión propicia para escuchar la voz del Señor y renovar la decisión de seguir a Cristo, recorriendo con Él el camino que sube a Jerusalén, donde se cumple el misterio de su pasión, muerte y resurrección.</p>
             
+            <div class="ornament">†</div>
+
             <h2>Escuchar</h2>
-            <p>Este año me gustaría llamar la atención, en primer lugar, sobre la importancia de dar espacio a la Palabra a través de la <strong>escucha</strong>, ya que la disposición a escuchar es el primer signo con el que se manifiesta el desejo de entrar en relação com o outro.</p>
-            <p>Dios mismo, al revelarse a Moisés desde la zarza ardiente, muestra que la escucha es un rasgo distintivo de su ser: «Yo he visto la opresión de mi pueblo, que está en Egipto, y he oído los gritos de dolor» (Ex 3,7).</p>
-            <p>Entre las muchas voces que atraviesan nuestra vida personal y social, las Sagradas Escrituras nos hacen capaces de reconocer la voz que clama desde el sufrimiento y la injusticia, para que no quede sin respuesta. Entrar en esta disposición interior de receptividad significa dejarnos instruir hoy por Dios para escuchar <strong>como</strong> Él, hasta reconocer que «la condición de los pobres representa un grito que, en la historia de la humanidad, interpela constantemente nuestra vida, nuestras sociedades, los sistemas políticos y económicos, y especialmente a la Iglesia».</p>
+            <p>Este año me gustaría llamar la atención, en primer lugar, sobre la importancia de dar espacio a la Palabra a través de la <strong>escucha</strong>, ya que la disposición a escuchar es el primer signo con el que se manifiesta el deseo de entrar en relación con el otro.</p>
+            <p>Dios mismo, al revelarse a Moisés desde la zarza ardiente, muestra que la escucha es un rasgo distintivo de su ser: «Yo he visto la opresión de mi pueblo, que está en Egipto, y he oído los gritos de dolor» (Ex 3,7). La escucha del clamor de los oprimidos es el comienzo de una historia de liberación, en la que el Señor involucra también a Moisés, enviándolo a abrir un camino de salvación para sus hijos reducidos a la esclavitud.</p>
+            <p>Es un Dios que nos atrae, que hoy también nos conmueve con los pensamientos que hacen vibrar su corazón. Por eso, la escucha de la Palabra en la liturgia nos educa para una escucha más verdadera de la realidad.</p>
+            <p>Entre las many voces que atraviesan nuestra vida personal y social, las Sagradas Escrituras nos hacen capaces de reconocer la voz que clama desde el sufrimiento y la injusticia, para que no quede sin respuesta. Entrar en esta disposición interior de receptividad significa dejarnos instruir hoy por Dios para escuchar <strong>como</strong> Él, hasta reconocer que «la condición de los pobres representa un grito que, en la historia de la humanidad, interpela constantemente nuestra vida, nuestras sociedades, los sistemas políticos y económicos, y especialmente a la Iglesia». [1]</p>
 
             <h2>Ayunar</h2>
-            <p>Si la Cuaresma es tiempo de escucha, el <strong>ayuno</strong> constituye una práctica concreta que dispone a la acogida de la Palabra de Dios. La abstinencia de alimento, en efecto, é um exercício ascético antiquíssimo e insustituível no caminho de conversão. Precisamente porque implica al corpo, hace más evidente aquello de lo que tenemos “hambre” y lo que consideramos esencial para nuestro sustento.</p>
-            <p>San Agustín observa que: «es propio de los hombres mortales tener hambre y sed de la justicia... los hombres, mientras tienen hambre, se ensanchan; mientras se ensanchan, son dilatados; mientras son dilatados, se fazem capazes; e, feitos capazes, a seu tempo serão saciados». El ayuno nos permite no sólo disciplinar el desejo, purificarlo y hacerlo más libre, sino también expandirlo, de modo que se dirija a Dios.</p>
-            <p>Por eso, me gustaría invitarles a una forma de abstinencia muy concreta: <strong>abstenerse de utilizar palabras que afectan y lastiman a nuestro prójimo</strong>. Empecemos a desarmar el lenguaje, renunciando a las palabras hirientes, al juicio inmediato, a hablar mal de quienes están ausentes.</p>
+            <p>Si la Cuaresma es tiempo de escucha, el <strong>ayuno</strong> constituye una práctica concreta que dispone a la acogida de la Palabra de Dios. La abstinencia de alimento, en efecto, es un ejercicio ascético antiquísimo e insustituible en el camino de la conversión. Precisamente porque implica al cuerpo, hace más evidente aquello de lo que tenemos “hambre” y lo que consideramos esencial para nuestro sustento. Sirve, por tanto, para discernir y ordenar los “apetitos”, para mantener despierta el hambre y la sed de justicia, sustrayéndola de la resignación, educarla para que se convierta en oración y responsabilidad hacia el prójimo.</p>
+            <p>San Agustín, con sutileza espiritual, deja entrever la tensión entre el tiempo presente y la realización futura que atraviesa este cuidado del corazón, cuando observa que: «es propio de los hombres mortales tener hambre y sed de la justicia, así como estar repletos de la justicia es propio de la otra vida. De este pan, de este alimento, están repletos los ángeles; en cambio, los hombres, mientras tienen hambre, se ensanchan; mientras se ensanchan, son dilatados; mientras son dilatados, se hacen capaces; y, hechos capaces, en su momento serán repletos». [2] El ayuno, entendido en este sentido, nos permite no sólo disciplinar el deseo, purificarlo y hacerlo más libre, sino también expandirlo, de modo que se dirija a Dios y se oriente hacia el bien.</p>
+            <p>Sin embargo, para que el ayuno conserve su verdad evangélica y evite la tentación de enorgullecer el corazón, debe vivirse siempre con fe y humildad. Exige permanecer arraigado en la comunión con el Señor, porque «no ayuna de verdad quien no sabe alimentarse de la Palabra de Dios». [3] En cuanto signo visible de nuestro compromiso interior de alejarnos, con la ayuda de la gracia, del pecado y del mal, el ayuno debe incluir también otras formas de privación destinadas a hacernos adquirir un estilo de vida más sobrio, ya que « sólo la austeridad hace fuerte y auténtica la vida cristiana». [4]</p>
+            <p>Por eso, me gustaría invitarles a una forma de abstinencia muy concreta y a menudo poco apreciada, es decir, la de <strong>abstenerse de utilizar palabras que afectan y lastiman a nuestro prójimo</strong>. Empecemos a desarmar el lenguaje, renunciando a las palabras hirientes, al juicio inmediato, a hablar mal de quienes están ausentes y no pueden defenderse, a las calumnias. Esforcémonos, en cambio, por aprender a medir las palabras y a cultivar la amabilidad: en la familia, entre amigos, en el lugar de trabalho, en las redes sociales, en los debates políticos, en los medios de comunicación e en las comunidades cristianas. Entonces, muchas palabras de odio darán paso a palabras de esperanza y paz.</p>
+            
+            <div class="ornament">†</div>
 
             <h2>Juntos</h2>
-            <p>Por último, la Cuaresma pone de relieve la dimensión comunitaria de la escucha de la Palabra y de la práctica del ayuno. Nuestras parroquias, familias, grupos eclesiales y comunidades religiosas están llamados a realizar en Cuaresma un caminho compartilhado, en el que la escucha de la Palabra de Dios se convierta en forma de vida común.</p>
-            <p>Queridos hermanos, pidamos la gracia de vivir una Cuaresma que haga más atento nuestro oído a Dios y a los más necesitados. Pidamos la fuerza de un ayuno que alcance también a la lengua, para que disminuyan las palabras que hieren y crezca el espacio para la voz de los demás.</p>
+            <p>Por último, la Cuaresma pone de relieve la dimensión comunitaria de la escucha de la Palabra y de la práctica del ayuno. También la Escritura subraya este aspecto de muchas maneras. Por ejemplo, cuando narra en el libro de Nehemías que el pueblo se reunió para escuchar la lectura pública del libro de la Ley y, practicando el ayuno, se dispuso a la confesión de fe y a la adoración, con el fin de renovar la alianza con Dios (cf. Ne 9,1-3).</p>
+            <p>Del mismo modo, nuestras parroquias, familias, grupos eclesiales y comunidades religiosas están llamados a realizar en Cuaresma un camino compartido, en el que la escucha de la Palabra de Dios, así como del clamor de los pobres y de la tierra, se convierta en forma de vida común, y el ayuno sostenga un arrepentimiento real. En este horizonte, la conversión no sólo concierne a la conciencia del individuo, sino también al estilo de las relaciones, a la calidad del diálogo, a la capacidad de dejarse interpelar por la realidad y de reconocer lo que realmente orienta el deseo, tanto en nuestras comunidades eclesiales como en la humanidad sedienta de justicia y reconciliación.</p>
+            <p>Queridos hermanos, pidamos la gracia de vivir una Cuaresma que haga más atento nuestro oído a Dios y a los más necesitados. Pidamos la fuerza de un ayuno que alcance también a la lengua, para que disminuyan las palabras que hieren y crezca el espacio para la voz de los demás. Y comprometámonos para que nuestras comunidades se conviertan en lugares donde el grito de los que sufren encuentre acogida y la escucha genere caminos de liberación, haciéndonos más dispuestos y diligentes para contribuir a edificar la civilización del amor.</p>
+            <p>Los bendigo de corazón a todos ustedes, y a su camino cuaresmal.</p>
 
             <footer>
-                <p>Vaticano, 5 de febrero de 2026</p>
+                <p>Vaticano, 5 de febrero de 2026, memoria de santa Águeda, virgen y mártir.</p>
                 <p><strong>LEÓN XIV PP.</strong></p>
             </footer>
         </body>
         </html>`;
 
         // =================================================================================
-        // 3. ESTRUTURA DE DADOS (COMPLETA)
+        // 3. ESTRUTURA DE DADOS
         // =================================================================================
         
         const APPS_DATA = [
@@ -250,15 +263,15 @@
         ];
 
         const PRAYERS_DATA = [
-            { id: 'm1', title: "Al despertar", subtitle: "Mañana", image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>☀️ Mañana</h2><p>En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p></div>" },
+            { id: 'm1', title: "Oraciones de la Mañana", subtitle: "Al despertar", image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>☀️ Mañana</h2><p>En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p></div>" },
             { id: 'm2', title: "Actos de Adoración", subtitle: "Mañana", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🙌 Adoración</h2><p>Bendita sea la santa y una Trinidad...</p></div>" },
             { id: 'm3', title: "Ofrecimiento del Día", subtitle: "Día", image: "https://i.postimg.cc/QCXj54t8/Gemini-Generated-Image-4bn33n4bn33n4bn3.png", match: "Diário", isModal: true, content: "<div class='p-8'><h2>❤️ Ofrecimiento</h2><p>Oh Jesús, por el Corazón de María te ofrezco...</p></div>" },
             { id: 'm4', title: "Bendición de Alimentos", subtitle: "Comidas", image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🍞 Bendición</h2><p>Bendice Señor estos alimentos...</p></div>" },
-            { id: 'm5', title: "Trabajo", subtitle: "Labor", image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>💼 Trabajo</h2><p>Bendice, Padre celestial...</p></div>" },
-            { id: 'm6', title: "Biblia", subtitle: "Estudio", image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>📖 Biblia</h2><p>Señor mío y Dios mío...</p></div>" },
+            { id: 'm5', title: "Oración para el Trabalho", subtitle: "Labor", image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>💼 Trabajo</h2><p>Bendice, Padre celestial...</p></div>" },
+            { id: 'm6', title: "Lectura de la Biblia", subtitle: "Estúdio", image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>📖 Biblia</h2><p>Señor mío y Dios mío...</p></div>" },
             { id: 'm7', title: "Acción de Gracias", subtitle: "Gratitud", image: "https://images.unsplash.com/photo-1507692814201-9994511ba977?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🙏 Gracias</h2><p>Oh Jesús, te agradezco...</p></div>" },
             { id: 'm8', title: "Petición de Perdón", subtitle: "Misericordia", image: "https://images.unsplash.com/photo-1544169601-382991823eb3?q=80&w=2072&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🕊️ Perdón</h2><p>Dios, Padre de amor...</p></div>" },
-            { id: 'm9', title: "Oración de la Noche", subtitle: "Descanso", image: "https://images.unsplash.com/photo-1507502707541-f369a3b18502?q=80&w=1976&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🌙 Noche</h2><p>Con Dios me acuesto...</p></div>" }
+            { id: 'm9', title: "Oración de la Noche", subtitle: "Noche", image: "https://images.unsplash.com/photo-1507502707541-f369a3b18502?q=80&w=1976&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🌙 Noite</h2><p>Em Vossas mãos encomendo...</p></div>" }
         ];
 
         const BOOKS_DATA = [
@@ -272,37 +285,113 @@
         const EXTRA_LIBRARY_DATA = [
             { id: 'e1', title: "1000 Máximas", author: "Don Bosco", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/19JXxLa1e4bwVutfgRJ6d55Qe0FYNQoWw/preview", titleOnCover: true, match: "Bono" },
             { id: 'e2', title: "Documentos II", author: "Fe", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMVFdUV3VYb0hzWWc/preview", titleOnCover: true, match: "Bono" },
-            { id: 'e3', title: "Lectura III", author: "Espiritual", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMOEVzTTdIMkpQbjg/preview", titleOnCover: true, match: "Bono" },
+            { id: 'e3', title: "Espiritualidad III", author: "Lectura", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMOEVzTTdIMkpQbjg/preview", titleOnCover: true, match: "Bono" },
             { id: 'e4', title: "Tradición IV", author: "Biblioteca", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMSGxxZGgwZ2hiQ3c/preview", titleOnCover: true, match: "Bono" }
         ];
 
         const MUSIC_DATA = [
-            { id: 'mu1', title: "Latín", subtitle: "Adveniat", image: "https://img.youtube.com/vi/akPTHn8PkcE/hqdefault.jpg", link: "https://www.youtube.com/watch?v=akPTHn8PkcE", match: "98%" },
-            { id: 'mu2', title: "Salmo 117", subtitle: "Gregoriano", image: "https://img.youtube.com/vi/I3v8mfk6ZF4/hqdefault.jpg", link: "https://www.youtube.com/watch?v=I3v8mfk6ZF4", match: "95%" },
-            { id: 'mu3', title: "Da Pacem", subtitle: "Templarios", image: "https://img.youtube.com/vi/h0YRkuziwEg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=h0YRkuziwEg", match: "99%" },
-            { id: 'mu4', title: "Miserere", subtitle: "Benedictinos", image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=nLpcVQghKDg", match: "97%" }
+            { id: 'mu1', title: "Gregoriano Latín", subtitle: "Meditación", image: "https://img.youtube.com/vi/akPTHn8PkcE/hqdefault.jpg", link: "https://www.youtube.com/watch?v=akPTHn8PkcE", match: "98%" },
+            { id: 'mu2', title: "Salmo 117 Español", subtitle: "Oración", image: "https://img.youtube.com/vi/I3v8mfk6ZF4/hqdefault.jpg", link: "https://www.youtube.com/watch?v=I3v8mfk6ZF4", match: "95%" },
+            { id: 'mu3', title: "Da Pacem Domine", subtitle: "Templarios", image: "https://img.youtube.com/vi/h0YRkuziwEg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=h0YRkuziwEg", match: "99%" },
+            { id: 'mu4', title: "Miserere Mei Deus", subtitle: "Contemplación", image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=nLpcVQghKDg", match: "97%" }
         ];
 
         const GUADALUPE_DATA = [
-            { id: 'g1', title: "La Imagen", subtitle: "Mensajes", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g2', title: "Estrellas", subtitle: "Manto", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g1', title: "Imagen que Habla", subtitle: "Mensajes", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g2', title: "Milagro Estrellas", subtitle: "Manto", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
             { id: 'g3', title: "Juan Diego", subtitle: "Encuentro", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
             { id: 'g4', title: "Náhuatl", subtitle: "Cultura", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g5', title: "500 Años", subtitle: "Milagros", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g5', title: "Milagros 500 Años", subtitle: "Historia", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
             { id: 'g6', title: "Profecías", subtitle: "Revelación", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g7', title: "Moderno", subtitle: "Mensagem", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" }
+            { id: 'g7', title: "Mensagem Moderno", subtitle: "Hoy", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" }
         ];
 
         const BONUS_DATA = [
             { id: 'bn1', title: "Rosario Gregoriano", isModal: true, color: "bg-stone-800", pdfUrl: "https://drive.google.com/file/d/1ND-7zNs9tDWPZzjAuesxPoiMnQUP8Fn1/preview", match: "Regalo" },
             { id: 'bn2', title: "Historia Sagrada", isModal: true, color: "bg-zinc-800", pdfUrl: "https://drive.google.com/file/d/1_QNbQuEjYbqGXOu0d0T203c0Vy9BYiiZ/preview", match: "Regalo" },
             { id: 'bn3', title: "Eucarística", isModal: true, color: "bg-slate-800", pdfUrl: "https://drive.google.com/file/d/1LZ2enqNSRP9L07jUxKQ7H_qFT1txZhxj/preview", match: "Regalo" },
-            { id: 'bn4', title: "Más bonos...", color: "bg-red-900", link: "https://drive.google.com/drive/folders/1WtvXPYpTOPAiNUR1WRh2_OJb_7eDxCR3", match: "Colección" }
+            { id: 'bn4', title: "Accede a más bonos", color: "bg-red-900", link: "https://drive.google.com/drive/folders/1WtvXPYpTOPAiNUR1WRh2_OJb_7eDxCR3", match: "Colección" }
         ];
 
         // =================================================================================
         // 4. COMPONENTES REACT
         // =================================================================================
+
+        const LentCountdown = () => {
+            const calculateState = () => {
+                const now = new Date();
+                const startDate = new Date(2026, 1, 18, 0, 0, 0); // Fev 18
+                const easterDate = new Date(2026, 3, 5, 0, 0, 0); // Apr 5
+
+                if (now < startDate) {
+                    const diff = startDate - now;
+                    return {
+                        status: 'waiting',
+                        días: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                        horas: Math.floor((diff / (1000 * 60 * 60)) % 24),
+                        minutos: Math.floor((diff / 1000 / 60) % 60),
+                        segundos: Math.floor((diff / 1000) % 60)
+                    };
+                } else if (now >= startDate && now <= easterDate) {
+                    const diff = now - startDate;
+                    return { 
+                        status: 'started', 
+                        días: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                        horas: Math.floor((diff / (1000 * 60 * 60)) % 24),
+                        minutos: Math.floor((diff / 1000 / 60) % 60),
+                        segundos: Math.floor((diff / 1000) % 60)
+                    };
+                } else {
+                    return { status: 'ended' };
+                }
+            };
+
+            const [timeState, setTimeState] = useState(calculateState());
+
+            useEffect(() => {
+                if (timeState.status !== 'ended') {
+                    const timer = setTimeout(() => setTimeState(calculateState()), 1000);
+                    return () => clearTimeout(timer);
+                }
+            });
+
+            const renderTimeBlocks = () => (
+                <div className="flex space-x-2">
+                    {['días', 'horas', 'minutos', 'segundos'].map((interval) => (
+                        <div key={interval} className="flex flex-col items-center justify-center bg-black/60 rounded p-1 md:p-2 min-w-[50px] border border-[#C5A059]/40 shadow-inner">
+                            <span className="text-sm md:text-lg font-serif font-bold text-[#C5A059] leading-none">{timeState[interval]}</span>
+                            <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-gray-300 mt-0.5">{interval}</span>
+                        </div>
+                    ))}
+                </div>
+            );
+
+            if (timeState.status === 'started') {
+                return (
+                    <div className="flex flex-col md:flex-row items-center justify-center bg-black/40 backdrop-blur-sm px-4 py-2 rounded-lg border border-[#C5A059]/30 shadow-lg w-fit mx-auto">
+                        <span className="text-gray-200 text-xs md:text-sm uppercase tracking-widest font-bold mr-0 md:mr-4 mb-2 md:mb-0 drop-shadow-md">
+                            Estamos en el desierto hace:
+                        </span>
+                        {renderTimeBlocks()}
+                    </div>
+                );
+            } else if (timeState.status === 'waiting') {
+                return (
+                    <div className="flex flex-col md:flex-row items-center justify-center bg-black/40 backdrop-blur-sm px-4 py-2 rounded-lg border border-[#C5A059]/30 shadow-lg w-fit mx-auto">
+                        <span className="text-gray-200 text-xs md:text-sm uppercase tracking-widest font-bold mr-0 md:mr-4 mb-2 md:mb-0 drop-shadow-md">
+                            Inicio de la Cuaresma en:
+                        </span>
+                        {renderTimeBlocks()}
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="bg-black/40 backdrop-blur-sm px-6 py-2 rounded-lg border border-[#C5A059]/30 shadow-lg w-fit mx-auto">
+                        <span className="text-[#C5A059] font-bold text-lg font-serif">¡Feliz Pascua!</span>
+                    </div>
+                );
+            }
+        };
 
         const Navbar = ({ searchQuery, setSearchQuery }) => {
             const [isScrolled, setIsScrolled] = useState(false);
@@ -343,13 +432,20 @@
                         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#141414]"></div>
                         <div className="hidden md:block absolute inset-0 hero-gradient"></div>
                     </div>
+
                     <div className="absolute bottom-4 left-0 w-full px-4 pb-8 md:p-0 md:left-12 md:top-[35%] md:w-auto max-w-2xl z-30">
                         <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Destacado de Cuaresma</span>
                         <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 leading-tight text-yellow-500 drop-shadow-lg">Itinerario Cuaresmal</h1>
-                        <p className="text-sm md:text-xl mb-4 md:mb-8 text-gray-100 font-medium drop-shadow-md">40 Días: Un caminho de conversión e esperanza. Acompaña a Jesús en el desierto e prepárate para la Pascua.</p>
-                        <div className="flex space-x-3">
-                            <button onClick={() => onOpenModal(featuredItem)} className="flex items-center bg-white text-black px-4 py-2 md:px-8 md:py-3 rounded font-bold hover:bg-opacity-80 transition transform active:scale-95"><Play className="w-4 h-4 md:w-6 md:h-6 mr-2 fill-current" /> Ver Itinerario</button>
-                            <button onClick={() => onOpenModal(featuredItem)} className="flex items-center bg-gray-500/60 text-white px-4 py-2 md:px-8 md:py-3 rounded font-bold backdrop-blur-md transition transform active:scale-95"><Info className="w-4 h-4 md:w-6 md:h-6 mr-2" /> Más Info</button>
+                        <p className="text-sm md:text-xl mb-4 md:mb-8 text-gray-100 font-medium drop-shadow-md">40 Días: Un camino de conversión e esperanza. Acompaña a Jesús en el desierto e prepárate para la Pascua.</p>
+                        <div className="flex flex-col space-y-3 mt-4 w-full md:w-fit">
+                            <a href="https://pay.hotmart.com/R104315521P?off=bsjlu74b&checkoutMode=10" target="_blank" className="flex items-center justify-center bg-gradient-to-r from-green-600 to-green-500 text-black px-4 py-3 md:px-8 md:py-4 rounded font-extrabold hover:from-green-500 hover:to-green-400 transition transform hover:scale-105 shadow-lg shadow-green-500/30 w-full no-underline uppercase tracking-wide text-xs md:text-sm">
+                                <Crown className="w-5 h-5 mr-2 flex-shrink-0" />
+                                <span>Quiero comenzar el itinerario hoy</span>
+                            </a>
+                            <a href="https://elitinerariocuaresmal2026.netlify.app/" target="_blank" className="flex items-center justify-center bg-purple-900 text-white border border-purple-700 px-4 py-3 md:px-8 md:py-4 rounded font-bold hover:bg-purple-800 transition transform hover:scale-105 shadow-lg w-full no-underline uppercase tracking-wide text-xs md:text-sm">
+                                <Play className="w-5 h-5 mr-2 fill-current flex-shrink-0" />
+                                <span>Ya adquirí el itinerario, puedo comenzar</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -370,14 +466,17 @@
                     <div className={`${aspect} w-full rounded-md overflow-hidden relative shadow-lg ${bgClass}`}>
                         {item.image ? <img src={item.image} alt={item.title} className="w-full h-full object-cover" /> : 
                         <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center">
-                            {item.icon ? <item.icon className="w-10 h-10 text-white opacity-80" /> : <BookOpen className="w-10 h-10 text-white opacity-30" />}
+                            {item.icon ? <item.icon className="w-10 h-10 text-white opacity-80" /> : <BookOpen className="w-8 h-8 text-white opacity-30" />}
                             <h3 className="font-serif font-bold text-white mt-2 text-xs">{item.title}</h3>
                         </div>}
                         {item.titleOnCover && <div className="absolute inset-0 flex items-center justify-center p-4 bg-black/20"><h3 className="font-serif font-bold text-black text-center text-sm md:text-lg" style={{textShadow: '0 0 10px white'}}>{item.title}</h3></div>}
                         {item.badge && <div className="absolute top-2 right-0 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md">{item.badge}</div>}
                     </div>
                     <div className="mt-2 px-1">
-                        <span className="text-green-500 font-bold text-[10px]">{item.match}</span>
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="text-green-500 font-bold text-[10px]">{item.match}</span>
+                            <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
+                        </div>
                         <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>
                     </div>
                 </div>
@@ -386,7 +485,7 @@
 
         const Row = ({ title, subtitle, items, onOpenModal, id, isHorizontal }) => (
             <div id={id} className="mb-8 md:mb-12 pl-4 md:pl-12 relative z-20 scroll-mt-24">
-                <h2 className="text-base md:text-xl font-bold text-gray-200 mb-1 hover:text-white cursor-pointer transition inline-flex items-center">{title}</h2>
+                <h2 className="text-base md:text-xl font-bold text-gray-200 mb-1">{title}</h2>
                 {subtitle && <p className="text-xs text-gray-400 italic mb-3">{subtitle}</p>}
                 <div className="flex space-x-2 md:space-x-4 overflow-x-scroll scrollbar-hide pb-4 pr-12">
                     {items.map((item, idx) => <Card key={idx} item={item} onOpenModal={onOpenModal} isHorizontal={isHorizontal} />)}
@@ -427,27 +526,63 @@
             );
         };
 
+        const WelcomePopup = ({ onClose }) => {
+            return (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
+                    <div className="bg-[#181818] w-full max-w-md rounded-xl shadow-2xl overflow-hidden relative animate-slideUp flex flex-col border border-[#C5A059]/30" onClick={e => e.stopPropagation()}>
+                        <button onClick={onClose} className="absolute top-3 right-3 z-20 bg-black/50 hover:bg-black/80 rounded-full p-2 text-white transition-all"><X className="w-5 h-5" /></button>
+                        
+                        <div className="p-6 md:p-8 text-center flex flex-col items-center">
+                            <img src="https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png" className="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-[#C5A059] shadow-lg" alt="Itinerario" />
+                            
+                            <h2 className="text-2xl font-serif text-[#C5A059] font-bold mb-4">¡Comienza hoy el Itinerario Cuaresmal!</h2>
+                            
+                            <div className="w-full flex justify-center mb-6">
+                                <LentCountdown />
+                            </div>
+
+                            <div className="flex flex-col space-y-3 w-full">
+                                <a href="https://pay.hotmart.com/R104315521P?off=bsjlu74b&checkoutMode=10" target="_blank" className="flex items-center justify-center bg-gradient-to-r from-green-600 to-green-500 text-black px-4 py-3 rounded font-extrabold hover:from-green-500 hover:to-green-400 transition transform hover:scale-105 shadow-lg shadow-green-500/30 w-full no-underline uppercase tracking-wide text-[11px] md:text-xs">
+                                    <Crown className="w-4 h-4 md:w-5 md:h-5 mr-2 flex-shrink-0" />
+                                    <span>Quiero comenzar el itinerario hoy</span>
+                                </a>
+                                <a href="https://elitinerariocuaresmal2026.netlify.app/" target="_blank" className="flex items-center justify-center bg-purple-900 text-white border border-purple-700 px-4 py-3 rounded font-bold hover:bg-purple-800 transition transform hover:scale-105 shadow-lg w-full no-underline uppercase tracking-wide text-[11px] md:text-xs">
+                                    <Play className="w-4 h-4 md:w-5 md:h-5 mr-2 fill-current flex-shrink-0" />
+                                    <span>Ya adquirí el itinerario</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
         const App = () => {
             const [searchQuery, setSearchQuery] = useState('');
             const [selectedItem, setSelectedItem] = useState(null);
+            const [showWelcomePopup, setShowWelcomePopup] = useState(true);
             
             return (
                 <div className="min-h-screen bg-[#141414] overflow-x-hidden font-sans">
+                    {showWelcomePopup && <WelcomePopup onClose={() => setShowWelcomePopup(false)} />}
                     <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
                     {selectedItem && <ContentModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+                    
                     <div className="relative z-10">
                         <Hero onOpenModal={setSelectedItem} />
+                        
                         <div className="relative z-20 md:-mt-32 pb-20">
                             <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} onOpenModal={setSelectedItem} />
                             <Row title="Cuaresma 2026" subtitle="Tiempo de Penitencia y Conversión" items={LENT_DATA} onOpenModal={setSelectedItem} />
                             <Row title="Oraciones Diarias" items={PRAYERS_DATA} onOpenModal={setSelectedItem} isHorizontal={true} />
                             <Row id="libros" title="Biblioteca Católica" items={BOOKS_DATA} onOpenModal={setSelectedItem} />
-                            <Row title="Tesoros de la Fe" subtitle="Lectura Espiritual" items={EXTRA_LIBRARY_DATA} onOpenModal={setSelectedItem} />
+                            <Row title="Tesoros de la Fe" subtitle="Lectura Espiritual Adicional" items={EXTRA_LIBRARY_DATA} onOpenModal={setSelectedItem} />
                             <Row title="Playlist Gregoriana" items={MUSIC_DATA} onOpenModal={setSelectedItem} isHorizontal={true} />
                             <Row title="Guadalupe Revelada" items={GUADALUPE_DATA} onOpenModal={setSelectedItem} />
                             <Row title="Bonos Exclusivos" items={BONUS_DATA} onOpenModal={setSelectedItem} />
                         </div>
                     </div>
+                    
                     <footer className="py-12 text-center text-gray-600 text-[10px] uppercase tracking-widest border-t border-white/5">
                         © 2026 Catholic Play Store - Ad Maiorem Dei Gloriam
                     </footer>
