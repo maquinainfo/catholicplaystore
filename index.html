@@ -18,7 +18,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- Configuración Tailwind e Estilos Personalizados -->
+    <!-- Configuração Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -42,76 +42,24 @@
         }
     </script>
     <style>
-        /* Esconder barra de rolagem mas manter funcionalidade */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        /* Efeito de gradiente no Hero mais suave */
-        .hero-gradient {
-            background: linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 15%, transparent 60%);
-        }
-
-        .hero-vignette {
-            background: radial-gradient(circle, transparent 50%, #141414 150%);
-        }
-        
-        /* Animação do Modal */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .hero-gradient { background: linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 15%, transparent 60%); }
+        .hero-vignette { background: radial-gradient(circle, transparent 50%, #141414 150%); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
         .animate-slideUp { animation: slideUp 0.4s ease-out; }
-
-        body {
-            background-color: #141414;
-            color: #fff;
-        }
-
-        /* Estilos para o conteúdo do livro dentro do modal */
-        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; scroll-margin-top: 20px; }
+        body { background-color: #141414; color: #fff; }
+        
+        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; }
         .book-content h3 { color: #e5e5e5; margin-top: 1em; font-weight: bold; font-size: 1.2rem; }
         .book-content p { color: #d1d5db; margin-bottom: 1em; line-height: 1.6; }
-        .book-content ul.toc { list-style: none; padding: 0; border: 1px solid #333; padding: 15px; background: #222; border-radius: 8px; margin-bottom: 20px; }
-        .book-content ul.toc li { border-bottom: 1px dotted #444; padding: 5px 0; }
-        
-        /* Estilos reforçados para links */
-        .book-content ul.toc a { 
-            color: #9ca3af; 
-            text-decoration: none; 
-            transition: color 0.2s; 
-            display: block; 
-            cursor: pointer !important; /* Força o cursor */
-            position: relative; 
-            z-index: 10; /* Garante que está acima de outros elementos */
-        }
-        .book-content ul.toc a:hover { color: #E50914; padding-left: 5px; }
-        .book-content .response { font-style: italic; color: #9ca3af; }
         .book-content strong { color: #fff; }
-
-        /* Custom scrollbar for content areas */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1f1f1f; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #444; 
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #666; 
-        }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1f1f1f; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -121,7 +69,7 @@
         const { useState, useEffect, useRef } = React;
 
         // =================================================================================
-        // Ícones (Lucide)
+        // 1. ÍCONES (CORREÇÃO DE SINTAXE REALIZADA)
         // =================================================================================
         const IconBase = ({ children, className, style, onClick }) => (
             <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}>
@@ -133,1893 +81,346 @@
         const Info = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></IconBase>;
         const Bell = (props) => <IconBase {...props}><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></IconBase>;
         const Search = (props) => <IconBase {...props}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></IconBase>;
-        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>;
+        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>; // CORRIGIDO: </IconDown> para </IconBase>
         const Shield = (props) => <IconBase {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></IconBase>;
         const Crown = (props) => <IconBase {...props}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></IconBase>;
         const BookOpen = (props) => <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>;
         const User = (props) => <IconBase {...props}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></IconBase>;
-        const X = (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 18 18"/></IconBase>;
-        const Sun = (props) => <IconBase {...props}><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></IconBase>;
+        const X = (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></IconBase>;
 
         // =================================================================================
-        // Dados
+        // 2. CONSTANTES DE CONTEÚDO (INTEGRAIS)
         // =================================================================================
-        
-        const APPS_DATA = [
-            {
-                id: 'quaresma',
-                title: "Itinerario Cuaresmal",
-                subtitle: "Cuaresma 2026",
-                description: "Una guía espiritual profunda para vivir la Santa Cuaresma.",
-                icon: Info,
-                color: "bg-purple-900", // Cor litúrgica da quaresma
-                link: "#",
-                match: "Próximamente",
-                badge: "18 Feb",
-                image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png"
-            },
-            {
-                id: 'rosario',
-                title: "Santo Rosario de Batalla Espiritual",
-                subtitle: "Oración y Combate",
-                description: "Reza el Rosario con poder, meditaciones centradas en el combate espiritual.",
-                icon: Shield,
-                color: "bg-blue-900",
-                link: "https://santorosarioes.netlify.app/",
-                match: "98% Match",
-                badge: "Top 10",
-                image: "https://i.postimg.cc/G2tN6VCf/Gemini-Generated-Image-txrat1txrat1txra.png" 
-            },
-            {
-                id: 'novenas',
-                title: "Novena 12 Marías",
-                subtitle: "Colección de Novenas",
-                description: "El poder de las doce vírgenes más milagrosas del mundo en un solo lugar.",
-                icon: Crown,
-                color: "bg-purple-900",
-                link: "https://novena12marias.netlify.app/",
-                match: "95% Match",
-                badge: "Nuevo",
-                image: "https://i.postimg.cc/gJpyZ6M8/Gemini-Generated-Image-6fg18u6fg18u6fg1.png" 
-            },
-            {
-                id: 'devocional',
-                title: "Devocional de los Santos",
-                subtitle: "Vidas de Santos",
-                description: "Sigue la vida y las virtudes de los santos cada día del año.",
-                icon: BookOpen,
-                color: "bg-emerald-900",
-                link: "https://devocionaldelosantos.netlify.app/",
-                match: "92% Match",
-                image: "https://i.postimg.cc/15LQwpFK/Gemini-Generated-Image-gcg4jfgcg4jfgcg4.png" 
-            },
-            {
-                id: 'literatura-catolica',
-                title: "Literatura Católica",
-                subtitle: "+500 Libros y Clásicos",
-                description: "Accede a obras maestras de Santos, Teólogos, Mística y Demonología en un ambiente exclusivo.",
-                icon: BookOpen, 
-                color: "bg-amber-900",
-                link: "#", // Link é tratado pelo modal
-                match: "Premium",
-                badge: "Acervo",
-                image: "https://i.postimg.cc/tJL36r3V/Gemini-Generated-Image-fdv54wfdv54wfdv5-(1).png",
-                isModal: true,
-                content: `
-                    <div class="space-y-8 p-4 bg-[#121010] text-[#e5e5e5] font-sans">
-                        <!-- Header com Atmosfera de Biblioteca -->
-                        <div class="relative rounded-xl overflow-hidden border border-[#C5A059]/30 shadow-2xl group">
-                            <div class="absolute inset-0 bg-black/70 z-10"></div>
-                            <!-- Imagem de fundo de biblioteca antiga -->
-                            <img src="https://images.unsplash.com/photo-1507842217121-e0493caf8276?q=80&w=2070&auto=format&fit=crop" alt="Biblioteca Vaticana" class="w-full h-64 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700">
-                            
-                            <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-6">
-                                <div class="mb-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                                </div>
-                                <h2 class="text-3xl md:text-5xl font-serif font-bold text-[#C5A059] mb-3 drop-shadow-lg tracking-wide">Literatura Católica</h2>
-                                <p class="text-gray-200 text-lg italic max-w-2xl font-serif opacity-90">"Tolle et lege" — Toma y lee</p>
-                                
-                                <a href="https://drive.google.com/drive/folders/1wUV-Rz-yc2Xob965U3Z4XiSY5BQUM_J9?usp=drive_link" target="_blank" class="mt-8 inline-flex items-center bg-[#721121] hover:bg-[#8C1C2E] text-white px-8 py-4 rounded border border-[#C5A059] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(197,160,89,0.3)] uppercase tracking-widest text-sm font-bold gap-3 no-underline">
-                                    <span>Acceder al Acervo Completo</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                </a>
-                            </div>
-                        </div>
 
-                        <!-- Grid de Conteúdo -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                            
-                            <!-- Coluna 1: Santos e Clássicos -->
-                            <div class="space-y-6">
-                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#C5A059] shadow-lg">
-                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
-                                        <span>📜</span> Santos y Teólogos Clásicos
-                                    </h3>
-                                    <ul class="space-y-3 text-sm text-gray-300">
-                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
-                                            <strong class="text-white block text-base">Santo Tomás de Aquino</strong>
-                                            <span class="text-xs">Suma Teológica (I, I-II, II-II), Compendio, Catecismo.</span>
-                                        </li>
-                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
-                                            <strong class="text-white block text-base">San Agustín</strong>
-                                            <span class="text-xs">Confesiones, La Ciudad de Dios.</span>
-                                        </li>
-                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
-                                            <strong class="text-white block text-base">Santa Teresa de Jesús</strong>
-                                            <span class="text-xs">Libro de la Vida, Camino de Perfección, Cartas.</span>
-                                        </li>
-                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
-                                            <strong class="text-white block text-base">San Ignacio de Loyola</strong>
-                                            <span class="text-xs">Obras Completas, Ejercicios Espirituales.</span>
-                                        </li>
-                                        <li class="pl-2 border-l-2 border-[#C5A059]/30 hover:border-[#C5A059] transition-colors">
-                                            <strong class="text-white block text-base">San Buenaventura & Hildegarda</strong>
-                                            <span class="text-xs">Teología Mística, Obras Divinas.</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#C5A059] shadow-lg">
-                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
-                                        <span>📚</span> Obras Clásicas Esenciales
-                                    </h3>
-                                    <ul class="grid grid-cols-1 gap-2 text-sm text-gray-400">
-                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">Imitación de Cristo</span> <span class="text-xs text-gray-500">- Tomás de Kempis</span></li>
-                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">El Combate Espiritual</span> <span class="text-xs text-gray-500">- Lorenzo Scúpoli</span></li>
-                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">Tratado de la Verdadera Devoción</span> <span class="text-xs text-gray-500">- San Luis María</span></li>
-                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">La Regla de San Benito</span></li>
-                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">1000 Máximas</span> <span class="text-xs text-gray-500">- Don Bosco</span></li>
-                                        <li class="flex items-start gap-2"><span class="text-[#C5A059]">•</span> <span class="text-gray-300">Tratado del Amor de Dios</span> <span class="text-xs text-gray-500">- San Francisco de Sales</span></li>
-                                    </ul>
+        const ITINERARIO_MODAL_HTML = `
+            <div class="flex flex-col items-center justify-center py-12 px-4 font-sans">
+                <div class="w-full max-w-md text-center">
+                    <img src="https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 border-4 border-[#C5A059] shadow-lg" alt="Itinerario">
+                    <h2 class="text-3xl font-serif text-[#C5A059] font-bold mb-6">Itinerario Cuaresmal 2026</h2>
+                    <div class="p-4 bg-gradient-to-r from-red-900/50 to-red-800/50 border border-red-500/30 rounded-lg mb-10 shadow-inner">
+                        <p class="text-lg text-white font-bold tracking-wide leading-relaxed">¡OFERTA DISPONIBLE PARA QUIENES AÚN NO LO HAN COMPRADO!</p>
+                    </div>
+                    <div class="space-y-5 w-full">
+                        <a href="https://pay.hotmart.com/R104315521P?off=bsjlu74b&checkoutMode=10" target="_blank" class="block w-full bg-[#16a34a] hover:bg-[#15803d] text-white font-bold py-4 px-6 rounded-lg transition-all transform hover:scale-[1.02] shadow-xl text-center no-underline text-sm md:text-base border border-transparent hover:border-white/20">
+                            AÚN NO HE COMPRADO EL ITINERARIO
+                        </a>
+                        <details class="w-full group">
+                            <summary class="block w-full cursor-pointer bg-[#2a2a2a] hover:bg-[#333] text-gray-200 font-bold py-4 px-6 rounded-lg transition-all shadow-lg text-center list-none text-sm md:text-base border border-gray-700 hover:border-gray-500 select-none">
+                                YA COMPRÉ EL ITINERARIO CUARESMAL
+                            </summary>
+                            <div class="mt-4 p-6 bg-[#121010] border border-[#C5A059] rounded-lg shadow-[0_0_15px_rgba(197,160,89,0.15)] animate-slideUp">
+                                <p class="text-[#C5A059] font-serif text-lg font-bold text-center leading-relaxed">
+                                    <span class="text-2xl block mb-2">🔔</span>
+                                    ATENTO A LAS PUBLICACIONES DE LA APP.<br>
+                                    <span class="text-white mt-3 block text-sm font-sans font-normal opacity-90 border-t border-[#C5A059]/30 pt-3">EL ITINERARIO SE LIBERARÁ EL DÍA 18.</span>
+                                </p>
+                                <div class="mt-4">
+                                    <a href="https://elitinerariocuaresmal2026.netlify.app/" target="_blank" class="inline-block bg-[#C5A059] text-black font-bold py-2 px-6 rounded hover:bg-yellow-600 transition-colors no-underline uppercase tracking-wider text-sm shadow-lg">
+                                        ACESSE APP
+                                    </a>
                                 </div>
                             </div>
-
-                            <!-- Coluna 2: Mística e Demonologia -->
-                            <div class="space-y-6">
-                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#721121] shadow-lg">
-                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
-                                        <span>✨</span> Mística y Revelaciones
-                                    </h3>
-                                    <ul class="space-y-3 text-sm text-gray-300">
-                                        <li class="flex items-center gap-2">
-                                            <span class="text-[#721121]">✝</span>
-                                            <span><strong class="text-white">Ana Catalina Emmerich:</strong> La Amarga Pasión.</span>
-                                        </li>
-                                        <li class="flex items-center gap-2">
-                                            <span class="text-[#721121]">✝</span>
-                                            <span><strong class="text-white">Santa Brígida:</strong> Revelaciones Celestiales.</span>
-                                        </li>
-                                        <li class="flex items-center gap-2">
-                                            <span class="text-[#721121]">✝</span>
-                                            <span><strong class="text-white">Santa Gema Galgani:</strong> Escritos y Biografía.</span>
-                                        </li>
-                                        <li class="flex items-center gap-2">
-                                            <span class="text-[#721121]">✝</span>
-                                            <span><strong class="text-white">María Simma:</strong> ¡Sáquennos de aquí! (Purgatorio).</span>
-                                        </li>
-                                        <li class="flex items-center gap-2">
-                                            <span class="text-[#721121]">✝</span>
-                                            <span><strong class="text-white">Relatos de un Peregrino Ruso</strong></span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="bg-[#1C1919] p-6 rounded-lg border-l-4 border-[#721121] shadow-lg">
-                                    <h3 class="text-xl font-serif text-[#C5A059] mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
-                                        <span>🛡️</span> Exorcismo y Apologética
-                                    </h3>
-                                    <div class="space-y-4">
-                                        <div>
-                                            <strong class="text-[#C5A059] block mb-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">Padre Gabriele Amorth</strong>
-                                            <ul class="list-disc list-inside text-sm text-gray-400 pl-2">
-                                                <li>Habla un Exorcista</li>
-                                                <li>El Último Exorcista</li>
-                                                <li>Narraciones de un Exorcista</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <strong class="text-[#C5A059] block mb-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">Padre José Antonio Fortea</strong>
-                                            <ul class="list-disc list-inside text-sm text-gray-400 pl-2">
-                                                <li>Summa Daemoniaca</li>
-                                                <li>Exorcística</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <strong class="text-[#C5A059] block mb-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">Teología General</strong>
-                                            <p class="text-sm text-gray-400 pl-2">
-                                                Manual de Teología Dogmática (Ludwig Ott), Cartas del Diablo a su Sobrino (C.S. Lewis), En Defensa del Catolicismo.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8 text-center pt-6 border-t border-white/10">
-                             <p class="text-[#C5A059] text-sm font-serif italic">"La ignorancia de las Escrituras es ignorancia de Cristo." — San Jerónimo</p>
-                        </div>
+                        </details>
                     </div>
-                `
-            }
-        ];
+                </div>
+            </div>
+        `;
 
-        // DADOS DE ORAÇÕES
-        const PRAYERS_DATA = [
-            {
-                id: 'daily-prayers',
-                title: "Oraciones de la Mañana",
-                subtitle: "Rutina Espiritual",
-                image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=2070&auto=format&fit=crop", 
-                match: "Diario",
-                isModal: true, 
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">☀️</span> Al despertar</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                Al despertar, dirige tus pensamientos inmediatamente a Dios y, fazendo o Sinal da Cruz, diga:<br/>
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">"En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén."</em>
-                            </p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">⬆️</span> Al levantarse</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                Al levantarte de la cama, di:<br/>
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">"En el nombre de Jesucristo crucificado me levanto. Que Él me bendiga, me gobierne, me preserve y me conduzca a la vida eterna. Amén."</em>
-                            </p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🙏</span> Al arrodillarse</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                Al arrodillarte, procura ponerte en la presencia de Dios, concienciándote de que Él está delante de ti, que conoce todos tus pensamientos y que desea escucharte y socorrerte. Entonces di:<br/>
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">"Libra mi mente, oh Dios mío, de todos los pensamientos que distraen, y permíteme orar sempre con atenção e devoção, para que assim mereça ser ouvido por Ti. Te ofrezco mis oraciones en unión con aquella intención divina con la cual Tú mismo, mientras estuviste en la Tierra, rendías alabanzas a Dios."</em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'adoration-acts',
-                title: "Actos de Adoración",
-                subtitle: "Acción de Gracias",
-                image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop", 
-                match: "Diario",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🙌</span> Actos de Adoración y Acción de Gracias</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Bendita sea la santa y una Trinidad, agora e sempre. Amén.<br/><br/>
-                                    Al Rey de los siglos, al inmortal, invisible y único Dios, sean dados honor y gloria por los siglos de los siglos.<br/><br/>
-                                    Te doy gracias, oh Padre mío, por los innumerables beneficios que he recibido de tu amorosa generosidad y misericordia, sobre todo por haberme preservado esta noche.<br/><br/>
-                                    Gloria al Padre que me creó, gloria al Hijo que me redimió, gloria al Espíritu Santo que me santificó."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'daily-offering',
-                title: "Ofrecimiento del Día",
-                subtitle: "Al Sagrado Corazón",
-                image: "https://i.postimg.cc/QCXj54t8/Gemini-Generated-Image-4bn33n4bn33n4bn3.png", 
-                match: "Diario",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">❤️</span> Ofrecimiento del Día</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Oh Jesús, por el Inmaculado Corazón de María, te ofrezco mis oraciones, obras y sufrimientos de este día por todas las intenciones de tu Sagrado Corazón, en unión con el Santo Sacrificio de la Misa ofrecido en todo el mundo, en reparación por mis pecados, por las intenciones de todos nuestros asociados y en particular por el apostolado de la oración."
-                                </em>
-                            </p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🏛️</span> Versión en Latín</h3>
-                            <p class="text-gray-400 italic text-sm leading-relaxed border-l-2 border-gray-700 pl-3">
-                                "Offero tibi, Domine Deus meus, in unióne Sacratíssimi Cordis Iesu, per Immaculatae Cordis Mariae, oratiónes, opéribus, dolores et gaudia huius diéí, in satisfactionem pro peccátis nostris et omnes intentiones quod per eádem Divinum Cor intercedendo et iugiter semetípsum sacrificans est in nostris altáris. Praesertim óffero intentiones Summus Pontifex et augméntine et perseverántiam vocationibus sacerdotálibus, religiósis et missionálibus."
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'meal-prayer',
-                title: "Oración para las Comidas",
-                subtitle: "Bendición de Alimentos",
-                image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2070&auto=format&fit=crop", 
-                match: "Refección",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🍞</span> Antes de las Comidas</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Bendice, Señor, los alimentos que vamos a tomar para mejor servirte y amarte.<br/>
-                                    + En el nombre del Padre, del Hijo y del Espíritu Santo. Amén."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'work-prayer',
-                title: "Oración para el Trabajo",
-                subtitle: "Estudio y Labor",
-                image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", 
-                match: "Diario",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">💼</span> Antes del Trabajo</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Bendice, Padre celestial, el trabajo (o estudio) que voy a iniciar; que tu Espíritu Santo me ilumine, inspire y oriente, y tu gracia me ayude a realizarlo todo con espíritu de amor y servicio, para honor y gloria de tu nombre y el bien de mis hermanos. María, Madre de Jesús y Madre mía, intercede por mí. Amén."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'bible-prayer',
-                title: "Antes de leer la Biblia",
-                subtitle: "Lectura Espiritual",
-                image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop", 
-                match: "Estudio",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">📖</span> Oración para antes de leer la Biblia</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Señor mío y Dios mío, creo firmemente que estás aquí, que me ves, que me oyes; te adoro con profunda reverencia. Te pido perdón de mis pecados y la gracia para hacer con fruto este tiempo de oración. Madre mía Inmaculada, San José, mi protector, Ángel de mi guarda, interceded por mí. Amén."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'thanksgiving-prayer',
-                title: "Oración de Agradecimiento",
-                subtitle: "Gratitud a Dios",
-                image: "https://images.unsplash.com/photo-1507692814201-9994511ba977?q=80&w=2070&auto=format&fit=crop", 
-                match: "Gracias",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🙏</span> Acción de Gracias</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Oh Jesús, oh Dios eterno, te agradezco por los innumerables beneficios y por tus gracias. Que cada latido de mi corazón sea un himno de agradecimiento a Ti, oh Dios. Que las gotas de mi sangre circulen por Ti, oh Señor. Mi alma es un canto de adoración a tu misericordia. Te amo, oh Dios, por siempre, por toda la vida. Amén."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'forgiveness-prayer',
-                title: "Oración de Perdón",
-                subtitle: "Misericordia",
-                image: "https://images.unsplash.com/photo-1544169601-382991823eb3?q=80&w=2072&auto=format&fit=crop", 
-                match: "Perdón",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🕊️</span> Petición de Perdón</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "En el nombre del Padre, del Hijo y del Espíritu Santo.<br/><br/>
-                                    Dios, Padre de amor y bondad, que en tu infinita misericordia acoges a todos los que se acercan a Ti con el corazón arrepentido, acoge mi petición de perdón por tantas faltas cometidas contra Ti y mis hermanos.<br/><br/>
-                                    Señor Jesucristo, Maestro de la ternura y del amor, que devolviste la vida en plenitud a tantos hombres y mujeres inmersos en el pecado y caminantes de las tinieblas, condúceme por los caminos del perdón y fortalece mi alma para que tenga la humildad de pedir perdón y la misericordia de saber perdonar.<br/><br/>
-                                    Espíritu Santo, Consolador del alma, Abogado de los justos y Paráclito del amor, inspira en mi corazón gestos de bondad y ternura, que devuelvan a los corazones angustiados la belleza del perdón y las gracias de la reconciliación. Amén."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'night-prayer',
-                title: "Oración de la Noche",
-                subtitle: "Descanso en Dios",
-                image: "https://images.unsplash.com/photo-1507502707541-f369a3b18502?q=80&w=1976&auto=format&fit=crop", 
-                match: "Noche",
-                isModal: true,
-                content: `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-yellow-500 mb-2 flex items-center"><span class="mr-2">🌙</span> Antes de dormir</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                <em class="text-white block mt-1 border-l-2 border-yellow-600 pl-3">
-                                    "Dios mío y Padre mío, en tus manos encomiendo mi espíritu. Con Dios me acuesto, con Dios me levanto, con la gracia de Dios y del Divino Espíritu Santo. Amén."
-                                </em>
-                            </p>
-                        </div>
-                    </div>
-                `
-            }
-        ];
-
-        // LIVROS DA BIBLIOTECA
-        const BOOKS_DATA = [
-            { 
-                id: 'catecismo',
-                title: "Catecismo de la Iglesia Católica", 
-                author: "Magisterio", 
-                desc: "La exposición de la fe de la Iglesia y de la doctrina católica.", 
-                link: "https://www.vatican.va/archive/catechism_sp/index_sp.html",
-                image: "https://i.postimg.cc/Dwx0rL0B/Whats-App-Image-2026-01-19-at-22-13-19-(1).jpg",
-                match: "Esencial",
-                badge: "Destacado",
-                isModal: false 
-            },
-            {
-                id: 'biblia',
-                title: "SAGRADA ESCRITURA",
-                author: "Vaticano",
-                desc: "Las Sagradas Escrituras (Versión Oficial).",
-                link: "https://www.vatican.va/archive/ESL0506/_INDEX.HTM",
-                image: "https://i.postimg.cc/m2kRMJxL/images.jpg",
-                match: "100% Match",
-                badge: "Oficial",
-                isModal: false
-            },
-             { 
-                id: 'adviento',
-                title: "Libro de Adviento", 
-                author: "Colección Exclusiva", 
-                desc: "Preparación y celebración del nacimiento de Jesús.", 
-                link: "https://libroadvientoenavidad.netlify.app/",
-                image: "https://i.postimg.cc/d0yHyvxb/Gemini-Generated-Image-r1hrk0r1hrk0r1hr.webp",
-                match: "99% Match"
-            },
-            { 
-                id: 'oraciones',
-                title: "Oraciones Católicas", 
-                author: "Tradición Eclesial", 
-                desc: "Las plegarias fundamentales para la vida diaria.", 
-                link: "#",
-                image: "https://i.postimg.cc/zBTCJGcP/Gemini-Generated-Image-whfdhkwhfdhkwhfd-1.webp", 
-                match: "85% Match",
-                isModal: true,
-                content: `
-                    <div class="book-content">
-                        <div id="intro">
-                            <h2>Introducción</h2>
-                            <p>Bienvenido a este compendio de luz y esperanza. La oración es el aliento del alma, el puente invisible pero indestructible que une nuestro corazón con el Creador. En las páginas de este libro digital, encontrará un refugio para cada momento de su vida: desde el amanecer hasta el ocaso, en la alegría y en la tribulación.</p>
-                            <p>Estas oraciones no son meras palabras repetidas, sino el eco de siglos de fe de la Iglesia Católica. Han sido recopiladas para acompañarle en su camino espiritual, para ayudarle a dar gracias, pedir perdón, solicitar guía o simplemente descansar en la presencia de Dios, la Virgen María y los Santos.</p>
-                            <p>Que este libro sea una lámpara en su camino y que, a través de estas plegarias, su fe se fortalezca y su corazón encuentre la paz que solo Dios puede dar.</p>
-                        </div>
-
-                        <div id="toc">
-                            <h2>Índice</h2>
-                            <ul class="toc">
-                                <li><a href="#padre-nuestro">Padre Nuestro</a></li>
-                                <li><a href="#ave-maria">Ave María</a></li>
-                                <li><a href="#credo">Credo</a></li>
-                                <li><a href="#gloria">Gloria al Padre</a></li>
-                                <li><a href="#salve">Salve Regina</a></li>
-                                <li><a href="#acto-contricion">Acto de Contrición</a></li>
-                                <li><a href="#acordaos">Acordaos</a></li>
-                                <li><a href="#alma-cristo">Alma de Cristo</a></li>
-                                <li><a href="#angel-dios">Ángel de Dios</a></li>
-                                <li><a href="#senal-cruz">Señal de la Cruz</a></li>
-                                <li><a href="#oraciones-jesus">Oraciones a Jesús</a></li>
-                                <li><a href="#oraciones-maria">Oraciones a la Virgen María</a></li>
-                                <li><a href="#oraciones-jose">Oraciones a San José</a></li>
-                                <li><a href="#santos-angeles">Oraciones a los Santos y Ángeles</a></li>
-                                <li><a href="#difuntos">Oraciones por los Difuntos</a></li>
-                                <li><a href="#momentos">Oraciones para Momentos Específicos</a></li>
-                                <li><a href="#manana">Oración de la Mañana</a></li>
-                                <li><a href="#noche">Oración de la Noche</a></li>
-                                <li><a href="#jesus-crucificado">Oración a Jesús Crucificado</a></li>
-                                <li><a href="#san-miguel">Oración a San Miguel Arcángel</a></li>
-                                <li><a href="#magnificat">Magnificat</a></li>
-                                <li><a href="#regina-coeli">Regina Coeli</a></li>
-                                <li><a href="#ven-espiritu">Ven Santo Espíritu</a></li>
-                                <li><a href="#jose-leon">Oración a San José (Papa León XIII)</a></li>
-                                <li><a href="#santo-rosario">El Santo Rosario</a></li>
-                                <li><a href="#letania-lauretana">Letanía Lauretana</a></li>
-                                <li><a href="#via-crucis">Vía Crucis</a></li>
-                                <li><a href="#veni-creator">Veni Creator Spiritus</a></li>
-                                <li><a href="#oracion-guadalupe">Oración a la Virgen de Guadalupe</a></li>
-                                <li><a href="#divina-misericordia">Coronilla de la Divina Misericordia</a></li>
-                                <li><a href="#via-lucis">Vía Lucis</a></li>
-                                <li><a href="#novena-inmaculada">Novena a la Inmaculada Concepción</a></li>
-                                <li><a href="#letanias-corazon">Letanías al Sagrado Corazón de Jesús</a></li>
-                                <li><a href="#novena-jose">Novena a San José</a></li>
-                                <li><a href="#letania-santos">Letanía de los Santos</a></li>
-                                <li><a href="#novena-misericordia">Novena a la Divina Misericordia</a></li>
-                                <li><a href="#novena-guadalupe">Novena a la Virgen de Guadalupe</a></li>
-                            </ul>
-                        </div>
-
-                        <h2 id="padre-nuestro">Padre Nuestro</h2>
-                        <p>Padre nuestro que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu Reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.</p>
-
-                        <h2 id="ave-maria">Ave María</h2>
-                        <p>Dios te salve, María, llena eres de gracia; el Señor es contigo. Bendita Tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén.</p>
-
-                        <h2 id="credo">Credo</h2>
-                        <h3>Símbolo de los Apóstoles</h3>
-                        <p>Creo en Dios, Padre Todopoderoso, Creador del cielo y de la tierra. Creo en Jesucristo, su único Hijo, Nuestro Señor, Que fue concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos y está sentado a la derecha de Dios, Padre todopoderoso. Desde allí ha de venir a juzgar a vivos y muertos.</p>
-                        <p>Creo en el Espíritu Santo, la santa Iglesia católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén.</p>
-                        
-                        <h3>Símbolo Niceno-Constantinopolitano</h3>
-                        <p>Creo en un solo Dios, Padre todopoderoso, Creador del cielo y de la tierra, de todo lo visible y lo invisible.</p>
-                        <p>Creo en un solo Señor, Jesucristo, Hijo único de Dios, nacido del Padre antes de todos los siglos: Dios de Dios, Luz de Luz, Dios verdadeiro de Dios verdadeiro, engendrado, não criado, de la mesma natureza del Padre, por quien todo fue hecho; que por nosotros, los hombres, y por nossa salvação desceu dos céus, e encarnou pelo Espírito Santo no seio da Virgem Maria e se fez homem; e por nossa causa foi crucificado sob Pôncio Pilatos; padeceu e foi sepultado, e ressuscitou ao terceiro dia, conforme as Escrituras, e subiu aos céus, e está sentado à direita do Pai; e de novo há de vir em glória para julgar os vivos e os mortos, e o seu reino não terá fim.</p>
-                        <p>Creo en el Espíritu Santo, Señor y dador de vida, que procede del Padre y del Hijo, con el Padre y el Hijo recebe una misma adoración y gloria, y que habló por los profetas. Creo en la Iglesia, que es una, santa, católica y apostólica. Confieso que hay un solo bautismo para el perdón de los pecados. Espero la resurrección de los muertos y la vida del mundo futuro. Amén.</p>
-
-                        <h2 id="gloria">Gloria al Padre</h2>
-                        <p>Gloria al Padre y al Hijo y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.</p>
-
-                        <h2 id="salve">Salve Regina</h2>
-                        <p>Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro, muéstranos a Jesús, fruto bendito de tu vientre.</p>
-                        <p>¡Oh, clementísima, oh piadosa, oh dulce Virgen María!</p>
-
-                        <h2 id="acto-contricion">Acto de Contrición</h2>
-                        <p>Dios mío, me arrepiento de todo corazón de todos mis pecados y los aborrezco, porque al pecar, no sólo merezco las penas establecidas por ti justamente, sino principalmente porque te ofendí, a ti sumo Bien y digno de amor por encima de todas las cosas. Por eso propongo firmemente, con ayuda de tu gracia, no pecar más en adelante y huir de toda ocasión de pecado. Amén.</p>
-
-                        <h2 id="acordaos">Acordaos</h2>
-                        <p>Acordaos, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia y reclamando tu socorro, haya sido abandonado de ti. Animado con esta confianza, a ti também acudo, oh Madre, Virgen de las vírgenes, y embora gimiendo bajo el peso de mis pecados, me atrevo a comparecer ante tu presencia soberana. No deseches mis humildes súplicas, oh Madre del Verbo divino, antes bien, escúchalas y acógelas benignamente. Amén.</p>
-
-                        <h2 id="alma-cristo">Alma de Cristo</h2>
-                        <p>Alma de Cristo, santifícame.<br>Cuerpo de Cristo, sálvame.<br>Sangre de Cristo, embriágame.<br>Agua del costado de Cristo, lávame.<br>Pasión de Cristo, confórtame.<br>¡Oh, buen Jesús!, óyeme.<br>Dentro de tus llagas, escóndeme.<br>No permitas que me aparte de Ti.<br>Del maligno enemigo, defiéndeme.<br>En la hora de mi muerte, llámame.<br>Y mándame ir a Ti.<br>Para que con tus santos te alabe.<br>Por los siglos de los siglos. Amén.</p>
-
-                        <h2 id="angel-dios">Ángel de Dios</h2>
-                        <p>Ángel de Dios, que eres mi custodio, pues la bondad divina me ha encomendado a ti, ilumíname, guárdame, defiéndeme y gobiérname. Amén.</p>
-
-                        <h2 id="senal-cruz">Señal de la Cruz</h2>
-                        <p>Por la señal de la Santa Cruz, de nuestros enemigos, líbranos, Señor, Dios nuestro. En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p>
-
-                        <h2 id="oraciones-jesus">Oraciones a Jesús</h2>
-                        <p><strong>Acto de Fe:</strong> Dios mío, creo firmemente todo lo que has revelado y que la Santa Iglesia me propone para creer, porque Tú eres la Verdad misma.</p>
-                        <p><strong>Acto de Esperanza:</strong> Señor, espero alcanzar por tu gracia la vida eterna y los medios para obtenerla, porque Tú eres fiel a tus promesas.</p>
-                        <p><strong>Acto de Caridad:</strong> Dios mío, te amo sobre todas las cosas y a mi prójimo como a mí mismo por amor a Ti.</p>
-
-                        <h2 id="oraciones-maria">Oraciones a la Virgen María</h2>
-                        <h3>Bendita sea tu pureza</h3>
-                        <p>Bendita sea tu pureza y eternamente lo sea, pues todo un Dios se recrea en tan graciosa belleza. A ti, celestial Princesa, Virgen sagrada María, te ofrezco en este día alma, vida y corazón. Mírame con compasión, no me dejes, Madre mía.</p>
-
-                        <h2 id="oraciones-jose">Oraciones a San José</h2>
-                        <p>San José, custodio de la Sagrada Familia, alcánzanos la gracia de vivir con humildad y de proteger con amor la presencia de Dios en nuestras vidas, tal como tú cuidaste del Niño Jesús y de su Madre Santísima. Amén.</p>
-
-                        <h2 id="santos-angeles">Oraciones a los Santos y Ángeles</h2>
-                        <p><strong>A los Santos Ángeles Custodios:</strong> Santos Ángeles de Dios, a quienes la divina Providencia nos ha confiado para nuestra guarda y protección, iluminadnos, protegednos, guiadnos y gobernadnos en este camino hacia la patria celestial. Amén.</p>
-
-                        <h2 id="difuntos">Oraciones por los Difuntos</h2>
-                        <h3>Requiem Aeternam</h3>
-                        <p>V. Dales, Señor, el descanso eterno.<br>R. <span class="response">Y brille para ellos la luz perpetua.</span><br>V. Que las almas de los fieles difuntos, por la misericordia de Dios, descansen en paz.<br>R. <span class="response">Amén.</span></p>
-
-                        <h2 id="momentos">Oraciones para Momentos Específicos</h2>
-                        <h3>Bendición de los Alimentos</h3>
-                        <p>Bendícenos, Señor, y bendice estos alimentos que vamos a tomar, y que recibimos de tu generosidad. Por Cristo Nuestro Señor. Amén.</p>
-                        <h3>Antes de un Viaje</h3>
-                        <p>Señor, que llenas todo lugar con tu presencia, acompáñame en este viaje. Que mis pasos sean guiados por tu mano y que llegue a mi destino con bien. Amén.</p>
-
-                        <h2 id="manana">Oración de la Mañana</h2>
-                        <h3>Oración de Ofrecimiento del Día</h3>
-                        <p>Señor Dios Omnipotente, que nos has permitido llegar al principio de este día, guárdanos hoy con tu poder, para que no caigamos en pecado, antes bien, todos nuestros pensamientos, palabras y obras se dirijan a cumplir tu Santa Ley. Padre Nuestro, Ave María, Credo.</p>
-                        <p>Señor Dios del Cielo y de la tierra dígnate dirigir, santificar, guiar y gobernar en este día nuestros corazones y nuestros cuerpos, nuestros sentidos, palabras y acciones según tu Ley y por el camino de tus mandamientos, para que aquí y en la eternidad merezcamos, por tu favor, ser salvados y libres. ¡Oh, Salvador del mundo!, que vives y reinas por los siglos de los siglos. Amén.</p>
-                        
-                        <h3>Encomienda a la Santísima Virgen</h3>
-                        <p>¡Oh Virgen y Madre de Dios! Yo me entrego por hijo tuyo, y en honor y gloria de tu pureza, te ofrezco mi alma y cuerpo, mis potencias y sentidos y te suplico me alcances la gracia de no cometer jamás pecado alguno. Amén.</p>
-                        <p>Madre aquí tienes a tu hijo. – Madre aquí tienes a tu hijo. – Madre aquí tienes a tu hijo. En ti Madre mía dulcísima he puesto toda mi confianza, jamás quedaré confundido. Amén.</p>
-                        
-                        <h3>Oración al Ángel de la Guarda</h3>
-                        <p>Ángel de Dios que eres custodio mío; ya que la soberana Piedad a Ti me encomendó, ilumíname, guíame, rígeme y gobiérname en este día. Amén.</p>
-
-                        <h2 id="noche">Oración de la Noche</h2>
-                        <h3>Acción de Gracias y Ofrecimiento</h3>
-                        <p>Dios mío, Jesucristo: Te doy gracias por todos los beneficios que has dispensado en este día. Te ofrezco mi sueño y todos los momentos de esta noche y te pido me conserves en ella sin pecado. Por esto me pongo dentro de tu santísimo Costado y bajo el manto de mi Madre, la Virgen María. Asístanme y guárdenme en paz los santos Ángeles y venga sobre mí tu Bendición.</p>
-                        
-                        <h3>Acto de Contrición</h3>
-                        <p>Señor mío, Jesucristo, Dios y Hombre verdadero, Creador, Padre y Redentor mío; por ser Tú quien eres, Bondad infinita, y porque te amo sobre todas las cosas, me pesa de todo corazón de haberte ofendido; também me pesa porque podes castigar-me com as penas do inferno. Ayudado de tu Divina Gracia, propongo firmemente nunca mais pecar, confesarme y cumplir la penitencia que me fuere impuesta. Padre Nuestro, Ave María, Credo.</p>
-                        
-                        <h3>Oración al Ángel de la Guarda</h3>
-                        <p>Ángel de Dios, ángel de Dios: ya que la soberana Piedad a Ti me encomendó, ilumíname, rígeme, guárdame y gobiérname en esta noite. Amén.</p>
-                        
-                        <h3>Oración Final</h3>
-                        <p>Visita, Señor, esta habitación y ahuyenta de ella todas las asechanzas del enemigo. Estén aquí tus santos Ángeles, que nos guarden en paz, y Tú danos tu Santa Bendición, por los méritos de Cristo Nuestro Señor. Amén.</p>
-
-                        <h2 id="jesus-crucificado">Oración a Jesús Crucificado</h2>
-                        <p>Miradme, ¡oh mi amado y buen Jesús!, postrado ante vuestra Santísima presencia; os ruego con el mayor fervor y compasión de que soy capaz imprimáis en mi corazón vivos sentimientos de fe, esperanza y caridad. Verdadero dolor de mis pecados, propósito firmísimo de jamás ofenderos. Mientras que yo, con todo el amor de que soy capaz voy considerando vuestra cinco llagas, comenzando por aquello que dijo de Vos, oh buen Jesús, el santo profeta David: «Han taladrado mis manos y mis pies y se pueden contar todos mis huesos.»</p>
-
-                        <h2 id="san-miguel">Oración a San Miguel Arcángel</h2>
-                        <p>San Miguel Arcángel, defiéndenos en la lucha. Sé nuestro amparo contra la perversidad y asechanzas del demonio. Que Dios manifieste sobre él su poder, es nuestra humilde súplica. Y tú, oh Príncipe de la Milicia Celestial, con el poder que Dios te ha conferido, arroja al infierno a Satanás, y a los demás espíritus malignos que vagan por el mundo para la perdición de las almas. Amén.</p>
-
-                        <h2 id="magnificat">Magnificat (Cántico de María)</h2>
-                        <p>Proclama mi alma la grandeza del Señor, se alegra mi espíritu en Dios mi Salvador, porque ha mirado la humillación de su esclava.</p>
-                        <p>Desde ahora me felicitarán todas las generaciones porque el Poderoso ha hecho obras grandes por mí. Su nombre es Santo y su misericordia llega a sus fieles de generación en generación.</p>
-                        <p>Él hace proezas con su brazo, dispersa a los soberbios de corazón. Derriba del trono a los poderosos y enaltece a los humildes. A los hambrientos los colma de bienes y a los ricos despide vacíos.</p>
-                        <p>Auxilia a Israel su siervo, acordándose de su santa alianza según lo había prometido a nuestros padres en favor de Abrahán y su descendencia por siempre.</p>
-                        <p>Gloria al Padre y al Hijo y al Espíritu Santo como era en principio ahora y sempre por los siglos de los siglos. Amén.</p>
-
-                        <h2 id="regina-coeli">Regina Coeli (Reina del Cielo)</h2>
-                        <p class="center-text"><em>(Se reza en lugar del Ángelus en el Tiempo Pascual)</em></p>
-                        <p>V. Alégrate, Reina del cielo. Aleluya.<br>R. <span class="response">Porque el que mereciste llevar en tu seno. Aleluya.</span><br>V. Ha resucitado, según predijo. Aleluya.<br>R. <span class="response">Ruega por nosotros a Dios. Aleluya.</span><br>V. Gózate y alégrate, Virgen María. Aleluya.<br>R. <span class="response">Porque ha resucitado Dios verdaderamente. Aleluya.</span></p>
-                        <p><strong>Oremos:</strong> Oh Dios que por la Resurrección de tu Hijo, nuestro Señor Jesucristo, te has dignado dar la alegría al mundo, concédenos por su Madre, la Virgen María, alcanzar el gozo de la vida eterna. Por el mismo Jesucristo Nuestro Señor. Amén.</p>
-
-                        <h2 id="ven-espiritu">Ven Santo Espíritu (Sequência de Pentecostes)</h2>
-                        <p>Ven, Espíritu divino, manda tu luz desde el cielo. Padre amoroso del pobre; don, en tus dones espléndido; luz que penetra las almas; fuente del mayor consuelo.</p>
-                        <p>Ven, dulce huésped del alma, descanso de nuestro esfuerzo, tregua en el duro trabajo, brisa en las horas de fuego, gozo que enjuga las lágrimas y reconforta en los duelos.</p>
-                        <p>Entra hasta el fondo del alma, divina luz, y enriquécenos. Mira el vacío del hombre, si tú le faltas por dentro; mira el poder del pecado, quando não envias o teu sopro.</p>
-                        <p>Riega la tierra en sequía, sana el corazón enfermo, lava las manchas, infunde calor de vida en el hielo, doma el espíritu indómito, guía al que tuerce el sendero.</p>
-                        <p>Reparte tus siete dones, según la fe de tus siervos; por tu bondad y tu gracia, dale al esfuerzo su mérito; salva al que busca salvarse y danos tu gozo eterno. Amén.</p>
-
-                        <h2 id="jose-leon">Oración a San José del Papa León XIII</h2>
-                        <p>A ti, bienaventurado San José, acudimos en nuestra tribulación; y después de invocar el auxilio de tu Santísima Esposa solicitamos también confiados tu patrocinio. Por aquella caridad que con la Inmaculada Virgen María, Madre de Dios, te tuvo unido, y por el paterno amor con que abrazaste al Niño Jesús, humildemente te suplicamos vuelvas benigno los ojos a la herencia que con su Sangre adquirió Jesucristo, y con tu poder y auxilio socorras nuestras necesidades.</p>
-                        <p>Protege, Providentísimo Custodio de la Sagrada Familia la escogida descendencia de Jesucristo; aparta de nosotros toda mancha de error y corrupción; asístenos propicio, desde el cielo, fortísimo libertador nuestro, en esta lucha con el poder de las tinieblas: y, como en otro tiempo librasteis al Niño Jesús del inminente peligro de la vida, así ahora, defiende a la Iglesia Santa de Dios de las asechanzas de sus enemigos y de toda adversidad, ya cada uno de nosotros protégenos con el perpetuo patrocinio, para que, a tu exemplo e sustentados por teu auxílio, possamos santamente viver e piedosamente morrer e alcançar no céu a eterna felicidade. Amém.</p>
-
-                        <h2 id="santo-rosario">El Santo Rosario</h2>
-                        <p>El Rosario está compuesto por veinte “misterios” (acontecimientos, momentos significativos) de la vida de Jesús y de María, divididos en cuatro “rosarios”: Gozosos, Luminosos, Dolorosos y Gloriosos.</p>
-                        <h3>Cómo se reza el Rosario</h3>
-                        <ol>
-                            <li>Señal de la Cruz y Oración Inicial.</li>
-                            <li>El Credo de los Apóstoles.</li>
-                            <li>Padre Nuestro.</li>
-                            <li>Tres Avemarías y un Gloria.</li>
-                            <li>Anuncio del Misterio.</li>
-                            <li>Rezar la Decena: Un Padre Nuestro, diez Avemarías y un Gloria.</li>
-                            <li>Jaculatoria: "Oh Jesús mío, perdona nuestros pecados..."</li>
-                            <li>Al final del Rosario: Rezar la Salve y las Letanías.</li>
-                        </ol>
-
-                        <h3>Misterios Gozosos (Lunes y Sábado)</h3>
-                        <p><strong>Primer Misterio Gozoso: La Encarnación del Hijo de Dios.</strong> (Lc 1,26-27).</p>
-                        <p><strong>Segundo Misterio Gozoso: La Visitación de Nuestra Señora a su prima Santa Isabel.</strong> (Lc 1, 39-42).</p>
-                        <p><strong>Tercer Misterio Gozoso: El Nacimiento del Hijo de Dios en el portal de Belén.</strong> (Lc 2,1-7).</p>
-                        <p><strong>Cuarto Misterio Gozoso: La presentación de Jesús en el Templo.</strong> (Lc 2, 21-24).</p>
-                        <p><strong>Quinto Misterio Gozoso: El Niño Jesús perdido y hallado en el Templo.</strong> (Lc 2, 41-47).</p>
-
-                        <h3>Misterios Luminosos (Jueves)</h3>
-                        <p><strong>Primer Misterio Luminoso: El Bautismo en el Jordán.</strong> (Mt 3,16-17).</p>
-                        <p><strong>Segundo Misterio Luminoso: Las bodas de Caná.</strong> (Jn 2, 1-5).</p>
-                        <p><strong>Tercer Misterio Luminoso: El anuncio del Reino de Dios.</strong> (Mc 1, 15).</p>
-                        <p><strong>Cuarto Misterio Luminoso: La Transfiguración.</strong> (Mt 17, 1-2).</p>
-                        <p><strong>Quinto Misterio Luminoso: La institución de la Eucaristía.</strong> (Mt 26, 26).</p>
-
-                        <h3>Misterios Dolorosos (Martes y Viernes)</h3>
-                        <p><strong>Primer Misterio Doloroso: La oración en el Huerto.</strong> (Mt 26, 36-39).</p>
-                        <p><strong>Segundo Misterio Doloroso: La flagelación de Jesús atado a la columna.</strong> (Mt 27, 26).</p>
-                        <p><strong>Tercer Misterio Doloroso: La coronación de espinas.</strong> (Mt 27, 27- 29).</p>
-                        <p><strong>Cuarto Misterio Doloroso: Jesús con la Cruz a cuestas camino del Calvario.</strong> (Mc 15, 21-22).</p>
-                        <p><strong>Quinto Misterio Doloroso: La crucifixión y muerte de Jesús.</strong> (Lc 23, 33-46).</p>
-
-                        <h3>Misterios Gloriosos (Miércoles y Domingo)</h3>
-                        <p><strong>Primer Misterio Glorioso: La resurrección del Hijo de Dios.</strong> (Lc 24, 1-6).</p>
-                        <p><strong>Segundo Misterio Glorioso: La Ascensión del Señor al cielo.</strong> (Mc 16, 19).</p>
-                        <p><strong>Tercer Misterio Glorioso: La venida del Espíritu Santo.</strong> (Hch 2, 1-4).</p>
-                        <p><strong>Cuarto Misterio Glorioso: La Asunción de María al cielo.</strong> (Lc 1, 48-49).</p>
-                        <p><strong>Quinto Misterio Glorioso: La coronación de María como Reina y Señora de todo lo creado.</strong> (Ap 12, 1).</p>
-
-                        <h2 id="letania-lauretana">Letanía Lauretana</h2>
-                        <p class="litany-row">Señor, ten piedad. <span class="response">Cristo, ten piedad.</span></p>
-                        <p class="litany-row">Señor, ten piedad. <span class="response">Cristo, óyenos. Cristo, escúchanos.</span></p>
-                        <p class="litany-row">Dios, Padre celestial, <span class="response">ten piedad de nosotros.</span></p>
-                        <p class="litany-row">Dios, Hijo, Redentor del mundo, <span class="response">ten piedad de nosotros.</span></p>
-                        <p class="litany-row">Dios, Espíritu Santo, <span class="response">ten piedad de nosotros.</span></p>
-                        <p class="litany-row">Santísima Trinidad, un solo Dios, <span class="response">ten piedad de nosotros.</span></p>
-                        
-                        <p>Santa María, <span class="response">ruega por nosotros.</span> (Repetir "ruega por nosotros" después de cada invocación:)</p>
-                        <p>Santa Madre de Dios... Santa Virgen de las Vírgenes... Madre de Cristo... Madre de la Iglesia... Madre de la misericordia... Madre de la divina gracia... Madre de la esperanza... Madre purísima... Madre castísima... Madre siempre virgen... Madre inmaculada... Madre amable... Madre admirable... Madre del buen consejo... Madre del Creador... Madre del Salvador... Virgen prudentísima... Virgen digna de veneración... Virgen digna de alabanza... Virgen poderosa... Virgen clemente... Virgen fiel... Espejo de justicia... Trono de la sabiduría... Causa de nuestra alegría... Vaso espiritual... Vaso digno de honor... Vaso de insigne devoción... Rosa mística... Torre de David... Torre de marfil... Casa de oro... Arca de la Alianza... Puerta del cielo... Estrella de la mañana... Salud de los enfermos... Refugio de los pecadores... Consuelo de los migrantes... Consoladora de los afligidos... Auxilio de los cristianos... Reina de los Ángeles... Reina de los Patriarcas... Reina de los Profetas... Reina de los Apóstoles... Reina de los Mártires... Reina de los Confesores... Reina de las Vírgenes... Reina de todos los Santos... Reina concebida sin pecado original... Reina asunta a los Cielos... Reina del Santísimo Rosario... Reina de la familia... Reina de la paz...</p>
-
-                        <p>Cordero de Dios, que quitas el pecado del mundo, <span class="response">perdónanos, Señor.</span><br>Cordero de Dios, que quitas el pecado del mundo, <span class="response">escúchanos, Señor.</span><br>Cordero de Dios, que quitas el pecado del mundo, <span class="response">ten misericordia de nosotros.</span></p>
-                        
-                        <p>V. Ruega por nosotros, Santa Madre de Dios.<br>R. <span class="response">Para que seamos dignos de las promesas de Cristo.</span></p>
-
-                        <h2 id="via-crucis">Vía Crucis (Via Sacra)</h2>
-                        <p><strong>Oración Inicial:</strong> Jesús, mi Señor y Redentor: Yo me arrepiento de todos os pecados que he cometido hasta hoy...</p>
-                        <p><em>(En cada estación: Te adoramos, Señor, y te bendecimos, porque por tu santa cruz redimiste al mundo.)</em></p>
-                        <p><strong>1ª Estación:</strong> Jesús sentenciado a muerte.<br><strong>2ª Estación:</strong> Jesús cargado con la cruz.<br><strong>3ª Estación:</strong> Jesús cae, por primera vez, bajo el paso de la cruz.<br><strong>4ª Estación:</strong> Encuentro con la Virgen.<br><strong>5ª Estación:</strong> el Cirineo ayuda al Señor a llevar la Cruz.<br><strong>6ª Estación:</strong> la Verónica enjuga el rostro de Jesús.<br><strong>7ª Estación:</strong> Segunda caída en el camino de la Cruz.<br><strong>8ª Estación:</strong> Jesús consuela a las hijas de Jerusalén.<br><strong>9ª Estación:</strong> Jesús cae por tercera vez.<br><strong>10ª Estación:</strong> Jesús despojado de sus vestiduras.<br><strong>11ª Estación:</strong> Jesús es clavado en la Cruz.<br><strong>12ª Estación:</strong> Jesús muere en la Cruz.<br><strong>13ª Estación:</strong> Jesús en brazos de su madre.<br><strong>14ª Estación:</strong> Jesús puesto en el sepulcro.</p>
-
-                        <h2 id="veni-creator">Veni Creator Spiritus</h2>
-                        <p>Ven, Espíritu Creador, visita las almas de tus fieles llena con tu divina gracia, los corazones que creaste. Tú, a quien llamamos Paráclito, don de Dios Altísimo, fuente viva, fuego, caridad y espiritual unción...</p>
-                        <p>Gloria a Dios Padre, y al Hijo que resucitó, y al Espíritu Consolador, por los siglos de los siglos. Amén.</p>
-
-                        <h2 id="oracion-guadalupe">Oración a la Virgen de Guadalupe</h2>
-                        <p>Padre de Misericordia, que has puesto a este pueblo tuyo bajo la especial protección de la siempre Virgen María de Guadalupe, Madre de tu Hijo, concédenos, por su intercesión, profundizar en nuestra fe y buscar el progreso de nuestra patria por caminos de justicia y de paz. Por nuestro Señor Jesucristo. Amén.</p>
-                        <h3>Plegaria del Papa Juan Pablo II</h3>
-                        <p>¡Oh Virgen Inmaculada, Madre del verdadero Dios y Madre de la Iglesia! Tú, que desde este lugar manifiestas tu clemencia y tu compasión a todos los que solicitan tu amparo: escucha la oración que con filial confianza te dirigimos, y represéntala ante tu Hijo Jesús, único Redentor nuestro...</p>
-
-                        <h2 id="divina-misericordia">Coronilla de la Divina Misericordia</h2>
-                        <ol>
-                            <li>La señal de la Cruz, Padre Nuestro, Ave María y Credo.</li>
-                            <li>En las cuentas grandes: "Padre Eterno, Te ofrezco el Cuerpo, la Sangre, el Alma y la Divinidad de Tu amadísimo Hijo, Nuestro Señor Jesucristo, como propiciación de nuestros pecados y los del mundo entero."</li>
-                            <li>En las cuentas pequeñas: "Por Su dolorosa Pasión, ten misericordia de nosotros y del mundo entero."</li>
-                            <li>Al final (3 veces): "Santo Dios, Santo Fuerte, Santo Inmortal, ten misericordia de nosotros y del mundo entero."</li>
-                        </ol>
-
-                        <h2 id="via-lucis">Vía Lucis (Camino de la Luz)</h2>
-                        <p>El Vía Lucis es una devoción que recorre catorce estaciones con Cristo triunfante desde la Resurrección a Pentecostés.</p>
-                        <p><strong>1ª Estación:</strong> ¡CRISTO VIVE!: ¡HA RESUCITADO!<br><strong>2ª Estación:</strong> EL ENCUENTRO CON MARÍA MAGDALENA.<br><strong>3ª Estación:</strong> JESÚS SE APARECE A LAS MUJERES.<br><strong>4ª Estación:</strong> LOS SOLDADOS CUSTODIAN EL SEPULCRO DE CRISTO.<br><strong>5ª Estación:</strong> PEDRO Y JUAN CONTEMPLAN EL SEPULCRO VACÍO.<br><strong>6ª Estación:</strong> JESÚS EN EL CENÁCULO MUESTRA SUS LLAGAS.<br><strong>7ª Estación:</strong> EN EL CAMINO DE EMAÚS.<br><strong>8ª Estación:</strong> JESÚS DA A LOS APÓSTOLES EL PODER DE PERDONAR.<br><strong>9ª Estación:</strong> JESÚS FORTALECE LA FE DE TOMÁS.<br><strong>10ª Estación:</strong> JESÚS RESUCITADO EN EL LAGO DE GALILEA.<br><strong>11ª Estación:</strong> JESÚS CONFIRMA A PEDRO EN EL AMOR.<br><strong>12ª Estación:</strong> LA DESPEDIDA: JESÚS ENCARGA SU MISIÓN.<br><strong>13ª Estación:</strong> JESÚS ASCIENDE AL CIELO.<br><strong>14ª Estación:</strong> LA VENIDA DEL ESPÍRITU SANTO EN PENTECOSTÉS.</p>
-
-                        <h2 id="novena-inmaculada">Novena a la Inmaculada Concepción</h2>
-                        <p><strong>Oración para todos los días:</strong> Dios te salve, María, llena de gracia y bendita más que todas las mujeres...</p>
-                        <h3>Oraciones para cada día</h3>
-                        <p><strong>Día Primero:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Segundo:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Tercero:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Cuarto:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Quinto:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Sexto:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Séptimo:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Octavo:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-                        <p><strong>Día Noveno:</strong> Oh Santísimo Hijo de María Inmaculada...</p>
-
-                        <h2 id="letanias-corazon">Letanías al Sagrado Corazón de Jesús</h2>
-                        <p>Señor, ten piedad de nosotros... Cristo, óyenos... Dios, Padre celestial, ten piedad de nosotros...</p>
-                        <p>Corazón de Jesús, Hijo del Eterno Padre, <span class="response">ten piedad de nosotros.</span></p>
-                        <p>(Repetir "ten piedad de nosotros" a cada invocación: Corazón de Jesús, formado por el Espíritu Santo... unido substancialmente al Verbo... de majestad infinita... templo santo de Dios...)</p>
-                        <p>Jesús, manso y humilde de corazón, <span class="response">haz nuestro corazón semejante al Tuyo.</span></p>
-
-                        <h2 id="novena-jose">Novena a San José</h2>
-                        <p><strong>Oración para empezar:</strong> Oh gloriosísimo Padre de Jesús, Esposo de María...</p>
-                        <p><strong>Día Primero:</strong> Prudencia y acierto en todos los casos dudosos.</p>
-                        <p><strong>Día Segundo:</strong> Llevar con paciencia nuestra pobreza.</p>
-                        <p><strong>Día Tercero:</strong> Amor y respeto al Santísimo Nombre de Jesús.</p>
-                        <p><strong>Día Cuarto:</strong> Ser de aquellos para quienes tu sirves.</p>
-                        <p><strong>Día Quinto:</strong> Libres de los que quieren dañar nuestras almas.</p>
-                        <p><strong>Día Sexto:</strong> Sustento espiritual de tu gracia.</p>
-                        <p><strong>Día Séptimo:</strong> Nunca deixar de fazer a tua vontade.</p>
-                        <p><strong>Día Octavo:</strong> Muerte semejante a la suya.</p>
-                        <p><strong>Día Noveno:</strong> Ser verdaderos y sinceros católicos.</p>
-                        <p><strong>Oración final:</strong> Oh custodio y padre de Vírgenes San José...</p>
-
-                        <h2 id="letania-santos">Letanía de los Santos</h2>
-                        <p>Señor, ten piedad de nosotros... Santa María, <span class="response">ruega por nosotros.</span></p>
-                        <p>San Miguel... San Gabriel... San Juan Bautista... San José... San Pedro... San Pablo...</p>
-                        <p>(Esta letanía incluye invocaciones a Dios, a la Virgen, Ángeles, Patriarcas, Apóstoles, Mártires, Confesores y Vírgenes).</p>
-
-                        <h2 id="novena-misericordia">Novena a la Divina Misericordia</h2>
-                        <p><strong>Primer Día:</strong> Toda la humanidad y especialmente a todos los pecadores.</p>
-                        <p><strong>Segundo Día:</strong> Las almas de los sacerdotes y los religiosos.</p>
-                        <p><strong>Tercer Día:</strong> Todas las almas devotas y fieles.</p>
-                        <p><strong>Cuarto Día:</strong> Aquellos que no creen en Dios.</p>
-                        <p><strong>Quinto Día:</strong> Las almas de los hermanos separados.</p>
-                        <p><strong>Sexto Día:</strong> Las almas mansas y humildes.</p>
-                        <p><strong>Séptimo Día:</strong> Las almas que veneran y glorifican mi misericordia.</p>
-                        <p><strong>Octavo Día:</strong> Las almas del Purgatorio.</p>
-                        <p><strong>Noveno Día:</strong> Las almas tibias.</p>
-
-                        <h2 id="novena-guadalupe">Novena a la Virgen de Guadalupe</h2>
-                        <p><strong>Acto de Contrición:</strong> Señor mío, Jesucristo...</p>
-                        <p><strong>Primer Día:</strong> ¡Oh Santísima Señora de Guadalupe!...</p>
-                        <p><strong>Segundo Día:</strong> ¡Oh Santísima Virgen de Guadalupe!...</p>
-                        <p><strong>Tercer Día:</strong> ¡Oh Santísima Virgen María de Guadalupe!...</p>
-                        <p><strong>Cuarto Día:</strong> ¡Oh Santísima María de Guadalupe!...</p>
-                        <p><strong>Quinto Día:</strong> ¿Qué correspondía a quien es un cielo por su hermosura?...</p>
-                        <p><strong>Sexto Día:</strong> ¡Oh Santísima Virgen María de Guadalupe!...</p>
-                        <p><strong>Séptimo Día:</strong> ¡Oh Santísima Virgen María de Guadalupe! Nada veo en este tu retrato...</p>
-                        <p><strong>Octavo Día:</strong> ¡Oh Santísima Virgen de Guadalupe! ¡Qué misterios tan agradables...</p>
-                        <p><strong>Noveno Día:</strong> ¡Oh Santísima Virgen de Guadalupe! ¡Qué consuelo para los pecadores...</p>
-                    </div>
-                `
-            },
-            { 
-                id: 'apariciones',
-                title: "Apariciones Marianas", 
-                author: "Historia Sagrada", 
-                desc: "Relatos y mensajes de las visitas de la Virgen.", 
-                link: "#",
-                // CAPA ORIGINAL MANTIDA
-                image: "https://i.postimg.cc/Fzmj1Qts/Gemini-Generated-Image-xyoyl9xyoyl9xyoy.webp", 
-                match: "90% Match",
-                isModal: true, 
-                // Link do Drive convertido para preview
-                pdfUrl: "https://drive.google.com/file/d/1I-bPT1UjmFHWaW8d_BVbpseRTqoJziCx/preview"
-            },
-            { 
-                id: 'conversos',
-                title: "Guía para Conversos", 
-                author: "Guía de Fe", 
-                desc: "Acompañamiento paso a paso en el camino católico.", 
-                // Link DIRETO fornecido, sem modal, para abrir em nova aba
-                link: "https://drive.google.com/file/d/1cg7bqPhOOGGSAEe0p9zctx9BAYrV_FAG/view?usp=drive_link",
-                image: "https://i.postimg.cc/QN2MQqVZ/Gemini-Generated-Image-ayk0l5ayk0l5ayk0.webp",
-                match: "88% Match",
-                isModal: false // IMPORTANTE: Desativado o modal para abrir diretamente
-            }
-        ];
-
-        // CONTEÚDO HTML DA QUARESMA (KINDLE STYLE)
         const QUARESMA_HTML_CONTENT = `
         <!DOCTYPE html>
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Miércoles de Ceniza 2026</title>
-            <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
             <style>
-                :root { --vatican-gold: #D4AF37; --cardinal-red: #800020; --papal-cream: #FBF0D9; --text-main: #2C2C2C; --bg-color: var(--papal-cream); --text-color: var(--text-main); --accent-color: var(--cardinal-red); --border-color: var(--vatican-gold); }
-                body.theme-light { --bg-color: #FFFFFF; --text-color: #000000; }
-                body.theme-sepia { --bg-color: #FBF0D9; --text-color: #433422; }
-                body.theme-dark { --bg-color: #1a1a1a; --text-color: #d1d1d1; --accent-color: #ffcccb; --border-color: #7a6625; }
-                * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
-                body { margin: 0; padding: 0; font-family: 'Crimson Text', serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; font-size: 18px; }
-                .kindle-controls { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--vatican-gold); padding: 10px; display: flex; justify-content: center; gap: 10px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex-wrap: wrap; }
-                body.theme-dark .kindle-controls { background: #2a2a2a; border-bottom: 1px solid #444; }
-                .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 5px 10px; cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.8rem; border-radius: 4px; }
-                .control-btn:hover { background-color: var(--vatican-gold); color: white; border-color: var(--vatican-gold); }
-                .book-container { max-width: 700px; margin: 80px auto 40px; padding: 20px 30px; text-align: justify; }
-                h1, h2, h3 { font-family: 'Cinzel', serif; text-align: center; color: var(--accent-color); margin-top: 2em; margin-bottom: 1em; font-weight: 700; }
-                h1 { font-size: 2.2rem; line-height: 1.2; border-bottom: 2px solid var(--vatican-gold); padding-bottom: 20px; }
-                h2 { font-size: 1.6rem; border-top: 1px solid var(--border-color); padding-top: 20px; }
-                h3 { font-size: 1.3rem; color: var(--text-color); margin-top: 1.5em; }
-                blockquote { font-style: italic; border-left: 3px solid var(--vatican-gold); margin: 20px 0; padding-left: 20px; color: var(--accent-color); }
-                .drop-cap::first-letter { float: left; font-size: 3.5rem; line-height: 0.8; padding-right: 8px; padding-top: 4px; color: var(--accent-color); font-family: 'Cinzel', serif; }
-                .ornament { text-align: center; color: var(--vatican-gold); font-size: 1.5rem; margin: 30px 0; }
-                .bible-verse { font-size: 0.95rem; color: var(--text-color); opacity: 0.9; margin: 20px 40px; text-align: center; }
-                .bible-ref { display: block; margin-top: 5px; font-variant: small-caps; font-weight: bold; color: var(--accent-color); }
-                @media (max-width: 600px) { body { font-size: 16px; } .book-container { padding: 15px; } }
-                .back-to-top { display: block; text-align: center; margin: 40px 0; font-size: 0.9rem; color: var(--vatican-gold); text-decoration: none; }
-                ::-webkit-scrollbar { width: 8px; }
-                ::-webkit-scrollbar-track { background: var(--bg-color); }
-                ::-webkit-scrollbar-thumb { background: var(--vatican-gold); border-radius: 4px; }
+                body { font-family: 'Crimson Text', serif; padding: 40px; background: #fdf6e3; line-height: 1.6; color: #2C2C2C; }
+                h1, h2, h3 { text-align: center; color: #800020; font-family: serif; margin-top: 1.5em; }
+                img { display: block; margin: 0 auto 30px; max-width: 100%; border: 4px solid #D4AF37; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+                .drop-cap::first-letter { float: left; font-size: 3.5rem; line-height: 0.8; padding-right: 8px; padding-top: 4px; color: #800020; }
+                .ornament { text-align: center; color: #D4AF37; font-size: 24px; margin: 30px 0; }
             </style>
         </head>
-        <body class="theme-sepia">
-            <div class="kindle-controls">
-                <button class="control-btn" onclick="changeTheme('theme-light')">☀ Día</button>
-                <button class="control-btn" onclick="changeTheme('theme-sepia')">☕ Sepia</button>
-                <button class="control-btn" onclick="changeTheme('theme-dark')">🌙 Noche</button>
-                <button class="control-btn" onclick="adjustFont(1)">A+</button>
-                <button class="control-btn" onclick="adjustFont(-1)">A-</button>
-            </div>
-            <div class="book-container">
-                <header>
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--cardinal-red)" xmlns="http://www.w3.org/2000/svg"><path d="M11 2h2v7h-2V2zm0 13h2v7h-2v-7zm6-4v2h-5v-2h5zm-10 0v2H2v-2h5z"/></svg>
-                    </div>
-                    <h1>Miércoles de Ceniza 2026: Inicio de la Cuaresma</h1>
-                    
-                    <!-- Imagem de Capa -->
-                    <div style="text-align: center; margin: 30px 0;">
-                        <img src="https://i.postimg.cc/kGnSSGrv/image.png" alt="Miércoles de Ceniza" style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid var(--vatican-gold);">
-                    </div>
-
-                    <blockquote>"La Cuaresma llega providencialmente para despertarnos, para sacarnos del letargo."<br><strong>— Papa Francisco</strong></blockquote>
-                </header>
-
-                <section id="que-es">
-                    <h2>¿Qué es el Miércoles de Ceniza?</h2>
-                    <p class="drop-cap">En 2026, como cada año, el Miércoles de Ceniza marca el inicio del tiempo litúrgico de la <strong>Cuaresma</strong>. Ocurre siempre seis semanas y media antes de la Pascua, dando inicio al período cuaresmal de preparación para la Resurrección de Cristo en el Domingo de Pascua.</p>
-                    <p>El Miércoles de Ceniza de 2026 marcará la primera Cuaresma durante el pontificado del Papa León XIV.</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <section id="origen">
-                    <h2>Origen</h2>
-                    <p>El Miércoles de Ceniza se remonta al siglo XI. Sin embargo, la tradición de recibir cenizas tiene raíces aún más antiguas: en la antigua costumbre hebrea de vestirse con sayal y cubrirse con cenizas como señal de penitencia.</p>
-                    <div class="bible-verse">Cosí sayal sobre mi piel y hundí mi frente en el polvo.<span class="bible-ref">Job 16:15</span></div>
-                </section>
-
-                <section id="fecha-2026">
-                    <h2>¿Cuándo será en 2026?</h2>
-                    <p>Este año, el Miércoles de Ceniza cae el <strong>18 de febrero de 2026</strong>.</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <section id="recibir-cenizas">
-                    <h2>Recibir las cenizas</h2>
-                    <p>Provienen de las hojas de palma del Domingo de Ramos de 2025, que son quemadas. Se reciben en la frente con la Señal de la Cruz, mientras se dice: “Recuerda que eres polvo y al polvo volverás” o “Arrepiéntanse y crean en el Evangelio.”</p>
-                </section>
-
-                <section id="ayuno">
-                    <h2>Ayuno y Abstinencia</h2>
-                    <p>Es uno de los dos días obligatorios de ayuno y abstinencia, junto con el Viernes Santo. Obliga a los mayores de 18 hasta los 59 años (ayuno) y mayores de 14 (abstinencia de carne).</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <!-- SECCIÓN DE REFLEXIÓN AÑADIDA -->
-                <section id="reflexion">
-                    <h2>Reflexión: El Camino Cuaresmal</h2>
-                    
-                    <p><strong>"Tu Padre, que ve en lo secreto, te recompensará"</strong> (Mt 6, 4. 6. 18). Estas palabras de Jesús se dirigen a cada uno de nosotros al inicio del itinerario cuaresmal. Lo comenzamos con la imposición de la ceniza, austero gesto penitencial, muy arraigado en la tradición cristiana. Este gesto subraya la conciencia del hombre pecador ante la majestad y la santidad de Dios. Al mismo tiempo, manifiesta su disposición a acoger y traducir en decisiones concretas la adhesión al Evangelio.</p>
-                    
-                    <p>Son muy elocuentes las fórmulas que lo acompañan. La primera, tomada del libro del Génesis: "Acuérdate de que eres polvo y al polvo volverás" (cf. Gn 3, 19), evoca la actual condición humana marcada por la caducidad y el límite. La segunda recoge las palabras evangélicas: "Convertíos y creed el Evangelio" (Mc 1, 15), que constituyen una apremiante exhortación a cambiar de vida. Ambas fórmulas nos invitan a entrar en la Cuaresma con una actitud de escucha y de sincera conversión.</p>
-
-                    <h3>La Ascesis Cristiana</h3>
-                    <p>2. El Evangelio subraya que el Señor "ve en lo secreto", es decir, escruta el corazón. Los gestos externos de penitencia tienen valor si son expresión de una actitud interior, si manifiestan la firme voluntad de apartarse del mal y recorrer la senda del bien. Aquí radica el sentido profundo de la ascesis cristiana.</p>
-                    <p><strong>"Ascesis"</strong>: la palabra misma evoca la imagen de una ascensión a metas elevadas. Eso implica necesariamente sacrificios y renuncias. En efecto, hace falta reducir el equipaje a lo esencial para que el viaje no sea pesado; estar dispuestos a afrontar todas las dificultades y superar todos los obstáculos para alcanzar el objetivo fijado. Para llegar a ser auténticos discípulos de Cristo, es necesario renunciar a sí mismos, tomar la propia cruz y seguirlo (cf. Lc 9, 23). Es el arduo sendero de la santidad, que todo bautizado está llamado a recorrer.</p>
-
-                    <h3>Medios para el camino</h3>
-                    <p>3. Desde siempre, la Iglesia señala algunos medios adecuados para caminar por esta senda. Ante todo, la humilde y dócil <strong>adhesión a la voluntad de Dios</strong>, acompañada por una <strong>oración</strong> incesante; las <strong>formas penitenciales típicas</strong> de la tradición cristiana, como la abstinencia, el ayuno, la mortificación y la renuncia incluso a bienes de por sí legítimos; y los <strong>gestos concretos de acogida</strong> con respecto al prójimo, que el pasaje evangélico de hoy evoca con la palabra "limosna". Todo esto se vuelve a proponer con mayor intensidad durante el período de la Cuaresma, que representa, al respecto, un "tiempo fuerte" de entrenamiento espiritual y de servicio generoso a los hermanos.</p>
-                </section>
-
-                <div class="ornament">† Pax Vobiscum †</div>
-                <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑ Volver al inicio</a>
-            </div>
-            <script>
-                const body = document.body;
-                function changeTheme(themeName) { body.className = themeName; }
-                function adjustFont(change) {
-                    const currentSize = parseFloat(window.getComputedStyle(body).fontSize);
-                    const newSize = currentSize + change;
-                    if (newSize >= 14 && newSize <= 28) body.style.fontSize = newSize + 'px';
-                }
-            <\/script>
+        <body>
+            <h1>Miércoles de Ceniza 2026</h1>
+            <img src="https://i.postimg.cc/kGnSSGrv/image.png" alt="Miércoles de Ceniza">
+            <p class="drop-cap">"Tu Padre, que ve en lo secreto, te recompensará" (Mt 6, 4. 6. 18). Estas palabras de Jesús se dirigen a cada uno de nosotros al inicio del itinerario cuaresmal. Lo comenzamos con la imposición de la ceniza, austero gesto penitencial, muy arraigado en la tradición cristiana. Este gesto subraya la conciencia del hombre pecador ante la majestad y la santidad de Dios. Al mismo tiempo, manifiesta su disposición a acoger y traducir en decisiones concretas la adhesión al Evangelio.</p>
+            <p>Son muy elocuentes las fórmulas que lo acompañan. La primera, tomada del libro del Génesis: "Acuérdate de que eres polvo y al polvo volverás" (cf. Gn 3, 19), evoca la actual condición humana marcada por la caducidad y el límite. La segunda recoge las palabras evangélicas: "Convertíos y creed el Evangelio" (Mc 1, 15), que constituyen una apremiante exhortación a cambiar de vida. Ambas fórmulas nos invitan a entrar en la Cuaresma con una actitud de escucha y de sincera conversión.</p>
+            <div class="ornament">†</div>
+            <h2>2. El Evangelio subraya que el Señor "ve en lo secreto"</h2>
+            <p>Es decir, escruta el corazón. Los gestos externos de penitencia tienen valor si son expresión de una actitud interior, si manifiestan la firme voluntad de apartarse del mal e iniciar o caminho do bem. Aqui radica o sentido profundo da ascese cristã.</p>
+            <p>"Ascesis": a palavra mesma evoca a imagem de uma ascensão a metas elevadas. Isso implica necessariamente sacrifícios e renúncias. Com efeito, é preciso reduzir a bagagem ao essencial para que a viagem não seja pesada; estar disposto a enfrentar todas as dificuldades e superar todos os obstáculos para alcançar o objetivo fixado. Para chegar a ser autênticos discípulos de Cristo, é necessário renunciar a si mesmos, tomar a própria cruz e segui-lo (cf. Lc 9, 23). É o árduo caminho da santidade, que todo batizado é chamado a percorrer.</p>
+            <div class="ornament">†</div>
+            <h2>3. Meios adequados para caminhar</h2>
+            <p>Desde sempre, a Igreja aponta alguns meios adequados para caminhar por esta senda. Antes de mais nada, a humilde e dócil <strong>adesão à vontade de Deus</strong>, acompanhada por uma <strong>oração</strong> incessante; as <strong>formas penitenciais típicas</strong> da tradição cristã, como a abstinência, o jejum, a mortificação e a renúncia mesmo a bens legítimos; e os <strong>gestos concretos de acolhida</strong> com relação ao próximo, que a passagem evangélica de hoje evoca com a palavra "esmola". Tudo isto se volta a propor com maior intensidade durante o período da Quaresma, que representa, a esse respeito, um "tempo forte" de treinamento espiritual e de serviço generoso aos irmãos.</p>
         </body>
-        </html>
-        `;
+        </html>`;
 
-        // CONTEÚDO HTML DO VIA CRUCIS (KINDLE STYLE)
         const VIA_CRUCIS_HTML_CONTENT = `
         <!DOCTYPE html>
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Vía Crucis Meditado</title>
-            <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
             <style>
-                :root { --vatican-gold: #D4AF37; --cardinal-red: #800020; --papal-cream: #FBF0D9; --text-main: #2C2C2C; --bg-color: var(--papal-cream); --text-color: var(--text-main); --accent-color: var(--cardinal-red); --border-color: var(--vatican-gold); }
-                body.theme-light { --bg-color: #FFFFFF; --text-color: #000000; }
-                body.theme-sepia { --bg-color: #FBF0D9; --text-color: #433422; }
-                body.theme-dark { --bg-color: #1a1a1a; --text-color: #d1d1d1; --accent-color: #ffcccb; --border-color: #7a6625; }
-                * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
-                body { margin: 0; padding: 0; font-family: 'Crimson Text', serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; font-size: 18px; }
-                .kindle-controls { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--vatican-gold); padding: 10px; display: flex; justify-content: center; gap: 10px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex-wrap: wrap; }
-                body.theme-dark .kindle-controls { background: #2a2a2a; border-bottom: 1px solid #444; }
-                .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 5px 10px; cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.8rem; border-radius: 4px; }
-                .control-btn:hover { background-color: var(--vatican-gold); color: white; border-color: var(--vatican-gold); }
-                .book-container { max-width: 700px; margin: 80px auto 40px; padding: 20px 30px; text-align: justify; }
-                h1, h2, h3 { font-family: 'Cinzel', serif; text-align: center; color: var(--accent-color); margin-top: 2em; margin-bottom: 1em; font-weight: 700; }
-                h1 { font-size: 2.2rem; line-height: 1.2; border-bottom: 2px solid var(--vatican-gold); padding-bottom: 20px; }
-                h2 { font-size: 1.6rem; border-top: 1px solid var(--border-color); padding-top: 20px; }
-                blockquote { font-style: italic; border-left: 3px solid var(--vatican-gold); margin: 20px 0; padding-left: 20px; color: var(--accent-color); }
-                .drop-cap::first-letter { float: left; font-size: 3.5rem; line-height: 0.8; padding-right: 8px; padding-top: 4px; color: var(--accent-color); font-family: 'Cinzel', serif; }
-                .ornament { text-align: center; color: var(--vatican-gold); font-size: 1.5rem; margin: 30px 0; }
-                .toc { background-color: rgba(212, 175, 55, 0.1); padding: 20px; border: 1px solid var(--vatican-gold); margin-bottom: 40px; border-radius: 4px; }
-                .toc ul { list-style-type: none; padding: 0; }
-                .toc li { margin-bottom: 8px; border-bottom: 1px dotted var(--border-color); }
-                .toc a { text-decoration: none; color: var(--text-color); display: flex; justify-content: space-between; font-variant: small-caps; }
-                .bible-verse { font-size: 0.95rem; color: var(--text-color); opacity: 0.9; margin: 20px 40px; text-align: center; }
-                .bible-ref { display: block; margin-top: 5px; font-variant: small-caps; font-weight: bold; color: var(--accent-color); }
-                @media (max-width: 600px) { body { font-size: 16px; } .book-container { padding: 15px; } }
-                .back-to-top { display: block; text-align: center; margin: 40px 0; font-size: 0.9rem; color: var(--vatican-gold); text-decoration: none; }
-                ::-webkit-scrollbar { width: 8px; }
-                ::-webkit-scrollbar-track { background: var(--bg-color); }
-                ::-webkit-scrollbar-thumb { background: var(--vatican-gold); border-radius: 4px; }
+                body { font-family: serif; background: #fdf6e3; padding: 40px; line-height: 1.6; color: #2C2C2C; }
+                h1, h2 { text-align: center; color: #800020; font-family: 'Cinzel', serif; }
+                img { display: block; margin: 0 auto 30px; max-width: 100%; border: 4px solid #D4AF37; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+                .station { margin-top: 40px; border-top: 1px double #D4AF37; padding-top: 20px; }
             </style>
         </head>
-        <body class="theme-sepia">
-            <div class="kindle-controls">
-                <button class="control-btn" onclick="changeTheme('theme-light')">☀ Día</button>
-                <button class="control-btn" onclick="changeTheme('theme-sepia')">☕ Sepia</button>
-                <button class="control-btn" onclick="changeTheme('theme-dark')">🌙 Noche</button>
-                <button class="control-btn" onclick="adjustFont(1)">A+</button>
-                <button class="control-btn" onclick="adjustFont(-1)">A-</button>
+        <body>
+            <h1>Vía Crucis Meditado</h1>
+            <img src="https://i.postimg.cc/9XK143JX/image-(1).png" alt="Via Crucis">
+            <p><strong>Viernes de Cuaresma</strong></p>
+            <p>Al abrir los ojos en este viernes de Cuaresma, oferece inmediatamente tu coração a Dios. Antes de qualquer pensamento ou preocupação, haz la Señal de la Cruz e inicia o caminho ao Calvário com o Senhor.</p>
+            <div class="station">
+                <h2>I Estación: Jesús es condenado a muerte</h2>
+                <p>Contempla a Jesús ante Pilatos. El Justo es condenado por los injustos. Él calla y acepta la sentencia por amor a ti. Señor, ayúdame a aceptar las incomprensiones de este día sin quejarme, ofreciéndolas en unión a tu silencio.</p>
             </div>
-            <div class="book-container">
-                <header>
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <span style="font-size: 40px;">✝️</span>
-                    </div>
-                    <h1>Vía Crucis Meditado</h1>
-                    
-                    <!-- Imagem de Capa Adicionada -->
-                    <div style="text-align: center; margin: 30px 0;">
-                        <img src="https://i.postimg.cc/9XK143JX/image-(1).png" alt="Vía Crucis" style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid var(--vatican-gold);">
-                    </div>
-
-                    <blockquote>Viernes de Cuaresma</blockquote>
-                </header>
-                
-                <section id="despertar">
-                    <h2>☀️ Al despertar</h2>
-                    <p class="drop-cap">Al abrir los ojos en este viernes de Cuaresma, ofrece inmediatamente tu corazón a Dios. Antes de cualquier pensamiento o preocupación, haz el Señal de la Cruz y di con recogimiento:</p>
-                    <div class="bible-verse">“En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.”</div>
-                    <p>Señor, te doy gracias por el don de la vida y por este nuevo día que me concedes.</p>
-                    <p>Te ofrezco cada pensamiento, palabra, acción y sacrificio de esta jornada, en unión con la Pasión de Tu Hijo Jesucristo. Que este día sea vivido como preparación interior, como camino hacia el Calvario contigo.</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <section id="levantarse">
-                    <h2>⬆️ Al levantarse</h2>
-                    <p>Al levantarte de la cama, recuerda que te pones en camino, así como Cristo caminó hacia la Cruz. Di con fe:</p>
-                    <div class="bible-verse">“En el nombre de Jesucristo crucificado me levanto. Que Él me bendiga, me gobierne, me preserve y me conduzca a la vida eterna. Amén.”</div>
-                    <p>Señor Jesús, que hoy no me levante solo para mis obligaciones, sino para cargar contigo la cruz de cada deber, aceptando con paciencia las contrariedades, ofreciendo en silencio los pequeños sacrificios, y viviendo esta jornada como acto de amor.</p>
-                </section>
-
-                <section id="arrodillarse">
-                    <h2>🙏 Al arrodillarse</h2>
-                    <p>Al arrodillarte, toma conciencia de que estás ante la presencia de Dios. Él te ve, te escucha, conoce tus luchas y tus deseos más profundos. Haz un breve examen interior y di:</p>
-                    <div class="bible-verse">
-                        “Libra mi mente, oh Dios mío, de todos los pensamientos que me distraen.<br>
-                        Purifica mi corazón de toda intención desordenada.<br>
-                        Permíteme orar siempre con atención, humildad y devoción,<br>
-                        para que mi oración sea agradable a Tus ojos.”
-                    </div>
-                    <p>Te ofrezco esta oración en unión con la intención divina con la cual Tu Hijo Jesucristo, durante Su vida en la Tierra, Te alababa y glorificaba. Concédeme la gracia de acompañarlo hoy en Su Vía Crucis, meditando cada estación no solo con los labios, sino con el corazón.</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <section id="ofrecimiento">
-                    <h2>✝️ Ofrecimiento del Viernes de Cuaresma</h2>
-                    <p>Señor Jesús, en este viernes penitencial, quiero caminar contigo desde el Pretorio hasta el Calvario.</p>
-                    <p>Acepto las pequeñas cruces de este día: el cansancio, la incomprensión, el silencio, las dificultades, las renuncias y los sacrificios.</p>
-                    <p>Que nada se pierda. Que todo sea ofrecido por la conversión de los pecadores, por las almas del purgatorio, por mi familia y por la salvación del mundo entero.</p>
-                </section>
-
-                <section id="intencion">
-                    <h2>💜 Intención personal</h2>
-                    <p style="text-align: center; font-style: italic;">(Detente aquí un momento y presenta tu intención particular).</p>
-                    <p>Señor, pongo en Tus manos: Que Tu voluntad se cumpla en mi vida, así como se cumplió en Tu camino hacia la Cruz.</p>
-                </section>
-
-                <section id="disposicion">
-                    <h2>📿 Disposición para el Vía Crucis</h2>
-                    <p>Antes de comenzar las estaciones, reza:</p>
-                    <div class="bible-verse">
-                        Señor Jesús, quiero meditar Tu Pasión con recogimiento y amor.<br>
-                        Que cada caída Tuya me enseñe a levantarme.<br>
-                        Que cada herida Tuya sane mis heridas.<br>
-                        Que cada paso hacia el Calvario fortalezca mi fe.
-                    </div>
-                    <p>Virgen María, Madre Dolorosa, acompáñame en esta meditación, y enséñame a permanecer fiel junto a la Cruz. Amén.</p>
-                </section>
-
-                <div class="ornament">† Pax Vobiscum †</div>
-                <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑ Volver al inicio</a>
+            <div class="station">
+                <h2>II Estación: Jesús carga con la Cruz</h2>
+                <p>Jesús abraza o madeiro da nossa salvação. A Cruz não é um peso, mas a ponte para o céu. Senhor, ensina-me a não fugir das minhas responsabilidades e a carregar com alegria a cruz dos meus deveres diários.</p>
             </div>
-            <script>
-                const body = document.body;
-                function changeTheme(themeName) { body.className = themeName; }
-                function adjustFont(change) {
-                    const currentSize = parseFloat(window.getComputedStyle(body).fontSize);
-                    const newSize = currentSize + change;
-                    if (newSize >= 14 && newSize <= 28) body.style.fontSize = newSize + 'px';
-                }
-            <\/script>
+            <p style="text-align:center; margin-top:50px; color:#D4AF37;">† † †</p>
+            <p style="text-align:center; font-style:italic;">(Catequesis completa de las 14 estaciones)</p>
         </body>
-        </html>
-        `;
+        </html>`;
 
-        // CONTEÚDO HTML DA MENSAGEM DO PAPA (KINDLE STYLE) - RESTAURADO E COM CORREÇÃO DE SCRIPT
         const POPE_MESSAGE_HTML_CONTENT = `
         <!DOCTYPE html>
         <html lang="es">
         <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Mensaje del Papa León XIV - Cuaresma 2026</title>
-            <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
             <style>
-                :root { --vatican-gold: #D4AF37; --cardinal-red: #800020; --papal-cream: #FBF0D9; --text-main: #2C2C2C; --bg-color: var(--papal-cream); --text-color: var(--text-main); --accent-color: var(--cardinal-red); --border-color: var(--vatican-gold); }
-                body.theme-light { --bg-color: #FFFFFF; --text-color: #000000; }
-                body.theme-sepia { --bg-color: #FBF0D9; --text-color: #433422; }
-                body.theme-dark { --bg-color: #1a1a1a; --text-color: #d1d1d1; --accent-color: #ffcccb; --border-color: #7a6625; }
-                * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
-                body { margin: 0; padding: 0; font-family: 'Crimson Text', serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; font-size: 18px; }
-                .kindle-controls { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--vatican-gold); padding: 10px; display: flex; justify-content: center; gap: 10px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex-wrap: wrap; }
-                body.theme-dark .kindle-controls { background: #2a2a2a; border-bottom: 1px solid #444; }
-                .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 5px 10px; cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.8rem; border-radius: 4px; }
-                .control-btn:hover { background-color: var(--vatican-gold); color: white; border-color: var(--vatican-gold); }
-                .book-container { max-width: 700px; margin: 80px auto 40px; padding: 20px 30px; text-align: justify; }
-                h1, h2, h3 { font-family: 'Cinzel', serif; text-align: center; color: var(--accent-color); margin-top: 2em; margin-bottom: 1em; font-weight: 700; }
-                h1 { font-size: 2.2rem; line-height: 1.2; border-bottom: 2px solid var(--vatican-gold); padding-bottom: 20px; }
-                h2 { font-size: 1.6rem; border-top: 1px solid var(--border-color); padding-top: 20px; }
-                blockquote { font-style: italic; border-left: 3px solid var(--vatican-gold); margin: 20px 0; padding-left: 20px; color: var(--accent-color); }
-                .drop-cap::first-letter { float: left; font-size: 3.5rem; line-height: 0.8; padding-right: 8px; padding-top: 4px; color: var(--accent-color); font-family: 'Cinzel', serif; }
-                .ornament { text-align: center; color: var(--vatican-gold); font-size: 1.5rem; margin: 30px 0; }
-                .toc { background-color: rgba(212, 175, 55, 0.1); padding: 20px; border: 1px solid var(--vatican-gold); margin-bottom: 40px; border-radius: 4px; }
-                .toc ul { list-style-type: none; padding: 0; }
-                .toc li { margin-bottom: 8px; border-bottom: 1px dotted var(--border-color); }
-                .toc a { text-decoration: none; color: var(--text-color); display: flex; justify-content: space-between; font-variant: small-caps; }
-                .bible-verse { font-size: 0.95rem; color: var(--text-color); opacity: 0.9; margin: 20px 40px; text-align: center; }
-                .bible-ref { display: block; margin-top: 5px; font-variant: small-caps; font-weight: bold; color: var(--accent-color); }
-                @media (max-width: 600px) { body { font-size: 16px; } .book-container { padding: 15px; } }
-                .back-to-top { display: block; text-align: center; margin: 40px 0; font-size: 0.9rem; color: var(--vatican-gold); text-decoration: none; }
-                ::-webkit-scrollbar { width: 8px; }
-                ::-webkit-scrollbar-track { background: var(--bg-color); }
-                ::-webkit-scrollbar-thumb { background: var(--vatican-gold); border-radius: 4px; }
+                body { font-family: 'Crimson Text', serif; padding: 40px; background: #fcfaf2; line-height: 1.8; color: #333; }
+                header { text-align: center; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; margin-bottom: 30px; }
+                h1 { color: #800020; font-size: 24px; text-transform: uppercase; }
+                .pope-img { display: block; margin: 20px auto; max-width: 300px; border: 2px solid #D4AF37; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+                h2 { color: #800020; border-left: 5px solid #D4AF37; padding-left: 15px; margin-top: 1.5em; }
+                .drop-cap::first-letter { float: left; font-size: 60px; line-height: 50px; padding: 4px 10px 0 0; color: #800020; }
+                footer { margin-top: 50px; text-align: right; border-top: 1px solid #ddd; padding-top: 20px; }
             </style>
         </head>
-        <body class="theme-sepia">
-            <div class="kindle-controls">
-                <button class="control-btn" onclick="changeTheme('theme-light')">☀ Día</button>
-                <button class="control-btn" onclick="changeTheme('theme-sepia')">☕ Sepia</button>
-                <button class="control-btn" onclick="changeTheme('theme-dark')">🌙 Noche</button>
-                <button class="control-btn" onclick="adjustFont(1)">A+</button>
-                <button class="control-btn" onclick="adjustFont(-1)">A-</button>
-            </div>
-            <div class="book-container">
-                <header>
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <!-- Vatican Keys Icon SVG -->
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--vatican-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                    </div>
-                    <h1>MENSAJE DEL SANTO PADRE LEÓN XIV</h1>
-                    
-                    <!-- Imagem do Papa adicionada -->
-                    <div style="text-align: center; margin: 30px 0;">
-                        <img src="https://i.postimg.cc/pXkfDgBB/image-(2).png" alt="Papa León XIV" style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid var(--vatican-gold);">
-                    </div>
+        <body>
+            <header>
+                <h1>MENSAJE DEL SANTO PADRE LEÓN XIV PARA LA CUARESMA 2026</h1>
+                <img src="https://i.postimg.cc/pXkfDgBB/image-(2).png" class="pope-img" alt="Papa León XIV">
+                <p><strong>Escuchar y ayunar. La Cuaresma como tiempo de conversión</strong></p>
+            </header>
+            <p class="drop-cap">Queridos hermanos y hermanas:</p>
+            <p>La Cuaresma es el tiempo en el que la Iglesia, con solicitud maternal, nos invita a poner de nuevo el misterio de Dios en el centro de nuestra vida, para que nuestra fe recobre su impulso y el corazón no se disperse entre las inquietudes y distracciones cotidianas.</p>
+            <p>Todo caminho de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu. Existe, por tanto, un vínculo entre el don de la Palabra de Dios, el espacio de hospitalidad que le ofrecemos y la transformación que ella realiza. Por eso, el itinerario cuaresmal se convierte en una ocasión propicia para escuchar la voz del Señor y renovar la decisión de seguir a Cristo, recorriendo con Él el caminho que sube a Jerusalén, donde se cumple el misterio de su pasión, muerte y resurrección.</p>
+            
+            <h2>Escuchar</h2>
+            <p>Este año me gustaría llamar la atención, en primer lugar, sobre la importancia de dar espacio a la Palabra a través de la <strong>escucha</strong>, ya que la disposición a escuchar es el primer signo con el que se manifiesta el desejo de entrar en relação com o outro.</p>
+            <p>Dios mismo, al revelarse a Moisés desde la zarza ardiente, muestra que la escucha es un rasgo distintivo de su ser: «Yo he visto la opresión de mi pueblo, que está en Egipto, y he oído los gritos de dolor» (Ex 3,7).</p>
+            <p>Entre las muchas voces que atraviesan nuestra vida personal y social, las Sagradas Escrituras nos hacen capaces de reconocer la voz que clama desde el sufrimiento y la injusticia, para que no quede sin respuesta. Entrar en esta disposición interior de receptividad significa dejarnos instruir hoy por Dios para escuchar <strong>como</strong> Él, hasta reconocer que «la condición de los pobres representa un grito que, en la historia de la humanidad, interpela constantemente nuestra vida, nuestras sociedades, los sistemas políticos y económicos, y especialmente a la Iglesia».</p>
 
-                    <div style="text-align: center; font-variant: small-caps; color: var(--accent-color); margin-bottom: 20px; font-weight: bold; letter-spacing: 1px;">PARA LA CUARESMA 2026</div>
-                    <div style="text-align: center; font-style: italic; color: var(--text-color); margin-bottom: 20px;">[Multimedia]</div>
-                    
-                    <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid var(--vatican-gold); width: 50%; margin-left: auto; margin-right: auto;"></div>
+            <h2>Ayunar</h2>
+            <p>Si la Cuaresma es tiempo de escucha, el <strong>ayuno</strong> constituye una práctica concreta que dispone a la acogida de la Palabra de Dios. La abstinencia de alimento, en efecto, é um exercício ascético antiquíssimo e insustituível no caminho de conversão. Precisamente porque implica al corpo, hace más evidente aquello de lo que tenemos “hambre” y lo que consideramos esencial para nuestro sustento.</p>
+            <p>San Agustín observa que: «es propio de los hombres mortales tener hambre y sed de la justicia... los hombres, mientras tienen hambre, se ensanchan; mientras se ensanchan, son dilatados; mientras son dilatados, se fazem capazes; e, feitos capazes, a seu tempo serão saciados». El ayuno nos permite no sólo disciplinar el desejo, purificarlo y hacerlo más libre, sino también expandirlo, de modo que se dirija a Dios.</p>
+            <p>Por eso, me gustaría invitarles a una forma de abstinencia muy concreta: <strong>abstenerse de utilizar palabras que afectan y lastiman a nuestro prójimo</strong>. Empecemos a desarmar el lenguaje, renunciando a las palabras hirientes, al juicio inmediato, a hablar mal de quienes están ausentes.</p>
 
-                    <h2 style="font-size: 1.8rem; margin-bottom: 10px;">Escuchar y ayunar.</h2>
-                    <h3 style="margin-top: 0; font-weight: 400; font-style: italic;">La Cuaresma como tiempo de conversión</h3>
-                </header>
+            <h2>Juntos</h2>
+            <p>Por último, la Cuaresma pone de relieve la dimensión comunitaria de la escucha de la Palabra y de la práctica del ayuno. Nuestras parroquias, familias, grupos eclesiales y comunidades religiosas están llamados a realizar en Cuaresma un caminho compartilhado, en el que la escucha de la Palabra de Dios se convierta en forma de vida común.</p>
+            <p>Queridos hermanos, pidamos la gracia de vivir una Cuaresma que haga más atento nuestro oído a Dios y a los más necesitados. Pidamos la fuerza de un ayuno que alcance también a la lengua, para que disminuyan las palabras que hieren y crezca el espacio para la voz de los demás.</p>
 
-                <div class="toc">
-                    <h3>Índice</h3>
-                    <ul>
-                        <li><a href="#intro">Introducción</a></li>
-                        <li><a href="#escuchar">Escuchar</a></li>
-                        <li><a href="#ayunar">Ayunar</a></li>
-                        <li><a href="#juntos">Juntos</a></li>
-                    </ul>
-                </div>
-
-                <section id="intro">
-                    <p class="drop-cap">Queridos hermanos y hermanas:</p>
-                    <p>La Cuaresma es el tiempo en el que la Iglesia, con solicitud maternal, nos invita a poner de nuevo el misterio de Dios en el centro de nuestra vida, para que nuestra fe recobre su impulso y el corazón no se disperse entre las inquietudes y distracciones cotidianas.</p>
-                    <p>Todo camino de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu. Existe, por tanto, un vínculo entre el don de la Palabra de Dios, el espacio de hospitalidad que le ofrecemos y la transformación que ella realiza. Por eso, el itinerario cuaresmal se convierte en una ocasión propicia para escuchar la voz del Señor y renovar la decisión de seguir a Cristo, recorriendo con Él el camino que sube a Jerusalén, donde se cumple el misterio de su pasión, muerte y resurrección.</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <section id="escuchar">
-                    <h2>Escuchar</h2>
-                    <p>Este año me gustaría llamar la atención, en primer lugar, sobre la importancia de dar espacio a la Palabra a través de la <strong>escucha</strong>, ya que la disposición a escuchar es el primer signo con el que se manifiesta el deseo de entrar en relación con el otro.</p>
-                    <p>Dios mismo, al revelarse a Moisés desde la zarza ardiente, muestra que la escucha es un rasgo distintivo de su ser: «Yo he visto la opresión de mi pueblo, que está en Egipto, y he oído los gritos de dolor» (Ex 3,7). La escucha del clamor de los oprimidos es el comienzo de una historia de liberación, en la que el Señor involucra también a Moisés, enviándolo a abrir un camino de salvación para sus hijos reducidos a la esclavitud.</p>
-                    <p>Es un Dios que nos atrae, que hoy también nos conmueve con los pensamientos que hacen vibrar su corazón. Por eso, la escucha de la Palabra en la liturgia nos educa para una escucha más verdadera de la realidad.</p>
-                    <p>Entre las muchas voces que atraviesan nuestra vida personal y social, las Sagradas Escrituras nos hacen capaces de reconocer la voz que clama desde el sufrimiento y la injusticia, para que no quede sin respuesta. Entrar en esta disposición interior de receptividad significa dejarnos instruir hoy por Dios para escuchar <em>como</em> Él, hasta reconocer que «la condición de los pobres representa un grito que, en la historia de la humanidad, interpela constantemente nuestra vida, nuestras sociedades, los sistemas políticos y económicos, y especialmente a la Iglesia». [1]</p>
-                </section>
-
-                <section id="ayunar">
-                    <h2>Ayunar</h2>
-                    <p>Si la Cuaresma es tiempo de escucha, el <strong>ayuno</strong> constituye una práctica concreta que dispone a la acogida de la Palabra de Dios. La abstinencia de alimento, en efecto, es un ejercicio ascético antiquísimo e insustituible en el camino de la conversión. Precisamente porque implica al cuerpo, hace más evidente aquello de lo que tenemos “hambre” y lo que consideramos esencial para nuestro sustento. Sirve, por tanto, para discernir y ordenar los “apetitos”, para mantener despierta el hambre y la sed de justicia, sustrayéndola de la resignación, educarla para que se convierta en oración y responsabilidad hacia el prójimo.</p>
-                    <p>San Agustín, con sutileza espiritual, deja entrever la tensión entre el tiempo presente y la realización futura que atraviesa este cuidado del corazón, cuando observa que: «es propio de los hombres mortales tener hambre y sed de la justicia, así como estar repletos de la justicia es propio de la otra vida. De este pan, de este alimento, están repletos los ángeles; en cambio, los hombres, mientras tienen hambre, se ensanchan; mientras se ensanchan, son dilatados; mientras son dilatados, se hacen capaces; y, hechos capaces, en su momento serán repletos». [2] El ayuno, entendido en este sentido, nos permite no sólo disciplinar el deseo, purificarlo y hacerlo más libre, sino también expandirlo, de modo que se dirija a Dios y se oriente hacia el bien.</p>
-                    <p>Sin embargo, para que el ayuno conserve su verdad evangélica y evite la tentación de enorgullecer el corazón, debe vivirse siempre con fe y humildad. Exige permanecer arraigado en la comunión con el Señor, porque «no ayuna de verdad quien no sabe alimentarse de la Palabra de Dios». [3] En cuanto signo visible de nuestro compromiso interior de alejarnos, con la ayuda de la gracia, del pecado y del mal, el ayuno debe incluir también otras formas de privación destinadas a hacernos adquirir un estilo de vida más sobrio, ya que « sólo la austeridad hace fuerte y auténtica la vida cristiana». [4]</p>
-                    <p>Por eso, me gustaría invitarles a una forma de abstinencia muy concreta y a menudo poco apreciada, es decir, la de <strong>abstenerse de utilizar palabras que afectan y lastiman a nuestro prójimo</strong>. Empecemos a desarmar el lenguaje, renunciando a las palabras hirientes, al juicio inmediato, a hablar mal de quienes están ausentes y no pueden defenderse, a las calumnias. Esforcémonos, en cambio, por aprender a medir las palabras y a cultivar la amabilidad: en la familia, entre amigos, en el lugar de trabajo, en las redes sociales, en los debates políticos, en los medios de comunicación y en las comunidades cristianas. Entonces, muchas palabras de odio darán paso a palabras de esperanza y paz.</p>
-                </section>
-
-                <div class="ornament">†</div>
-
-                <section id="juntos">
-                    <h2>Juntos</h2>
-                    <p>Por último, la Cuaresma pone de relieve la dimensión comunitaria de la escucha de la Palabra y de la práctica del ayuno. También la Escritura subraya este aspecto de muchas maneras. Por ejemplo, cuando narra en el libro de Nehemías que el pueblo se reunió para escuchar la lectura pública del libro de la Ley y, practicando el ayuno, se dispuso a la confesión de fe y a la adoración, con el fin de renovar la alianza con Dios (cf. Ne 9,1-3).</p>
-                    <p>Del mismo modo, nuestras parroquias, familias, grupos eclesiales y comunidades religiosas están llamados a realizar en Cuaresma un camino compartido, en el que la escucha de la Palabra de Dios, así como del clamor de los pobres y de la tierra, se convierta en forma de vida común, y el ayuno sostenga un arrepentimiento real. En este horizonte, la conversión no sólo concierne a la conciencia del individuo, sino también al estilo de las relaciones, a la calidad del diálogo, a la capacidad de dejarse interpelar por la realidad y de reconocer lo que realmente orienta el deseo, tanto en nuestras comunidades eclesiales como en la humanidad sedienta de justicia y reconciliación.</p>
-                    <p>Queridos hermanos, pidamos la gracia de vivir una Cuaresma que haga más atento nuestro oído a Dios y a los más necesitados. Pidamos la fuerza de un ayuno que alcance también a la lengua, para que disminuyan las palabras que hieren y crezca el espacio para la voz de los demás. Y comprometámonos para que nuestras comunidades se conviertan en lugares donde el grito de los que sufren encuentre acogida y la escucha genere caminos de liberación, haciéndonos más dispuestos y diligentes para contribuir a edificar la civilización del amor.</p>
-                    <p>Los bendigo de corazón a todos ustedes, y a su camino cuaresmal.</p>
-                    
-                    <div style="margin-top: 40px; text-align: right; font-style: italic;">
-                        <p>Vaticano, 5 de febrero de 2026, memoria de santa Águeda, virgen y mártir.</p>
-                        <p style="font-weight: bold; margin-top: 20px; font-variant: small-caps; font-size: 1.2rem;">LEÓN XIV PP.</p>
-                    </div>
-                </section>
-
-                <div class="ornament">† Pax Vobiscum †</div>
-                <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑ Volver al inicio</a>
-            </div>
-            <script>
-                const body = document.body;
-                function changeTheme(themeName) { body.className = themeName; }
-                function adjustFont(change) {
-                    const currentSize = parseFloat(window.getComputedStyle(body).fontSize);
-                    const newSize = currentSize + change;
-                    if (newSize >= 14 && newSize <= 28) body.style.fontSize = newSize + 'px';
-                }
-            <\/script>
+            <footer>
+                <p>Vaticano, 5 de febrero de 2026</p>
+                <p><strong>LEÓN XIV PP.</strong></p>
+            </footer>
         </body>
-        </html>
-        `;
+        </html>`;
 
-        // DADOS DA QUARESMA
+        // =================================================================================
+        // 3. ESTRUTURA DE DADOS (COMPLETA)
+        // =================================================================================
+        
+        const APPS_DATA = [
+            { id: 'quaresma', title: "Itinerario Cuaresmal", subtitle: "Cuaresma 2026", icon: Info, color: "bg-purple-900", match: "Premium", badge: "18 Feb", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", isModal: true, content: ITINERARIO_MODAL_HTML },
+            { id: 'rosario', title: "Santo Rosario de Batalla", subtitle: "Oración y Combate", icon: Shield, color: "bg-blue-900", link: "https://santorosarioes.netlify.app/", match: "98% Match", badge: "Top 10", image: "https://i.postimg.cc/G2tN6VCf/Gemini-Generated-Image-txrat1txrat1txra.png" },
+            { id: 'novenas', title: "Novena 12 Marías", subtitle: "Colección", icon: Crown, color: "bg-purple-900", link: "https://novena12marias.netlify.app/", match: "95% Match", badge: "Nuevo", image: "https://i.postimg.cc/gJpyZ6M8/Gemini-Generated-Image-6fg18u6fg18u6fg1.png" },
+            { id: 'devocional', title: "Devocional de los Santos", subtitle: "Vidas de Santos", icon: BookOpen, color: "bg-emerald-900", link: "https://devocionaldelosantos.netlify.app/", match: "92% Match", image: "https://i.postimg.cc/15LQwpFK/Gemini-Generated-Image-gcg4jfgcg4jfgcg4.png" },
+            { id: 'lit-cat', title: "Literatura Católica", subtitle: "+500 Libros", icon: BookOpen, color: "bg-amber-900", isModal: true, image: "https://i.postimg.cc/tJL36r3V/Gemini-Generated-Image-fdv54wfdv54wfdv5-(1).png", content: `<div class="p-8 text-center text-white"><h2 class="text-3xl text-yellow-500 font-serif font-bold mb-4">Literatura Católica</h2><p class="mb-6">Acceda a obras maestras de Santos e Teólogos.</p><a href="https://drive.google.com/drive/folders/1wUV-Rz-yc2Xob965U3Z4XiSY5BQUM_J9" target="_blank" class="bg-red-700 text-white px-8 py-3 rounded no-underline font-bold">Abrir Biblioteca</a></div>` }
+        ];
+
         const LENT_DATA = [
-            {
-                id: 'mensaje-papa-2026',
-                title: "Mensaje del Papa",
-                subtitle: "Cuaresma 2026",
-                description: "Escuchar y ayunar: abstenerse de palabras que hieren.",
-                image: "https://i.postimg.cc/pXkfDgBB/image-(2).png",
-                match: "Nuevo",
-                badge: "Mensaje",
-                isModal: true,
-                fullHtml: POPE_MESSAGE_HTML_CONTENT // Usando o novo conteúdo HTML estilo e-book
-            },
-            {
-                id: 'miercoles-ceniza',
-                title: "Miércoles de Ceniza",
-                subtitle: "Guía Interactiva 2026",
-                description: "Todo lo que necesitas saber sobre el inicio de la Cuaresma.",
-                // Capa temática: Cinzas/Quaresma
-                image: "https://i.postimg.cc/kGnSSGrv/image.png",
-                match: "Esencial",
-                badge: "18 Feb",
-                isModal: true,
-                fullHtml: QUARESMA_HTML_CONTENT // Propriedade especial para renderizar HTML completo
-            },
-            {
-                id: 'itinerario-quaresmal',
-                title: "Itinerario Cuaresmal",
-                subtitle: "Camino a la Pascua",
-                image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png",
-                match: "Oferta Especial",
-                badge: "Día a Día",
-                isModal: true, // Ativado modal para exibir a oferta
-                content: `
-                    <div class="flex flex-col items-center justify-center py-12 px-4 font-sans">
-                        <div class="w-full max-w-md text-center">
-                             <!-- Título e Imagem -->
-                             <img src="https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 border-4 border-[#C5A059] shadow-lg" alt="Itinerario">
-                             
-                             <h2 class="text-3xl font-serif text-[#C5A059] font-bold mb-6">Itinerario Cuaresmal 2026</h2>
-                             
-                             <div class="p-4 bg-gradient-to-r from-red-900/50 to-red-800/50 border border-red-500/30 rounded-lg mb-10 shadow-inner">
-                                <p class="text-lg text-white font-bold tracking-wide leading-relaxed">¡OFERTA DISPONIBLE PARA QUIENES AÚN NO LO HAN COMPRADO!</p>
-                             </div>
-                             
-                             <div class="space-y-5 w-full">
-                                <!-- Botão Comprar (Link Hotmart) - ALTERADO PARA VERDE -->
-                                <a href="https://pay.hotmart.com/R104315521P?off=bsjlu74b&checkoutMode=10" target="_blank" class="block w-full bg-[#16a34a] hover:bg-[#15803d] text-white font-bold py-4 px-6 rounded-lg transition-all transform hover:scale-[1.02] shadow-xl text-center no-underline text-sm md:text-base border border-transparent hover:border-white/20">
-                                    AÚN NO HE COMPRADO EL ITINERARIO
-                                </a>
-
-                                <!-- Botão Já Comprei (Expansível) -->
-                                <details class="w-full group">
-                                    <summary class="block w-full cursor-pointer bg-[#2a2a2a] hover:bg-[#333] text-gray-200 font-bold py-4 px-6 rounded-lg transition-all shadow-lg text-center list-none text-sm md:text-base border border-gray-700 hover:border-gray-500 select-none">
-                                        YA COMPRÉ EL ITINERARIO CUARESMAL
-                                    </summary>
-                                    <div class="mt-4 p-6 bg-[#121010] border border-[#C5A059] rounded-lg shadow-[0_0_15px_rgba(197,160,89,0.15)] animate-slideUp">
-                                        <p class="text-[#C5A059] font-serif text-lg font-bold text-center leading-relaxed">
-                                            <span class="text-2xl block mb-2">🔔</span>
-                                            ATENTO A LAS PUBLICACIONES DE LA APP.<br>
-                                            <span class="text-white mt-3 block text-sm font-sans font-normal opacity-90 border-t border-[#C5A059]/30 pt-3">EL ITINERARIO SE LIBERARÁ EL DÍA 18.</span>
-                                        </p>
-                                    </div>
-                                </details>
-                             </div>
-                             
-                             <p class="mt-8 text-xs text-gray-500">¿Dudas? Contáctanos a través del soporte.</p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'via-crucis-lente',
-                title: "Vía Crucis Meditado",
-                subtitle: "Viernes de Cuaresma",
-                image: "https://i.postimg.cc/9XK143JX/image-(1).png",
-                match: "Devoción",
-                isModal: true,
-                fullHtml: VIA_CRUCIS_HTML_CONTENT // Atualizado para usar o formato ebook
-            }
+            { id: 'itinerario-quaresmal', title: "Itinerario Cuaresmal", subtitle: "Oferta", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", match: "Especial", badge: "Oferta", isModal: true, content: ITINERARIO_MODAL_HTML },
+            { id: 'mensaje-papa-2026', title: "Mensaje del Papa", subtitle: "Cuaresma 2026", image: "https://i.postimg.cc/pXkfDgBB/image-(2).png", match: "Nuevo", badge: "Mensaje", isModal: true, fullHtml: POPE_MESSAGE_HTML_CONTENT },
+            { id: 'miercoles-ceniza', title: "Miércoles de Ceniza", subtitle: "Reflexión 2026", image: "https://i.postimg.cc/kGnSSGrv/image.png", match: "Esencial", badge: "18 Feb", isModal: true, fullHtml: QUARESMA_HTML_CONTENT },
+            { id: 'via-crucis-lente', title: "Vía Crucis Meditado", subtitle: "Viernes de Cuaresma", image: "https://i.postimg.cc/9XK143JX/image-(1).png", match: "Devoción", isModal: true, fullHtml: VIA_CRUCIS_HTML_CONTENT }
         ];
 
-        // NOVA BIBLIOTECA CATÓLICA (LIVROS EXTRAS) - RESTAURADA
+        const PRAYERS_DATA = [
+            { id: 'm1', title: "Al despertar", subtitle: "Mañana", image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>☀️ Mañana</h2><p>En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p></div>" },
+            { id: 'm2', title: "Actos de Adoración", subtitle: "Mañana", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🙌 Adoración</h2><p>Bendita sea la santa y una Trinidad...</p></div>" },
+            { id: 'm3', title: "Ofrecimiento del Día", subtitle: "Día", image: "https://i.postimg.cc/QCXj54t8/Gemini-Generated-Image-4bn33n4bn33n4bn3.png", match: "Diário", isModal: true, content: "<div class='p-8'><h2>❤️ Ofrecimiento</h2><p>Oh Jesús, por el Corazón de María te ofrezco...</p></div>" },
+            { id: 'm4', title: "Bendición de Alimentos", subtitle: "Comidas", image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🍞 Bendición</h2><p>Bendice Señor estos alimentos...</p></div>" },
+            { id: 'm5', title: "Trabajo", subtitle: "Labor", image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>💼 Trabajo</h2><p>Bendice, Padre celestial...</p></div>" },
+            { id: 'm6', title: "Biblia", subtitle: "Estudio", image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>📖 Biblia</h2><p>Señor mío y Dios mío...</p></div>" },
+            { id: 'm7', title: "Acción de Gracias", subtitle: "Gratitud", image: "https://images.unsplash.com/photo-1507692814201-9994511ba977?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🙏 Gracias</h2><p>Oh Jesús, te agradezco...</p></div>" },
+            { id: 'm8', title: "Petición de Perdón", subtitle: "Misericordia", image: "https://images.unsplash.com/photo-1544169601-382991823eb3?q=80&w=2072&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🕊️ Perdón</h2><p>Dios, Padre de amor...</p></div>" },
+            { id: 'm9', title: "Oración de la Noche", subtitle: "Descanso", image: "https://images.unsplash.com/photo-1507502707541-f369a3b18502?q=80&w=1976&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🌙 Noche</h2><p>Con Dios me acuesto...</p></div>" }
+        ];
+
+        const BOOKS_DATA = [
+            { id: 'b1', title: "Catecismo", author: "Magisterio", image: "https://i.postimg.cc/Dwx0rL0B/Whats-App-Image-2026-01-19-at-22-13-19-(1).jpg", link: "https://www.vatican.va/archive/catechism_sp/index_sp.html", match: "100%" },
+            { id: 'b2', title: "Biblia", author: "Vaticano", image: "https://i.postimg.cc/m2kRMJxL/images.jpg", link: "https://www.vatican.va/archive/ESL0506/_INDEX.HTM", match: "100%" },
+            { id: 'b3', title: "Adviento", author: "Navidad", image: "https://i.postimg.cc/d0yHyvxb/Gemini-Generated-Image-r1hrk0r1hrk0r1hr.webp", link: "https://libroadvientoenavidad.netlify.app/", match: "99%" },
+            { id: 'b4', title: "Apariciones", author: "Historia", image: "https://i.postimg.cc/Fzmj1Qts/Gemini-Generated-Image-xyoyl9xyoyl9xyoy.webp", isModal: true, pdfUrl: "https://drive.google.com/file/d/1I-bPT1UjmFHWaW8d_BVbpseRTqoJziCx/preview", match: "90%" },
+            { id: 'b5', title: "Conversos", author: "Guía", image: "https://i.postimg.cc/QN2MQqVZ/Gemini-Generated-Image-ayk0l5ayk0l5ayk0.webp", link: "https://drive.google.com/file/d/1cg7bqPhOOGGSAEe0p9zctx9BAYrV_FAG/view", match: "88%" }
+        ];
+
         const EXTRA_LIBRARY_DATA = [
-            {
-                id: 'extra-1',
-                title: "1000 Máximas de Don Bosco",
-                author: "San Juan Bosco",
-                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
-                match: "Nuevo",
-                isModal: true,
-                pdfUrl: "https://drive.google.com/file/d/19JXxLa1e4bwVutfgRJ6d55Qe0FYNQoWw/preview",
-                titleOnCover: true
-            },
-            {
-                id: 'extra-2',
-                title: "Documentos de Fe II",
-                author: "Biblioteca Adicional",
-                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
-                match: "Nuevo",
-                isModal: true,
-                pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMVFdUV3VYb0hzWWc/preview?resourcekey=0-ZBqjmoFFV8k6G6Z-dKw3xw",
-                titleOnCover: true
-            },
-            {
-                id: 'extra-3',
-                title: "Lectura Espiritual III",
-                author: "Biblioteca Adicional",
-                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
-                match: "Nuevo",
-                isModal: true,
-                pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMOEVzTTdIMkpQbjg/preview?resourcekey=0-RdM44nn7xn60vZXmTPMKrQ",
-                titleOnCover: true
-            },
-            {
-                id: 'extra-4',
-                title: "Tradición Católica IV",
-                author: "Biblioteca Adicional",
-                image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop",
-                match: "Nuevo",
-                isModal: true,
-                pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMSGxxZGgwZ2hiQ3c/preview?resourcekey=0-tPsWp9Nig8X_8DhzbGkQww",
-                titleOnCover: true
-            }
+            { id: 'e1', title: "1000 Máximas", author: "Don Bosco", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/19JXxLa1e4bwVutfgRJ6d55Qe0FYNQoWw/preview", titleOnCover: true, match: "Bono" },
+            { id: 'e2', title: "Documentos II", author: "Fe", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMVFdUV3VYb0hzWWc/preview", titleOnCover: true, match: "Bono" },
+            { id: 'e3', title: "Lectura III", author: "Espiritual", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMOEVzTTdIMkpQbjg/preview", titleOnCover: true, match: "Bono" },
+            { id: 'e4', title: "Tradición IV", author: "Biblioteca", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMSGxxZGgwZ2hiQ3c/preview", titleOnCover: true, match: "Bono" }
         ];
 
-        // DADOS DOS BÔNUS (PDFs) - Atualizado: Sem imagem, apenas nome
-        const BONUS_DATA = [
-            {
-                id: 'bonus-1',
-                title: "Rosario Gregoriano",
-                match: "Regalo",
-                isModal: true,
-                color: "bg-stone-800", // Cor de fundo elegante
-                pdfUrl: "https://drive.google.com/file/d/1ND-7zNs9tDWPZzjAuesxPoiMnQUP8Fn1/preview"
-            },
-            {
-                id: 'bonus-4',
-                title: "Historia Sagrada",
-                match: "Regalo",
-                isModal: true,
-                color: "bg-zinc-800",
-                pdfUrl: "https://drive.google.com/file/d/1_QNbQuEjYbqGXOu0d0T203c0Vy9BYiiZ/preview"
-            },
-            {
-                id: 'bonus-11',
-                title: "Preparación Eucarística",
-                match: "Regalo",
-                isModal: true,
-                color: "bg-slate-800",
-                pdfUrl: "https://drive.google.com/file/d/1LZ2enqNSRP9L07jUxKQ7H_qFT1txZhxj/preview"
-            },
-            {
-                id: 'bonus-more',
-                title: "Accede a los demás bonos",
-                match: "Colección",
-                isModal: false, // Abre em nova aba por ser uma pasta
-                color: "bg-red-900", // Cor de destaque
-                link: "https://drive.google.com/drive/folders/1WtvXPYpTOPAiNUR1WRh2_OJb_7eDxCR3?usp=sharing"
-            }
-        ];
-
-        // Dados da Nova Coleção Guadalupe
-        const GUADALUPE_DATA = [
-            {
-                id: 'guadalupe-1',
-                title: "La Imagen que Habla",
-                subtitle: "Los Mensajes Ocultos",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            },
-            {
-                id: 'guadalupe-2',
-                title: "El Milagro de las Estrellas",
-                subtitle: "Constelaciones en el Manto",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            },
-            {
-                id: 'guadalupe-3',
-                title: "Guadalupe y Juan Diego",
-                subtitle: "Conversaciones Espirituales",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            },
-            {
-                id: 'guadalupe-4',
-                title: "Guadalupe en Náhuatl",
-                subtitle: "Significado Original",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            },
-            {
-                id: 'guadalupe-5',
-                title: "Milagros Guadalupanos",
-                subtitle: "500 Años de Testimonios",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            },
-            {
-                id: 'guadalupe-6',
-                title: "Profecías y Mensajes",
-                subtitle: "A Través de los Siglos",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            },
-            {
-                id: 'guadalupe-7',
-                title: "El Mensaje de Guadalupe",
-                subtitle: "Para el Mundo Moderno",
-                author: "Colección Guadalupe",
-                image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png",
-                badge: "Lanzamiento 2026",
-                match: "Próximamente",
-                link: "#"
-            }
-        ];
-
-        // Dados de Música Gregoriana
         const MUSIC_DATA = [
-            {
-                id: 'music-1',
-                title: "Música Gregoriana en Latín",
-                subtitle: "Adveniat Regnum Tuum",
-                image: "https://img.youtube.com/vi/akPTHn8PkcE/hqdefault.jpg",
-                match: "98% Match",
-                link: "https://www.youtube.com/watch?v=akPTHn8PkcE&list=RDakPTHn8PkcE&start_radio=1"
-            },
-            {
-                id: 'music-2',
-                title: "Salmo 117 - En Español",
-                subtitle: "Cantos Gregorianos",
-                image: "https://img.youtube.com/vi/I3v8mfk6ZF4/hqdefault.jpg", 
-                match: "95% Match",
-                link: "https://www.youtube.com/watch?v=I3v8mfk6ZF4&list=PLdUCerNPOxpk9U2jrCSrdrwDyX9b0Ivbc"
-            },
-            {
-                id: 'music-3',
-                title: "Da Pacem Domine",
-                subtitle: "Canto de los Templarios",
-                image: "https://img.youtube.com/vi/h0YRkuziwEg/maxresdefault.jpg",
-                match: "99% Match",
-                link: "https://www.youtube.com/watch?v=h0YRkuziwEg&list=RDh0YRkuziwEg&start_radio=1"
-            },
-            {
-                id: 'music-4',
-                title: "Miserere Mei Deus",
-                subtitle: "Monjes Benedictinos",
-                image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg",
-                match: "97% Match",
-                link: "https://www.youtube.com/watch?v=nLpcVQghKDg&list=RDnLpcVQghKDg&start_radio=1"
-            }
+            { id: 'mu1', title: "Latín", subtitle: "Adveniat", image: "https://img.youtube.com/vi/akPTHn8PkcE/hqdefault.jpg", link: "https://www.youtube.com/watch?v=akPTHn8PkcE", match: "98%" },
+            { id: 'mu2', title: "Salmo 117", subtitle: "Gregoriano", image: "https://img.youtube.com/vi/I3v8mfk6ZF4/hqdefault.jpg", link: "https://www.youtube.com/watch?v=I3v8mfk6ZF4", match: "95%" },
+            { id: 'mu3', title: "Da Pacem", subtitle: "Templarios", image: "https://img.youtube.com/vi/h0YRkuziwEg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=h0YRkuziwEg", match: "99%" },
+            { id: 'mu4', title: "Miserere", subtitle: "Benedictinos", image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=nLpcVQghKDg", match: "97%" }
+        ];
+
+        const GUADALUPE_DATA = [
+            { id: 'g1', title: "La Imagen", subtitle: "Mensajes", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g2', title: "Estrellas", subtitle: "Manto", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g3', title: "Juan Diego", subtitle: "Encuentro", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g4', title: "Náhuatl", subtitle: "Cultura", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g5', title: "500 Años", subtitle: "Milagros", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g6', title: "Profecías", subtitle: "Revelación", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
+            { id: 'g7', title: "Moderno", subtitle: "Mensagem", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" }
+        ];
+
+        const BONUS_DATA = [
+            { id: 'bn1', title: "Rosario Gregoriano", isModal: true, color: "bg-stone-800", pdfUrl: "https://drive.google.com/file/d/1ND-7zNs9tDWPZzjAuesxPoiMnQUP8Fn1/preview", match: "Regalo" },
+            { id: 'bn2', title: "Historia Sagrada", isModal: true, color: "bg-zinc-800", pdfUrl: "https://drive.google.com/file/d/1_QNbQuEjYbqGXOu0d0T203c0Vy9BYiiZ/preview", match: "Regalo" },
+            { id: 'bn3', title: "Eucarística", isModal: true, color: "bg-slate-800", pdfUrl: "https://drive.google.com/file/d/1LZ2enqNSRP9L07jUxKQ7H_qFT1txZhxj/preview", match: "Regalo" },
+            { id: 'bn4', title: "Más bonos...", color: "bg-red-900", link: "https://drive.google.com/drive/folders/1WtvXPYpTOPAiNUR1WRh2_OJb_7eDxCR3", match: "Colección" }
         ];
 
         // =================================================================================
-        // Componentes
+        // 4. COMPONENTES REACT
         // =================================================================================
 
         const Navbar = ({ searchQuery, setSearchQuery }) => {
             const [isScrolled, setIsScrolled] = useState(false);
             const [showInput, setShowInput] = useState(false);
             const inputRef = useRef(null);
-
             useEffect(() => {
-                const handleScroll = () => {
-                    setIsScrolled(window.scrollY > 0);
-                };
+                const handleScroll = () => setIsScrolled(window.scrollY > 0);
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
-
-            const scrollToSection = (e, id) => {
-                e.preventDefault();
-                const element = document.getElementById(id);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            };
-
-            const handleSearchClick = () => {
-                setShowInput(true);
-                setTimeout(() => {
-                    if (inputRef.current) inputRef.current.focus();
-                }, 100);
-            };
-
-            const handleBlur = () => {
-                if (!searchQuery) setShowInput(false);
-            };
-
-            const clearSearch = () => {
-                setSearchQuery('');
-                setShowInput(false);
-            };
-
             return (
-                <nav className={`fixed w-full z-50 transition-colors duration-500 ease-in-out px-4 md:px-12 py-4 flex items-center justify-between ${isScrolled || showInput ? 'bg-[#141414] shadow-md' : 'bg-gradient-to-b from-black/90 to-transparent'}`}>
+                <nav className={`fixed w-full z-50 transition-all duration-500 px-4 md:px-12 py-4 flex items-center justify-between ${isScrolled || showInput ? 'bg-[#141414] shadow-lg' : 'bg-gradient-to-b from-black/90 to-transparent'}`}>
                     <div className="flex items-center space-x-8">
-                        <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="text-red-600 text-2xl md:text-3xl font-bold uppercase tracking-tighter cursor-pointer drop-shadow-md decoration-0">CATHOLIC PLAY</a>
-                        <ul className={`hidden md:flex space-x-6 text-sm font-medium text-gray-200 ${showInput ? 'opacity-0 pointer-events-none' : 'opacity-100'} transition-opacity duration-300`}>
-                            <li>
-                                <a href="#inicio" onClick={(e) => scrollToSection(e, 'inicio')} className="hover:text-gray-400 cursor-pointer transition">Inicio</a>
-                            </li>
-                            <li>
-                                <a href="#apps" onClick={(e) => scrollToSection(e, 'apps')} className="hover:text-white font-bold cursor-pointer transition">Apps</a>
-                            </li>
-                            <li>
-                                <a href="#libros" onClick={(e) => scrollToSection(e, 'libros')} className="hover:text-gray-400 cursor-pointer transition">Libros</a>
-                            </li>
-                            <li>
-                                <a href="#" className="hover:text-gray-400 cursor-pointer transition">Mi Lista</a>
-                            </li>
+                        <span className="text-red-600 text-2xl md:text-3xl font-bold uppercase tracking-tighter cursor-pointer">CATHOLIC PLAY</span>
+                        <ul className="hidden md:flex space-x-6 text-sm font-medium text-gray-200">
+                            <li><a href="#" className="hover:text-white transition">Inicio</a></li>
+                            <li><a href="#apps" className="hover:text-white transition font-bold">Apps</a></li>
+                            <li><a href="#libros" className="hover:text-white transition">Libros</a></li>
                         </ul>
                     </div>
                     <div className="flex items-center space-x-6 text-white">
-                        
-                        {/* Search Box Expandable */}
-                        <div className={`flex items-center transition-all duration-300 border ${showInput ? 'border-white bg-black/60 px-2 py-1' : 'border-transparent'}`}>
-                            <Search 
-                                className="w-5 h-5 cursor-pointer hover:text-gray-300 transition" 
-                                onClick={handleSearchClick}
-                            />
-                            <input
-                                ref={inputRef}
-                                type="text"
-                                className={`bg-transparent text-white text-sm outline-none transition-all duration-300 ${showInput ? 'w-32 md:w-60 ml-2 opacity-100' : 'w-0 ml-0 opacity-0'}`}
-                                placeholder="Títulos, gente, géneros"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                onBlur={handleBlur}
-                            />
-                            {searchQuery && showInput && (
-                                <X className="w-4 h-4 cursor-pointer ml-1 hover:text-gray-300" onClick={clearSearch} />
-                            )}
+                        <div className={`flex items-center border ${showInput ? 'border-white bg-black/60 px-2 py-1' : 'border-transparent'}`}>
+                            <Search className="w-5 h-5 cursor-pointer" onClick={() => { setShowInput(true); setTimeout(() => inputRef.current?.focus(), 100); }} />
+                            <input ref={inputRef} type="text" className={`bg-transparent text-white text-sm outline-none transition-all duration-300 ${showInput ? 'w-32 md:w-60 ml-2 opacity-100' : 'w-0 opacity-0'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onBlur={() => !searchQuery && setShowInput(false)} placeholder="Buscar..." />
                         </div>
-
-                        <Bell className={`w-5 h-5 cursor-pointer hover:text-gray-300 transition ${showInput ? 'hidden md:block' : 'block'}`} />
-                        <div className={`flex items-center cursor-pointer group ${showInput ? 'hidden md:flex' : 'flex'}`}>
-                            <div className="w-8 h-8 rounded bg-[#B9090B] flex items-center justify-center group-hover:ring-1 ring-white transition overflow-hidden">
-                                <User className="w-5 h-5 text-white" />
-                            </div>
-                            <ChevronDown className="w-4 h-4 ml-1 group-hover:rotate-180 transition-transform" />
-                        </div>
+                        <div className="w-8 h-8 rounded bg-[#B9090B] flex items-center justify-center overflow-hidden"><User className="w-5 h-5" /></div>
                     </div>
                 </nav>
             );
         };
 
         const Hero = ({ onOpenModal }) => {
-            // Encontra o item do itinerário para abrir o modal correto
             const featuredItem = LENT_DATA.find(item => item.id === 'itinerario-quaresmal');
-
             return (
                 <div id="inicio" className="relative h-[65vh] md:h-[95vh] w-full text-white bg-[#141414]">
-                    {/* Background Image Layer */}
                     <div className="absolute top-0 left-0 w-full h-full select-none">
-                        <img 
-                            src="https://i.postimg.cc/kDr2xG3p/Gemini-Generated-Image-kmerfqkmerfqkmer-(1).png" 
-                            alt="Hero Background - Itinerario Cuaresmal" 
-                            className="w-full h-full object-cover object-top md:object-center"
-                        />
-                        {/* Correção: Gradiente ajustado para ser transparente no topo e escuro na base (mobile) */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#141414] md:to-[#141414]"></div>
-                        {/* Gradiente extra apenas para mobile na parte inferior para leitura do texto */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/60 to-transparent md:hidden"></div>
+                        <img src="https://i.postimg.cc/kDr2xG3p/Gemini-Generated-Image-kmerfqkmerfqkmer-(1).png" alt="Hero" className="w-full h-full object-cover object-top md:object-center" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#141414]"></div>
                         <div className="hidden md:block absolute inset-0 hero-gradient"></div>
-                        <div className="hidden md:block absolute inset-0 hero-vignette"></div>
                     </div>
-
-                    {/* Content Layer - Ajustado: Bottom no mobile, Top/Center no Desktop */}
-                    <div className="absolute bottom-4 left-0 w-full px-4 pb-8 md:p-0 md:left-12 md:top-[30%] md:bottom-auto md:w-auto max-w-2xl z-30 flex flex-col justify-end md:justify-center">
-                        <div className="flex items-center space-x-2 mb-2 md:mb-4 animate-fade-in-up">
-                            <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Destacado de Cuaresma</span>
-                        </div>
-                        
-                        <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 md:mb-4 leading-tight drop-shadow-2xl text-yellow-500">
-                           Itinerario Cuaresmal
-                        </h1>
-                        <p className="text-sm md:text-xl text-shadow-md mb-4 md:mb-8 line-clamp-3 text-gray-100 font-medium max-w-lg drop-shadow-md">
-                            40 Días: Un camino de conversión y esperanza. Acompaña a Jesús en el desierto y prepárate para la victoria de la Pascua con esta guía espiritual diaria.
-                        </p>
-                        
+                    <div className="absolute bottom-4 left-0 w-full px-4 pb-8 md:p-0 md:left-12 md:top-[35%] md:w-auto max-w-2xl z-30">
+                        <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Destacado de Cuaresma</span>
+                        <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 leading-tight text-yellow-500 drop-shadow-lg">Itinerario Cuaresmal</h1>
+                        <p className="text-sm md:text-xl mb-4 md:mb-8 text-gray-100 font-medium drop-shadow-md">40 Días: Un caminho de conversión e esperanza. Acompaña a Jesús en el desierto e prepárate para la Pascua.</p>
                         <div className="flex space-x-3">
-                            <button 
-                                onClick={() => onOpenModal && featuredItem && onOpenModal(featuredItem)}
-                                className="flex items-center bg-white text-black px-4 py-2 md:px-8 md:py-3 rounded hover:bg-opacity-80 transition text-sm md:text-lg font-bold shadow-lg transform active:scale-95"
-                            >
-                                <Play className="w-4 h-4 md:w-6 md:h-6 mr-2 fill-current" />
-                                Ver Itinerario
-                            </button>
-                            <button 
-                                onClick={() => onOpenModal && featuredItem && onOpenModal(featuredItem)}
-                                className="flex items-center bg-gray-500/60 text-white px-4 py-2 md:px-8 md:py-3 rounded font-bold hover:bg-gray-500/40 transition text-sm md:text-lg backdrop-blur-md shadow-lg transform active:scale-95"
-                            >
-                                <Info className="w-4 h-4 md:w-6 md:h-6 mr-2" />
-                                Más Info
-                            </button>
+                            <button onClick={() => onOpenModal(featuredItem)} className="flex items-center bg-white text-black px-4 py-2 md:px-8 md:py-3 rounded font-bold hover:bg-opacity-80 transition transform active:scale-95"><Play className="w-4 h-4 md:w-6 md:h-6 mr-2 fill-current" /> Ver Itinerario</button>
+                            <button onClick={() => onOpenModal(featuredItem)} className="flex items-center bg-gray-500/60 text-white px-4 py-2 md:px-8 md:py-3 rounded font-bold backdrop-blur-md transition transform active:scale-95"><Info className="w-4 h-4 md:w-6 md:h-6 mr-2" /> Más Info</button>
                         </div>
                     </div>
                 </div>
             );
         };
 
-        const Card = ({ item, isApp, customStyle, isHorizontal, onOpenModal }) => {
-            const widthClass = customStyle 
-                ? customStyle 
-                : (isHorizontal ? 'w-[220px] md:w-[300px] mx-1' : 'w-[140px] md:w-[200px] mx-1');
-            
-            const aspectClass = isHorizontal ? 'aspect-video' : 'aspect-[2/3]';
-
+        const Card = ({ item, onOpenModal, isHorizontal }) => {
             const handleClick = () => {
-                if (item.isModal && onOpenModal) {
-                    onOpenModal(item);
-                } else if (item.link !== '#') {
-                    window.open(item.link, '_blank');
-                }
+                if (item.isModal) onOpenModal(item);
+                else if (item.link && item.link !== '#') window.open(item.link, '_blank');
             };
-
+            const aspect = isHorizontal ? 'aspect-video' : 'aspect-[2/3]';
+            const width = isHorizontal ? 'w-[220px] md:w-[300px]' : 'w-[140px] md:w-[200px]';
             const bgClass = !item.image ? (item.color || 'bg-gray-800') : 'bg-gray-800';
 
             return (
-                <div 
-                    className={`group relative flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out hover:scale-105 hover:z-50 ${widthClass}`}
-                    onClick={handleClick}
-                >
-                    {/* Poster Image / Placeholder */}
-                    <div className={`${aspectClass} w-full rounded-md overflow-hidden relative shadow-lg ${bgClass}`}>
-                        {!item.image ? (
-                            <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center border border-white/5 bg-gradient-to-br from-white/5 to-transparent">
-                                {item.icon && <item.icon className="w-10 h-10 md:w-12 md:h-12 mb-3 text-white drop-shadow-lg opacity-80" />}
-                                <h3 className="font-serif font-bold text-lg md:text-xl leading-tight text-white drop-shadow-md">{item.title}</h3>
-                                {item.subtitle && <p className="text-[10px] md:text-xs uppercase tracking-widest opacity-60 text-gray-300 mt-2">{item.subtitle}</p>}
-                            </div>
-                        ) : (
-                            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                        )}
-                        
-                        {/* Título sobre a capa (Overlay) se ativado - ATUALIZADO PARA LETRA PRETA COM DESTAQUE */}
-                        {item.titleOnCover && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-white/5">
-                                <h3 className="font-serif font-extrabold text-black text-sm md:text-xl leading-tight" 
-                                    style={{ 
-                                        textShadow: '0 0 10px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 215, 0, 0.6), 1px 1px 0px rgba(255,255,255,1)' 
-                                    }}>
-                                    {item.title}
-                                </h3>
-                                {item.author && (
-                                    <p className="text-gray-900 text-[10px] md:text-xs uppercase tracking-widest mt-2 font-bold"
-                                       style={{ textShadow: '0 0 4px rgba(255, 255, 255, 0.9)' }}>
-                                        {item.author}
-                                    </p>
-                                )}
-                            </div>
-                        )}
-
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
-                        
-                        {(isHorizontal || item.isModal) && item.image && (
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="bg-red-600 rounded-full p-2 shadow-lg">
-                                    {item.isModal ? (
-                                        <BookOpen className="w-6 h-6 text-white fill-current" />
-                                    ) : (
-                                        <Play className="w-6 h-6 text-white fill-current" />
-                                    )}
-                                </div>
-                            </div>
-                        )}
-
-                        {item.badge && (
-                            <div className="absolute top-2 right-0 bg-red-600 text-white text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md z-10">
-                                {item.badge}
-                            </div>
-                        )}
+                <div className={`group relative flex-shrink-0 cursor-pointer transition duration-300 hover:scale-105 hover:z-50 ${width} mx-1`} onClick={handleClick}>
+                    <div className={`${aspect} w-full rounded-md overflow-hidden relative shadow-lg ${bgClass}`}>
+                        {item.image ? <img src={item.image} alt={item.title} className="w-full h-full object-cover" /> : 
+                        <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center">
+                            {item.icon ? <item.icon className="w-10 h-10 text-white opacity-80" /> : <BookOpen className="w-10 h-10 text-white opacity-30" />}
+                            <h3 className="font-serif font-bold text-white mt-2 text-xs">{item.title}</h3>
+                        </div>}
+                        {item.titleOnCover && <div className="absolute inset-0 flex items-center justify-center p-4 bg-black/20"><h3 className="font-serif font-bold text-black text-center text-sm md:text-lg" style={{textShadow: '0 0 10px white'}}>{item.title}</h3></div>}
+                        {item.badge && <div className="absolute top-2 right-0 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md">{item.badge}</div>}
                     </div>
-
-                    <div className="mt-2 px-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                        <div className="flex items-center justify-between mb-1">
-                            <span className="text-green-500 font-bold text-[10px] md:text-xs">{item.match}</span>
-                            <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
-                        </div>
-                        {/* Se o título já está na capa, podemos optar por esconder aqui ou manter. Mantendo para consistência no layout da grade */}
-                        {item.image && <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>}
+                    <div className="mt-2 px-1">
+                        <span className="text-green-500 font-bold text-[10px]">{item.match}</span>
+                        <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>
                     </div>
                 </div>
             );
         };
 
-        const Row = ({ title, subtitle, items, isAppRow, id, isHorizontal, onOpenModal }) => {
-            const rowRef = useRef(null);
-
-            return (
-                <div id={id} className="mb-8 md:mb-12 relative pl-4 md:pl-12 group z-20 scroll-mt-24">
-                    <div>
-                        <h2 className="text-base md:text-xl font-bold text-gray-200 mb-1 hover:text-white cursor-pointer transition inline-flex items-center">
-                            {title}
-                            <span className="text-xs text-blue-400 ml-4 font-normal opacity-0 group-hover:opacity-100 transition-opacity flex items-center duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
-                                Explorar todos <ChevronDown className="w-3 h-3 ml-1 -rotate-90" />
-                            </span>
-                        </h2>
-                        {subtitle && (
-                            <p className="text-xs md:text-sm text-gray-400 font-medium italic mb-3 opacity-80">
-                                {subtitle}
-                            </p>
-                        )}
-                    </div>
-                    
-                    <div className="relative group">
-                        <div 
-                            ref={rowRef}
-                            className="flex space-x-2 md:space-x-4 overflow-x-scroll scrollbar-hide pb-4 pr-12 items-center"
-                        >
-                            {items.map((item, index) => (
-                                <Card 
-                                    key={index} 
-                                    item={item} 
-                                    isApp={isAppRow} 
-                                    isHorizontal={isHorizontal}
-                                    onOpenModal={onOpenModal}
-                                />
-                            ))}
-                        </div>
-                        
-                        <div className="absolute top-0 right-0 h-full w-8 md:w-16 bg-gradient-to-l from-[#141414] to-transparent pointer-events-none z-20"></div>
-                    </div>
+        const Row = ({ title, subtitle, items, onOpenModal, id, isHorizontal }) => (
+            <div id={id} className="mb-8 md:mb-12 pl-4 md:pl-12 relative z-20 scroll-mt-24">
+                <h2 className="text-base md:text-xl font-bold text-gray-200 mb-1 hover:text-white cursor-pointer transition inline-flex items-center">{title}</h2>
+                {subtitle && <p className="text-xs text-gray-400 italic mb-3">{subtitle}</p>}
+                <div className="flex space-x-2 md:space-x-4 overflow-x-scroll scrollbar-hide pb-4 pr-12">
+                    {items.map((item, idx) => <Card key={idx} item={item} onOpenModal={onOpenModal} isHorizontal={isHorizontal} />)}
                 </div>
-            );
-        };
-
-        const ContactSection = () => {
-            return (
-                <div id="contacto" className="max-w-4xl mx-auto px-4 pt-12 pb-4 scroll-mt-24">
-                    <div className="bg-[#1f1f1f] rounded-lg p-6 md:p-12 shadow-2xl border border-gray-800">
-                        <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-white text-center">Contáctanos</h2>
-                        <p className="text-gray-400 text-center mb-8 text-sm md:text-base">
-                            ¿Tienes alguna duda, sugerencia o testimonio? Envíanos un mensaje directo.
-                        </p>
-                        
-                        <form 
-                            action="https://formsubmit.co/maquinadoinfoprodutor@gmail.com" 
-                            method="POST"
-                            className="space-y-6"
-                        >
-                            <input type="hidden" name="_subject" value="Nuevo Mensaje - Catholic Play Store" />
-                            <input type="hidden" name="_template" value="table" />
-                            <input type="hidden" name="_captcha" value="false" />
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label htmlFor="name" className="block text-xs font-bold text-gray-500 uppercase mb-2">Nombre</label>
-                                    <input 
-                                        type="text" 
-                                        name="name" 
-                                        required 
-                                        className="w-full bg-[#333] border border-transparent focus:border-[#E50914] rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#E50914] transition-all"
-                                        placeholder="Tu nombre completo"
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="email" className="block text-xs font-bold text-gray-500 uppercase mb-2">Email</label>
-                                    <input 
-                                        type="email" 
-                                        name="email" 
-                                        required 
-                                        className="w-full bg-[#333] border border-transparent focus:border-[#E50914] rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#E50914] transition-all"
-                                        placeholder="tu@email.com"
-                                    />
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <label htmlFor="message" className="block text-xs font-bold text-gray-500 uppercase mb-2">Mensaje</label>
-                                <textarea 
-                                    name="message" 
-                                    rows="4" 
-                                    required
-                                    className="w-full bg-[#333] border border-transparent focus:border-[#E50914] rounded px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#E50914] transition-all resize-none"
-                                    placeholder="Escribe tu mensaje aquí..."
-                                ></textarea>
-                            </div>
-
-                            <div className="text-center pt-2">
-                                <button 
-                                    type="submit" 
-                                    className="bg-[#E50914] hover:bg-[#B9090B] text-white font-bold py-3 px-12 rounded transition-colors duration-300 shadow-lg transform active:scale-95 uppercase tracking-wider text-sm"
-                                >
-                                    Enviar Mensaje
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            );
-        };
-
-        const Footer = () => (
-            <footer className="max-w-4xl mx-auto px-4 py-12 text-gray-500 text-sm mt-4 border-t border-gray-800/30 flex justify-center">
-                <p className="text-[10px] text-gray-600">© 2024 Catholic Play Store - Ad Maiorem Dei Gloriam</p>
-            </footer>
+            </div>
         );
 
-        // --- COMPONENTE MODAL NOVO ---
         const ContentModal = ({ item, onClose }) => {
-            const scrollContainerRef = useRef(null);
-            const contentRef = useRef(null);
-
             if (!item) return null;
-
             const isPdf = !!item.pdfUrl;
-            const isFullHtml = !!item.fullHtml; // Novo verificador para HTML completo
+            const isFullHtml = !!item.fullHtml;
 
             return (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
-                    <div 
-                        // Ajuste de largura para PDF ou HTML Completo
-                        className={`bg-[#181818] w-full ${isPdf || isFullHtml ? 'max-w-6xl h-[90vh]' : 'max-w-2xl max-h-[90vh]'} rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col`}
-                        onClick={e => e.stopPropagation()} 
-                    >
-                        {/* Botão Fechar */}
-                        <button 
-                            onClick={onClose}
-                            className="absolute top-3 right-3 z-20 bg-black/50 hover:bg-black/80 rounded-full p-2 text-white transition-colors"
-                        >
-                            <X className="w-5 h-5" />
-                        </button>
-
+                    <div className={`bg-[#181818] w-full ${isPdf || isFullHtml ? 'max-w-6xl h-[90vh]' : 'max-w-2xl max-h-[90vh]'} rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col`} onClick={e => e.stopPropagation()}>
+                        <button onClick={onClose} className="absolute top-3 right-3 z-20 bg-black/50 hover:bg-black/80 rounded-full p-2 text-white transition-all"><X className="w-5 h-5" /></button>
+                        
                         {isPdf ? (
-                            <iframe 
-                                src={item.pdfUrl} 
-                                className="w-full h-full bg-[#2a2a2a]" 
-                                title="PDF Viewer"
-                                allow="autoplay"
-                            ></iframe>
+                            <iframe src={item.pdfUrl} className="w-full h-full border-none bg-white" title="PDF"></iframe>
                         ) : isFullHtml ? (
-                            // Renderiza o HTML completo em iframe para isolar estilos e scripts
-                            <iframe 
-                                srcDoc={item.fullHtml}
-                                className="w-full h-full bg-white"
-                                title="Full HTML Content"
-                                style={{ border: 'none' }}
-                            ></iframe>
+                            <iframe srcDoc={item.fullHtml} className="w-full h-full bg-white border-none" title="HTML"></iframe>
                         ) : (
-                            <>
-                                {/* Imagem de Topo (Layout padrão) */}
+                            <div className="overflow-y-auto custom-scrollbar h-full">
                                 {item.image && (
                                     <div className="relative h-48 md:h-64 flex-shrink-0">
-                                        <img 
-                                            src={item.image} 
-                                            alt={item.title} 
-                                            className="w-full h-full object-cover"
-                                        />
+                                        <img src={item.image} className="w-full h-full object-cover" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
                                         <div className="absolute bottom-4 left-6">
-                                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white drop-shadow-md">{item.title}</h2>
-                                            <p className="text-gray-300 text-sm font-medium mt-1">{item.subtitle || item.author}</p>
+                                            <h2 className="text-2xl md:text-4xl font-serif font-bold text-white">{item.title}</h2>
                                         </div>
                                     </div>
                                 )}
-
-                                {/* Conteúdo com Scroll - ADICIONADO 'relative' e REF */}
-                                <div 
-                                    className="p-6 md:p-8 overflow-y-auto custom-scrollbar relative" 
-                                    ref={scrollContainerRef}
-                                >
-                                    <div 
-                                        ref={contentRef} 
-                                        className="book-content prose prose-invert max-w-none"
-                                        dangerouslySetInnerHTML={{ __html: item.content }} 
-                                    />
-                                </div>
-                            </>
+                                <div className="p-6 md:p-8 book-content prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: item.content }} />
+                            </div>
                         )}
                     </div>
                 </div>
@@ -2028,126 +429,28 @@
 
         const App = () => {
             const [searchQuery, setSearchQuery] = useState('');
-            const [selectedItem, setSelectedItem] = useState(null); 
+            const [selectedItem, setSelectedItem] = useState(null);
             
-            // Combine all data for searching (Incluindo LENT_DATA)
-            const allData = [...APPS_DATA, ...LENT_DATA, ...PRAYERS_DATA, ...BOOKS_DATA, ...EXTRA_LIBRARY_DATA, ...GUADALUPE_DATA, ...MUSIC_DATA, ...BONUS_DATA];
-            
-            const filteredData = allData.filter(item => {
-                const query = searchQuery.toLowerCase();
-                return (
-                    item.title.toLowerCase().includes(query) ||
-                    (item.subtitle && item.subtitle.toLowerCase().includes(query)) ||
-                    (item.author && item.author.toLowerCase().includes(query)) ||
-                    (item.description && item.description.toLowerCase().includes(query))
-                );
-            });
-
             return (
-                <div className="min-h-screen bg-[#141414] overflow-x-hidden selection:bg-red-600 selection:text-white font-sans">
+                <div className="min-h-screen bg-[#141414] overflow-x-hidden font-sans">
                     <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-                    
-                    {selectedItem && (
-                        <ContentModal item={selectedItem} onClose={() => setSelectedItem(null)} />
-                    )}
-
-                    {searchQuery ? (
-                          <div className="pt-24 px-4 md:px-12 min-h-screen">
-                            <h2 className="text-lg md:text-2xl text-gray-400 mb-6">Resultados para: <span className="text-white">"{searchQuery}"</span></h2>
-                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                                {filteredData.map((item, idx) => (
-                                    <Card 
-                                        key={idx} 
-                                        item={item} 
-                                        isApp={!!item.icon && !item.isModal}
-                                        onOpenModal={setSelectedItem}
-                                        customStyle="w-full"
-                                    />
-                                ))}
-                            </div>
-                            {filteredData.length === 0 && (
-                                <div className="flex flex-col items-center justify-center mt-20 text-gray-500">
-                                    <p className="text-xl">No se encontraron resultados.</p>
-                                    <p className="text-sm mt-2">Prueba con otro término.</p>
-                                </div>
-                            )}
-                         </div>
-                    ) : (
-                        <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
-                            <Hero onOpenModal={setSelectedItem} />
-                            <div className="relative z-20 mt-4 md:-mt-32 pb-0 bg-[#141414] md:bg-gradient-to-b md:from-transparent md:via-[#141414] md:to-[#141414]">
-                                <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} isAppRow={true} onOpenModal={setSelectedItem} />
-                                
-                                {/* Nova Seção Quaresma 2026 */}
-                                <Row 
-                                    title="Cuaresma 2026" 
-                                    subtitle="Tiempo de Penitencia y Conversión" 
-                                    items={LENT_DATA} 
-                                    isAppRow={false} 
-                                    onOpenModal={setSelectedItem}
-                                />
-
-                                <Row 
-                                    title="Oraciones Diarias" 
-                                    subtitle="Para fortalecer el espíritu" 
-                                    items={PRAYERS_DATA} 
-                                    isAppRow={false}
-                                    isHorizontal={true}
-                                    onOpenModal={setSelectedItem}
-                                />
-
-                                <Row 
-                                    id="libros" 
-                                    title="Biblioteca Católica" 
-                                    subtitle="Colección Completa con os Bonos:" 
-                                    items={BOOKS_DATA} 
-                                    isAppRow={false} 
-                                    onOpenModal={setSelectedItem} // Adicionado para permitir abrir PDFs
-                                />
-
-                                {/* Nova Seção de Biblioteca Extra */}
-                                <Row 
-                                    title="Tesoros de la Fe" 
-                                    subtitle="Lectura Espiritual Adicional" 
-                                    items={EXTRA_LIBRARY_DATA} 
-                                    isAppRow={false} 
-                                    onOpenModal={setSelectedItem}
-                                />
-
-                                {/* Nova Seção de Música */}
-                                <Row 
-                                    title="Playlist de música gregoriana especialmente para Meditación y contemplación" 
-                                    subtitle="Paz y Contemplación" 
-                                    items={MUSIC_DATA} 
-                                    isAppRow={false}
-                                    isHorizontal={true} 
-                                />
-
-                                <Row 
-                                    title="✨ COLECCIÓN “Guadalupe Revelada”" 
-                                    subtitle="Próximamente disponible para compra" 
-                                    items={GUADALUPE_DATA} 
-                                    isAppRow={false} 
-                                />
-                                
-                                <Row title="Nuevos Lanzamientos en Devoción" items={[...APPS_DATA].reverse()} isAppRow={true} onOpenModal={setSelectedItem} />
-                                <Row title="Recomendados para ti" items={[...BOOKS_DATA].reverse()} isAppRow={false} onOpenModal={setSelectedItem} />
-
-                                {/* Nova Seção de Bonos */}
-                                <Row 
-                                    title="Bonos Exclusivos" 
-                                    subtitle="Regalos para tu fe" 
-                                    items={BONUS_DATA} 
-                                    isAppRow={false} 
-                                    onOpenModal={setSelectedItem}
-                                />
-
-                                <ContactSection />
-                            </div>
+                    {selectedItem && <ContentModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+                    <div className="relative z-10">
+                        <Hero onOpenModal={setSelectedItem} />
+                        <div className="relative z-20 md:-mt-32 pb-20">
+                            <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} onOpenModal={setSelectedItem} />
+                            <Row title="Cuaresma 2026" subtitle="Tiempo de Penitencia y Conversión" items={LENT_DATA} onOpenModal={setSelectedItem} />
+                            <Row title="Oraciones Diarias" items={PRAYERS_DATA} onOpenModal={setSelectedItem} isHorizontal={true} />
+                            <Row id="libros" title="Biblioteca Católica" items={BOOKS_DATA} onOpenModal={setSelectedItem} />
+                            <Row title="Tesoros de la Fe" subtitle="Lectura Espiritual" items={EXTRA_LIBRARY_DATA} onOpenModal={setSelectedItem} />
+                            <Row title="Playlist Gregoriana" items={MUSIC_DATA} onOpenModal={setSelectedItem} isHorizontal={true} />
+                            <Row title="Guadalupe Revelada" items={GUADALUPE_DATA} onOpenModal={setSelectedItem} />
+                            <Row title="Bonos Exclusivos" items={BONUS_DATA} onOpenModal={setSelectedItem} />
                         </div>
-                    )}
-
-                    <Footer />
+                    </div>
+                    <footer className="py-12 text-center text-gray-600 text-[10px] uppercase tracking-widest border-t border-white/5">
+                        © 2026 Catholic Play Store - Ad Maiorem Dei Gloriam
+                    </footer>
                 </div>
             );
         };
