@@ -3,437 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catholic Play Store - Member Area</title>
+    <title>Itinerario Cuaresmal 2026</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- Babel -->
+    <!-- Bibliotecas via CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        netflix: {
-                            bg: '#141414',
-                            red: '#E50914',
-                            darkRed: '#B9090B',
-                            card: '#1f1f1f',
-                            text: '#e5e5e5',
-                            dim: '#b3b3b3'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .hero-gradient { background: linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 15%, transparent 60%); }
-        .hero-vignette { background: radial-gradient(circle, transparent 50%, #141414 150%); }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
-        .animate-slideUp { animation: slideUp 0.4s ease-out; }
-        body { background-color: #141414; color: #fff; }
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
         
-        .book-content h2 { color: #facc15; margin-top: 1.5em; border-bottom: 1px solid #444; padding-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; }
-        .book-content h3 { color: #e5e5e5; margin-top: 1em; font-weight: bold; font-size: 1.2rem; }
-        .book-content p { color: #d1d5db; margin-bottom: 1em; line-height: 1.6; }
-        .book-content strong { color: #fff; }
+        .font-sacred { font-family: 'Playfair Display', serif; }
+        .font-vatican { font-family: 'Cinzel', serif; }
+        .font-reading { font-family: 'Lato', sans-serif; }
         
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #1f1f1f; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        /* Tema Visual do Deserto */
+        .bg-desert-theme {
+            background-color: #050301; 
+            background-image: 
+                linear-gradient(to bottom, rgba(5, 3, 1, 0.75), rgba(20, 10, 30, 0.88)),
+                url('https://i.postimg.cc/bNVgfTBC/Gemini-Generated-Image-kmerfqkmerfqkmer-(1).png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .card-hover-effect {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.9);
+            border-color: rgba(252, 211, 77, 0.6);
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1A1005; }
+        ::-webkit-scrollbar-thumb { background: #96712E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FCD34D; }
+
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dynamic-font {
+            font-size: var(--app-font-size, 16px);
+            transition: font-size 0.2s ease-in-out;
+        }
+
+        .pulse-soft {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .instruction-glow {
+            text-shadow: 0 0 15px rgba(252, 211, 77, 0.5);
+        }
     </style>
 </head>
-<body>
+<body class="bg-desert-theme text-white">
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect } = React;
 
-        // =================================================================================
-        // 1. ÍCONES
-        // =================================================================================
-        const IconBase = ({ children, className, style, onClick }) => (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}>
-                {children}
-            </svg>
+        // --- BIBLIOTECA DE ÍCONES ---
+        const Icon = ({ name, size = 20, className = "" }) => {
+            const icons = {
+                ChevronDown: <path d="m6 9 6 6 6-6"/>,
+                ChevronUp: <path d="m18 15-6-6-6 6"/>,
+                ChevronRight: <path d="m9 18 6-6-6-6"/>,
+                ArrowLeft: <path d="m12 19-7-7 7-7M5 12h14"/>,
+                Cross: <path d="M11 2h2v17h-2z M5 8h14v2h-14z"/>,
+                Footprints: <path d="M4 16c0-2 2-5 3-5s3 3 3 5-1 4-3 4-3-2-3-4z M14 8c0-2 2-5 3-5s3 3 3 5-1 4-3 4-3-2-3-4z"/>,
+                Moon: <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>,
+                Flame: <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>,
+                CheckCircle2: <React.Fragment><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></React.Fragment>,
+                Fish: <path d="M2 12c5-5 13-5 18 0M2 12c5 5 13 5 18 0M20 12l4 4M20 12l4-4M18 12h-2"/>,
+                Lock: <React.Fragment><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></React.Fragment>,
+                X: <path d="M18 6 6 18M6 6l12 12"/>,
+                Mail: <React.Fragment><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></React.Fragment>,
+                Star: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>,
+                BookOpen: <React.Fragment><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></React.Fragment>,
+                Heart: <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>,
+                Gift: <React.Fragment><rect width="18" height="14" x="3" y="8" rx="2"/><path d="M12 5v3m0 0v11M12 8H3m9 0h9M3 12h18"/></React.Fragment>,
+                Plus: <path d="M12 5v14M5 12h14"/>,
+                Minus: <path d="M5 12h14"/>,
+                Type: <path d="M4 7V4h16v3M9 20h6M12 4v16"/>,
+                Scroll: <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4 M19 17V3a2 2 0 0 0-2-2H4"/>,
+                Calendar: <React.Fragment><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></React.Fragment>,
+                AlertCircle: <React.Fragment><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></React.Fragment>
+            };
+
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                    {icons[name] || null}
+                </svg>
+            );
+        };
+
+        // --- CONTROLO DE ACESSIBILIDADE ---
+        const FontControls = ({ scale, setScale }) => (
+            <div className="fixed bottom-6 right-6 z-[90] flex items-center bg-[#2D1B36] border border-[#FCD34D]/50 rounded-full p-2 shadow-2xl backdrop-blur-md">
+                <button onClick={() => setScale(Math.max(0.8, scale - 0.1))} className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"><Icon name="Minus" size={18} /></button>
+                <div className="px-2 flex items-center gap-1 border-x border-white/10 mx-1">
+                    <Icon name="Type" size={16} className="text-[#FCD34D]" />
+                    <span className="text-[10px] font-bold text-white w-8 text-center">{Math.round(scale * 100)}%</span>
+                </div>
+                <button onClick={() => setScale(Math.min(1.5, scale + 0.1))} className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"><Icon name="Plus" size={18} /></button>
+            </div>
         );
 
-        const Play = (props) => <IconBase {...props}><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></IconBase>;
-        const Info = (props) => <IconBase {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></IconBase>;
-        const Bell = (props) => <IconBase {...props}><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></IconBase>;
-        const Search = (props) => <IconBase {...props}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></IconBase>;
-        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>;
-        const Shield = (props) => <IconBase {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></IconBase>;
-        const Crown = (props) => <IconBase {...props}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></IconBase>;
-        const BookOpen = (props) => <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>;
-        const User = (props) => <IconBase {...props}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></IconBase>;
-        const X = (props) => <IconBase {...props}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></IconBase>;
+        // --- COMPONENTE DE LOGIN ---
+        const LoginView = ({ onLogin }) => {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
 
-        // =================================================================================
-        // 2. CONSTANTES DE CONTEÚDO HTML (INTEGRAIS)
-        // =================================================================================
-
-        const BIBLIOTECA_MODAL_HTML = `
-            <div class="flex flex-col items-center justify-center py-12 px-4 font-sans text-center">
-                <img src="https://i.postimg.cc/tJL36r3V/Gemini-Generated-Image-fdv54wfdv54wfdv5-(1).png" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 border-4 border-[#C5A059] shadow-lg" alt="Biblioteca">
-                <h2 class="text-3xl md:text-4xl font-serif text-[#C5A059] font-bold mb-4">Literatura Católica</h2>
-                <p class="text-gray-300 mb-8 max-w-lg leading-relaxed mx-auto">
-                    Acceda a una colección exclusiva con más de 500 libros, documentos de la Iglesia, obras maestras de los Santos, escritos de los Padres de la Iglesia y tratados de Teología para enriquecer su fe y vida espiritual.
-                </p>
-                <div class="grid grid-cols-2 gap-4 mb-10 w-full max-w-md mx-auto text-sm text-gray-200">
-                    <div class="bg-[#1a1a1a] p-3 rounded-lg border border-[#C5A059]/30 shadow-md">📜 Vidas de Santos</div>
-                    <div class="bg-[#1a1a1a] p-3 rounded-lg border border-[#C5A059]/30 shadow-md">🏛️ Padres de la Iglesia</div>
-                    <div class="bg-[#1a1a1a] p-3 rounded-lg border border-[#C5A059]/30 shadow-md">✝️ Teología y Apologética</div>
-                    <div class="bg-[#1a1a1a] p-3 rounded-lg border border-[#C5A059]/30 shadow-md">📖 Documentos Papales</div>
-                </div>
-                <a href="https://drive.google.com/drive/folders/1wUV-Rz-yc2Xob965U3Z4XiSY5BQUM_J9" target="_blank" class="inline-block bg-gradient-to-r from-red-900 to-[#800020] text-white font-bold py-4 px-10 rounded-lg hover:from-red-800 hover:to-red-900 transition-transform transform hover:scale-105 shadow-xl uppercase tracking-wider text-sm border border-red-700/50 no-underline">
-                    ABRIR BIBLIOTECA COMPLETA
-                </a>
-            </div>
-        `;
-
-        const QUARESMA_HTML_CONTENT = `
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body { font-family: 'Crimson Text', serif; padding: 40px; background: #fdf6e3; line-height: 1.6; color: #2C2C2C; }
-                h1, h2, h3 { text-align: center; color: #800020; font-family: serif; margin-top: 1.5em; }
-                img { display: block; margin: 0 auto 30px; max-width: 100%; border: 4px solid #D4AF37; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-                .drop-cap::first-letter { float: left; font-size: 3.5rem; line-height: 0.8; padding-right: 8px; padding-top: 4px; color: #800020; }
-                .ornament { text-align: center; color: #D4AF37; font-size: 24px; margin: 30px 0; }
-            </style>
-        </head>
-        <body>
-            <h1>Miércoles de Ceniza 2026</h1>
-            <img src="https://i.postimg.cc/kGnSSGrv/image.png" alt="Miércoles de Ceniza">
-            
-            <p class="drop-cap">"Tu Padre, que ve en lo secreto, te recompensará" (Mt 6, 4. 6. 18). Estas palabras de Jesús se dirigen a cada uno de nosotros al inicio del itinerario cuaresmal. Lo comenzamos con la imposición de la ceniza, austero gesto penitencial, muy arraigado en la tradición cristiana. Este gesto subraya la conciencia del hombre pecador ante la majestad y la santidad de Dios. Al mismo tiempo, manifiesta su disposición a acoger y traducir en decisiones concretas la adhesión al Evangelio.</p>
-            
-            <p>Son muy elocuentes las fórmulas que lo acompañan. La primera, tomada del libro del Génesis: "Acuérdate de que eres polvo y al polvo volverás" (cf. Gn 3, 19), evoca la actual condición humana marcada por la caducidad y el límite. La segunda recoge las palabras evangélicas: "Convertíos y creed el Evangelio" (Mc 1, 15), que constituyen una apremiante exhortación a cambiar de vida. Ambas fórmulas nos invitan a entrar en la Cuaresma con una actitud de escucha y de sincera conversión.</p>
-
-            <div class="ornament">†</div>
-
-            <h2>2. En lo secreto</h2>
-            <p>El Evangelio subraya que el Señor "ve en lo secreto", es decir, escruta el corazón. Los gestos externos de penitencia tienen valor si son expresión de una actitud interior, si manifiestan la firme voluntad de apartarse del mal e iniciar el camino del bien. Aquí radica el sentido profundo de la ascesis cristiana.</p>
-            
-            <p><strong>"Ascesis"</strong>: la palabra misma evoca la imagen de una ascensión a metas elevadas. Eso implica necesariamente sacrificios y renuncias. En efecto, hace falta reducir el equipaje a lo esencial para que el viaje no sea pesado; estar dispuestos a afrontar todas las dificultades y superar todos los obstáculos para alcanzar el objetivo fijado. Para llegar a ser auténticos discípulos de Cristo, es necesario renunciar a sí mismos, tomar la propia cruz y seguirlo (cf. Lc 9, 23). Es el arduo sendero de la santidad, que todo bautizado está llamado a recorrer.</p>
-
-            <div class="ornament">†</div>
-
-            <h2>3. Medios para el camino</h2>
-            <p>Desde siempre, la Iglesia señala algunos medios adecuados para caminar por esta senda. Ante todo, la humilde e dócil <strong>adhesión a la voluntad de Dios</strong>, acompañada por una <strong>oración</strong> incesante; las <strong>formas penitenciales típicas</strong> de la tradición cristiana, como la abstinencia, el ayuno, la mortificación y la renuncia incluso a bienes de por sí legítimos; y los <strong>gestos concretos de acogida</strong> con respecto al prójimo, que el pasaje evangélico de hoy evoca con la palabra "limosna". Todo esto se vuelve a proponer con mayor intensidad durante el período de la Cuaresma, que representa, al respecto, un "tiempo fuerte" de entrenamiento espiritual y de servicio generoso a los hermanos.</p>
-        </body>
-        </html>`;
-
-        const VIA_CRUCIS_HTML_CONTENT = `
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body { font-family: serif; background: #fdf6e3; padding: 40px; line-height: 1.6; color: #2C2C2C; }
-                h1, h2 { text-align: center; color: #800020; font-family: 'Cinzel', serif; }
-                img { display: block; margin: 0 auto 30px; max-width: 100%; border: 4px solid #D4AF37; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-                .station { margin-top: 40px; border-top: 1px double #D4AF37; padding-top: 20px; }
-            </style>
-        </head>
-        <body>
-            <h1>Vía Crucis Meditado</h1>
-            <img src="https://i.postimg.cc/9XK143JX/image-(1).png" alt="Via Crucis">
-            <p><strong>Viernes de Cuaresma</strong></p>
-            <p>Al abrir los ojos en este viernes de Cuaresma, oferece inmediatamente tu coração a Dios. Antes de qualquer pensamento ou preocupação, haz la Señal de la Cruz e inicia el camino al Calvario con el Señor.</p>
-            <div class="station">
-                <h2>I Estación: Jesús es condenado a muerte</h2>
-                <p>Contempla a Jesús ante Pilato. El Justo es condenado por los injustos. Él calla y acepta la sentencia por amor a ti. Señor, ayúdame a aceptar las incomprensiones de este día sin quejarme, ofreciéndolas en unión a tu silencio.</p>
-            </div>
-            <div class="station">
-                <h2>II Estación: Jesús carga con la Cruz</h2>
-                <p>Jesús abraza el madero de nuestra salvación. La Cruz no es un peso, sino el puente hacia el cielo. Señor, enséñame a no huir de mis responsabilidades e a cargar con alegría la cruz de mis deberes diarios.</p>
-            </div>
-            <p style="text-align:center; margin-top:50px; color:#D4AF37;">† † †</p>
-        </body>
-        </html>`;
-
-        const POPE_MESSAGE_HTML_CONTENT = `
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body { font-family: 'Crimson Text', serif; padding: 40px; background: #fcfaf2; line-height: 1.8; color: #333; }
-                header { text-align: center; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; margin-bottom: 30px; }
-                h1 { color: #800020; font-size: 24px; text-transform: uppercase; }
-                .pope-img { display: block; margin: 20px auto; max-width: 300px; border: 2px solid #D4AF37; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-                h2 { color: #800020; border-left: 5px solid #D4AF37; padding-left: 15px; margin-top: 1.5em; }
-                .drop-cap::first-letter { float: left; font-size: 60px; line-height: 50px; padding: 4px 10px 0 0; color: #800020; }
-                footer { margin-top: 50px; text-align: right; border-top: 1px solid #ddd; padding-top: 20px; }
-            </style>
-        </head>
-        <body>
-            <header>
-                <h1>MENSAJE DEL SANTO PADRE LEÓN XIV PARA LA CUARESMA 2026</h1>
-                <img src="https://i.postimg.cc/pXkfDgBB/image-(2).png" class="pope-img" alt="Papa León XIV">
-                <p><strong>Escuchar y ayunar. La Cuaresma como tiempo de conversión</strong></p>
-            </header>
-            <p class="drop-cap">Queridos hermanos y hermanas:</p>
-            <p>La Cuaresma es el tiempo en el que la Iglesia, con solicitud maternal, nos invita a poner de nuevo el misterio de Dios en el centro de nuestra vida, para que nuestra fe recobre su impulso y el corazón no se disperse entre las inquietudes y distracciones cotidianas.</p>
-            <p>Todo caminho de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu. Existe, por tanto, un vínculo entre el don de la Palabra de Dios, el espacio de hospitalidad que le ofrecemos y la transformación que ella realiza. Por eso, el itinerario cuaresmal se convierte en una ocasión propicia para escuchar la voz del Señor y renovar la decisión de seguir a Cristo, recorriendo con Él el camino que sube a Jerusalén, donde se cumple el misterio de su pasión, muerte y resurrección.</p>
-            
-            <div class="ornament">†</div>
-
-            <h2>Escuchar</h2>
-            <p>Este año me gustaría llamar la atención, en primer lugar, sobre la importancia de dar espacio a la Palabra a través de la <strong>escucha</strong>, ya que la disposición a escuchar es el primer signo con el que se manifiesta el deseo de entrar en relación con el otro.</p>
-            <p>Dios mismo, al revelarse a Moisés desde la zarza ardiente, muestra que la escucha es un rasgo distintivo de su ser: «Yo he visto la opresión de mi pueblo, que está en Egipto, y he oído los gritos de dolor» (Ex 3,7). La escucha del clamor de los oprimidos es el comienzo de una historia de liberación, en la que el Señor involucra también a Moisés, enviándolo a abrir un camino de salvación para sus hijos reducidos a la esclavitud.</p>
-            <p>Es un Dios que nos atrae, que hoy también nos conmueve con los pensamientos que hacen vibrar su corazón. Por eso, la escucha de la Palabra en la liturgia nos educa para una escucha más verdadera de la realidad.</p>
-            <p>Entre las many voces que atraviesan nuestra vida personal y social, las Sagradas Escrituras nos hacen capaces de reconocer la voz que clama desde el sufrimiento y la injusticia, para que no quede sin respuesta. Entrar en esta disposición interior de receptividad significa dejarnos instruir hoy por Dios para escuchar <strong>como</strong> Él, hasta reconocer que «la condición de los pobres representa un grito que, en la historia de la humanidad, interpela constantemente nuestra vida, nuestras sociedades, los sistemas políticos y económicos, y especialmente a la Iglesia». [1]</p>
-
-            <h2>Ayunar</h2>
-            <p>Si la Cuaresma es tiempo de escucha, el <strong>ayuno</strong> constituye una práctica concreta que dispone a la acogida de la Palabra de Dios. La abstinencia de alimento, en efecto, es un ejercicio ascético antiquísimo e insustituible en el camino de la conversión. Precisamente porque implica al cuerpo, hace más evidente aquello de lo que tenemos “hambre” y lo que consideramos esencial para nuestro sustento. Sirve, por tanto, para discernir y ordenar los “apetitos”, para mantener despierta el hambre y la sed de justicia, sustrayéndola de la resignación, educarla para que se convierta en oración y responsabilidad hacia el prójimo.</p>
-            <p>San Agustín, con sutileza espiritual, deja entrever la tensión entre el tiempo presente y la realización futura que atraviesa este cuidado del corazón, cuando observa que: «es propio de los hombres mortales tener hambre y sed de la justicia, así como estar repletos de la justicia es propio de la otra vida. De este pan, de este alimento, están repletos los ángeles; en cambio, los hombres, mientras tienen hambre, se ensanchan; mientras se ensanchan, son dilatados; mientras son dilatados, se hacen capaces; y, hechos capaces, en su momento serán repletos». [2] El ayuno, entendido en este sentido, nos permite no sólo disciplinar el deseo, purificarlo y hacerlo más libre, sino también expandirlo, de modo que se dirija a Dios y se oriente hacia el bien.</p>
-            <p>Sin embargo, para que el ayuno conserve su verdad evangélica y evite la tentación de enorgullecer el corazón, debe vivirse siempre con fe y humildad. Exige permanecer arraigado en la comunión con el Señor, porque «no ayuna de verdad quien no sabe alimentarse de la Palabra de Dios». [3] En cuanto signo visible de nuestro compromiso interior de alejarnos, con la ayuda de la gracia, del pecado y del mal, el ayuno debe incluir también otras formas de privación destinadas a hacernos adquirir un estilo de vida más sobrio, ya que « sólo la austeridad hace fuerte y auténtica la vida cristiana». [4]</p>
-            <p>Por eso, me gustaría invitarles a una forma de abstinencia muy concreta y a menudo poco apreciada, es decir, la de <strong>abstenerse de utilizar palabras que afectan y lastiman a nuestro prójimo</strong>. Empecemos a desarmar el lenguaje, renunciando a las palabras hirientes, al juicio inmediato, a hablar mal de quienes están ausentes y no pueden defenderse, a las calumnias. Esforcémonos, en cambio, por aprender a medir las palabras y a cultivar la amabilidad: en la familia, entre amigos, en el lugar de trabalho, en las redes sociales, en los debates políticos, en los medios de comunicación e en las comunidades cristianas. Entonces, muchas palabras de odio darán paso a palabras de esperanza y paz.</p>
-            
-            <div class="ornament">†</div>
-
-            <h2>Juntos</h2>
-            <p>Por último, la Cuaresma pone de relieve la dimensión comunitaria de la escucha de la Palabra y de la práctica del ayuno. También la Escritura subraya este aspecto de muchas maneras. Por ejemplo, cuando narra en el libro de Nehemías que el pueblo se reunió para escuchar la lectura pública del libro de la Ley y, practicando el ayuno, se dispuso a la confesión de fe y a la adoración, con el fin de renovar la alianza con Dios (cf. Ne 9,1-3).</p>
-            <p>Del mismo modo, nuestras parroquias, familias, grupos eclesiales y comunidades religiosas están llamados a realizar en Cuaresma un camino compartido, en el que la escucha de la Palabra de Dios, así como del clamor de los pobres y de la tierra, se convierta en forma de vida común, y el ayuno sostenga un arrepentimiento real. En este horizonte, la conversión no sólo concierne a la conciencia del individuo, sino también al estilo de las relaciones, a la calidad del diálogo, a la capacidad de dejarse interpelar por la realidad y de reconocer lo que realmente orienta el deseo, tanto en nuestras comunidades eclesiales como en la humanidad sedienta de justicia y reconciliación.</p>
-            <p>Queridos hermanos, pidamos la gracia de vivir una Cuaresma que haga más atento nuestro oído a Dios y a los más necesitados. Pidamos la fuerza de un ayuno que alcance también a la lengua, para que disminuyan las palabras que hieren y crezca el espacio para la voz de los demás. Y comprometámonos para que nuestras comunidades se conviertan en lugares donde el grito de los que sufren encuentre acogida y la escucha genere caminos de liberación, haciéndonos más dispuestos y diligentes para contribuir a edificar la civilización del amor.</p>
-            <p>Los bendigo de corazón a todos ustedes, y a su camino cuaresmal.</p>
-
-            <footer>
-                <p>Vaticano, 5 de febrero de 2026, memoria de santa Águeda, virgen y mártir.</p>
-                <p><strong>LEÓN XIV PP.</strong></p>
-            </footer>
-        </body>
-        </html>`;
-
-        // =================================================================================
-        // 3. ESTRUTURA DE DADOS
-        // =================================================================================
-        
-        const APPS_DATA = [
-            { id: 'quaresma', title: "Itinerario Cuaresmal", subtitle: "Cuaresma 2026", icon: Info, color: "bg-purple-900", match: "Premium", badge: "18 Feb", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", link: "https://itinerariocuaresmalgratuito.netlify.app/" },
-            { id: 'rosario', title: "Santo Rosario de Batalla", subtitle: "Oración y Combate", icon: Shield, color: "bg-blue-900", link: "https://santorosarioes.netlify.app/", match: "98% Match", badge: "Top 10", image: "https://i.postimg.cc/G2tN6VCf/Gemini-Generated-Image-txrat1txrat1txra.png" },
-            { id: 'novenas', title: "Novena 12 Marías", subtitle: "Colección", icon: Crown, color: "bg-purple-900", link: "https://novena12marias.netlify.app/", match: "95% Match", badge: "Nuevo", image: "https://i.postimg.cc/gJpyZ6M8/Gemini-Generated-Image-6fg18u6fg18u6fg1.png" },
-            { id: 'devocional', title: "Devocional de los Santos", subtitle: "Vidas de Santos", icon: BookOpen, color: "bg-emerald-900", link: "https://devocionaldelosantos.netlify.app/", match: "92% Match", image: "https://i.postimg.cc/15LQwpFK/Gemini-Generated-Image-gcg4jfgcg4jfgcg4.png" },
-            { id: 'lit-cat', title: "Literatura Católica", subtitle: "+500 Libros", icon: BookOpen, color: "bg-amber-900", isModal: true, image: "https://i.postimg.cc/tJL36r3V/Gemini-Generated-Image-fdv54wfdv54wfdv5-(1).png", content: BIBLIOTECA_MODAL_HTML }
-        ];
-
-        const LENT_DATA = [
-            { id: 'itinerario-quaresmal', title: "Itinerario Cuaresmal", subtitle: "Oferta", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", match: "Especial", badge: "Oferta", link: "https://itinerariocuaresmalgratuito.netlify.app/" },
-            { id: 'mensaje-papa-2026', title: "Mensaje del Papa", subtitle: "Cuaresma 2026", image: "https://i.postimg.cc/pXkfDgBB/image-(2).png", match: "Nuevo", badge: "Mensaje", isModal: true, fullHtml: POPE_MESSAGE_HTML_CONTENT },
-            { id: 'miercoles-ceniza', title: "Miércoles de Ceniza", subtitle: "Reflexión 2026", image: "https://i.postimg.cc/kGnSSGrv/image.png", match: "Esencial", badge: "18 Feb", isModal: true, fullHtml: QUARESMA_HTML_CONTENT },
-            { id: 'via-crucis-lente', title: "Vía Crucis Meditado", subtitle: "Viernes de Cuaresma", image: "https://i.postimg.cc/9XK143JX/image-(1).png", match: "Devoción", isModal: true, fullHtml: VIA_CRUCIS_HTML_CONTENT }
-        ];
-
-        const PRAYERS_DATA = [
-            { id: 'm1', title: "Oraciones de la Mañana", subtitle: "Al despertar", image: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>☀️ Mañana</h2><p>En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.</p></div>" },
-            { id: 'm2', title: "Actos de Adoración", subtitle: "Mañana", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🙌 Adoración</h2><p>Bendita sea la santa y una Trinidad...</p></div>" },
-            { id: 'm3', title: "Ofrecimiento del Día", subtitle: "Día", image: "https://i.postimg.cc/QCXj54t8/Gemini-Generated-Image-4bn33n4bn33n4bn3.png", match: "Diário", isModal: true, content: "<div class='p-8'><h2>❤️ Ofrecimiento</h2><p>Oh Jesús, por el Corazón de María te ofrezco...</p></div>" },
-            { id: 'm4', title: "Bendición de Alimentos", subtitle: "Comidas", image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🍞 Bendición</h2><p>Bendice Señor estos alimentos...</p></div>" },
-            { id: 'm5', title: "Oración para el Trabalho", subtitle: "Labor", image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>💼 Trabajo</h2><p>Bendice, Padre celestial...</p></div>" },
-            { id: 'm6', title: "Lectura de la Biblia", subtitle: "Estúdio", image: "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>📖 Biblia</h2><p>Señor mío y Dios mío...</p></div>" },
-            { id: 'm7', title: "Acción de Gracias", subtitle: "Gratitud", image: "https://images.unsplash.com/photo-1507692814201-9994511ba977?q=80&w=2070&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🙏 Gracias</h2><p>Oh Jesús, te agradezco...</p></div>" },
-            { id: 'm8', title: "Petición de Perdón", subtitle: "Misericordia", image: "https://images.unsplash.com/photo-1544169601-382991823eb3?q=80&w=2072&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🕊️ Perdón</h2><p>Dios, Padre de amor...</p></div>" },
-            { id: 'm9', title: "Oración de la Noche", subtitle: "Noche", image: "https://images.unsplash.com/photo-1507502707541-f369a3b18502?q=80&w=1976&auto=format&fit=crop", match: "Diário", isModal: true, content: "<div class='p-8'><h2>🌙 Noite</h2><p>Em Vossas mãos encomendo...</p></div>" }
-        ];
-
-        const BOOKS_DATA = [
-            { id: 'b1', title: "Catecismo", author: "Magisterio", image: "https://i.postimg.cc/Dwx0rL0B/Whats-App-Image-2026-01-19-at-22-13-19-(1).jpg", link: "https://www.vatican.va/archive/catechism_sp/index_sp.html", match: "100%" },
-            { id: 'b2', title: "Biblia", author: "Vaticano", image: "https://i.postimg.cc/m2kRMJxL/images.jpg", link: "https://www.vatican.va/archive/ESL0506/_INDEX.HTM", match: "100%" },
-            { id: 'b3', title: "Adviento", author: "Navidad", image: "https://i.postimg.cc/d0yHyvxb/Gemini-Generated-Image-r1hrk0r1hrk0r1hr.webp", link: "https://libroadvientoenavidad.netlify.app/", match: "99%" },
-            { id: 'b4', title: "Apariciones", author: "Historia", image: "https://i.postimg.cc/Fzmj1Qts/Gemini-Generated-Image-xyoyl9xyoyl9xyoy.webp", isModal: true, pdfUrl: "https://drive.google.com/file/d/1I-bPT1UjmFHWaW8d_BVbpseRTqoJziCx/preview", match: "90%" },
-            { id: 'b5', title: "Conversos", author: "Guía", image: "https://i.postimg.cc/QN2MQqVZ/Gemini-Generated-Image-ayk0l5ayk0l5ayk0.webp", link: "https://drive.google.com/file/d/1cg7bqPhOOGGSAEe0p9zctx9BAYrV_FAG/view", match: "88%" }
-        ];
-
-        const EXTRA_LIBRARY_DATA = [
-            { id: 'e1', title: "1000 Máximas", author: "Don Bosco", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/19JXxLa1e4bwVutfgRJ6d55Qe0FYNQoWw/preview", titleOnCover: true, match: "Bono" },
-            { id: 'e2', title: "Documentos II", author: "Fe", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMVFdUV3VYb0hzWWc/preview", titleOnCover: true, match: "Bono" },
-            { id: 'e3', title: "Espiritualidad III", author: "Lectura", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMOEVzTTdIMkpQbjg/preview", titleOnCover: true, match: "Bono" },
-            { id: 'e4', title: "Tradición IV", author: "Biblioteca", image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070&auto=format&fit=crop", isModal: true, pdfUrl: "https://drive.google.com/file/d/0Bxu0vxnfM6FMSGxxZGgwZ2hiQ3c/preview", titleOnCover: true, match: "Bono" }
-        ];
-
-        const MUSIC_DATA = [
-            { id: 'mu1', title: "Gregoriano Latín", subtitle: "Meditación", image: "https://img.youtube.com/vi/akPTHn8PkcE/hqdefault.jpg", link: "https://www.youtube.com/watch?v=akPTHn8PkcE", match: "98%" },
-            { id: 'mu2', title: "Salmo 117 Español", subtitle: "Oración", image: "https://img.youtube.com/vi/I3v8mfk6ZF4/hqdefault.jpg", link: "https://www.youtube.com/watch?v=I3v8mfk6ZF4", match: "95%" },
-            { id: 'mu3', title: "Da Pacem Domine", subtitle: "Templarios", image: "https://img.youtube.com/vi/h0YRkuziwEg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=h0YRkuziwEg", match: "99%" },
-            { id: 'mu4', title: "Miserere Mei Deus", subtitle: "Contemplación", image: "https://img.youtube.com/vi/nLpcVQghKDg/maxresdefault.jpg", link: "https://www.youtube.com/watch?v=nLpcVQghKDg", match: "97%" }
-        ];
-
-        const GUADALUPE_DATA = [
-            { id: 'g1', title: "Imagen que Habla", subtitle: "Mensajes", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g2', title: "Milagro Estrellas", subtitle: "Manto", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g3', title: "Juan Diego", subtitle: "Encuentro", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g4', title: "Náhuatl", subtitle: "Cultura", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g5', title: "Milagros 500 Años", subtitle: "Historia", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g6', title: "Profecías", subtitle: "Revelación", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" },
-            { id: 'g7', title: "Mensagem Moderno", subtitle: "Hoy", image: "https://i.postimg.cc/3wnZGFqN/Gemini-Generated-Image-5lgc485lgc485lgc.png", match: "2026", link: "#" }
-        ];
-
-        const BONUS_DATA = [
-            { id: 'bn1', title: "Rosario Gregoriano", isModal: true, color: "bg-stone-800", pdfUrl: "https://drive.google.com/file/d/1ND-7zNs9tDWPZzjAuesxPoiMnQUP8Fn1/preview", match: "Regalo" },
-            { id: 'bn2', title: "Historia Sagrada", isModal: true, color: "bg-zinc-800", pdfUrl: "https://drive.google.com/file/d/1_QNbQuEjYbqGXOu0d0T203c0Vy9BYiiZ/preview", match: "Regalo" },
-            { id: 'bn3', title: "Eucarística", isModal: true, color: "bg-slate-800", pdfUrl: "https://drive.google.com/file/d/1LZ2enqNSRP9L07jUxKQ7H_qFT1txZhxj/preview", match: "Regalo" },
-            { id: 'bn4', title: "Accede a más bonos", color: "bg-red-900", link: "https://drive.google.com/drive/folders/1WtvXPYpTOPAiNUR1WRh2_OJb_7eDxCR3", match: "Colección" }
-        ];
-
-        // =================================================================================
-        // 4. COMPONENTES REACT
-        // =================================================================================
-
-        // Componente do Formulário Clássico de Contacto / Suporte em formato Pop-up
-        const SupportModal = ({ onClose }) => {
-            const [submitted, setSubmitted] = useState(false);
-            const [isSubmitting, setIsSubmitting] = useState(false);
-
-            const handleSubmit = async (e) => {
+            const handleSubmit = (e) => {
                 e.preventDefault();
-                setIsSubmitting(true);
-                
-                const form = e.target;
-                const data = new FormData(form);
-
-                try {
-                    const response = await fetch("https://formspree.io/f/xwvnnvnb", {
-                        method: "POST",
-                        body: data,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        setSubmitted(true);
-                    } else {
-                        alert("Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo.");
-                    }
-                } catch (error) {
-                    alert("Error de conexión. Verifica tu internet e inténtalo de nuevo.");
-                } finally {
-                    setIsSubmitting(false);
+                if(email.trim() !== '' && password.trim() !== '') {
+                    onLogin();
                 }
             };
 
             return (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
-                    <div className="bg-[#141414] w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden relative animate-slideUp flex flex-col md:flex-row border border-[#C5A059]/30" onClick={e => e.stopPropagation()}>
-                        <button type="button" onClick={onClose} className="absolute top-3 right-3 z-20 bg-black/50 hover:bg-black/80 rounded-full p-2 text-white transition-all"><X className="w-5 h-5" /></button>
+                <div className="min-h-screen flex items-center justify-center p-4 animate-fade-in relative z-10">
+                    <div className="max-w-md w-full bg-black/80 backdrop-blur-2xl border border-[#FCD34D]/30 rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9)] relative overflow-hidden">
                         
-                        <div className="w-full md:w-1/2 p-6 md:p-8 bg-gradient-to-br from-[#181818] to-[#121212] flex flex-col justify-center">
-                            <h2 className="text-2xl md:text-3xl font-serif text-[#C5A059] font-bold mb-4">¿Necesitas ayuda?</h2>
-                            <p className="text-gray-400 text-sm mb-6 leading-relaxed">Si tienes dudas sobre el Itinerario Cuaresmal, problemas de acceso a tu cuenta o necesitas soporte técnico con la plataforma, envíanos un mensaje. Nuestro equipo te responderá a la mayor brevedad posible.</p>
-                            <div className="space-y-4 text-sm text-gray-300">
-                                <p className="flex items-center"><Info className="w-5 h-5 mr-3 text-[#C5A059]"/> Soporte técnico y resolución de acceso</p>
-                                <p className="flex items-center"><BookOpen className="w-5 h-5 mr-3 text-[#C5A059]"/> Dudas sobre el contenido y materiales</p>
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FCD34D] to-transparent opacity-70"></div>
+                        
+                        <div className="text-center mb-10">
+                            <div className="mx-auto w-20 h-20 rounded-full border-2 border-[#FCD34D] bg-black/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(252,211,77,0.3)] pulse-soft">
+                                <Icon name="Cross" size={36} className="text-[#FCD34D]" />
                             </div>
+                            <h1 className="font-vatican text-4xl md:text-5xl text-[#FCD34D] font-bold mb-3 uppercase tracking-tight drop-shadow-[0_0_15px_rgba(252,211,77,0.4)] leading-tight">
+                                Itinerario<br/>Cuaresmal 2026
+                            </h1>
+                            <p className="font-sacred text-white/80 italic text-xl">El Camino del Desierto</p>
                         </div>
-                        
-                        <div className="w-full md:w-1/2 bg-[#181818] p-6 md:p-8">
-                            {submitted ? (
-                                <div className="h-full flex flex-col items-center justify-center py-8 text-center animate-fadeIn">
-                                    <div className="w-16 h-16 bg-green-900/30 text-green-500 rounded-full flex items-center justify-center mb-4 border border-green-500/50">
-                                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-green-400 mb-2">¡Mensaje Enviado!</h3>
-                                    <p className="text-gray-400 text-sm mb-6">Hemos recibido tu consulta y te responderemos por correo electrónico.</p>
-                                    <button onClick={onClose} className="w-full bg-[#C5A059] hover:bg-yellow-600 text-black font-bold py-3 rounded transition-colors uppercase tracking-wide text-sm shadow-lg">Cerrar</button>
+
+                        <div className="bg-[#FCD34D]/10 border border-[#FCD34D]/20 rounded-xl p-5 mb-8 text-center">
+                            <Icon name="AlertCircle" size={20} className="text-[#FCD34D] mx-auto mb-3" />
+                            <p className="text-sm font-reading text-gray-200 leading-relaxed">
+                                Para ingresar, utiliza tu <strong>correo electrónico</strong> de registro.
+                            </p>
+                            <p className="text-sm font-reading text-gray-200 leading-relaxed mt-2">
+                                Como contraseña, ingresa tu <strong>fecha de nacimiento</strong> (solo números).
+                            </p>
+                            <p className="text-xs text-[#FCD34D] mt-3 font-bold tracking-widest uppercase">Ejemplo: 05121990</p>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <Icon name="Mail" size={18} className="text-gray-400" />
                                 </div>
-                            ) : (
-                                <form className="space-y-5" onSubmit={handleSubmit}>
-                                    <input type="hidden" name="_subject" value="Nuevo Mensaje de Soporte - Catholic Play" />
-                                    <div>
-                                        <label className="block text-gray-400 text-xs font-bold mb-1 uppercase tracking-wider">Nombre</label>
-                                        <input type="text" name="nombre" required className="w-full bg-[#2a2a2a] text-white border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-[#C5A059] transition-colors" placeholder="Tu nombre" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-400 text-xs font-bold mb-1 uppercase tracking-wider">Email</label>
-                                        <input type="email" name="email" required className="w-full bg-[#2a2a2a] text-white border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-[#C5A059] transition-colors" placeholder="tu@email.com" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-400 text-xs font-bold mb-1 uppercase tracking-wider">Mensaje</label>
-                                        <textarea required name="mensaje" rows="4" className="w-full bg-[#2a2a2a] text-white border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-[#C5A059] transition-colors resize-none" placeholder="¿En qué te podemos ayudar?"></textarea>
-                                    </div>
-                                    <button type="submit" disabled={isSubmitting} className={`w-full bg-[#C5A059] hover:bg-yellow-600 text-black font-bold py-3 md:py-4 rounded transition-colors uppercase tracking-wide text-sm shadow-lg ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                                        {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
-                                    </button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            );
-        };
+                                <input 
+                                    type="email" 
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full pl-11 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#FCD34D] focus:ring-1 focus:ring-[#FCD34D] transition-all font-reading"
+                                    placeholder="Correo electrónico"
+                                />
+                            </div>
+                            
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <Icon name="Lock" size={18} className="text-gray-400" />
+                                </div>
+                                <input 
+                                    type="password" 
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full pl-11 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#FCD34D] focus:ring-1 focus:ring-[#FCD34D] transition-all font-reading"
+                                    placeholder="Contraseña (DDMMAAAA)"
+                                />
+                            </div>
+                            
+                            <button 
+                                type="submit"
+                                className="w-full py-4 mt-6 bg-[#FCD34D] text-[#2D1B36] rounded-xl font-bold uppercase tracking-[0.2em] text-sm hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(252,211,77,0.3)] active:scale-[0.98]"
+                            >
+                                Iniciar el Camino
+                            </button>
+                        </form>
 
-        const Navbar = ({ searchQuery, setSearchQuery }) => {
-            const [isScrolled, setIsScrolled] = useState(false);
-            const [showInput, setShowInput] = useState(false);
-            const inputRef = useRef(null);
-            useEffect(() => {
-                const handleScroll = () => setIsScrolled(window.scrollY > 0);
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-            return (
-                <nav className={`fixed w-full z-50 transition-all duration-500 px-4 md:px-12 py-4 flex items-center justify-between ${isScrolled || showInput ? 'bg-[#141414] shadow-lg' : 'bg-gradient-to-b from-black/90 to-transparent'}`}>
-                    <div className="flex items-center space-x-8">
-                        <span className="text-red-600 text-2xl md:text-3xl font-bold uppercase tracking-tighter cursor-pointer">CATHOLIC PLAY</span>
-                        <ul className="hidden md:flex space-x-6 text-sm font-medium text-gray-200">
-                            <li><a href="#" className="hover:text-white transition">Inicio</a></li>
-                            <li><a href="#apps" className="hover:text-white transition font-bold">Apps</a></li>
-                            <li><a href="#libros" className="hover:text-white transition">Libros</a></li>
-                        </ul>
-                    </div>
-                    <div className="flex items-center space-x-6 text-white">
-                        <div className={`flex items-center border ${showInput ? 'border-white bg-black/60 px-2 py-1' : 'border-transparent'}`}>
-                            <Search className="w-5 h-5 cursor-pointer" onClick={() => { setShowInput(true); setTimeout(() => inputRef.current?.focus(), 100); }} />
-                            <input ref={inputRef} type="text" className={`bg-transparent text-white text-sm outline-none transition-all duration-300 ${showInput ? 'w-32 md:w-60 ml-2 opacity-100' : 'w-0 opacity-0'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onBlur={() => !searchQuery && setShowInput(false)} placeholder="Buscar..." />
-                        </div>
-                        <div className="w-8 h-8 rounded bg-[#B9090B] flex items-center justify-center overflow-hidden"><User className="w-5 h-5" /></div>
-                    </div>
-                </nav>
-            );
-        };
-
-        const Hero = () => {
-            return (
-                <div id="inicio" className="relative h-[65vh] md:h-[95vh] w-full text-white bg-[#141414]">
-                    <div className="absolute top-0 left-0 w-full h-full select-none">
-                        <img src="https://i.postimg.cc/kDr2xG3p/Gemini-Generated-Image-kmerfqkmerfqkmer-(1).png" alt="Hero" className="w-full h-full object-cover object-top md:object-center" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#141414]"></div>
-                        <div className="hidden md:block absolute inset-0 hero-gradient"></div>
-                    </div>
-
-                    <div className="absolute bottom-4 left-0 w-full px-4 pb-8 md:p-0 md:left-12 md:top-[35%] md:w-auto max-w-2xl z-30">
-                        <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Destacado de Cuaresma</span>
-                        <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 leading-tight text-yellow-500 drop-shadow-lg">Itinerario Cuaresmal</h1>
-                        <p className="text-sm md:text-xl mb-4 md:mb-8 text-gray-100 font-medium drop-shadow-md">40 Días: Un camino de conversión e esperanza. Acompaña a Jesús en el desierto e prepárate para la Pascua.</p>
-                        
-                        <div className="flex flex-col space-y-3 mt-6 w-full md:w-fit">
-                            <a href="https://itinerariocuaresmalgratuito.netlify.app/" target="_blank" className="group relative flex items-center justify-center bg-gradient-to-r from-green-500 to-green-400 text-black px-6 py-4 md:px-10 md:py-5 rounded-xl font-black hover:from-green-400 hover:to-green-300 transition-all transform hover:scale-105 shadow-[0_0_40px_rgba(74,222,128,0.6)] border-2 border-green-200 w-full no-underline uppercase tracking-widest text-sm md:text-lg overflow-hidden">
-                                <span className="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
-                                <Crown className="w-6 h-6 md:w-8 md:h-8 mr-3 flex-shrink-0 animate-pulse group-hover:animate-none" />
-                                <span className="drop-shadow-md">Comenzar Itinerario Cuaresmal</span>
+                        <div className="mt-8 pt-8 border-t border-white/10 text-center">
+                            <p className="text-gray-300 font-reading text-sm mb-4">
+                                Acceso exclusivo para suscriptores.
+                            </p>
+                            <a 
+                                href="https://pay.hotmart.com/R104315521P?off=bsjlu74b&checkoutMode=10" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center w-full gap-3 px-6 py-4 bg-white/5 border border-[#FCD34D]/40 rounded-xl text-[#FCD34D] hover:bg-[#FCD34D] hover:text-[#2D1B36] transition-all font-bold uppercase tracking-[0.15em] text-xs shadow-lg group"
+                            >
+                                <Icon name="Star" size={16} className="group-hover:animate-spin" />
+                                Haz clic aquí y adquiere tu acceso
                             </a>
                         </div>
                     </div>
@@ -441,123 +216,266 @@
             );
         };
 
-        const Card = ({ item, onOpenModal, isHorizontal }) => {
-            const handleClick = () => {
-                if (item.isModal) onOpenModal(item);
-                else if (item.link && item.link !== '#') window.open(item.link, '_blank');
-            };
-            const aspect = isHorizontal ? 'aspect-video' : 'aspect-[2/3]';
-            const width = isHorizontal ? 'w-[220px] md:w-[300px]' : 'w-[140px] md:w-[200px]';
-            const bgClass = !item.image ? (item.color || 'bg-gray-800') : 'bg-gray-800';
-
+        // --- MODAL DE BLOQUEIO ---
+        const InfoModal = ({ isOpen, onClose, date }) => {
+            if (!isOpen) return null;
             return (
-                <div className={`group relative flex-shrink-0 cursor-pointer transition duration-300 hover:scale-105 hover:z-50 ${width} mx-1`} onClick={handleClick}>
-                    <div className={`${aspect} w-full rounded-md overflow-hidden relative shadow-lg ${bgClass}`}>
-                        {item.image ? <img src={item.image} alt={item.title} className="w-full h-full object-cover" /> : 
-                        <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center">
-                            {item.icon ? <item.icon className="w-10 h-10 text-white opacity-80" /> : <BookOpen className="w-8 h-8 text-white opacity-30" />}
-                            <h3 className="font-serif font-bold text-white mt-2 text-xs">{item.title}</h3>
-                        </div>}
-                        {item.titleOnCover && <div className="absolute inset-0 flex items-center justify-center p-4 bg-black/20"><h3 className="font-serif font-bold text-black text-center text-sm md:text-lg" style={{textShadow: '0 0 10px white'}}>{item.title}</h3></div>}
-                        {item.badge && <div className="absolute top-2 right-0 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-l shadow-md">{item.badge}</div>}
-                    </div>
-                    <div className="mt-2 px-1">
-                        <div className="flex items-center justify-between mb-1">
-                            <span className="text-green-500 font-bold text-[10px]">{item.match}</span>
-                            <span className="border border-gray-500 text-gray-400 text-[9px] px-1 rounded">HD</span>
+                <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/98 backdrop-blur-md animate-fade-in text-gray-800">
+                    <div className="bg-[#FDFBF7] w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden border-2 border-[#96712E] relative p-8 text-center">
+                        <div className="mx-auto w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mb-6 border border-amber-200 text-amber-600"><Icon name="Lock" size={32} /></div>
+                        <h3 className="font-sacred text-2xl text-[#2D1B36] mb-2 font-bold uppercase tracking-tight">Aún no es el tiempo</h3>
+                        <p className="font-reading text-gray-600 mb-6 leading-relaxed">Este paso del itinerario estará disponible el día <span className="font-bold text-[#4C1D95]">{date}</span>. Mantén la fidelidad diaria.</p>
+                        <div className="bg-[#FAF5FF] rounded-xl p-4 mb-8 border border-purple-100 text-xs">
+                             <div className="flex items-center justify-center gap-2 text-[#4C1D95] font-bold uppercase tracking-widest mb-2"><Icon name="Mail" size={14} /> Soporte</div>
+                             <p className="text-gray-500 font-reading italic text-center leading-tight">Cualquier duda, póngase en contacto a través de:<br/><span className="text-[#96712E] font-bold block mt-1">suporte@app.tscotelaro.com.br</span></p>
                         </div>
-                        <h4 className="text-xs md:text-sm font-medium text-gray-200 truncate">{item.title}</h4>
+                        <button onClick={onClose} className="w-full py-3 bg-[#2D1B36] text-[#FDFBF7] rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#4C1D95] transition-all shadow-lg">Regresar</button>
                     </div>
                 </div>
             );
         };
 
-        const Row = ({ title, subtitle, items, onOpenModal, id, isHorizontal }) => (
-            <div id={id} className="mb-8 md:mb-12 pl-4 md:pl-12 relative z-20 scroll-mt-24">
-                <h2 className="text-base md:text-xl font-bold text-gray-200 mb-1">{title}</h2>
-                {subtitle && <p className="text-xs text-gray-400 italic mb-3">{subtitle}</p>}
-                <div className="flex space-x-2 md:space-x-4 overflow-x-scroll scrollbar-hide pb-4 pr-12">
-                    {items.map((item, idx) => <Card key={idx} item={item} onOpenModal={onOpenModal} isHorizontal={isHorizontal} />)}
+        // --- MODAL MENSAGEM DO PAPA ---
+        const PapalMessageModal = ({ isOpen, onClose }) => {
+          if (!isOpen) return null;
+          return (
+            <div className="fixed inset-0 z-[110] flex items-center justify-center p-2 md:p-4 bg-black/98 backdrop-blur-lg animate-fade-in text-gray-800">
+              <div className="bg-[#FDFBF7] w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden border-2 border-[#96712E] relative flex flex-col max-h-[95vh]">
+                <div className="bg-[#F5F5F4] p-4 flex items-center justify-between border-b border-[#E7E5E4]">
+                   <div className="flex items-center gap-3">
+                     <div className="p-2 bg-[#FCD34D]/20 rounded-full border border-[#96712E]/30"><Icon name="Cross" size={20} className="text-[#96712E]" /></div>
+                     <div><h3 className="font-sacred text-sm font-bold text-[#2D1B36] uppercase tracking-widest">Santa Sede</h3><p className="text-[10px] text-gray-500 uppercase font-bold text-xs">Mensaje Oficial</p></div>
+                   </div>
+                   <button onClick={onClose} className="p-2 rounded-full hover:bg-black/10 text-[#2D1B36] transition-colors"><Icon name="X" size={20} /></button>
                 </div>
+                <div className="p-6 md:p-12 overflow-y-auto font-reading text-gray-800 leading-relaxed text-justify space-y-6 text-base md:text-lg">
+                  <div className="text-center mb-10">
+                    <img src="https://i.postimg.cc/yNG5vKFL/Capturarcxasxsaxsa.gif" alt="Papa Francisco" className="w-full max-w-md mx-auto rounded-lg shadow-xl border border-[#96712E]/30 mb-8" />
+                    <h2 className="font-vatican text-2xl md:text-4xl font-bold text-[#2D1B36] mb-2 uppercase">Mensaje del Santo Padre León XIV</h2>
+                    <h3 className="font-sacred text-xl text-[#96712E] italic mb-6">PARA LA CUARESMA 2026</h3>
+                    <div className="h-0.5 w-32 bg-[#96712E] mx-auto my-6"></div>
+                  </div>
+                  <div className="space-y-6">
+                     <p className="font-bold">Queridos hermanos y hermanas:</p>
+                     <p>La Cuaresma es el tiempo en el que la Iglesia, con solicitud maternal, nos invita a poner de nuevo el misterio de Dios en el centro de nuestra vida, para que nuestra fe recobre su impulso y el corazón no se disperse entre las inquietudes y distracciones cotidianas.</p>
+                     <p>Todo camino de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu. Existe, por tanto, un vínculo entre el don de la Palabra de Dios, el espacio de hospitalidad que le ofrecemos y la transformación que ella realiza. Por eso, el itinerario cuaresmal se convierte en una ocasión propicia para escuchar la voz del Señor y renovar la decisión de seguir a Cristo, recorriendo con Él el camino que sube a Jerusalén, donde se cumple el misterio de su pasión, muerte y resurrección.</p>
+                     
+                     <div className="pt-4 border-t border-gray-100">
+                        <h5 className="font-vatican font-bold text-xl text-[#4C1D95] mb-4 uppercase tracking-widest">Escuchar</h5>
+                        <p className="mb-4">Este año me gustaría llamar la atención, en primer lugar, sobre la importancia de dar espacio a la Palabra a través de la <strong>escucha</strong>, ya que la disposición a escuchar es el primer signo con el que se manifiesta el deseo de entrar en relación con el otro.</p>
+                        <p className="mb-4">Dios mismo, al revelarse a Moisés desde la zarza ardiente, muestra que la escucha es un rasgo distintivo de su ser: «Yo he visto la opresión de mi pueblo, que está en Egipto, y he oído los gritos de dolor» (Ex 3,7). La escucha del clamor de los oprimidos es el comienzo de una historia de liberación, en la que el Señor involucra también a Moisés, enviándolo a abrir un camino de salvación para sus hijos reducidos a la esclavitud.</p>
+                        <p className="mb-4">Es un Dios que nos atrae, que hoy también nos conmueve con los pensamientos que hacen vibrar su corazón. Por eso, la escucha de la Palabra en la liturgia nos educa para una escucha más verdadera de la realidad.</p>
+                        <p>Entre las muchas voces que atraviesan nuestra vida personal y social, las Sagradas Escrituras nos hacen capaces de reconocer la voz que clama desde el sufrimiento y la injusticia, para que no quede sin respuesta. Entrar en esta disposición interior de receptividad significa dejarnos instruir hoy por Dios para escuchar como Él, hasta reconocer que «la condición de los pobres representa un grito que, en la historia de la humanidad, interpela constantemente nuestra vida, nuestras sociedades, los sistemas políticos y económicos, y especialmente a la Iglesia».</p>
+                     </div>
+
+                     <div className="pt-4 border-t border-gray-100">
+                        <h5 className="font-vatican font-bold text-xl text-[#4C1D95] mb-4 uppercase tracking-widest">Ayunar</h5>
+                        <p className="mb-4">Si la Cuaresma es tiempo de escucha, el <strong>ayuno</strong> constituye una práctica concreta que dispone a la acogida de la Palabra de Dios. La abstinencia de alimento, en efecto, es un ejercicio ascético antiquísimo e insustituible en el camino de la conversión. Precisamente porque implica al cuerpo, hace más evidente aquello de lo que tenemos “hambre” y lo que consideramos esencial para nuestro sustento. Sirve, por tanto, para discernir y ordenar los “apetitos”, para mantener despierta el hambre y la sed de justicia, sustrayéndola de la resignación, educarla para que se convierta en oración y responsabilidad hacia el prójimo.</p>
+                        <p className="italic bg-gray-50 p-6 border-l-4 border-[#96712E] my-6 rounded-r-lg text-gray-700 shadow-sm leading-relaxed">
+                            San Agustín, con sutileza espiritual, deja entrever la tensión entre el tiempo presente y la realización futura que atraviesa este cuidado del corazón, cuando observa que: «es propio de los hombres mortales tener hambre y sed de la justicia, así como estar repletos de la justicia es propio de la otra vida. De este pan, de este alimento, están repletos los ángeles; en cambio, los hombres, mientras tienen hambre, se ensanchan; mientras se ensanchan, son dilatados; mientras son dilatados, se hacen capaces; y, hechos capaces, en su momento serán repletos». El ayuno, entendido en este sentido, nos permite no sólo disciplinar el deseo, purificarlo y hacerlo más libre, sino también expandirlo, de modo que se dirija a Dios y se oriente hacia el bien.
+                        </p>
+                        <p className="mb-4">Sin embargo, para que el ayuno conserve su verdad evangélica y evite la tentación de enorgullecer el corazón, debe vivirse siempre con fe y humildad. Exige permanecer arraigado en la comunión con el Señor, porque «no ayuna de verdad quien no sabe alimentarse de la Palabra de Dios». En cuanto signo visible de nuestro compromiso interior de alejarnos, con la ayuda de la gracia, del pecado y del mal, el ayuno debe incluir también otras formas de privación destinadas a hacernos adquirir un estilo de vida más sobrio, ya que «sólo la austeridad hace fuerte y auténtica la vida cristiana».</p>
+                        <p>Por eso, me gustaría invitarles a una forma de abstinencia muy concreta y a menudo poco apreciada, es decir, la de abstenerse de utilizar palabras que afectan y lastiman a nuestro prójimo. Empecemos a desarmar el lenguaje, renunciando a las palabras hirientes, al juicio inmediato, a hablar mal de quienes están ausentes y no pueden defenderse, a las calumnias. Esforcémonos, en cambio, por aprender a medir las palabras y a cultivar la amabilidad: en la familia, entre amigos, en el lugar de trabajo, en las redes sociales, en los debates políticos, en los medios de comunicación y en las comunidades cristianas. Entonces, muchas palabras de odio darán paso a palabras de esperanza y paz.</p>
+                     </div>
+
+                     <div className="pt-4 border-t border-gray-100">
+                        <h5 className="font-vatican font-bold text-xl text-[#4C1D95] mb-4 uppercase tracking-widest">Juntos</h5>
+                        <p className="mb-4">Por último, la Cuaresma pone de relieve la dimensión comunitaria de la escucha de la Palabra y de la práctica del ayuno. También la Escritura subraya este aspecto de muchas maneras. Por ejemplo, cuando narra en el libro de Nehemías que el pueblo se reunió para escuchar la lectura pública del libro de la Ley y, practicando el ayuno, se dispuso a la confesión de fe y a la adoración, con el fin de renovar la alianza con Dios (cf. Ne 9,1-3).</p>
+                        <p className="mb-4">Del mismo modo, nuestras parroquias, familias, grupos eclesiales y comunidades religiosas están llamados a realizar en Cuaresma un camino compartido, en el que la escucha de la Palabra de Dios, así como del clamor de los pobres y de la tierra, se convierta en forma de vida común, y el ayuno sostenga un arrepentimiento real. En este horizonte, la conversión no sólo concierne a la conciencia del individuo, sino también al estilo de las relaciones, a la calidad del diálogo, a la capacidad de dejarse interpelar por la realidad y de reconocer lo que realmente orienta el deseo, tanto en nuestras comunidades eclesiales como en la humanidad sedienta de justicia y reconciliación.</p>
+                        <p className="mb-4">Queridos hermanos, pidamos la gracia de vivir una Cuaresma que haga más atento nuestro oído a Dios y a los más necesitados. Pidamos la fuerza de un ayuno que alcance también a la lengua, para que disminuyan las palabras que hieren y crezca el espacio para la voz de los demás. Y comprometámonos para que nuestras comunidades se conviertan en lugares donde el grito de los que sufren encuentre acogida y la escucha genere caminos de liberación, haciéndonos más dispuestos y diligentes para contribuir a edificar la civilización del amor.</p>
+                        <p>Los bendigo de corazón a todos ustedes, y a su camino cuaresmal.</p>
+                     </div>
+
+                     <div className="pt-10 text-right text-sm italic text-gray-500">
+                        <p>Vaticano, 5 de febrero de 2026, memoria de santa Águeda, virgen y mártir.</p>
+                        <p className="font-vatican font-bold text-[#2D1B36] text-xl pt-2 not-italic uppercase">León XIV PP.</p>
+                     </div>
+                  </div>
+                </div>
+                 <div className="bg-[#F5F5F4] p-4 border-t border-[#E7E5E4] flex justify-center">
+                    <button onClick={onClose} className="px-10 py-3 bg-[#2D1B36] text-[#FDFBF7] rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#4C1D95] transition-all shadow-lg">Cerrar Mensaje</button>
+                 </div>
+              </div>
             </div>
+          );
+        }
+
+        // --- SEÇÃO DE INTRODUÇÃO ---
+        const IntroSection = () => (
+          <div className="container mx-auto px-4 pt-8 md:pt-12 pb-12 text-center max-w-4xl">
+            <h1 className="font-vatican text-4xl md:text-6xl text-white mb-4 drop-shadow-lg uppercase tracking-tight">Itinerario Cuaresmal 2026</h1>
+            <div className="h-1 w-32 bg-[#FCD34D] mx-auto mb-6"></div>
+            <p className="font-sacred italic text-lg md:text-2xl text-[#E9D5FF] mb-8 drop-shadow-md">"He aquí el tiempo de conversión, he aquí el día de la salvación."</p>
+            <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl text-left md:text-center text-gray-100">
+              <h3 className="font-bold uppercase tracking-widest text-[#FCD34D] text-xs mb-4 tracking-[0.2em]">Instrucciones del Camino</h3>
+              <p className="font-reading leading-relaxed mb-6 text-sm md:text-lg">Bienvenido al desierto. Durante 40 días, subiremos a la montaña sagrada de la Pascua. Cada día trae un paso espiritual en la antigua tradición de la Iglesia:</p>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                {[{ icon: "Star", title: "Statio", desc: "Preparar" },{ icon: "BookOpen", title: "Lectio", desc: "Leer" },{ icon: "Moon", title: "Meditatio", desc: "Meditar" },{ icon: "Heart", title: "Oratio", desc: "Rezar" },{ icon: "Footprints", title: "Actio", desc: "Actuar" }].map((item, idx) => (
+                  <div key={idx} className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-colors">
+                    <Icon name={item.icon} className="text-[#FCD34D]" size={18} />
+                    <span className="font-sacred font-bold text-white text-xs">{item.title}</span>
+                    <span className="text-[9px] text-gray-400 uppercase tracking-tighter">{item.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         );
 
-        const ContentModal = ({ item, onClose }) => {
-            if (!item) return null;
-            const isPdf = !!item.pdfUrl;
-            const isFullHtml = !!item.fullHtml;
-
-            return (
-                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn" onClick={onClose}>
-                    <div className={`bg-[#181818] w-full ${isPdf || isFullHtml ? 'max-w-6xl h-[90vh]' : 'max-w-2xl max-h-[90vh]'} rounded-lg shadow-2xl overflow-hidden relative animate-slideUp flex flex-col`} onClick={e => e.stopPropagation()}>
-                        <button onClick={onClose} className="absolute top-3 right-3 z-20 bg-black/50 hover:bg-black/80 rounded-full p-2 text-white transition-all"><X className="w-5 h-5" /></button>
-                        
-                        {isPdf ? (
-                            <iframe src={item.pdfUrl} className="w-full h-full border-none bg-white" title="PDF"></iframe>
-                        ) : isFullHtml ? (
-                            <iframe srcDoc={item.fullHtml} className="w-full h-full bg-white border-none" title="HTML"></iframe>
-                        ) : (
-                            <div className="overflow-y-auto custom-scrollbar h-full">
-                                {item.image && (
-                                    <div className="relative h-48 md:h-64 flex-shrink-0">
-                                        <img src={item.image} className="w-full h-full object-cover" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#181818] to-transparent"></div>
-                                        <div className="absolute bottom-4 left-6">
-                                            <h2 className="text-2xl md:text-4xl font-serif font-bold text-white">{item.title}</h2>
-                                        </div>
-                                    </div>
-                                )}
-                                <div className="p-6 md:p-8 book-content prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: item.content }} />
-                            </div>
-                        )}
-                    </div>
-                </div>
-            );
+        // --- COMPONENTE PORTA COM CONECTOR VISÍVEL ---
+        const PathDay = ({ day, status, onClick, isLast, dateLabel, weekDay, isFriday, showPathToNext }) => {
+          const isActive = status === 'active';
+          return (
+            <div className="relative flex items-center justify-center w-full group">
+              {showPathToNext && (
+                <div className="absolute left-1/2 w-full border-t-4 border-dotted border-[#FCD34D]/40 z-0 pointer-events-none transition-all duration-500 group-hover:border-[#FCD34D]/80" style={{ marginLeft: '1.5rem' }}></div>
+              )}
+              
+              <button 
+                onClick={onClick} 
+                className={`relative z-10 flex flex-col items-center justify-center w-20 h-24 sm:w-24 sm:h-28 md:w-28 md:h-36 rounded-t-full rounded-b-3xl transition-all duration-300 ${isActive ? 'bg-[#2D1B36] -translate-y-2 shadow-[0_15px_40px_rgba(0,0,0,0.9)] border-2 border-[#FCD34D] ring-4 ring-[#FCD34D]/20' : 'bg-black/60 border border-white/10 opacity-70 hover:opacity-100 hover:scale-105 shadow-xl'}`}
+              >
+                {isActive && <div className="absolute -top-3 left-1/2 -translate-x-1/2"><Icon name="Flame" size={24} className="text-[#FCD34D] fill-[#FCD34D] animate-pulse" /></div>}
+                {isFriday && <div className="absolute -top-2 -right-2 bg-blue-900/90 p-1.5 rounded-full shadow-md border border-blue-400 z-10"><Icon name="Fish" size={14} className="text-blue-200" /></div>}
+                <span className={`font-sacred text-2xl sm:text-3xl md:text-4xl font-bold ${isActive ? 'text-[#FCD34D]' : 'text-gray-400'}`}>{day}</span>
+                <div className={`flex flex-col items-center mt-1 ${isActive ? 'text-[#E9D5FF]' : 'text-gray-500'}`}><span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold font-vatican">{dateLabel}</span><span className="text-[8px] sm:text-[9px] uppercase opacity-70 mt-0.5">{weekDay}</span></div>
+              </button>
+            </div>
+          );
         };
 
-        const App = () => {
-            const [searchQuery, setSearchQuery] = useState('');
-            const [selectedItem, setSelectedItem] = useState(null);
-            const [showSupportForm, setShowSupportForm] = useState(false);
+        // --- APLICAÇÃO PRINCIPAL ---
+        function App() {
+          const [isAuthenticated, setIsAuthenticated] = useState(false);
+          const [showPapalMessage, setShowPapalMessage] = useState(false);
+          const [infoModal, setInfoModal] = useState({ open: false, date: '' });
+          const [fontScale, setFontScale] = useState(1.0);
+          
+          const getLentDate = (dayNumber) => {
+            const startDate = new Date(2026, 1, 18); 
+            const targetDate = new Date(startDate);
+            targetDate.setDate(startDate.getDate() + (dayNumber - 1));
+            return { 
+                dayString: `${targetDate.getDate()} ${targetDate.toLocaleString('es-ES', { month: 'short' }).toUpperCase()}`, 
+                weekday: targetDate.toLocaleString('es-ES', { weekday: 'short' }).toUpperCase(), 
+                isFriday: targetDate.getDay() === 5 
+            };
+          };
 
+          const handleDayClick = (day) => {
+            const dateInfo = getLentDate(day);
+            const links = { 
+                1: 'https://01cuaresma2026.netlify.app/', 
+                2: 'https://02cuaresma2026.netlify.app/', 
+                3: 'https://03cuaresma2026.netlify.app/', 
+                4: 'https://04cuaresma2026.netlify.app/',
+                5: 'https://05cuaresma2026.netlify.app/',
+                6: 'https://06cuaresma2026.netlify.app/'
+            };
+            if(links[day]) { window.open(links[day], '_blank'); } 
+            else { setInfoModal({ open: true, date: `${dateInfo.dayString} (2026)` }); }
+          };
+
+          if (!isAuthenticated) {
             return (
-                <div className="min-h-screen bg-[#141414] overflow-x-hidden font-sans relative">
-                    <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-                    {selectedItem && <ContentModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
-                    
-                    {/* Modal de Suporte */}
-                    {showSupportForm && <SupportModal onClose={() => setShowSupportForm(false)} />}
-                    
-                    {/* Botão Flutuante de Suporte */}
-                    <button 
-                        onClick={() => setShowSupportForm(true)} 
-                        className="fixed bottom-6 right-6 z-50 bg-[#C5A059] hover:bg-yellow-600 text-black px-5 py-3 rounded-full font-bold shadow-[0_0_15px_rgba(197,160,89,0.4)] transition-transform hover:scale-105 flex items-center space-x-2"
-                    >
-                        <Info className="w-5 h-5" />
-                        <span>Soporte</span>
-                    </button>
+               <div className="dynamic-font" style={{ "--app-font-size": `${16 * fontScale}px` }}>
+                   <FontControls scale={fontScale} setScale={setFontScale} />
+                   <LoginView onLogin={() => setIsAuthenticated(true)} />
+               </div>
+            );
+          }
 
+          return (
+            <div className="min-h-screen dynamic-font pb-24" style={{ "--app-font-size": `${16 * fontScale}px` }}>
+              <PapalMessageModal isOpen={showPapalMessage} onClose={() => setShowPapalMessage(false)} />
+              <InfoModal isOpen={infoModal.open} onClose={() => setInfoModal({ open: false, date: '' })} date={infoModal.date} />
+              <FontControls scale={fontScale} setScale={setFontScale} />
+              
+              <div className="container mx-auto px-4 animate-fade-in pb-20">
+                 <IntroSection />
+                 
+                 {/* CARTÃO DO PAPA */}
+                 <div className="flex justify-center mb-16 px-2">
+                  <div onClick={() => setShowPapalMessage(true)} className="card-hover-effect group relative max-w-2xl w-full cursor-pointer overflow-hidden rounded-3xl border border-[#FCD34D]/20 bg-[#1A1005]/80 backdrop-blur-xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 shadow-2xl">
+                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#FCD34D]/5 rounded-full blur-2xl pointer-events-none"></div>
+                     <div className="relative w-24 h-24 md:w-32 md:h-32 shrink-0 z-10">
+                        <div className="absolute inset-0 rounded-full border-2 border-[#FCD34D] rotate-45 group-hover:rotate-90 transition-transform duration-700"></div>
+                        <img src="https://i.postimg.cc/MpmqPnH2/cq5dam-thumbnail-cropped-750-422.jpg" alt="Papa" className="w-full h-full object-cover rounded-full p-1" />
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#FCD34D] text-[#2D1B36] rounded-full p-1.5 shadow-lg pulse-soft"><Icon name="ChevronDown" size={14} className="stroke-[3]" /></div>
+                     </div>
+                     <div className="text-center md:text-left flex-1 space-y-2 text-white z-10">
+                        <div className="flex items-center justify-center md:justify-start gap-2"><span className="bg-[#FCD34D]/20 text-[#FCD34D] text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full border border-[#FCD34D]/30">Vaticano</span><span className="text-gray-400 text-[10px] uppercase tracking-widest font-bold font-vatican">Cuaresma 2026</span></div>
+                        <h3 className="font-vatican font-bold text-xl md:text-2xl group-hover:text-[#FCD34D] transition-colors leading-tight">Mensaje del Santo Padre León XIV</h3>
+                        <p className="text-gray-300 text-sm italic font-sacred line-clamp-2">"Escuchar y ayunar: tiempo de conversión. Queridos hermanos y hermanas..."</p>
+                        <div className="pt-2 flex items-center justify-center md:justify-start gap-2 text-[#FCD34D] text-xs font-bold uppercase tracking-widest opacity-70 group-hover:opacity-100 transition-opacity"><Icon name="Scroll" size={14} /><span>Toca para leer el mensaje completo</span><Icon name="ChevronRight" size={14} /></div>
+                     </div>
+                  </div>
+                 </div>
+
+                 {/* INSTRUÇÃO E FRASE */}
+                 <div className="max-w-4xl mx-auto text-center mb-12 px-4 space-y-8">
+                    <p className="font-sacred text-2xl md:text-4xl text-white italic leading-relaxed drop-shadow-2xl opacity-95 text-gray-100">"Aquí comienza tu ascenso al monte sagrado. En este desierto de gracia, <span className="text-[#FCD34D] not-italic font-bold underline decoration-[#96712E]/50 underline-offset-8">cada día es un umbral</span>: una nueva puerta de conversión se abre ante tu corazón."</p>
+                    <div className="inline-flex items-center gap-3 bg-[#FCD34D]/10 border border-[#FCD34D]/40 rounded-full px-8 py-4 animate-fade-in ring-1 ring-[#FCD34D]/20 shadow-[0_0_20px_rgba(252,211,77,0.1)]">
+                        <Icon name="Calendar" size={20} className="text-[#FCD34D] animate-pulse" />
+                        <span className="font-vatican text-sm md:text-base text-[#FCD34D] font-bold uppercase tracking-widest instruction-glow">Abre únicamente la puerta correspondiente al día de hoy</span>
+                    </div>
+                 </div>
+
+                 {/* --- ÁREA DAS PORTAS COM DESTAQUE MAIS ESCURO --- */}
+                 <div className="relative w-full max-w-6xl mx-auto bg-black/70 backdrop-blur-xl border border-[#FCD34D]/20 rounded-[2.5rem] p-6 sm:p-8 md:p-12 mb-32 shadow-[0_30px_60px_-15px_rgba(0,0,0,1)]">
+                    
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#FCD34D]/50 to-transparent"></div>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-32 bg-[#FCD34D]/5 blur-[80px] pointer-events-none rounded-full"></div>
+
+                    {/* GRELHA DE PORTAS */}
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-x-3 gap-y-10 sm:gap-x-4 sm:gap-y-12 place-items-center relative z-10">
+                    {Array.from({ length: 40 }, (_, i) => i + 1).map((day, index) => {
+                        const { dayString, weekday, isFriday } = getLentDate(day);
+                        const status = (day <= 6) ? 'active' : 'locked';
+                        
+                        const nextIsActive = (day + 1) <= 6;
+                        const currentGridCols = window.innerWidth < 640 ? 3 : window.innerWidth < 768 ? 4 : window.innerWidth < 1024 ? 5 : 8;
+                        const isNotEndOfRow = (index + 1) % currentGridCols !== 0;
+                        const showPath = nextIsActive && isNotEndOfRow;
+
+                        return (
+                            <PathDay key={day} day={day} dateLabel={dayString} weekDay={weekday} isFriday={isFriday} status={status} isLast={index === 39} showPathToNext={showPath} onClick={() => handleDayClick(day)} />
+                        );
+                    })}
+                    </div>
+                 </div>
+                 {/* --- FIM DA ÁREA DAS PORTAS --- */}
+
+                 {/* FRASE DE ENCERRAMENTO */}
+                 <div className="text-center max-w-2xl mx-auto px-4 mb-32 relative text-white">
+                      <div className="flex justify-center mb-8 opacity-40 text-[#FCD34D]"><Icon name="Cross" size={60} /></div>
+                      <blockquote className="relative z-10 font-sacred text-2xl md:text-3xl italic leading-relaxed text-gray-100">"Todo camino de conversión comienza cuando nos dejamos alcanzar por la Palabra y la acogemos con docilidad de espíritu."</blockquote>
+                      <div className="flex items-center justify-center gap-3 mt-8 text-[#FCD34D]">
+                        <div className="h-px w-8 bg-[#FCD34D]/50"></div>
+                        <p className="text-xs font-bold uppercase tracking-widest font-vatican">Papa León XIV • Cuaresma 2026</p>
+                        <div className="h-px w-8 bg-[#FCD34D]/50"></div>
+                      </div>
+                 </div>
+
+                 {/* SEÇÃO REGALO */}
+                 <div className="mt-32 bg-[#1A1005]/80 backdrop-blur-xl border border-[#FCD34D]/30 rounded-3xl p-8 md:p-12 text-center max-w-2xl mx-auto shadow-2xl relative overflow-hidden card-hover-effect">
+                    <div className="absolute top-0 right-0 p-4 opacity-5 text-[#FCD34D]"><Icon name="Gift" size={150} /></div>
                     <div className="relative z-10">
-                        <Hero />
-                        
-                        <div className="relative z-20 md:-mt-32 pb-24">
-                            <Row id="apps" title="Mis Aplicaciones" items={APPS_DATA} onOpenModal={setSelectedItem} />
-                            <Row title="Cuaresma 2026" subtitle="Tiempo de Penitencia y Conversión" items={LENT_DATA} onOpenModal={setSelectedItem} />
-                            <Row title="Oraciones Diarias" items={PRAYERS_DATA} onOpenModal={setSelectedItem} isHorizontal={true} />
-                            <Row id="libros" title="Biblioteca Católica" items={BOOKS_DATA} onOpenModal={setSelectedItem} />
-                            <Row title="Tesoros de la Fe" subtitle="Lectura Espiritual Adicional" items={EXTRA_LIBRARY_DATA} onOpenModal={setSelectedItem} />
-                            <Row title="Playlist Gregoriana" items={MUSIC_DATA} onOpenModal={setSelectedItem} isHorizontal={true} />
-                            <Row title="Guadalupe Revelada" items={GUADALUPE_DATA} onOpenModal={setSelectedItem} />
-                            <Row title="Bonos Exclusivos" items={BONUS_DATA} onOpenModal={setSelectedItem} />
-                        </div>
+                        <div className="mx-auto w-20 h-20 bg-[#FCD34D] rounded-full flex items-center justify-center mb-6 shadow-xl"><Icon name="Gift" className="text-[#2D1B36]" size={40} /></div>
+                        <h3 className="font-sacred text-3xl text-white mb-4 uppercase tracking-wide font-bold">¿Conoces a alguien que necesita a Dios?</h3>
+                        <p className="text-gray-300 mb-10 font-reading text-lg leading-relaxed">La fe crece cuando se comparte. Regala este <strong>Itinerario Cuaresmal</strong> a un amigo o familiar. Hemos preparado una oferta especial para evangelizar.</p>
+                        <a href="https://pay.hotmart.com/R104315521P?off=bsjlu74b&checkoutMode=10" target="_blank" className="inline-flex items-center gap-3 px-10 py-5 bg-[#FCD34D] text-[#2D1B36] rounded-full font-bold uppercase tracking-widest text-sm transition-all shadow-[0_0_20px_rgba(252,211,77,0.4)] hover:scale-105 hover:bg-white active:scale-95">Regalar con Descuento Especial</a>
                     </div>
-                    
-                    <footer className="py-12 text-center text-gray-600 text-[10px] uppercase tracking-widest border-t border-white/5">
-                        © 2026 Catholic Play Store - Ad Maiorem Dei Gloriam
-                    </footer>
-                </div>
-            );
-        };
+                 </div>
+
+                 <footer className="mt-40 py-12 text-center text-gray-500 border-t border-white/10 font-sacred">
+                    <p className="tracking-widest text-xs uppercase font-bold">Ad Majorem Dei Gloriam</p>
+                    <div className="flex items-center justify-center gap-2 text-[10px] mt-3 font-reading opacity-50 uppercase tracking-widest font-bold"><Icon name="Mail" size={12} /> Soporte: suporte@app.tscotelaro.com.br</div>
+                 </footer>
+              </div>
+            </div>
+          );
+        }
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
