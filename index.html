@@ -233,7 +233,7 @@
         // =================================================================================
         
         const APPS_DATA = [
-            { id: 'quaresma', title: "Itinerario Cuaresmal", subtitle: "Cuaresma 2026", icon: Info, color: "bg-purple-900", match: "Premium", badge: "18 Feb", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", link: "https://itinerariocuaresmalgratuito.netlify.app/" },
+            { id: 'quaresma', title: "Itinerario Cuaresmal", subtitle: "Cuaresma 2026", icon: Info, color: "bg-purple-900", match: "Premium", badge: "18 Feb", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", link: "https://appitinerariocuaresmal2026.netlify.app/" },
             { id: 'rosario', title: "Santo Rosario de Batalla", subtitle: "Oración y Combate", icon: Shield, color: "bg-blue-900", link: "https://santorosarioes.netlify.app/", match: "98% Match", badge: "Top 10", image: "https://i.postimg.cc/G2tN6VCf/Gemini-Generated-Image-txrat1txrat1txra.png" },
             { id: 'novenas', title: "Novena 12 Marías", subtitle: "Colección", icon: Crown, color: "bg-purple-900", link: "https://novena12marias.netlify.app/", match: "95% Match", badge: "Nuevo", image: "https://i.postimg.cc/gJpyZ6M8/Gemini-Generated-Image-6fg18u6fg18u6fg1.png" },
             { id: 'devocional', title: "Devocional de los Santos", subtitle: "Vidas de Santos", icon: BookOpen, color: "bg-emerald-900", link: "https://devocionaldelosantos.netlify.app/", match: "92% Match", image: "https://i.postimg.cc/15LQwpFK/Gemini-Generated-Image-gcg4jfgcg4jfgcg4.png" },
@@ -241,7 +241,7 @@
         ];
 
         const LENT_DATA = [
-            { id: 'itinerario-quaresmal', title: "Itinerario Cuaresmal", subtitle: "Oferta", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", match: "Especial", badge: "Oferta", link: "https://itinerariocuaresmalgratuito.netlify.app/" },
+            { id: 'itinerario-quaresmal', title: "Itinerario Cuaresmal", subtitle: "Oferta", image: "https://i.postimg.cc/2yHz8g7L/Gemini-Generated-Image-fdrg7rfdrg7rfdrg.png", match: "Especial", badge: "Oferta", link: "https://appitinerariocuaresmal2026.netlify.app/" },
             { id: 'mensaje-papa-2026', title: "Mensaje del Papa", subtitle: "Cuaresma 2026", image: "https://i.postimg.cc/pXkfDgBB/image-(2).png", match: "Nuevo", badge: "Mensaje", isModal: true, fullHtml: POPE_MESSAGE_HTML_CONTENT },
             { id: 'miercoles-ceniza', title: "Miércoles de Ceniza", subtitle: "Reflexión 2026", image: "https://i.postimg.cc/kGnSSGrv/image.png", match: "Esencial", badge: "18 Feb", isModal: true, fullHtml: QUARESMA_HTML_CONTENT },
             { id: 'via-crucis-lente', title: "Vía Crucis Meditado", subtitle: "Viernes de Cuaresma", image: "https://i.postimg.cc/9XK143JX/image-(1).png", match: "Devoción", isModal: true, fullHtml: VIA_CRUCIS_HTML_CONTENT }
@@ -419,21 +419,21 @@
             return (
                 <div id="inicio" className="relative h-[65vh] md:h-[95vh] w-full text-white bg-[#141414]">
                     <div className="absolute top-0 left-0 w-full h-full select-none">
-                        <img src="https://i.postimg.cc/kDr2xG3p/Gemini-Generated-Image-kmerfqkmerfqkmer-(1).png" alt="Hero" className="w-full h-full object-cover object-top md:object-center" />
+                        <img src="https://i.postimg.cc/ZKd6YFgK/cq5dam-thumbnail-cropped-750-422.jpg" alt="Hero" className="w-full h-full object-cover object-top md:object-center opacity-80" />
                         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#141414]"></div>
                         <div className="hidden md:block absolute inset-0 hero-gradient"></div>
                     </div>
 
                     <div className="absolute bottom-4 left-0 w-full px-4 pb-8 md:p-0 md:left-12 md:top-[35%] md:w-auto max-w-2xl z-30">
-                        <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Destacado de Cuaresma</span>
-                        <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 leading-tight text-yellow-500 drop-shadow-lg">Itinerario Cuaresmal</h1>
-                        <p className="text-sm md:text-xl mb-4 md:mb-8 text-gray-100 font-medium drop-shadow-md">40 Días: Un camino de conversión e esperanza. Acompaña a Jesús en el desierto e prepárate para la Pascua.</p>
+                        <span className="tracking-[4px] uppercase text-gray-200 text-[10px] md:text-sm font-bold drop-shadow-sm">Especial de Pascua</span>
+                        <h1 className="text-3xl md:text-7xl font-serif font-black mb-2 leading-tight text-yellow-500 drop-shadow-lg">Mensaje del Papa</h1>
+                        <p className="text-sm md:text-xl mb-4 md:mb-8 text-gray-100 font-medium drop-shadow-md">Urbi et Orbi 2026. Lee y medita las palabras del Santo Padre León XIV para este tiempo de Resurrección.</p>
                         
                         <div className="flex flex-col space-y-3 mt-6 w-full md:w-fit">
-                            <a href="https://itinerariocuaresmalgratuito.netlify.app/" target="_blank" className="group relative flex items-center justify-center bg-gradient-to-r from-green-500 to-green-400 text-black px-6 py-4 md:px-10 md:py-5 rounded-xl font-black hover:from-green-400 hover:to-green-300 transition-all transform hover:scale-105 shadow-[0_0_40px_rgba(74,222,128,0.6)] border-2 border-green-200 w-full no-underline uppercase tracking-widest text-sm md:text-lg overflow-hidden">
+                            <a href="https://www.vaticannews.va/es/papa/news/2026-04/papa-leon-xiv-mensaje-pascua-urbi-et-orbi-2026-vigilia-oracion.html" target="_blank" className="group relative flex items-center justify-center bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-6 py-4 md:px-10 md:py-5 rounded-xl font-black hover:from-yellow-500 hover:to-yellow-400 transition-all transform hover:scale-105 shadow-[0_0_40px_rgba(234,179,8,0.5)] border-2 border-yellow-200 w-full no-underline uppercase tracking-widest text-sm md:text-lg overflow-hidden">
                                 <span className="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
-                                <Crown className="w-6 h-6 md:w-8 md:h-8 mr-3 flex-shrink-0 animate-pulse group-hover:animate-none" />
-                                <span className="drop-shadow-md">Comenzar Itinerario Cuaresmal</span>
+                                <BookOpen className="w-6 h-6 md:w-8 md:h-8 mr-3 flex-shrink-0 animate-pulse group-hover:animate-none" />
+                                <span className="drop-shadow-md">Leer Mensaje de Pascua</span>
                             </a>
                         </div>
                     </div>
